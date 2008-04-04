@@ -3,6 +3,7 @@ package buenetxea.gui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JToolBar;
@@ -31,10 +33,10 @@ public class Nagusia extends JFrame {
 	/**
 	 * Create the frame
 	 */
-	public Nagusia(Kudeatzailea kudeatzailea) {
+	public Nagusia() {
 		super();
 
-		this.kud = kudeatzailea;
+		this.kargatuKud();
 
 		this.setJMenuBar(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,6 +122,48 @@ public class Nagusia extends JFrame {
 		this.getContentPane().setLayout(groupLayout);
 		this.pack();
 		//
+	}
+
+	private void kargatuKud() {
+		try {
+			this.kud = Kudeatzailea.getInstance();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+
+			if (ex.getErrorCode() == 1045) {
+				JOptionPane jop = new JOptionPane(
+						"El nombre de usuario o la contraseña son incorrectos.",
+						JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION,
+						new javax.swing.ImageIcon(this.getClass().getResource(
+								"/ingrGast/resources/loginFailed_48x48.png")));
+				jop.createDialog(null, "Conexión fallida").setVisible(true);
+			} else if (ex.getErrorCode() == 1044) {
+				JOptionPane jop = new JOptionPane(
+						"Este usuario no tiene permisos para acceder al programa.",
+						JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION,
+						new javax.swing.ImageIcon(this.getClass().getResource(
+								"/ingrGast/resources/loginFailed_48x48.png")));
+				jop.createDialog(null, "Conexión fallida").setVisible(true);
+			} else if (ex.getErrorCode() == 0) {
+				JOptionPane jop = new JOptionPane("MySQL no está en marcha.",
+						JOptionPane.ERROR_MESSAGE);
+				jop.createDialog(null, "Conexión fallida").setVisible(true);
+			} else {
+				JOptionPane jop = new JOptionPane(
+						"Error al establecer la conexión con la base de datos.",
+						JOptionPane.ERROR_MESSAGE);
+				jop.createDialog(null, "Conexión fallida").setVisible(true);
+			}
+
+			System.exit(1);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			JOptionPane jop = new JOptionPane(
+					"Error al establecer la conexión con la base de datos.",
+					JOptionPane.ERROR_MESSAGE);
+			jop.createDialog(null, "Conexión fallida").setVisible(true);
+			System.exit(1);
+		}
 	}
 
 }

@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 
 import buenetxea.db.Connector;
-import buenetxea.kudeatzaileak.Kudeatzailea;
 
 public class LoginFrame extends JFrame {
 
@@ -140,15 +139,16 @@ public class LoginFrame extends JFrame {
 
 	private void loginEgin(java.awt.event.ActionEvent evt) {
 		try {
-			Connector con = new Connector(this.textField.getText(), String
+			Connector.setUserPass(this.textField.getText(), String
 					.valueOf(this.passwordField.getPassword()));
-			Nagusia mainForm = new Nagusia(new Kudeatzailea(con));
+			Nagusia mainForm = new Nagusia();
 			mainForm.setLocationRelativeTo(null);
 			mainForm.setExtendedState(MAXIMIZED_BOTH);
 			this.setVisible(false);
 			mainForm.setVisible(true);
 		} catch (SQLException ex) {
 			ex.printStackTrace();
+
 			if (ex.getErrorCode() == 1045) {
 				JOptionPane jop = new JOptionPane(
 						"El nombre de usuario o la contraseña son incorrectos.",
@@ -167,10 +167,23 @@ public class LoginFrame extends JFrame {
 				JOptionPane jop = new JOptionPane("MySQL no está en marcha.",
 						JOptionPane.ERROR_MESSAGE);
 				jop.createDialog(null, "Conexión fallida").setVisible(true);
+			} else {
+				JOptionPane jop = new JOptionPane(
+						"Error al establecer la conexión con la base de datos.",
+						JOptionPane.ERROR_MESSAGE);
+				jop.createDialog(null, "Conexión fallida").setVisible(true);
 			}
+
 			this.textField.setText("");
 			this.passwordField.setText("");
 			this.textField.requestFocus();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			JOptionPane jop = new JOptionPane(
+					"Error al establecer la conexión con la base de datos.",
+					JOptionPane.ERROR_MESSAGE);
+			jop.createDialog(null, "Conexión fallida").setVisible(true);
+			System.exit(1);
 		}
 	}
 }
