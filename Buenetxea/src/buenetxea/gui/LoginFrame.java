@@ -70,39 +70,71 @@ public class LoginFrame extends JFrame {
 		});
 		aceptarButton.setText("Aceptar");
 		final GroupLayout groupLayout = new GroupLayout(this.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(label, GroupLayout.Alignment.TRAILING)
-								.addComponent(nombreDeUsuarioLabel, GroupLayout.Alignment.TRAILING))
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)))
-						.addComponent(aceptarButton, GroupLayout.Alignment.TRAILING))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(nombreDeUsuarioLabel)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(label)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(aceptarButton)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+		groupLayout
+				.setHorizontalGroup(groupLayout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								groupLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addGroup(
+																groupLayout
+																		.createSequentialGroup()
+																		.addGroup(
+																				groupLayout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								label,
+																								GroupLayout.Alignment.TRAILING)
+																						.addComponent(
+																								nombreDeUsuarioLabel,
+																								GroupLayout.Alignment.TRAILING))
+																		.addPreferredGap(
+																				LayoutStyle.ComponentPlacement.RELATED)
+																		.addGroup(
+																				groupLayout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								this.passwordField,
+																								GroupLayout.DEFAULT_SIZE,
+																								195,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								this.textField,
+																								GroupLayout.DEFAULT_SIZE,
+																								195,
+																								Short.MAX_VALUE)))
+														.addComponent(
+																aceptarButton,
+																GroupLayout.Alignment.TRAILING))
+										.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addGroup(
+				groupLayout.createSequentialGroup().addContainerGap().addGroup(
+						groupLayout.createParallelGroup(
+								GroupLayout.Alignment.BASELINE).addComponent(
+								nombreDeUsuarioLabel).addComponent(
+								this.textField, GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+						LayoutStyle.ComponentPlacement.RELATED).addGroup(
+						groupLayout.createParallelGroup(
+								GroupLayout.Alignment.BASELINE).addComponent(
+								label).addComponent(this.passwordField,
+								GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+						LayoutStyle.ComponentPlacement.RELATED).addComponent(
+						aceptarButton).addContainerGap(
+						GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		this.getContentPane().setLayout(groupLayout);
-		pack();
+		this.pack();
 		//
 	}
 
