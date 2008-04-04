@@ -15,26 +15,14 @@ import javax.swing.LayoutStyle;
 
 import buenetxea.db.Connector;
 
+import com.swtdesigner.SwingResourceManager;
+
 public class LoginFrame extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Launch the application
-	 * 
-	 * @param args
-	 */
-	public static void main(String args[]) {
-		try {
-			LoginFrame frame = new LoginFrame();
-			frame.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	private final JPasswordField passwordField;
 	private final JTextField textField;
@@ -44,6 +32,8 @@ public class LoginFrame extends JFrame {
 	 */
 	public LoginFrame() {
 		super();
+		this.setIconImage(SwingResourceManager.getImage(LoginFrame.class,
+				"/buenetxea/resources/logo_buenetxea.png"));
 		this.setResizable(false);
 		this.setTitle("Buenetxea Login");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
