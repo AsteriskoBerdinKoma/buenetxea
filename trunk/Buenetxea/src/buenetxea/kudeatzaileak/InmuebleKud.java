@@ -11,21 +11,12 @@ import buenetxea.objektuak.Inmueble;
 
 class InmuebleKud {
 
-	private static InmuebleKud instance;
-
 	private final Connection connection;
 	private final Statement statement;
 
-	private InmuebleKud() throws SQLException, ClassNotFoundException {
-		this.connection = Connector.getConnection();
-		this.statement = Connector.getStatement();
-	}
-
-	public static InmuebleKud getInstance() throws SQLException,
-			ClassNotFoundException {
-		if (null == instance)
-			instance = new InmuebleKud();
-		return instance;
+	InmuebleKud(Connector con) {
+		this.connection = con.getConnection();
+		this.statement = con.getStatement();
 	}
 
 	Inmueble getInmueble(int referencia) throws SQLException {

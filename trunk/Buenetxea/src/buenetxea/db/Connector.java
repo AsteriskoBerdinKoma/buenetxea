@@ -14,6 +14,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 /**
  * 
  * @author Beñat
@@ -29,78 +31,86 @@ public class Connector {
 	 */
 	public static final String DATABASE_URL = "jdbc:mysql://localhost/dbbuenetxea";
 
-	private static String username;
-	private static String password;
+	private String username;
+	private String password;
 
-	private static java.sql.Connection connection;
-	private static boolean connectedToDatabase = false;
-	private static java.sql.Statement statement;
-
-	/**
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	private static void connect() throws SQLException, ClassNotFoundException {
-		Class.forName(JDBC_DRIVER);
-		Connector.connection = DriverManager.getConnection(DATABASE_URL,
-				Connector.username, Connector.password);
-		Connector.statement = Connector.connection.createStatement();
-		Connector.connectedToDatabase = true;
-		System.out.println("Driverra Kargatuta");
-	}
+	private java.sql.Connection connection;
+	private boolean connectedToDatabase = false;
+	private java.sql.Statement statement;
 
 	/**
-	 * @param user
-	 * @param pass
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
+	 * Creates a new instance of Connector
 	 */
-	public static void setUserPass(String user, String pass)
-			throws SQLException, ClassNotFoundException {
-		Connector.username = user;
-		Connector.password = pass;
-		Connector.connect();
-	}
-
-	/**
-	 * @return
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	public static Connection getConnection() throws SQLException,
-			ClassNotFoundException {
-		if (null == connection || !connectedToDatabase)
-			connect();
-		return connection;
-	}
-
-	/**
-	 * @return
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	public static Statement getStatement() throws SQLException,
-			ClassNotFoundException {
-		if (null == statement || !connectedToDatabase)
-			connect();
-		return statement;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static boolean isConnectedToDatabase() {
-		return Connector.connectedToDatabase;
+	public Connector(String user, String pass) throws SQLException {
+		try {
+			this.username = user;
+			this.password = pass;
+			Class.forName(JDBC_DRIVER);
+			this.connection = DriverManager.getConnection(DATABASE_URL,
+					this.username, this.password);
+			this.statement = this.connection.createStatement();
+			this.connectedToDatabase = true;
+			System.out.println("Driverra Kargatuta");
+			/*
+			 * } catch (SQLException ex) { ex.printStackTrace(); JOptionPane jop =
+			 * new JOptionPane("Error al establecer la conexión con la base de
+			 * datos.", JOptionPane.ERROR_MESSAGE); jop.createDialog(null,
+			 * "Conexión fallida").setVisible(true); System.exit(1);
+			 */
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+			JOptionPane jop = new JOptionPane(
+					"Error al establecer la conexión con la base de datos.",
+					JOptionPane.ERROR_MESSAGE);
+			jop.createDialog(null, "Conexión fallida").setVisible(true);
+			System.exit(1);
+		} /*
+			 * catch (Exception ex){ ex.printStackTrace(); JOptionPane jop = new
+			 * JOptionPane("Error al establecer la conexión con la base de
+			 * datos.", JOptionPane.ERROR_MESSAGE); jop.createDialog(null,
+			 * "Conexión fallida").setVisible(true); System.exit(1); }
+			 */
 	}
 
 	/**
 	 * 
 	 * @throws java.sql.SQLException
 	 */
-	public static void close() throws SQLException {
-		Connector.connection.close();
-		Connector.statement.close();
-		Connector.connectedToDatabase = false;
+	public void close() throws SQLException {
+		this.connection.close();
+		this.statement.close();
+		this.connectedToDatabase = false;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Connection getConnection() {
+		return this.connection;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Statement getStatement() {
+		return this.statement;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isConnectedToDatabase() {
+		return this.connectedToDatabase;
 	}
 }
