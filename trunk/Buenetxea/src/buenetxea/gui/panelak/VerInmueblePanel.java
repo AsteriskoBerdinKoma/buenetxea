@@ -23,7 +23,7 @@ public class VerInmueblePanel extends JPanel {
 	 * @throws JRException
 	 * @throws FileNotFoundException
 	 */
-	public VerInmueblePanel() throws FileNotFoundException, JRException {
+	public VerInmueblePanel() {
 		super();
 		this.setBorder(new TitledBorder(null, "Ver Inmueble",
 				TitledBorder.DEFAULT_JUSTIFICATION,

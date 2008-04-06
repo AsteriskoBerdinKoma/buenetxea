@@ -3,7 +3,6 @@ package buenetxea.gui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.io.FileNotFoundException;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -18,7 +17,6 @@ import javax.swing.JToolBar;
 import javax.swing.LayoutStyle;
 import javax.swing.border.MatteBorder;
 
-import net.sf.jasperreports.engine.JRException;
 import buenetxea.gui.panelak.VerInmueblePanel;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 
@@ -116,19 +114,10 @@ public class Nagusia extends JFrame {
 										GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)));
-
-		try {
-			VerInmueblePanel verInmueblePanel;
-			verInmueblePanel = new VerInmueblePanel();
-			verInmueblePanel.setName("verInmueblePanel");
-			panel.add(verInmueblePanel, verInmueblePanel.getName());
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JRException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		VerInmueblePanel verInmueblePanel;
+		verInmueblePanel = new VerInmueblePanel();
+		verInmueblePanel.setName("verInmueblePanel");
+		panel.add(verInmueblePanel, verInmueblePanel.getName());
 		final JButton peritajeButton = new JButton();
 		peritajeButton.setText("Peritaje");
 		toolBar.add(peritajeButton);
