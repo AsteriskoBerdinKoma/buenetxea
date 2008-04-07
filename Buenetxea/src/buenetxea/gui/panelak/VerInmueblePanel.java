@@ -8,8 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import net.sf.jasperreports.engine.JRException;
-
 public class VerInmueblePanel extends JPanel {
 
 	/**
