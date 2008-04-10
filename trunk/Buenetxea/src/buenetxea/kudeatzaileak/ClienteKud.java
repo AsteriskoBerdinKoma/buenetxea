@@ -30,7 +30,7 @@ public class ClienteKud {
 			 int telefono;
 			 String medio;
 			 String asesor; 
-			 String query = " SELECT * FROM Cliente WHERE referencia = ?";
+			 String query = " SELECT * FROM Cliente WHERE dni = ?";
 				PreparedStatement ps = this.connection.prepareStatement(query);
 				ps.setInt(1, nan);
 				ResultSet rs = this.statement.executeQuery(query);
