@@ -2,13 +2,13 @@ package buenetxea.objektuak;
 
 public class Inmueble {
 
-	private final int referencia;
+	private final int ref;
 	private String tipo;
 	private String zona;
 	private String direccion;
-	private boolean exclusiva;
+	private boolean excluvisa;
 	private boolean comprado;
-	private float metros_const;
+	private float metros_constr;
 	private float metros_utiles;
 	private float metros_parcela;
 	private boolean gas;
@@ -42,7 +42,7 @@ public class Inmueble {
 	 * @param direccion
 	 * @param exclusiva
 	 * @param comprado
-	 * @param metros_const
+	 * @param metros_constr
 	 * @param metros_utiles
 	 * @param metros_parcela
 	 * @param gas
@@ -63,7 +63,7 @@ public class Inmueble {
 	 * @param altura_edificio
 	 */
 	public Inmueble(int referencia, String tipo, String zona, String direccion,
-			boolean exclusiva, boolean comprado, float metros_const,
+			boolean exclusiva, boolean comprado, float metros_constr,
 			float metros_utiles, float metros_parcela, boolean gas,
 			boolean luminoso, String techos, boolean exterior, int antiguedad,
 			boolean portero, boolean ascensor, boolean calefaccion,
@@ -71,13 +71,13 @@ public class Inmueble {
 			boolean desalojo, int puertas, int ventanas, boolean muebles,
 			float altura_edificio) {
 
-		this.referencia = referencia;
+		this.ref = referencia;
 		this.tipo = tipo;
 		this.zona = zona;
 		this.direccion = direccion;
-		this.exclusiva = exclusiva;
+		this.excluvisa = exclusiva;
 		this.comprado = comprado;
-		this.metros_const = metros_const;
+		this.metros_constr = metros_constr;
 		this.metros_utiles = metros_utiles;
 		this.metros_parcela = metros_parcela;
 		this.gas = gas;
@@ -102,175 +102,191 @@ public class Inmueble {
 	 * @return the altura_edificio
 	 */
 	public float getAltura_edificio() {
-		return this.altura_edificio;
+		return altura_edificio;
 	}
 
 	/**
 	 * @return the antiguedad
 	 */
 	public int getAntiguedad() {
-		return this.antiguedad;
+		return antiguedad;
 	}
 
 	/**
 	 * @return the direccion
 	 */
 	public String getDireccion() {
-		return this.direccion;
+		return direccion;
 	}
 
 	/**
-	 * @return the metros_const
+	 * @return the excluvisa
 	 */
-	public float getMetros_const() {
-		return this.metros_const;
+	public boolean isExcluvisa() {
+		return excluvisa;
+	}
+
+	/**
+	 * @param excluvisa
+	 *            the excluvisa to set
+	 */
+	public void setExcluvisa(boolean excluvisa) {
+		this.excluvisa = excluvisa;
+	}
+
+	/**
+	 * @return the metros_constr
+	 */
+	public float getMetros_constr() {
+		return metros_constr;
+	}
+
+	/**
+	 * @param metros_constr
+	 *            the metros_constr to set
+	 */
+	public void setMetros_constr(float metros_constr) {
+		this.metros_constr = metros_constr;
+	}
+
+	/**
+	 * @return the ref
+	 */
+	public int getRef() {
+		return ref;
 	}
 
 	/**
 	 * @return the metros_parcela
 	 */
 	public float getMetros_parcela() {
-		return this.metros_parcela;
+		return metros_parcela;
 	}
 
 	/**
 	 * @return the metros_utiles
 	 */
 	public float getMetros_utiles() {
-		return this.metros_utiles;
+		return metros_utiles;
 	}
 
 	/**
 	 * @return the orientacion
 	 */
 	public String getOrientacion() {
-		return this.orientacion;
+		return orientacion;
 	}
 
 	/**
 	 * @return the pintura
 	 */
 	public String getPintura() {
-		return this.pintura;
+		return pintura;
 	}
 
 	/**
 	 * @return the puertas
 	 */
 	public int getPuertas() {
-		return this.puertas;
-	}
-
-	/**
-	 * @return the referencia
-	 */
-	public int getReferencia() {
-		return this.referencia;
+		return puertas;
 	}
 
 	/**
 	 * @return the techos
 	 */
 	public String getTechos() {
-		return this.techos;
+		return techos;
 	}
 
 	/**
 	 * @return the tipo
 	 */
 	public String getTipo() {
-		return this.tipo;
+		return tipo;
 	}
 
 	/**
 	 * @return the tipo_suelo
 	 */
 	public String getTipo_suelo() {
-		return this.tipo_suelo;
+		return tipo_suelo;
 	}
 
 	/**
 	 * @return the ventanas
 	 */
 	public int getVentanas() {
-		return this.ventanas;
+		return ventanas;
 	}
 
 	/**
 	 * @return the zona
 	 */
 	public String getZona() {
-		return this.zona;
+		return zona;
 	}
 
 	/**
 	 * @return the ascensor
 	 */
 	public boolean isAscensor() {
-		return this.ascensor;
+		return ascensor;
 	}
 
 	/**
 	 * @return the calefaccion
 	 */
 	public boolean isCalefaccion() {
-		return this.calefaccion;
+		return calefaccion;
 	}
 
 	/**
 	 * @return the comprado
 	 */
 	public boolean isComprado() {
-		return this.comprado;
+		return comprado;
 	}
 
 	/**
 	 * @return the desalojo
 	 */
 	public boolean isDesalojo() {
-		return this.desalojo;
-	}
-
-	/**
-	 * @return the exclusiva
-	 */
-	public boolean isExclusiva() {
-		return this.exclusiva;
+		return desalojo;
 	}
 
 	/**
 	 * @return the exterior
 	 */
 	public boolean isExterior() {
-		return this.exterior;
+		return exterior;
 	}
 
 	/**
 	 * @return the gas
 	 */
 	public boolean isGas() {
-		return this.gas;
+		return gas;
 	}
 
 	/**
 	 * @return the luminoso
 	 */
 	public boolean isLuminoso() {
-		return this.luminoso;
+		return luminoso;
 	}
 
 	/**
 	 * @return the muebles
 	 */
 	public boolean isMuebles() {
-		return this.muebles;
+		return muebles;
 	}
 
 	/**
 	 * @return the portero
 	 */
 	public boolean isPortero() {
-		return this.portero;
+		return portero;
 	}
 
 	/**
@@ -334,7 +350,7 @@ public class Inmueble {
 	 *            the exclusiva to set
 	 */
 	public void setExclusiva(boolean exclusiva) {
-		this.exclusiva = exclusiva;
+		excluvisa = exclusiva;
 	}
 
 	/**
@@ -366,7 +382,7 @@ public class Inmueble {
 	 *            the metros_const to set
 	 */
 	public void setMetros_const(float metros_const) {
-		this.metros_const = metros_const;
+		metros_constr = metros_const;
 	}
 
 	/**
