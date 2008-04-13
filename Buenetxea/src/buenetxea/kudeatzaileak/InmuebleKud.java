@@ -15,8 +15,8 @@ class InmuebleKud {
 	private final Statement statement;
 
 	InmuebleKud(Connector con) {
-		this.connection = con.getConnection();
-		this.statement = con.getStatement();
+		connection = con.getConnection();
+		statement = con.getStatement();
 	}
 
 	Inmueble getInmueble(int referencia) throws SQLException {
@@ -25,9 +25,9 @@ class InmuebleKud {
 		String tipo;
 		String zona;
 		String direccion;
-		boolean exclusiva;
+		boolean excluvisa;
 		boolean comprado;
-		float metros_const;
+		float metros_constr;
 		float metros_utiles;
 		float metros_parcela;
 		boolean gas;
@@ -47,18 +47,18 @@ class InmuebleKud {
 		boolean muebles;
 		float altura_edificio;
 
-		String query = " SELECT * FROM Inmueble WHERE referencia = ?";
-		PreparedStatement ps = this.connection.prepareStatement(query);
+		String query = "SELECT * FROM inmueble WHERE ref = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, referencia);
-		ResultSet rs = this.statement.executeQuery(query);
+		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			ref = rs.getInt("ref");
 			tipo = rs.getString("tipo");
 			zona = rs.getString("zona");
 			direccion = rs.getString("direccion");
-			exclusiva = rs.getBoolean("exclusiva");
+			excluvisa = rs.getBoolean("excluvisa");
 			comprado = rs.getBoolean("comprado");
-			metros_const = rs.getFloat("metros_const");
+			metros_constr = rs.getFloat("metros_constr");
 			metros_utiles = rs.getFloat("metros_utiles");
 			metros_parcela = rs.getFloat("metros_parcela");
 			gas = rs.getBoolean("gas");
@@ -78,11 +78,11 @@ class InmuebleKud {
 			muebles = rs.getBoolean("muebles");
 			altura_edificio = rs.getFloat("altura_edificio");
 
-			return new Inmueble(ref, tipo, zona, direccion, exclusiva,
-					comprado, metros_const, metros_utiles, metros_parcela, gas,
-					luminoso, techos, exterior, antiguedad, portero, ascensor,
-					calefaccion, pintura, tipo_suelo, orientacion, desalojo,
-					puertas, ventanas, muebles, altura_edificio);
+			return new Inmueble(ref, tipo, zona, direccion, excluvisa,
+					comprado, metros_constr, metros_utiles, metros_parcela,
+					gas, luminoso, techos, exterior, antiguedad, portero,
+					ascensor, calefaccion, pintura, tipo_suelo, orientacion,
+					desalojo, puertas, ventanas, muebles, altura_edificio);
 		}
 		return null;
 	}

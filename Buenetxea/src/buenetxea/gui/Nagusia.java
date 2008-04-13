@@ -17,6 +17,7 @@ import javax.swing.JToolBar;
 import javax.swing.LayoutStyle;
 import javax.swing.border.MatteBorder;
 
+import buenetxea.gui.panelak.LocalizadorPanel;
 import buenetxea.gui.panelak.VerInmueblePanel;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 
@@ -115,15 +116,43 @@ public class Nagusia extends JFrame {
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)));
 		VerInmueblePanel verInmueblePanel;
-		verInmueblePanel = new VerInmueblePanel();
+
+		final LocalizadorPanel localizadorPanel = new LocalizadorPanel();
+		localizadorPanel.setName("localizadorPanel");
+		panel.add(localizadorPanel, localizadorPanel.getName());
+		verInmueblePanel = new VerInmueblePanel(this);
 		verInmueblePanel.setName("verInmueblePanel");
 		panel.add(verInmueblePanel, verInmueblePanel.getName());
 		final JButton peritajeButton = new JButton();
 		peritajeButton.setText("Peritaje");
 		toolBar.add(peritajeButton);
+
+		final JButton localizarButton = new JButton();
+		localizarButton.setText("Localizador");
+		toolBar.add(localizarButton);
+
+		final JButton buscasButton = new JButton();
+		buscasButton.setText("Buscas");
+		toolBar.add(buscasButton);
+
+		final JButton seguimientoPropietariosButton = new JButton();
+		seguimientoPropietariosButton.setText("Seguimiento propietarios");
+		toolBar.add(seguimientoPropietariosButton);
+
+		final JButton visitasButton = new JButton();
+		visitasButton.setText("Visitas");
+		toolBar.add(visitasButton);
+
+		final JButton localizarClienteButton = new JButton();
+		localizarClienteButton.setText("Localizar cliente");
+		toolBar.add(localizarClienteButton);
 		this.getContentPane().setLayout(groupLayout);
 		this.pack();
 		//
+	}
+
+	public Kudeatzailea getKud() {
+		return this.kud;
 	}
 
 }
