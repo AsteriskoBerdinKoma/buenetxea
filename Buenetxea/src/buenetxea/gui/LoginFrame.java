@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 
 import buenetxea.db.Connector;
-import buenetxea.kudeatzaileak.Kudeatzailea;
 
 import com.swtdesigner.SwingResourceManager;
 
@@ -130,9 +129,9 @@ public class LoginFrame extends JFrame {
 
 	private void loginEgin(java.awt.event.ActionEvent evt) {
 		try {
-			Connector con = new Connector(this.textField.getText(), String
+			Connector.connect(this.textField.getText(), String
 					.valueOf(this.passwordField.getPassword()));
-			Nagusia mainForm = new Nagusia(new Kudeatzailea(con));
+			Nagusia mainForm = new Nagusia();
 			mainForm.setLocationRelativeTo(null);
 			mainForm.setExtendedState(MAXIMIZED_BOTH);
 			this.setVisible(false);
@@ -161,6 +160,9 @@ public class LoginFrame extends JFrame {
 			this.textField.setText("");
 			this.passwordField.setText("");
 			this.textField.requestFocus();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

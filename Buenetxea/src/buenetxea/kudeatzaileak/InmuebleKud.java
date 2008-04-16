@@ -11,23 +11,32 @@ import buenetxea.objektuak.Inmueble;
 
 class InmuebleKud {
 
+	private static InmuebleKud instance;
+
 	private final Connection connection;
 	private final Statement statement;
 
-	InmuebleKud(Connector con) {
-		connection = con.getConnection();
-		statement = con.getStatement();
+	private InmuebleKud() throws SQLException, ClassNotFoundException {
+		this.connection = Connector.getConnection();
+		this.statement = Connector.getStatement();
 	}
 
-	Inmueble getInmueble(int referencia) throws SQLException {
+	public static InmuebleKud getInstance() throws SQLException,
+			ClassNotFoundException {
+		if (null == instance)
+			instance = new InmuebleKud();
+		return instance;
+	}
+
+	public Inmueble getInmueble(int referencia) throws SQLException {
 
 		int ref;
 		String tipo;
 		String zona;
 		String direccion;
-		boolean excluvisa;
+		boolean exclusiva;
 		boolean comprado;
-		float metros_constr;
+		float metros_const;
 		float metros_utiles;
 		float metros_parcela;
 		boolean gas;
@@ -47,18 +56,18 @@ class InmuebleKud {
 		boolean muebles;
 		float altura_edificio;
 
-		String query = "SELECT * FROM inmueble WHERE ref = ?";
-		PreparedStatement ps = connection.prepareStatement(query);
+		String query = " SELECT * FROM Inmueble WHERE referencia = ?";
+		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setInt(1, referencia);
-		ResultSet rs = ps.executeQuery();
+		ResultSet rs = this.statement.executeQuery(query);
 		if (rs.next()) {
 			ref = rs.getInt("ref");
 			tipo = rs.getString("tipo");
 			zona = rs.getString("zona");
 			direccion = rs.getString("direccion");
-			excluvisa = rs.getBoolean("excluvisa");
+			exclusiva = rs.getBoolean("exclusiva");
 			comprado = rs.getBoolean("comprado");
-			metros_constr = rs.getFloat("metros_constr");
+			metros_const = rs.getFloat("metros_const");
 			metros_utiles = rs.getFloat("metros_utiles");
 			metros_parcela = rs.getFloat("metros_parcela");
 			gas = rs.getBoolean("gas");
@@ -78,11 +87,11 @@ class InmuebleKud {
 			muebles = rs.getBoolean("muebles");
 			altura_edificio = rs.getFloat("altura_edificio");
 
-			return new Inmueble(ref, tipo, zona, direccion, excluvisa,
-					comprado, metros_constr, metros_utiles, metros_parcela,
-					gas, luminoso, techos, exterior, antiguedad, portero,
-					ascensor, calefaccion, pintura, tipo_suelo, orientacion,
-					desalojo, puertas, ventanas, muebles, altura_edificio);
+			return new Inmueble(ref, tipo, zona, direccion, exclusiva,
+					comprado, metros_const, metros_utiles, metros_parcela, gas,
+					luminoso, techos, exterior, antiguedad, portero, ascensor,
+					calefaccion, pintura, tipo_suelo, orientacion, desalojo,
+					puertas, ventanas, muebles, altura_edificio);
 		}
 		return null;
 	}
