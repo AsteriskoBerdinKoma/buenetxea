@@ -2,13 +2,14 @@ package buenetxea.objektuak;
 
 public class Visita {
 	
+	private final int ref;
 	private boolean precio;
 	private boolean nolegustalazona;
-	private boolean loquierenmasbarato;
+	private boolean loquierenmasalto;
 	private boolean muchasreformas;
 	private boolean quierenmashabitaciones;
 	private boolean visitaanuladacomprador;
-	private boolean visitaaunladapropietario;
+	private boolean visitaanuladapropietario;
 	private boolean oscuro;
 	private boolean loquierenmasgrande;
 	private boolean notieneascensor;
@@ -24,7 +25,7 @@ public class Visita {
 	private boolean gestiondeventa;
 	private boolean peritarpiso;
 	
-	public Visita(boolean precio,boolean nolegustalazona,boolean loquierenmasbarato,
+	public Visita(int referencia,boolean precio,boolean nolegustalazona,boolean loquierenmasalto,
 			boolean muchasreformas,boolean quierenmashabitaciones,boolean visitaanuladacomprador,
 			boolean visitaanuladapropietario,boolean oscuro,boolean loquierenmasgrande,
 			boolean notieneascensor,boolean quierenmasbaños,boolean concertada2visita,
@@ -32,13 +33,14 @@ public class Visita {
 			boolean quierenbalconterraza,boolean nogustadistribucion,boolean alquiladoenestavisita,
 			boolean gestiondeventa,boolean peritarpiso){
 		
+		this.ref = referencia;
 		this.precio = precio;
 		this.nolegustalazona = nolegustalazona;
-		this.loquierenmasbarato = loquierenmasbarato;
+		this.loquierenmasalto = loquierenmasalto;
 		this.muchasreformas = muchasreformas;
 		this.quierenmashabitaciones = quierenmashabitaciones;
 		this.visitaanuladacomprador = visitaanuladacomprador;
-		this.visitaaunladapropietario = visitaanuladapropietario;
+		this.visitaanuladapropietario = visitaanuladapropietario;
 		this.oscuro = oscuro;
 		this.loquierenmasgrande = loquierenmasgrande;
 		this.notieneascensor = notieneascensor;
@@ -56,6 +58,10 @@ public class Visita {
 		
 	}
 	
+	public int getRef() {
+		return ref;
+	}
+
 	public boolean getPrecio(){
 		return precio;
 	}
@@ -66,10 +72,10 @@ public class Visita {
 		this.nolegustalazona = nolegustalazona;
 	}
 	public boolean isLoquierenmasbarato() {
-		return loquierenmasbarato;
+		return loquierenmasalto;
 	}
 	public void setLoquierenmasbarato(boolean loquierenmasbarato) {
-		this.loquierenmasbarato = loquierenmasbarato;
+		this.loquierenmasalto = loquierenmasbarato;
 	}
 	public boolean isMuchasreformas() {
 		return muchasreformas;
@@ -90,10 +96,10 @@ public class Visita {
 		this.visitaanuladacomprador = visitaanuladacomprador;
 	}
 	public boolean isVisitaaunladapropietario() {
-		return visitaaunladapropietario;
+		return visitaanuladapropietario;
 	}
 	public void setVisitaaunladapropietario(boolean visitaaunladapropietario) {
-		this.visitaaunladapropietario = visitaaunladapropietario;
+		this.visitaanuladapropietario = visitaaunladapropietario;
 	}
 	public boolean isOscuro() {
 		return oscuro;
