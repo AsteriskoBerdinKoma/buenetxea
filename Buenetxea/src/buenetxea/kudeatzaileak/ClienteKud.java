@@ -10,15 +10,21 @@ import java.sql.Statement;
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Cliente;
 public class ClienteKud {
-
+	
+	private static ClienteKud instance;
 	private final Connection connection;
 	private final Statement statement;
 	
-	public ClienteKud(Connector conector) {
-		
-		this.connection=conector.getConnection();
-		this.statement=conector.getStatement();
+	private ClienteKud() throws SQLException, ClassNotFoundException {
+		this.connection = Connector.getConnection();
+		this.statement = Connector.getStatement();
 	}
+	public static ClienteKud getInstance() throws SQLException,
+	ClassNotFoundException {
+		if (null == instance)
+			instance = new ClienteKud();
+	return instance;
+}
 	
 	 Cliente getCliente (int nan) throws IOException, SQLException
 	{
