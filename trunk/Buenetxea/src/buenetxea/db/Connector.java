@@ -63,7 +63,9 @@ public class Connector {
 	}
 
 	/**
-	 * @return
+	 * 
+	 * 
+	 * @return Datu basearen konexioa
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
