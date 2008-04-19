@@ -23,18 +23,20 @@ public class Connector {
 	/**
 	 * The jdbc driver used to connect to the database
 	 */
-	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	public static final String JDBC_DRIVER = ConnectionPref
+			.getString("ConnectionPref.JDBC_DRIVER"); //$NON-NLS-1$
 	/**
 	 * The URL of the server where the database is hosted
 	 */
-	public static final String DATABASE_URL = "jdbc:mysql://localhost/dbbuenetxea";
+	public static final String DATABASE_URL = ConnectionPref
+			.getString("ConnectionPref.DATABASE_URL"); //$NON-NLS-1$
 
 	private static String username;
 	private static String password;
 
 	private static java.sql.Connection connection;
-	private static boolean connectedToDatabase = false;
 	private static java.sql.Statement statement;
+	private static boolean connectedToDatabase = false;
 
 	/**
 	 * @throws SQLException
@@ -46,26 +48,29 @@ public class Connector {
 				Connector.username, Connector.password);
 		Connector.statement = Connector.connection.createStatement();
 		Connector.connectedToDatabase = true;
-		System.out.println("Driverra Kargatuta");
 	}
 
 	/**
+	 * Datu basera konektatzen da emandako erabiltzaile eta pasahitzarekin.
+	 * 
 	 * @param user
+	 *            konexioa ezartzeko erabiltzaile izena
 	 * @param pass
+	 *            konexioa ezartzeko erabiltzailearen pasahitza
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public static void connect(String user, String pass)
-			throws SQLException, ClassNotFoundException {
+	public static void connect(String user, String pass) throws SQLException,
+			ClassNotFoundException {
 		Connector.username = user;
 		Connector.password = pass;
 		Connector.connect();
 	}
 
 	/**
+	 * Datu basera konexioa itzultzen du.
 	 * 
-	 * 
-	 * @return Datu basearen konexioa
+	 * @return Datu basera uneko konexioa
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
@@ -77,7 +82,9 @@ public class Connector {
 	}
 
 	/**
-	 * @return
+	 * Uneko konexioaren statement-a itzultzen du.
+	 * 
+	 * @return uneko konexioaren statement-a
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
@@ -89,14 +96,16 @@ public class Connector {
 	}
 
 	/**
+	 * Datu basera konektatuta dagoen edo ez esaten du.
 	 * 
-	 * @return
+	 * @return Datu basera konexioa badago true itzultzen du, bestela false.
 	 */
 	public static boolean isConnectedToDatabase() {
 		return Connector.connectedToDatabase;
 	}
 
 	/**
+	 * Datu basera konexioa ixten du.
 	 * 
 	 * @throws java.sql.SQLException
 	 */
