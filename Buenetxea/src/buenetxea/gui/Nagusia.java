@@ -19,7 +19,6 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.MatteBorder;
 
 import buenetxea.gui.panelak.LocalizadorPanel;
-import buenetxea.gui.panelak.VerInmueblePanel;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 
 public class Nagusia extends JFrame {
@@ -124,14 +123,10 @@ public class Nagusia extends JFrame {
 										GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)));
-		VerInmueblePanel verInmueblePanel;
 
 		final LocalizadorPanel localizadorPanel = new LocalizadorPanel();
 		localizadorPanel.setName("localizadorPanel");
 		panel.add(localizadorPanel, localizadorPanel.getName());
-		verInmueblePanel = new VerInmueblePanel(this);
-		verInmueblePanel.setName("verInmueblePanel");
-		panel.add(verInmueblePanel, verInmueblePanel.getName());
 		final JButton peritajeButton = new JButton();
 		peritajeButton.setText("Peritaje");
 		toolBar.add(peritajeButton);

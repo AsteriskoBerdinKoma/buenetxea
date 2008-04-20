@@ -1,12 +1,8 @@
-package buenetxea.gui;
-
-import java.awt.Frame;
-import java.text.ParseException;
+package buenetxea.gui.panelak;
 
 import javax.swing.ActionMap;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,34 +19,25 @@ import org.jdesktop.application.Task;
 import buenetxea.BuenetxeaApp;
 import buenetxea.actions.BuscarClienteAction;
 
-public class VenderInmuebleDialog extends JDialog {
+public class VenderInmueblePanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private final JFormattedTextField formattedTextField;
 	private final JTable table;
 	private final JTextField textField_2;
 	private final JTextField textField_1;
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 648927771057505907L;
-
-	@Action
-	public Task<Object, Object> buscarCliente() {
-		return new BuscarClienteAction(BuenetxeaApp.getApplication());
-	}
 
 	/**
-	 * Create the dialog
-	 * 
-	 * @throws ParseException
+	 * Create the panel
 	 */
-	public VenderInmuebleDialog(Frame jabea) {
-		super(jabea, true);
-		setTitle("Vender Inmueble");
+	public VenderInmueblePanel() {
+		super();
 
-		JPanel panel;
-		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Vender Inmueble",
+		setBorder(new TitledBorder(null, "Vender Inmueble",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 
@@ -111,17 +98,6 @@ public class VenderInmuebleDialog extends JDialog {
 		venderInmuebleAlButton = new JButton();
 		venderInmuebleAlButton
 				.setText("Vender inmueble al cliente seleccionado");
-		final GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 511,
-								Short.MAX_VALUE).addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 380,
-								Short.MAX_VALUE).addContainerGap()));
 
 		JButton crearUnClienteButton;
 		crearUnClienteButton = new JButton();
@@ -217,7 +193,7 @@ public class VenderInmuebleDialog extends JDialog {
 								referenciaLabel).addComponent(label))
 						.addContainerGap(22, Short.MAX_VALUE)));
 		panel_1.setLayout(groupLayout_2);
-		final GroupLayout groupLayout_1 = new GroupLayout(panel);
+		final GroupLayout groupLayout_1 = new GroupLayout(this);
 		groupLayout_1.setHorizontalGroup(groupLayout_1.createParallelGroup(
 				GroupLayout.Alignment.TRAILING).addComponent(panel_1,
 				GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
@@ -255,10 +231,13 @@ public class VenderInmuebleDialog extends JDialog {
 														venderInmuebleAlButton)
 												.addComponent(
 														crearUnClienteButton))));
-		panel.setLayout(groupLayout_1);
-		getContentPane().setLayout(groupLayout);
-		pack();
+		setLayout(groupLayout_1);
 		//
+	}
+
+	@Action
+	public Task<Object, Object> buscarCliente() {
+		return new BuscarClienteAction(BuenetxeaApp.getApplication());
 	}
 
 }
