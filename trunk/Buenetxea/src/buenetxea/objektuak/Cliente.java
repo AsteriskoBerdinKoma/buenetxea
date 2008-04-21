@@ -1,23 +1,34 @@
 package buenetxea.objektuak;
 
+import java.util.Date;
+
+/**
+ * @author Mireia
+ *
+ */
+
 public class Cliente {
 	
 	private int dni;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
-	private String fecha;
+	private String nacionalidad;
+	private Date fecha;
 	private int telefono;
 	private String medio;
 	private String asesor;
+	
+	
 	public Cliente (int dni, String nombre, String apellido1, String apellido2,
-			String fecha, int telefono, String medio, String asesor)
+			String nacionalidad, Date fecha, int telefono, String medio, String asesor)
 	{
 		
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
+		this.nacionalidad=nacionalidad;
 		this.fecha = fecha;
 		this.telefono = telefono;
 		this.medio = medio;
@@ -41,10 +52,10 @@ public class Cliente {
 	public void setApellido2(String apellido2) {
 		this.apellido2 = apellido2;
 	}
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 	public int getTelefono() {
@@ -64,6 +75,12 @@ public class Cliente {
 	}
 	public void setAsesor(String asesor) {
 		this.asesor = asesor;
+	}
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
 	}
 	
 	

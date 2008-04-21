@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Cliente;
@@ -46,7 +47,8 @@ public class ClienteKud {
 		String nombre;
 		String apellido1;
 		String apellido2;
-		String fecha;
+		Date fecha;
+		String nacionalidad;
 		int telefono;
 		String medio;
 		String asesor;
@@ -59,11 +61,12 @@ public class ClienteKud {
 			nombre = rs.getString("nombre");
 			apellido1 = rs.getString("apellido1");
 			apellido2 = rs.getString("apellido2");
-			fecha = rs.getString("fecha");
+			nacionalidad=rs.getString("nacionalidad");
+			//fecha = Date.parse(rs.getString("fecha"));
 			telefono = rs.getInt("telefono");
 			medio = rs.getString("medio");
 			asesor = rs.getString("asesor");
-			return new Cliente(dni, nombre, apellido1, apellido2, fecha,
+			return new Cliente(dni, nombre, apellido1, apellido2,nacionalidad, fecha,
 					telefono, medio, asesor);
 		} else
 			return null;
