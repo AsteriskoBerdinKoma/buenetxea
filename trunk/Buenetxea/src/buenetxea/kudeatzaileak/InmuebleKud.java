@@ -56,10 +56,11 @@ class InmuebleKud {
 		boolean muebles;
 		float altura_edificio;
 
-		String query = " SELECT * FROM Inmueble WHERE referencia = ?";
+		String query = "SELECT * FROM Inmueble WHERE referencia = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setInt(1, referencia);
-		ResultSet rs = this.statement.executeQuery(query);
+		ResultSet rs = ps.executeQuery();
+		Inmueble inmueble = null;
 		if (rs.next()) {
 			ref = rs.getInt("ref");
 			tipo = rs.getString("tipo");
@@ -87,12 +88,14 @@ class InmuebleKud {
 			muebles = rs.getBoolean("muebles");
 			altura_edificio = rs.getFloat("altura_edificio");
 
-			return new Inmueble(ref, tipo, zona, direccion, exclusiva,
+			inmueble = new Inmueble(ref, tipo, zona, direccion, exclusiva,
 					comprado, metros_const, metros_utiles, metros_parcela, gas,
 					luminoso, techos, exterior, antiguedad, portero, ascensor,
 					calefaccion, pintura, tipo_suelo, orientacion, desalojo,
 					puertas, ventanas, muebles, altura_edificio);
 		}
-		return null;
+		ps.close();
+		rs.close();
+		return inmueble;
 	}
 }

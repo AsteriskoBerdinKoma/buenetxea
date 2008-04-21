@@ -1,5 +1,7 @@
 package buenetxea.gui.panelak;
 
+import java.sql.SQLException;
+
 import javax.swing.ActionMap;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -10,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
 import org.jdesktop.application.Action;
@@ -18,9 +21,12 @@ import org.jdesktop.application.Task;
 
 import buenetxea.BuenetxeaApp;
 import buenetxea.actions.BuscarClienteAction;
+import buenetxea.db.ResultSetTableModel;
+import buenetxea.kudeatzaileak.Kudeatzailea;
 
 public class VenderInmueblePanel extends JPanel {
 
+	private JTextField textField_3;
 	/**
 	 * 
 	 */
@@ -33,8 +39,11 @@ public class VenderInmueblePanel extends JPanel {
 
 	/**
 	 * Create the panel
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
 	 */
-	public VenderInmueblePanel() {
+	public VenderInmueblePanel() throws SQLException, ClassNotFoundException {
 		super();
 
 		setBorder(new TitledBorder(null, "Vender Inmueble",
@@ -92,6 +101,11 @@ public class VenderInmueblePanel extends JPanel {
 		scrollPane = new JScrollPane();
 
 		table = new JTable();
+		table.setModel(new ResultSetTableModel(Kudeatzailea.getInstance()
+				.getBuscarClientesQuery(formattedTextField.getText(),
+						textField_1.getText(), textField_2.getText(),
+						textField_3.getText())));
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 
 		JButton venderInmuebleAlButton;
@@ -102,6 +116,24 @@ public class VenderInmueblePanel extends JPanel {
 		JButton crearUnClienteButton;
 		crearUnClienteButton = new JButton();
 		crearUnClienteButton.setText("Crear un cliente nuevo");
+
+		textField_3 = new JTextField();
+		final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
+		groupLayout_2.setHorizontalGroup(groupLayout_2.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addGroup(
+				groupLayout_2.createSequentialGroup().addContainerGap()
+						.addComponent(referenciaLabel).addPreferredGap(
+								LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(label).addContainerGap(342,
+								Short.MAX_VALUE)));
+		groupLayout_2.setVerticalGroup(groupLayout_2.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addGroup(
+				groupLayout_2.createSequentialGroup().addGroup(
+						groupLayout_2.createParallelGroup(
+								GroupLayout.Alignment.BASELINE).addComponent(
+								referenciaLabel).addComponent(label))
+						.addContainerGap(22, Short.MAX_VALUE)));
+		panel_1.setLayout(groupLayout_2);
 		final GroupLayout groupLayout_3 = new GroupLayout(panel_2);
 		groupLayout_3
 				.setHorizontalGroup(groupLayout_3
@@ -143,14 +175,24 @@ public class VenderInmueblePanel extends JPanel {
 																		.addComponent(
 																				textField_1,
 																				GroupLayout.DEFAULT_SIZE,
-																				193,
+																				182,
 																				Short.MAX_VALUE))
-														.addComponent(
-																textField_2,
+														.addGroup(
 																GroupLayout.Alignment.TRAILING,
-																GroupLayout.DEFAULT_SIZE,
-																310,
-																Short.MAX_VALUE))
+																groupLayout_3
+																		.createSequentialGroup()
+																		.addComponent(
+																				textField_2,
+																				GroupLayout.PREFERRED_SIZE,
+																				147,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				LayoutStyle.ComponentPlacement.RELATED)
+																		.addComponent(
+																				textField_3,
+																				GroupLayout.PREFERRED_SIZE,
+																				146,
+																				GroupLayout.PREFERRED_SIZE)))
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(buscarClientesButton)));
@@ -171,42 +213,33 @@ public class VenderInmueblePanel extends JPanel {
 						groupLayout_3.createParallelGroup(
 								GroupLayout.Alignment.BASELINE).addComponent(
 								apellidosLabel).addComponent(
-								buscarClientesButton).addComponent(textField_2,
+								buscarClientesButton).addComponent(textField_3,
 								GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE).addComponent(
+								textField_2, GroupLayout.PREFERRED_SIZE,
 								GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE)).addContainerGap(
 						GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		groupLayout_3.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+				new java.awt.Component[] { textField_3, textField_2 });
+		groupLayout_3.linkSize(javax.swing.SwingConstants.VERTICAL,
+				new java.awt.Component[] { textField_3, textField_2 });
 		panel_2.setLayout(groupLayout_3);
-		final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
-		groupLayout_2.setHorizontalGroup(groupLayout_2.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout_2.createSequentialGroup().addContainerGap()
-						.addComponent(referenciaLabel).addPreferredGap(
-								LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(label).addContainerGap(353,
-								Short.MAX_VALUE)));
-		groupLayout_2.setVerticalGroup(groupLayout_2.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout_2.createSequentialGroup().addGroup(
-						groupLayout_2.createParallelGroup(
-								GroupLayout.Alignment.BASELINE).addComponent(
-								referenciaLabel).addComponent(label))
-						.addContainerGap(22, Short.MAX_VALUE)));
-		panel_1.setLayout(groupLayout_2);
 		final GroupLayout groupLayout_1 = new GroupLayout(this);
 		groupLayout_1.setHorizontalGroup(groupLayout_1.createParallelGroup(
 				GroupLayout.Alignment.TRAILING).addComponent(panel_1,
-				GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+				GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
 				.addGroup(
 						groupLayout_1.createSequentialGroup().addContainerGap(
-								127, Short.MAX_VALUE).addComponent(
+								116, Short.MAX_VALUE).addComponent(
 								crearUnClienteButton).addPreferredGap(
 								LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(venderInmuebleAlButton))
-				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 495,
+				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 484,
 						Short.MAX_VALUE).addComponent(scrollPane,
 						GroupLayout.Alignment.LEADING,
-						GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE));
+						GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE));
 		groupLayout_1
 				.setVerticalGroup(groupLayout_1.createParallelGroup(
 						GroupLayout.Alignment.LEADING).addGroup(
@@ -221,7 +254,7 @@ public class VenderInmueblePanel extends JPanel {
 								.addPreferredGap(
 										LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(scrollPane,
-										GroupLayout.DEFAULT_SIZE, 153,
+										GroupLayout.DEFAULT_SIZE, 148,
 										Short.MAX_VALUE).addPreferredGap(
 										LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
@@ -236,7 +269,7 @@ public class VenderInmueblePanel extends JPanel {
 	}
 
 	@Action
-	public Task<Object, Object> buscarCliente() {
+	public Task<?, ?> buscarCliente() {
 		return new BuscarClienteAction(BuenetxeaApp.getApplication());
 	}
 

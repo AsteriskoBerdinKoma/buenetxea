@@ -3,7 +3,6 @@ package buenetxea.gui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -20,7 +19,6 @@ import javax.swing.border.MatteBorder;
 
 import buenetxea.gui.panelak.LocalizadorPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
-import buenetxea.kudeatzaileak.Kudeatzailea;
 
 public class Nagusia extends JFrame {
 
@@ -29,23 +27,11 @@ public class Nagusia extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Kudeatzailea kud;
-
 	/**
 	 * Create the frame
 	 */
 	public Nagusia() {
 		super();
-
-		try {
-			this.kud = Kudeatzailea.getInstance();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		this.setJMenuBar(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
