@@ -19,6 +19,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.MatteBorder;
 
 import buenetxea.gui.panelak.LocalizadorPanel;
+import buenetxea.gui.panelak.VenderInmueblePanel;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 
 public class Nagusia extends JFrame {
@@ -124,6 +125,10 @@ public class Nagusia extends JFrame {
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)));
 
+		final VenderInmueblePanel venderInmueblePanel = new VenderInmueblePanel();
+		venderInmueblePanel.setName("venderInmueblePanel");
+		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
+
 		final LocalizadorPanel localizadorPanel = new LocalizadorPanel();
 		localizadorPanel.setName("localizadorPanel");
 		panel.add(localizadorPanel, localizadorPanel.getName());
@@ -153,10 +158,6 @@ public class Nagusia extends JFrame {
 		this.getContentPane().setLayout(groupLayout);
 		this.pack();
 		//
-	}
-
-	public Kudeatzailea getKud() {
-		return this.kud;
 	}
 
 }

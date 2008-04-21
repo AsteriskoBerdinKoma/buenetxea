@@ -7,7 +7,6 @@ public class BuscarClienteAction extends Task<Object, Object> {
 
 	public BuscarClienteAction(Application application) {
 		super(application);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
