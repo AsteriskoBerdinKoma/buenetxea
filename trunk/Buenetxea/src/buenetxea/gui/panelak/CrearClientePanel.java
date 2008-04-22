@@ -24,7 +24,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.UIManager;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
@@ -64,7 +63,7 @@ public class CrearClientePanel extends JPanel {
 	 */
 	public CrearClientePanel() throws ParseException {
 		super();
-		
+
 		setBorder(new TitledBorder(null, "Crear cliente",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
@@ -157,27 +156,22 @@ public class CrearClientePanel extends JPanel {
 		guardarButton = new JButton();
 		guardarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
-				int dni=Integer.parseInt(formattedTextField.getText());
-				String nombre=textField.getText();
-				String apellido1=textField_2.getText();
-				String apellido2=textField_3.getText();
-				String nacionalidad=comboBox.getSelectedItem().toString();
-				int telefono= Integer.parseInt(textField_5.getText());
-				String medio=textField_6.getText();
-				String asesor=textField_7.getText();
+				int dni = Integer.parseInt(formattedTextField.getText());
+				String nombre = textField.getText();
+				String apellido1 = textField_2.getText();
+				String apellido2 = textField_3.getText();
+				String nacionalidad = comboBox.getSelectedItem().toString();
+				int telefono = Integer.parseInt(textField_5.getText());
+				String medio = textField_6.getText();
+				String asesor = textField_7.getText();
 				Date fecha;
 				if (radioButton.isSelected())
-				{
 					fecha = new Date();
-				}
 				else
-				{
-					 fecha = dateChooser.getDate();
-				}
-				Cliente cliente=new Cliente (dni,nombre,apellido1,apellido2,
-						nacionalidad,fecha,telefono,medio,asesor);
-				
-				
+					fecha = dateChooser.getDate();
+				Cliente cliente = new Cliente(dni, nombre, apellido1,
+						apellido2, nacionalidad, fecha, telefono, medio, asesor);
+
 			}
 		});
 		guardarButton.setText("Guardar");
@@ -258,13 +252,13 @@ public class CrearClientePanel extends JPanel {
 		textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 
-		final GroupLayout groupLayout_2 = new GroupLayout((JComponent) panel_1);
+		final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
 		groupLayout_2.setHorizontalGroup(
 			groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(groupLayout_2.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
 						.addGroup(groupLayout_2.createSequentialGroup()
 							.addComponent(numHabitacionesLabel)
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -311,7 +305,7 @@ public class CrearClientePanel extends JPanel {
 								.addGroup(groupLayout_2.createSequentialGroup()
 									.addComponent(tipoLabel)
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(textField_8, GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)))
+									.addComponent(textField_8, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)))
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
 					.addGap(1, 1, 1))
 		);
@@ -353,12 +347,12 @@ public class CrearClientePanel extends JPanel {
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(obserbacionesLabel)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		panel_1.setLayout(groupLayout_2);
 
-		final GroupLayout groupLayout_1 = new GroupLayout((JComponent) panel);
+		final GroupLayout groupLayout_1 = new GroupLayout(panel);
 		groupLayout_1.setHorizontalGroup(
 			groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(groupLayout_1.createSequentialGroup()
@@ -370,36 +364,40 @@ public class CrearClientePanel extends JPanel {
 						.addComponent(apellido1Label)
 						.addComponent(dniLabel))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(groupLayout_1.createSequentialGroup()
-							.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
+						.addGroup(GroupLayout.Alignment.LEADING, groupLayout_1.createSequentialGroup()
+							.addComponent(actualRadioButton)
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(nombreLabel)
+							.addComponent(radioButton)
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-						.addGroup(groupLayout_1.createSequentialGroup()
-							.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+							.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout_1.createSequentialGroup()
 							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
-								.addComponent(comboBox, 0, 72, Short.MAX_VALUE)
-								.addComponent(textField_6, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
+								.addComponent(comboBox, GroupLayout.Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(textField_6, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(asesorLabel, GroupLayout.Alignment.TRAILING)
 								.addComponent(telefonoLabel, GroupLayout.Alignment.TRAILING))
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
-								.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-								.addComponent(textField_7, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
-							.addGap(129, 129, 129))
+							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(textField_7, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+								.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
+							.addGap(162, 162, 162))
 						.addGroup(groupLayout_1.createSequentialGroup()
-							.addComponent(actualRadioButton)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(radioButton)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addGroup(groupLayout_1.createSequentialGroup()
+									.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(nombreLabel)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(textField, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+								.addGroup(groupLayout_1.createSequentialGroup()
+									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
 					.addContainerGap())
 		);
 		groupLayout_1.setVerticalGroup(
@@ -413,8 +411,8 @@ public class CrearClientePanel extends JPanel {
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(apellido1Label)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(nacionalidadLabel)
@@ -433,23 +431,23 @@ public class CrearClientePanel extends JPanel {
 						.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 							.addComponent(fechaLabel)
 							.addComponent(actualRadioButton))
-						.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
-							.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(radioButton)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(groupLayout_1.createSequentialGroup()
+							.addGap(1, 1, 1)
+							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(radioButton))))
+					.addContainerGap(14, Short.MAX_VALUE))
 		);
 		panel.setLayout(groupLayout_1);
-		final GroupLayout groupLayout = new GroupLayout((JComponent) this);
+		final GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+			groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(371, 371, 371)
-							.addComponent(guardarButton))
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+						.addComponent(panel_1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+						.addComponent(guardarButton))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -457,7 +455,7 @@ public class CrearClientePanel extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(guardarButton)
 					.addContainerGap())
@@ -477,13 +475,11 @@ public class CrearClientePanel extends JPanel {
 		private boolean verifyDNI(String DNI) {
 			// Eliminamos caracteres de separación.
 			DNI = DNI.replaceAll("[.-]", "");
-			if (DNI.length() != 9) {
+			if (DNI.length() != 9)
 				return false;
-			}
 			// El último carácter debe ser una letra
-			if (!Character.isLetter(DNI.charAt(8))) {
+			if (!Character.isLetter(DNI.charAt(8)))
 				return false;
-			}
 			int digits;
 			try {
 				digits = Integer.parseInt(DNI.substring(0, 8));
@@ -492,9 +488,8 @@ public class CrearClientePanel extends JPanel {
 			}
 			// El algoritmo mágico
 			int pos = (digits % 23);
-			if (pos == 0) {
+			if (pos == 0)
 				pos = pattern.length();
-			}
 			pos = pos - 1; // Las tiras en Java están basadas en cero!
 			return (pattern.charAt(pos) == DNI.charAt(8));
 		}
