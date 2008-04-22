@@ -7,17 +7,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import buenetxea.db.Connector;
-import buenetxea.objektuak.Inmueble;
+import buenetxea.objektuak.Visita;
 
 class VisitaKud {
 
-
+	private static VisitaKud instance;
 	private final Connection connection;
 	private final Statement statement;
 	
 	private VisitaKud() throws SQLException, ClassNotFoundException {
 		this.connection = Connector.getConnection();
 		this.statement = Connector.getStatement();
+	}
+	
+	public static VisitaKud getInstance() throws SQLException,
+	ClassNotFoundException {
+		if (null == instance)
+			instance = new VisitaKud();
+		return instance;
 	}
 	
 	public Visita getVisita(int referencia) throws SQLException {
@@ -71,6 +78,8 @@ class VisitaKud {
 			quierenbalconterraza = rs.getBoolean("quierenbalconterraza");
 			nogustadistribucion = rs.getBoolean("nogustadistribucion");
 			alquiladoenestavisita = rs.getBoolean("alquiladoenestavisita");
+			gestiondeventa = rs.getBoolean("gestiondeventa");
+			peritarpiso = rs.getBoolean("peritarpiso");
 			
 
 			return new Visita(referencia,precio,nolegustalazona,loquierenmasalto,
