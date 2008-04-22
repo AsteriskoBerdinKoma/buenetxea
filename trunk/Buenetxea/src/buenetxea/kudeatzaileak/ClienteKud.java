@@ -30,7 +30,9 @@ public class ClienteKud {
 			ClassNotFoundException {
 		if (null == instance)
 			instance = new ClienteKud();
+
 		return instance;
+
 	}
 
 	/**

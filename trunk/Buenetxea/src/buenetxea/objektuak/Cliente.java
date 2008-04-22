@@ -21,7 +21,9 @@ public class Cliente {
 	
 	
 	public Cliente (int dni, String nombre, String apellido1, String apellido2,
+
 			String nacionalidad, Date fecha, int telefono, String medio, String asesor)
+
 	{
 		
 		this.dni = dni;
@@ -40,6 +42,7 @@ public class Cliente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getApellido1() {
 		return apellido1;
 	}

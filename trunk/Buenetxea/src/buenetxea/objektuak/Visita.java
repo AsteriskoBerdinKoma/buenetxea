@@ -2,7 +2,7 @@ package buenetxea.objektuak;
 
 public class Visita {
 	
-	private final int ref;
+	private int ref;
 	private boolean precio;
 	private boolean nolegustalazona;
 	private boolean loquierenmasalto;
