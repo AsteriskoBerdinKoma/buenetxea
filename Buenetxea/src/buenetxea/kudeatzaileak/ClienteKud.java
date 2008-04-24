@@ -64,7 +64,7 @@ public class ClienteKud {
 			apellido1 = rs.getString("apellido1");
 			apellido2 = rs.getString("apellido2");
 			nacionalidad=rs.getString("nacionalidad");
-			//fecha = Date.parse(rs.getString("fecha"));
+			fecha=rs.getDate("fecha");
 			telefono = rs.getInt("telefono");
 			medio = rs.getString("medio");
 			asesor = rs.getString("asesor");
@@ -72,6 +72,37 @@ public class ClienteKud {
 					telefono, medio, asesor);
 		} else
 			return null;
+	}
+	/** Bezero berri baten datuak datu basean sartzen ditu
+	 * @param nan
+	 * @param nombre
+	 * @param apellido1
+	 * @param apellido2
+	 * @param fecha
+	 * @param nacionalidad
+	 * @param telefono
+	 * @param medio
+	 * @param asesor
+	 */
+	public void InsertCliente (int nan, String nombre, String apellido1,String apellido2,Date fecha,String nacionalidad,
+			int telefono, String medio, String asesor)
+	{
+		String query="INSERT INTO Cliente VALUES (" + nan + "," + nombre + "," + apellido1 + "," + apellido2 + "," + fecha 
+		+ "," + nacionalidad + "," + telefono + "," + medio + "," +asesor + ")";
+		try {
+			ResultSet rs=this.statement.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String baieztatu = "COMMIT";
+		try {
+			int rs= this.statement.executeUpdate(baieztatu);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

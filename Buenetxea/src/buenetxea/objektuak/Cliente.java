@@ -20,6 +20,19 @@ public class Cliente {
 	private String asesor;
 	
 	
+	/**
+	 * Datu Basean ez dagoen bezero bat sortzen du eta datu basea eguneratzen du.
+	 * 
+	 * @param dni
+	 * @param nombre
+	 * @param apellido1
+	 * @param apellido2
+	 * @param nacionalidad
+	 * @param fecha
+	 * @param telefono
+	 * @param medio
+	 * @param asesor
+	 */
 	public Cliente (int dni, String nombre, String apellido1, String apellido2,
 
 			String nacionalidad, Date fecha, int telefono, String medio, String asesor)
@@ -35,8 +48,11 @@ public class Cliente {
 		this.telefono = telefono;
 		this.medio = medio;
 		this.asesor = asesor;
+		
 	}
+	
 	public String getNombre() {
+		
 		return nombre;
 	}
 	public void setNombre(String nombre) {

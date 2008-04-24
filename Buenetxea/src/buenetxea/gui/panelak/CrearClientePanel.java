@@ -27,6 +27,7 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import buenetxea.kudeatzaileak.ClienteKud;
 import buenetxea.objektuak.Cliente;
 
 import com.toedter.calendar.JDateChooser;
@@ -156,23 +157,29 @@ public class CrearClientePanel extends JPanel {
 		guardarButton = new JButton();
 		guardarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
-				int dni = Integer.parseInt(formattedTextField.getText());
-				String nombre = textField.getText();
-				String apellido1 = textField_2.getText();
-				String apellido2 = textField_3.getText();
-				String nacionalidad = comboBox.getSelectedItem().toString();
-				int telefono = Integer.parseInt(textField_5.getText());
-				String medio = textField_6.getText();
-				String asesor = textField_7.getText();
+
+				ClienteKud clientekud = null;
+				int dni=Integer.parseInt(formattedTextField.getText());
+				String nombre=textField.getText();
+				String apellido1=textField_2.getText();
+				String apellido2=textField_3.getText();
+				String nacionalidad=comboBox.getSelectedItem().toString();
+				int telefono= Integer.parseInt(textField_5.getText());
+				String medio=textField_6.getText();
+				String asesor=textField_7.getText();
+
 				Date fecha;
 				if (radioButton.isSelected())
 					fecha = new Date();
 				else
-					fecha = dateChooser.getDate();
-				Cliente cliente = new Cliente(dni, nombre, apellido1,
-						apellido2, nacionalidad, fecha, telefono, medio, asesor);
 
-			}
+				{
+					 fecha = dateChooser.getDate();
+				}
+				Cliente cliente=new Cliente (dni,nombre,apellido1,apellido2,
+						nacionalidad,fecha,telefono,medio,asesor);
+				clientekud.InsertCliente(dni, nombre, apellido1, apellido2, fecha, nacionalidad, telefono, medio, asesor);
+				}
 		});
 		guardarButton.setText("Guardar");
 
