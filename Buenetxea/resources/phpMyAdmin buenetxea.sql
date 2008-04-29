@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 2.10.2
 -- http://www.phpmyadmin.net
 -- 
@@ -15,13 +15,13 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Estructura de tabla para la tabla `cliente`
 -- 
 
 DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE IF NOT EXISTS `cliente` (
-  `dni` int(10) unsigned NOT NULL auto_increment,
+  `dni` varchar(9) NOT NULL,
   `fecha` datetime NOT NULL,
   `asesor` varchar(45) NOT NULL,
   `medio` varchar(45) NOT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `peritaje` (
 
 DROP TABLE IF EXISTS `preferencia`;
 CREATE TABLE IF NOT EXISTS `preferencia` (
-  `fk_cliente_dni` int(10) unsigned NOT NULL auto_increment,
+  `fk_cliente_dni` varchar(9) NOT NULL,
   `tipo` varchar(45) NOT NULL,
   `desde_metros` int(10) unsigned NOT NULL,
   `hasta_metros` int(10) unsigned NOT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `preferencia` (
 
 DROP TABLE IF EXISTS `propietario`;
 CREATE TABLE IF NOT EXISTS `propietario` (
-  `dni` int(10) unsigned NOT NULL auto_increment,
+  `dni` varchar(9) NOT NULL,
   `apellido1` varchar(45) NOT NULL,
   `apellido2` varchar(45) NOT NULL,
   `nombre` varchar(45) NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `propietario` (
 
 DROP TABLE IF EXISTS `rel_cliente_inmueble`;
 CREATE TABLE IF NOT EXISTS `rel_cliente_inmueble` (
-  `fk_cliente_dni` int(10) unsigned NOT NULL auto_increment,
+  `fk_cliente_dni` varchar(9) NOT NULL,
   `fk_inmueble_referencia` int(10) unsigned NOT NULL,
   `fecha` datetime NOT NULL,
   `precio_venta` double NOT NULL,
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `rel_cliente_inmueble` (
 DROP TABLE IF EXISTS `rel_inmueble_propietario`;
 CREATE TABLE IF NOT EXISTS `rel_inmueble_propietario` (
   `fk_inmueble_referencia` int(10) unsigned NOT NULL auto_increment,
-  `fk_propietario_dni` int(10) unsigned NOT NULL,
+  `fk_propietario_dni` varchar(9) NOT NULL,
   `nuevo_precio` varchar(45) NOT NULL,
   `fecha` datetime NOT NULL,
   `observaciones` varchar(100) NOT NULL,
@@ -285,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `rel_visita` (
   `nombre_trabajador` varchar(45) NOT NULL,
   `categoria_trabajador` varchar(45) NOT NULL,
   `fk_inmueble_referencia` int(10) unsigned NOT NULL,
-  `fk_cliente_dni` int(10) unsigned NOT NULL,
+  `fk_cliente_dni` varchar(9) NOT NULL,
   PRIMARY KEY  USING BTREE (`fk_inmueble_referencia`,`fk_cliente_dni`),
   KEY `FK_rel_visita_2` (`fk_cliente_dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
