@@ -78,14 +78,6 @@ public class VenderInmueblePanel extends JPanel {
 
 			textField_1 = new JTextField();
 
-			JLabel referenciaLabel;
-			referenciaLabel = new JLabel();
-			referenciaLabel.setText("Referencia:");
-
-			JLabel label;
-			label = new JLabel();
-			label.setText("New JLabel");
-
 			textField_2 = new JTextField();
 
 			ActionMap actionMap = Application.getInstance(BuenetxeaApp.class)
@@ -120,22 +112,102 @@ public class VenderInmueblePanel extends JPanel {
 			crearUnClienteButton.setText("Crear un cliente nuevo");
 
 			textField_3 = new JTextField();
+
+			JLabel referenciaLabel;
+			referenciaLabel = new JLabel();
+			referenciaLabel.setText("Referencia:");
+
+			JLabel label;
+			label = new JLabel();
+			label.setText("Dirección:");
+
+			JLabel label_1;
+			label_1 = new JLabel();
+			label_1.setText("New JLabel");
+
+			JLabel zonaLabel;
+			zonaLabel = new JLabel();
+			zonaLabel.setText("Zona:");
+
+			JLabel label_2;
+			label_2 = new JLabel();
+			label_2.setText("New JLabel");
+
+			JLabel label_3;
+			label_3 = new JLabel();
+			label_3.setText("New JLabel");
 			final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
-			groupLayout_2.setHorizontalGroup(groupLayout_2.createParallelGroup(
-					GroupLayout.Alignment.LEADING).addGroup(
-					groupLayout_2.createSequentialGroup().addContainerGap()
-							.addComponent(referenciaLabel).addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(label).addContainerGap(342,
-									Short.MAX_VALUE)));
-			groupLayout_2.setVerticalGroup(groupLayout_2.createParallelGroup(
-					GroupLayout.Alignment.LEADING).addGroup(
-					groupLayout_2.createSequentialGroup().addGroup(
-							groupLayout_2.createParallelGroup(
-									GroupLayout.Alignment.BASELINE)
-									.addComponent(referenciaLabel)
-									.addComponent(label)).addContainerGap(22,
-							Short.MAX_VALUE)));
+			groupLayout_2
+					.setHorizontalGroup(groupLayout_2
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout_2
+											.createSequentialGroup()
+											.addContainerGap()
+											.addGroup(
+													groupLayout_2
+															.createParallelGroup(
+																	GroupLayout.Alignment.LEADING)
+															.addComponent(
+																	label,
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	zonaLabel,
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	referenciaLabel,
+																	GroupLayout.Alignment.TRAILING))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout_2
+															.createParallelGroup(
+																	GroupLayout.Alignment.LEADING)
+															.addComponent(
+																	label_1)
+															.addComponent(
+																	label_2)
+															.addComponent(
+																	label_3))
+											.addContainerGap(340,
+													Short.MAX_VALUE)));
+			groupLayout_2
+					.setVerticalGroup(groupLayout_2
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout_2
+											.createSequentialGroup()
+											.addContainerGap()
+											.addGroup(
+													groupLayout_2
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	referenciaLabel)
+															.addComponent(
+																	label_1))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout_2
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	zonaLabel)
+															.addComponent(
+																	label_2))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout_2
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(label)
+															.addComponent(
+																	label_3))
+											.addContainerGap(
+													GroupLayout.DEFAULT_SIZE,
+													Short.MAX_VALUE)));
 			panel_1.setLayout(groupLayout_2);
 			final GroupLayout groupLayout_3 = new GroupLayout(panel_2);
 			groupLayout_3
@@ -144,13 +216,16 @@ public class VenderInmueblePanel extends JPanel {
 							.addGroup(
 									groupLayout_3
 											.createSequentialGroup()
-											.addContainerGap()
+											.addGap(15, 15, 15)
 											.addGroup(
 													groupLayout_3
 															.createParallelGroup(
 																	GroupLayout.Alignment.LEADING)
 															.addComponent(
 																	apellidosLabel,
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	nombreLabel,
 																	GroupLayout.Alignment.TRAILING)
 															.addComponent(
 																	dniLabel,
@@ -164,41 +239,43 @@ public class VenderInmueblePanel extends JPanel {
 															.addGroup(
 																	groupLayout_3
 																			.createSequentialGroup()
-																			.addComponent(
-																					formattedTextField,
-																					GroupLayout.PREFERRED_SIZE,
-																					68,
-																					GroupLayout.PREFERRED_SIZE)
+																			.addGroup(
+																					groupLayout_3
+																							.createParallelGroup(
+																									GroupLayout.Alignment.TRAILING)
+																							.addComponent(
+																									textField_1,
+																									GroupLayout.Alignment.LEADING,
+																									GroupLayout.DEFAULT_SIZE,
+																									292,
+																									Short.MAX_VALUE)
+																							.addGroup(
+																									groupLayout_3
+																											.createSequentialGroup()
+																											.addComponent(
+																													textField_2,
+																													GroupLayout.DEFAULT_SIZE,
+																													144,
+																													Short.MAX_VALUE)
+																											.addGap(
+																													4,
+																													4,
+																													4)
+																											.addComponent(
+																													textField_3,
+																													GroupLayout.DEFAULT_SIZE,
+																													144,
+																													Short.MAX_VALUE)))
 																			.addPreferredGap(
 																					LayoutStyle.ComponentPlacement.RELATED)
 																			.addComponent(
-																					nombreLabel)
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addComponent(
-																					textField_1,
-																					GroupLayout.DEFAULT_SIZE,
-																					182,
-																					Short.MAX_VALUE))
-															.addGroup(
-																	GroupLayout.Alignment.TRAILING,
-																	groupLayout_3
-																			.createSequentialGroup()
-																			.addComponent(
-																					textField_2,
-																					GroupLayout.PREFERRED_SIZE,
-																					147,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addComponent(
-																					textField_3,
-																					GroupLayout.PREFERRED_SIZE,
-																					146,
-																					GroupLayout.PREFERRED_SIZE)))
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addComponent(buscarClientesButton)));
+																					buscarClientesButton))
+															.addComponent(
+																	formattedTextField,
+																	GroupLayout.PREFERRED_SIZE,
+																	68,
+																	GroupLayout.PREFERRED_SIZE))
+											.addContainerGap()));
 			groupLayout_3
 					.setVerticalGroup(groupLayout_3
 							.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -215,7 +292,13 @@ public class VenderInmueblePanel extends JPanel {
 																	formattedTextField,
 																	GroupLayout.PREFERRED_SIZE,
 																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
+																	GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout_3
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
 															.addComponent(
 																	nombreLabel)
 															.addComponent(
@@ -232,47 +315,70 @@ public class VenderInmueblePanel extends JPanel {
 															.addComponent(
 																	apellidosLabel)
 															.addComponent(
-																	buscarClientesButton)
+																	textField_2,
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
 																	textField_3,
 																	GroupLayout.PREFERRED_SIZE,
 																	GroupLayout.DEFAULT_SIZE,
 																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
-																	textField_2,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE))
+																	buscarClientesButton))
 											.addContainerGap(
 													GroupLayout.DEFAULT_SIZE,
 													Short.MAX_VALUE)));
 			groupLayout_3.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-					new java.awt.Component[] { textField_3, textField_2 });
-			groupLayout_3.linkSize(javax.swing.SwingConstants.VERTICAL,
-					new java.awt.Component[] { textField_3, textField_2 });
+					new java.awt.Component[] { textField_2, textField_3 });
 			panel_2.setLayout(groupLayout_3);
 			final GroupLayout groupLayout_1 = new GroupLayout(this);
-			groupLayout_1.setHorizontalGroup(groupLayout_1.createParallelGroup(
-					GroupLayout.Alignment.TRAILING).addComponent(panel_1,
-					GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE).addGroup(
-					groupLayout_1.createSequentialGroup().addContainerGap(116,
-							Short.MAX_VALUE).addComponent(crearUnClienteButton)
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(venderInmuebleAlButton))
-					.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 484,
-							Short.MAX_VALUE).addComponent(scrollPane,
-							GroupLayout.Alignment.LEADING,
-							GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE));
+			groupLayout_1
+					.setHorizontalGroup(groupLayout_1
+							.createParallelGroup(GroupLayout.Alignment.TRAILING)
+							.addGroup(
+									groupLayout_1
+											.createSequentialGroup()
+											.addContainerGap()
+											.addGroup(
+													groupLayout_1
+															.createParallelGroup(
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	scrollPane,
+																	GroupLayout.Alignment.LEADING,
+																	GroupLayout.DEFAULT_SIZE,
+																	482,
+																	Short.MAX_VALUE)
+															.addComponent(
+																	panel_2,
+																	GroupLayout.PREFERRED_SIZE,
+																	482,
+																	Short.MAX_VALUE)
+															.addGroup(
+																	groupLayout_1
+																			.createSequentialGroup()
+																			.addComponent(
+																					crearUnClienteButton)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					venderInmuebleAlButton))
+															.addComponent(
+																	panel_1,
+																	GroupLayout.DEFAULT_SIZE,
+																	482,
+																	Short.MAX_VALUE))
+											.addContainerGap()));
 			groupLayout_1
 					.setVerticalGroup(groupLayout_1
-							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.createParallelGroup(GroupLayout.Alignment.TRAILING)
 							.addGroup(
 									groupLayout_1
 											.createSequentialGroup()
 											.addComponent(panel_1,
 													GroupLayout.PREFERRED_SIZE,
-													66,
+													GroupLayout.DEFAULT_SIZE,
 													GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
@@ -284,7 +390,7 @@ public class VenderInmueblePanel extends JPanel {
 													LayoutStyle.ComponentPlacement.RELATED)
 											.addComponent(scrollPane,
 													GroupLayout.DEFAULT_SIZE,
-													148, Short.MAX_VALUE)
+													142, Short.MAX_VALUE)
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
 											.addGroup(
@@ -294,7 +400,8 @@ public class VenderInmueblePanel extends JPanel {
 															.addComponent(
 																	venderInmuebleAlButton)
 															.addComponent(
-																	crearUnClienteButton))));
+																	crearUnClienteButton))
+											.addContainerGap()));
 			setLayout(groupLayout_1);
 			//
 		} catch (SQLException e) {
