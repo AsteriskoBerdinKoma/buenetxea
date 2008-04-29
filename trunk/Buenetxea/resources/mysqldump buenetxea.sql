@@ -1,27 +1,8 @@
--- MySQL dump 10.11
---
--- Host: localhost    Database: buenetxea
--- ------------------------------------------------------
--- Server version	5.0.37-community-nt
+CREATE DATABASE `dbbuenetxea` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `cliente`
---
-
-DROP TABLE IF EXISTS `cliente`;
-CREATE TABLE `cliente` (
-  `dni` int(10) unsigned NOT NULL auto_increment,
+DROP TABLE IF EXISTS `dbbuenetxea`.`cliente`;
+CREATE TABLE  `dbbuenetxea`.`cliente` (
+  `dni` varchar(9) NOT NULL,
   `fecha` datetime NOT NULL,
   `asesor` varchar(45) NOT NULL,
   `medio` varchar(45) NOT NULL,
@@ -34,21 +15,8 @@ CREATE TABLE `cliente` (
   PRIMARY KEY  (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `cliente`
---
-
-LOCK TABLES `cliente` WRITE;
-/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `descripcion`
---
-
-DROP TABLE IF EXISTS `descripcion`;
-CREATE TABLE `descripcion` (
+DROP TABLE IF EXISTS `dbbuenetxea`.`descripcion`;
+CREATE TABLE  `dbbuenetxea`.`descripcion` (
   `fk_peritaje_fecha` datetime NOT NULL,
   `tipo` varchar(45) NOT NULL,
   `m2` int(10) unsigned NOT NULL,
@@ -57,21 +25,8 @@ CREATE TABLE `descripcion` (
   CONSTRAINT `FK_descripcion_1` FOREIGN KEY (`fk_peritaje_fecha`) REFERENCES `peritaje` (`fecha`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `descripcion`
---
-
-LOCK TABLES `descripcion` WRITE;
-/*!40000 ALTER TABLE `descripcion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `descripcion` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `inmueble`
---
-
-DROP TABLE IF EXISTS `inmueble`;
-CREATE TABLE `inmueble` (
+DROP TABLE IF EXISTS `dbbuenetxea`.`inmueble`;
+CREATE TABLE  `dbbuenetxea`.`inmueble` (
   `referencia` int(10) unsigned NOT NULL auto_increment,
   `zona` varchar(100) NOT NULL,
   `direccion` varchar(100) NOT NULL,
@@ -79,21 +34,8 @@ CREATE TABLE `inmueble` (
   PRIMARY KEY  (`referencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `inmueble`
---
-
-LOCK TABLES `inmueble` WRITE;
-/*!40000 ALTER TABLE `inmueble` DISABLE KEYS */;
-/*!40000 ALTER TABLE `inmueble` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `peritaje`
---
-
-DROP TABLE IF EXISTS `peritaje`;
-CREATE TABLE `peritaje` (
+DROP TABLE IF EXISTS `dbbuenetxea`.`peritaje`;
+CREATE TABLE  `dbbuenetxea`.`peritaje` (
   `fecha` datetime NOT NULL COMMENT 'Fecha y hora del peritaje',
   `nombre_perito` varchar(45) NOT NULL COMMENT 'Nombre completo del perito',
   `tipo_inmueble` varchar(45) NOT NULL COMMENT 'Piso, Local, Casa, Parking',
@@ -123,22 +65,9 @@ CREATE TABLE `peritaje` (
   PRIMARY KEY  (`fecha`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `peritaje`
---
-
-LOCK TABLES `peritaje` WRITE;
-/*!40000 ALTER TABLE `peritaje` DISABLE KEYS */;
-/*!40000 ALTER TABLE `peritaje` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `preferencia`
---
-
-DROP TABLE IF EXISTS `preferencia`;
-CREATE TABLE `preferencia` (
-  `fk_cliente_dni` int(10) unsigned NOT NULL auto_increment,
+DROP TABLE IF EXISTS `dbbuenetxea`.`preferencia`;
+CREATE TABLE  `dbbuenetxea`.`preferencia` (
+  `fk_cliente_dni` varchar(9) NOT NULL,
   `tipo` varchar(45) NOT NULL,
   `desde_metros` int(10) unsigned NOT NULL,
   `hasta_metros` int(10) unsigned NOT NULL,
@@ -155,22 +84,9 @@ CREATE TABLE `preferencia` (
   CONSTRAINT `FK_preferencia_1` FOREIGN KEY (`fk_cliente_dni`) REFERENCES `cliente` (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `preferencia`
---
-
-LOCK TABLES `preferencia` WRITE;
-/*!40000 ALTER TABLE `preferencia` DISABLE KEYS */;
-/*!40000 ALTER TABLE `preferencia` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `propietario`
---
-
-DROP TABLE IF EXISTS `propietario`;
-CREATE TABLE `propietario` (
-  `dni` int(10) unsigned NOT NULL auto_increment,
+DROP TABLE IF EXISTS `dbbuenetxea`.`propietario`;
+CREATE TABLE  `dbbuenetxea`.`propietario` (
+  `dni` varchar(9) NOT NULL,
   `apellido1` varchar(45) NOT NULL,
   `apellido2` varchar(45) NOT NULL,
   `nombre` varchar(45) NOT NULL,
@@ -184,22 +100,9 @@ CREATE TABLE `propietario` (
   PRIMARY KEY  (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `propietario`
---
-
-LOCK TABLES `propietario` WRITE;
-/*!40000 ALTER TABLE `propietario` DISABLE KEYS */;
-/*!40000 ALTER TABLE `propietario` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `rel_cliente_inmueble`
---
-
-DROP TABLE IF EXISTS `rel_cliente_inmueble`;
-CREATE TABLE `rel_cliente_inmueble` (
-  `fk_cliente_dni` int(10) unsigned NOT NULL auto_increment,
+DROP TABLE IF EXISTS `dbbuenetxea`.`rel_cliente_inmueble`;
+CREATE TABLE  `dbbuenetxea`.`rel_cliente_inmueble` (
+  `fk_cliente_dni` varchar(9) NOT NULL,
   `fk_inmueble_referencia` int(10) unsigned NOT NULL,
   `fecha` datetime NOT NULL,
   `precio_venta` double NOT NULL,
@@ -212,23 +115,10 @@ CREATE TABLE `rel_cliente_inmueble` (
   CONSTRAINT `FK_rel_cliente_inmueble_2` FOREIGN KEY (`fk_inmueble_referencia`) REFERENCES `inmueble` (`referencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla para las ventas';
 
---
--- Dumping data for table `rel_cliente_inmueble`
---
-
-LOCK TABLES `rel_cliente_inmueble` WRITE;
-/*!40000 ALTER TABLE `rel_cliente_inmueble` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rel_cliente_inmueble` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `rel_inmueble_propietario`
---
-
-DROP TABLE IF EXISTS `rel_inmueble_propietario`;
-CREATE TABLE `rel_inmueble_propietario` (
+DROP TABLE IF EXISTS `dbbuenetxea`.`rel_inmueble_propietario`;
+CREATE TABLE  `dbbuenetxea`.`rel_inmueble_propietario` (
   `fk_inmueble_referencia` int(10) unsigned NOT NULL auto_increment,
-  `fk_propietario_dni` int(10) unsigned NOT NULL,
+  `fk_propietario_dni` varchar(9) NOT NULL,
   `nuevo_precio` varchar(45) NOT NULL,
   `fecha` datetime NOT NULL,
   `observaciones` varchar(100) NOT NULL,
@@ -238,21 +128,8 @@ CREATE TABLE `rel_inmueble_propietario` (
   CONSTRAINT `FK_rel_inmueble_propietario_2` FOREIGN KEY (`fk_propietario_dni`) REFERENCES `propietario` (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `rel_inmueble_propietario`
---
-
-LOCK TABLES `rel_inmueble_propietario` WRITE;
-/*!40000 ALTER TABLE `rel_inmueble_propietario` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rel_inmueble_propietario` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `rel_peritaje_inmueble`
---
-
-DROP TABLE IF EXISTS `rel_peritaje_inmueble`;
-CREATE TABLE `rel_peritaje_inmueble` (
+DROP TABLE IF EXISTS `dbbuenetxea`.`rel_peritaje_inmueble`;
+CREATE TABLE  `dbbuenetxea`.`rel_peritaje_inmueble` (
   `fk_peritaje_fecha` datetime NOT NULL,
   `fk_inmueble_referencia` int(10) unsigned NOT NULL,
   `llaves` tinyint(1) NOT NULL,
@@ -270,21 +147,8 @@ CREATE TABLE `rel_peritaje_inmueble` (
   CONSTRAINT `FK_rel_peritaje_inmueble_2` FOREIGN KEY (`fk_inmueble_referencia`) REFERENCES `inmueble` (`referencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `rel_peritaje_inmueble`
---
-
-LOCK TABLES `rel_peritaje_inmueble` WRITE;
-/*!40000 ALTER TABLE `rel_peritaje_inmueble` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rel_peritaje_inmueble` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `rel_visita`
---
-
-DROP TABLE IF EXISTS `rel_visita`;
-CREATE TABLE `rel_visita` (
+DROP TABLE IF EXISTS `dbbuenetxea`.`rel_visita`;
+CREATE TABLE  `dbbuenetxea`.`rel_visita` (
   `fecha` datetime NOT NULL,
   `representante` varchar(45) NOT NULL,
   `precio` double NOT NULL,
@@ -311,28 +175,8 @@ CREATE TABLE `rel_visita` (
   `nombre_trabajador` varchar(45) NOT NULL,
   `categoria_trabajador` varchar(45) NOT NULL,
   `fk_inmueble_referencia` int(10) unsigned NOT NULL,
-  `fk_cliente_dni` int(10) unsigned NOT NULL,
+  `fk_cliente_dni` varchar(9) NOT NULL,
   PRIMARY KEY  USING BTREE (`fk_inmueble_referencia`,`fk_cliente_dni`),
   KEY `FK_rel_visita_2` (`fk_cliente_dni`),
   CONSTRAINT `FK_rel_visita_2` FOREIGN KEY (`fk_cliente_dni`) REFERENCES `cliente` (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rel_visita`
---
-
-LOCK TABLES `rel_visita` WRITE;
-/*!40000 ALTER TABLE `rel_visita` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rel_visita` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2008-04-24 18:56:36
