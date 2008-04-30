@@ -86,15 +86,15 @@ public class LocalizarClientePanel extends JPanel {
 		groupLayout_2.setHorizontalGroup(
 			groupLayout_2.createParallelGroup(GroupLayout.Alignment.TRAILING)
 				.addGroup(groupLayout_2.createSequentialGroup()
-					.addContainerGap(358, Short.MAX_VALUE)
+					.addContainerGap(361, Short.MAX_VALUE)
 					.addComponent(imprimirButton)
 					.addContainerGap())
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
 		);
 		groupLayout_2.setVerticalGroup(
 			groupLayout_2.createParallelGroup(GroupLayout.Alignment.TRAILING)
 				.addGroup(groupLayout_2.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(imprimirButton))
 		);
@@ -111,8 +111,8 @@ public class LocalizarClientePanel extends JPanel {
 								.addComponent(dniLabel))
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(comboBox, 0, 145, Short.MAX_VALUE)
-								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+								.addComponent(comboBox, 0, 155, Short.MAX_VALUE)
+								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
 							.addGap(21, 21, 21)
 							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(nombreLabel)
@@ -120,9 +120,9 @@ public class LocalizarClientePanel extends JPanel {
 								.addComponent(apellido2Label))
 							.addGap(5, 5, 5)
 							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-								.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-								.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)))
+								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+								.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+								.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
 						.addGroup(groupLayout_1.createSequentialGroup()
 							.addComponent(buscarButton)
 							.addGap(12, 12, 12))))
@@ -162,8 +162,8 @@ public class LocalizarClientePanel extends JPanel {
 			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -171,7 +171,7 @@ public class LocalizarClientePanel extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 		//
