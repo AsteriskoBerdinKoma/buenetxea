@@ -27,11 +27,15 @@ public class Nagusia extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static Nagusia nagusia;
+
 	/**
 	 * Create the frame
 	 */
 	public Nagusia() {
 		super();
+
+		nagusia = this;
 
 		this.setJMenuBar(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -146,4 +150,7 @@ public class Nagusia extends JFrame {
 		//
 	}
 
+	public static Nagusia getInstance() {
+		return nagusia;
+	}
 }

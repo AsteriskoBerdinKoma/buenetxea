@@ -1,41 +1,42 @@
 package buenetxea.gui.panelak;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.ParseException;
 
-import javax.swing.ActionMap;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 
-import org.jdesktop.application.Action;
-import org.jdesktop.application.Application;
-import org.jdesktop.application.Task;
-
-import buenetxea.BuenetxeaApp;
-import buenetxea.actions.BuscarClienteAction;
-import buenetxea.db.ResultSetTableModel;
 import buenetxea.kudeatzaileak.Kudeatzailea;
+import buenetxea.objektuak.Inmueble;
 
 public class VenderInmueblePanel extends JPanel {
 
 	private JTextField textField_3;
+	private JTextField textField_2;
+	private JTextField textField_1;
+	private JTextField textField;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JFormattedTextField formattedTextField;
-	private JTable table;
-	private JTextField textField_2;
-	private JTextField textField_1;
+	private JFormattedTextField dniTextField;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+
+	private Inmueble inmueble;
+
+	private Kudeatzailea kud;
 
 	/**
 	 * Create the panel
@@ -47,6 +48,10 @@ public class VenderInmueblePanel extends JPanel {
 		super();
 
 		try {
+			kud = Kudeatzailea.getInstance();
+
+			inmueble = new Inmueble(1, "zona", "direccion", false);
+
 			setBorder(new TitledBorder(null, "Vender Inmueble",
 					TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
@@ -59,59 +64,33 @@ public class VenderInmueblePanel extends JPanel {
 
 			JPanel panel_2;
 			panel_2 = new JPanel();
-			panel_2.setBorder(new TitledBorder(null,
-					"Buscar cliente comprador",
+			panel_2.setBorder(new TitledBorder(null, "Cliente comprador",
 					TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
-
-			JLabel nombreLabel;
-			nombreLabel = new JLabel();
-			nombreLabel.setText("Nombre:");
-
-			JLabel apellidosLabel;
-			apellidosLabel = new JLabel();
-			apellidosLabel.setText("Apellidos:");
 
 			JLabel dniLabel;
 			dniLabel = new JLabel();
 			dniLabel.setText("DNI:");
 
-			textField_1 = new JTextField();
-
-			textField_2 = new JTextField();
-
-			ActionMap actionMap = Application.getInstance(BuenetxeaApp.class)
-					.getContext().getActionMap(this);
-
 			JButton buscarClientesButton;
 			buscarClientesButton = new JButton();
-			buscarClientesButton.setAction(actionMap.get("buscarCliente"));
-			buscarClientesButton.setText("Buscar clientes");
+			buscarClientesButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent arg0) {
+				}
+			});
+			buscarClientesButton.setText("...");
 
-			formattedTextField = new JFormattedTextField();
-			formattedTextField.setColumns(9);
+			dniTextField = new JFormattedTextField(new MaskFormatter(
+					"########U"));
+			dniTextField.setColumns(9);
 
-			JScrollPane scrollPane;
-			scrollPane = new JScrollPane();
-
-			table = new JTable();
-			table.setModel(new ResultSetTableModel(Kudeatzailea.getInstance()
-					.getBuscarClientesQuery(formattedTextField.getText(),
-							textField_1.getText(), textField_2.getText(),
-							textField_3.getText())));
-			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			scrollPane.setViewportView(table);
-
-			JButton venderInmuebleAlButton;
-			venderInmuebleAlButton = new JButton();
-			venderInmuebleAlButton
-					.setText("Vender inmueble al cliente seleccionado");
-
-			JButton crearUnClienteButton;
-			crearUnClienteButton = new JButton();
-			crearUnClienteButton.setText("Crear un cliente nuevo");
-
-			textField_3 = new JTextField();
+			JButton venderInmuebleButton;
+			venderInmuebleButton = new JButton();
+			venderInmuebleButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+				}
+			});
+			venderInmuebleButton.setText("Vender inmueble");
 
 			JLabel referenciaLabel;
 			referenciaLabel = new JLabel();
@@ -121,7 +100,6 @@ public class VenderInmueblePanel extends JPanel {
 			label = new JLabel();
 			label.setText("Dirección:");
 
-			JLabel label_1;
 			label_1 = new JLabel();
 			label_1.setText("New JLabel");
 
@@ -129,13 +107,76 @@ public class VenderInmueblePanel extends JPanel {
 			zonaLabel = new JLabel();
 			zonaLabel.setText("Zona:");
 
-			JLabel label_2;
 			label_2 = new JLabel();
 			label_2.setText("New JLabel");
 
-			JLabel label_3;
 			label_3 = new JLabel();
 			label_3.setText("New JLabel");
+
+			JPanel panel;
+			panel = new JPanel();
+			panel.setBorder(new TitledBorder(null, "Datos de venta",
+					TitledBorder.DEFAULT_JUSTIFICATION,
+					TitledBorder.DEFAULT_POSITION, null, null));
+
+			JLabel precioDeVentaLabel;
+			precioDeVentaLabel = new JLabel();
+			precioDeVentaLabel.setText("Precio de venta:");
+
+			JLabel honorariosLabel;
+			honorariosLabel = new JLabel();
+			honorariosLabel.setText("Honorarios:");
+
+			JLabel precioDelPropietarioLabel;
+			precioDelPropietarioLabel = new JLabel();
+			precioDelPropietarioLabel.setText("Precio del propietario:");
+
+			textField = new JTextField();
+
+			textField_1 = new JTextField();
+
+			textField_2 = new JTextField();
+
+			JLabel ivaLabel;
+			ivaLabel = new JLabel();
+			ivaLabel.setText("IVA:");
+
+			textField_3 = new JTextField();
+
+			JLabel label_4;
+			label_4 = new JLabel();
+			label_4.setText("€");
+
+			JLabel label_5;
+			label_5 = new JLabel();
+			label_5.setText("€");
+			final GroupLayout groupLayout_3 = new GroupLayout(panel_2);
+			groupLayout_3.setHorizontalGroup(groupLayout_3.createParallelGroup(
+					GroupLayout.Alignment.LEADING).addGroup(
+					groupLayout_3.createSequentialGroup().addContainerGap()
+							.addComponent(dniLabel).addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(dniTextField,
+									GroupLayout.PREFERRED_SIZE, 68,
+									GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(buscarClientesButton)
+							.addContainerGap(263, Short.MAX_VALUE)));
+			groupLayout_3.setVerticalGroup(groupLayout_3.createParallelGroup(
+					GroupLayout.Alignment.LEADING).addGroup(
+					groupLayout_3.createSequentialGroup().addGroup(
+							groupLayout_3.createParallelGroup(
+									GroupLayout.Alignment.BASELINE)
+									.addComponent(dniLabel).addComponent(
+											dniTextField,
+											GroupLayout.PREFERRED_SIZE,
+											GroupLayout.DEFAULT_SIZE,
+											GroupLayout.PREFERRED_SIZE)
+									.addComponent(buscarClientesButton))
+							.addContainerGap(GroupLayout.DEFAULT_SIZE,
+									Short.MAX_VALUE)));
+			panel_2.setLayout(groupLayout_3);
 			final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
 			groupLayout_2
 					.setHorizontalGroup(groupLayout_2
@@ -169,7 +210,7 @@ public class VenderInmueblePanel extends JPanel {
 																	label_2)
 															.addComponent(
 																	label_3))
-											.addContainerGap(340,
+											.addContainerGap(292,
 													Short.MAX_VALUE)));
 			groupLayout_2
 					.setVerticalGroup(groupLayout_2
@@ -209,133 +250,144 @@ public class VenderInmueblePanel extends JPanel {
 													GroupLayout.DEFAULT_SIZE,
 													Short.MAX_VALUE)));
 			panel_1.setLayout(groupLayout_2);
-			final GroupLayout groupLayout_3 = new GroupLayout(panel_2);
-			groupLayout_3
-					.setHorizontalGroup(groupLayout_3
-							.createParallelGroup(GroupLayout.Alignment.LEADING)
+			final GroupLayout groupLayout = new GroupLayout(panel);
+			groupLayout
+					.setHorizontalGroup(groupLayout
+							.createParallelGroup(GroupLayout.Alignment.TRAILING)
 							.addGroup(
-									groupLayout_3
+									groupLayout
 											.createSequentialGroup()
-											.addGap(15, 15, 15)
+											.addContainerGap()
 											.addGroup(
-													groupLayout_3
+													groupLayout
 															.createParallelGroup(
 																	GroupLayout.Alignment.LEADING)
 															.addComponent(
-																	apellidosLabel,
+																	precioDeVentaLabel,
 																	GroupLayout.Alignment.TRAILING)
 															.addComponent(
-																	nombreLabel,
+																	precioDelPropietarioLabel,
 																	GroupLayout.Alignment.TRAILING)
 															.addComponent(
-																	dniLabel,
+																	honorariosLabel,
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	ivaLabel,
 																	GroupLayout.Alignment.TRAILING))
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
 											.addGroup(
-													groupLayout_3
+													groupLayout
 															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
+																	GroupLayout.Alignment.TRAILING)
 															.addGroup(
-																	groupLayout_3
+																	groupLayout
+																			.createSequentialGroup()
+																			.addComponent(
+																					textField,
+																					GroupLayout.DEFAULT_SIZE,
+																					118,
+																					Short.MAX_VALUE)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					label_4))
+															.addGroup(
+																	groupLayout
 																			.createSequentialGroup()
 																			.addGroup(
-																					groupLayout_3
+																					groupLayout
 																							.createParallelGroup(
 																									GroupLayout.Alignment.TRAILING)
+																							.addComponent(
+																									textField_3,
+																									GroupLayout.Alignment.LEADING,
+																									GroupLayout.DEFAULT_SIZE,
+																									118,
+																									Short.MAX_VALUE)
 																							.addComponent(
 																									textField_1,
 																									GroupLayout.Alignment.LEADING,
 																									GroupLayout.DEFAULT_SIZE,
-																									292,
+																									118,
 																									Short.MAX_VALUE)
-																							.addGroup(
-																									groupLayout_3
-																											.createSequentialGroup()
-																											.addComponent(
-																													textField_2,
-																													GroupLayout.DEFAULT_SIZE,
-																													144,
-																													Short.MAX_VALUE)
-																											.addGap(
-																													4,
-																													4,
-																													4)
-																											.addComponent(
-																													textField_3,
-																													GroupLayout.DEFAULT_SIZE,
-																													144,
-																													Short.MAX_VALUE)))
+																							.addComponent(
+																									textField_2,
+																									GroupLayout.DEFAULT_SIZE,
+																									118,
+																									Short.MAX_VALUE))
 																			.addPreferredGap(
 																					LayoutStyle.ComponentPlacement.RELATED)
 																			.addComponent(
-																					buscarClientesButton))
-															.addComponent(
-																	formattedTextField,
-																	GroupLayout.PREFERRED_SIZE,
-																	68,
-																	GroupLayout.PREFERRED_SIZE))
-											.addContainerGap()));
-			groupLayout_3
-					.setVerticalGroup(groupLayout_3
+																					label_5)))
+											.addGap(171, 171, 171)));
+			groupLayout
+					.setVerticalGroup(groupLayout
 							.createParallelGroup(GroupLayout.Alignment.LEADING)
 							.addGroup(
-									groupLayout_3
+									groupLayout
 											.createSequentialGroup()
 											.addGroup(
-													groupLayout_3
+													groupLayout
 															.createParallelGroup(
 																	GroupLayout.Alignment.BASELINE)
 															.addComponent(
-																	dniLabel)
+																	precioDeVentaLabel)
 															.addComponent(
-																	formattedTextField,
+																	textField,
 																	GroupLayout.PREFERRED_SIZE,
 																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE))
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	label_4))
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
 											.addGroup(
-													groupLayout_3
+													groupLayout
 															.createParallelGroup(
 																	GroupLayout.Alignment.BASELINE)
 															.addComponent(
-																	nombreLabel)
-															.addComponent(
-																	textField_1,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addGroup(
-													groupLayout_3
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	apellidosLabel)
+																	precioDelPropietarioLabel)
 															.addComponent(
 																	textField_2,
 																	GroupLayout.PREFERRED_SIZE,
 																	GroupLayout.DEFAULT_SIZE,
 																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
+																	label_5))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	honorariosLabel)
+															.addComponent(
+																	textField_1,
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE))
+											.addGap(6, 6, 6)
+											.addGroup(
+													groupLayout
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	ivaLabel)
+															.addComponent(
 																	textField_3,
 																	GroupLayout.PREFERRED_SIZE,
 																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	buscarClientesButton))
-											.addContainerGap(
-													GroupLayout.DEFAULT_SIZE,
-													Short.MAX_VALUE)));
-			groupLayout_3.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-					new java.awt.Component[] { textField_2, textField_3 });
-			panel_2.setLayout(groupLayout_3);
+																	GroupLayout.PREFERRED_SIZE))
+											.addGap(87, 87, 87)));
+			groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+					new java.awt.Component[] { textField, textField_2 });
+			panel.setLayout(groupLayout);
 			final GroupLayout groupLayout_1 = new GroupLayout(this);
 			groupLayout_1
 					.setHorizontalGroup(groupLayout_1
-							.createParallelGroup(GroupLayout.Alignment.TRAILING)
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
 							.addGroup(
 									groupLayout_1
 											.createSequentialGroup()
@@ -343,65 +395,43 @@ public class VenderInmueblePanel extends JPanel {
 											.addGroup(
 													groupLayout_1
 															.createParallelGroup(
-																	GroupLayout.Alignment.TRAILING)
+																	GroupLayout.Alignment.LEADING)
 															.addComponent(
-																	scrollPane,
-																	GroupLayout.Alignment.LEADING,
+																	panel,
+																	GroupLayout.Alignment.TRAILING,
 																	GroupLayout.DEFAULT_SIZE,
-																	482,
+																	434,
+																	Short.MAX_VALUE)
+															.addComponent(
+																	panel_1,
+																	0,
+																	0,
 																	Short.MAX_VALUE)
 															.addComponent(
 																	panel_2,
-																	GroupLayout.PREFERRED_SIZE,
-																	482,
+																	0,
+																	0,
 																	Short.MAX_VALUE)
-															.addGroup(
-																	groupLayout_1
-																			.createSequentialGroup()
-																			.addComponent(
-																					crearUnClienteButton)
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addComponent(
-																					venderInmuebleAlButton))
 															.addComponent(
-																	panel_1,
-																	GroupLayout.DEFAULT_SIZE,
-																	482,
-																	Short.MAX_VALUE))
+																	venderInmuebleButton,
+																	GroupLayout.Alignment.TRAILING))
 											.addContainerGap()));
-			groupLayout_1
-					.setVerticalGroup(groupLayout_1
-							.createParallelGroup(GroupLayout.Alignment.TRAILING)
-							.addGroup(
-									groupLayout_1
-											.createSequentialGroup()
-											.addComponent(panel_1,
-													GroupLayout.PREFERRED_SIZE,
-													GroupLayout.DEFAULT_SIZE,
-													GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addComponent(panel_2,
-													GroupLayout.PREFERRED_SIZE,
-													GroupLayout.DEFAULT_SIZE,
-													GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addComponent(scrollPane,
-													GroupLayout.DEFAULT_SIZE,
-													142, Short.MAX_VALUE)
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addGroup(
-													groupLayout_1
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	venderInmuebleAlButton)
-															.addComponent(
-																	crearUnClienteButton))
-											.addContainerGap()));
+			groupLayout_1.setVerticalGroup(groupLayout_1.createParallelGroup(
+					GroupLayout.Alignment.LEADING).addGroup(
+					groupLayout_1.createSequentialGroup().addComponent(panel_1,
+							GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+							.addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE,
+									GroupLayout.DEFAULT_SIZE,
+									GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE,
+									144, Short.MAX_VALUE).addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(venderInmuebleButton)
+							.addContainerGap()));
 			setLayout(groupLayout_1);
 			//
 		} catch (SQLException e) {
@@ -410,12 +440,41 @@ public class VenderInmueblePanel extends JPanel {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
-	@Action
-	public Task<?, ?> buscarCliente() {
-		return new BuscarClienteAction(BuenetxeaApp.getApplication());
+	public void setInmueble(Inmueble inmueble) {
+		this.inmueble = inmueble;
+		this.label_1.setText(Integer.toString(inmueble.getReferencia()));
+		this.label_2.setText(inmueble.getZona());
+		this.label_3.setText(inmueble.getDireccion());
 	}
 
+	// private String getBuscarClientesQuery() {
+	// String dni = dniTextField.getText().trim();
+	//
+	// String query = "SELECT * FROM cliente WHERE";
+	// if (dni != "")
+	// query += " dni LIKE '" + dni + "%' AND";
+	// query += " nombre LIKE '" + nombre + "%' AND apellido1 LIKE '"
+	// + apellido1 + "%' AND apellido2 LIKE '" + apellido2 + "%'";
+	// return query;
+	// }
+
+	// private final class BuscarClientes implements ActionListener {
+	// public void actionPerformed(final ActionEvent arg0) {
+	// try {
+	// tableModel.setQuery(getBuscarClientesQuery());
+	// } catch (IllegalStateException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
+	// }
 }
