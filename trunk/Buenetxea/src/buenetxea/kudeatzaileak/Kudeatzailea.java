@@ -28,17 +28,13 @@ public class Kudeatzailea {
 		return this.inmKud.getInmueble(referencia);
 	}
 
-	public String getBuscarClientesQuery(String dni, String nombre,
-			String apellido1, String apellido2) {
-		return "SELECT * FROM cliente WHERE dni LIKE " + dni
-				+ "% AND nombre LIKE " + nombre + "% AND apellido1 LIKE "
-				+ apellido1 + "% AND apellido2 LIKE " + apellido2 + "%";
-	}
-
 	public boolean crearCliente(Cliente c) throws SQLException {
 		return this.cliKud.insertCliente(c.getDni(), c.getNombre(), c
 				.getApellido1(), c.getApellido2(), c.getFecha(), c
 				.getNacionalidad(), c.getTelefono(), c.getMedio(), c
 				.getAsesor());
+	}
+
+	public void venderInmueble(int referencia, String nan) {
 	}
 }

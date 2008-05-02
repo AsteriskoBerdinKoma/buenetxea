@@ -58,6 +58,8 @@ public class LoginFrame extends JFrame {
 			}
 		});
 		aceptarButton.setText("Aceptar");
+		this.getRootPane().setDefaultButton(aceptarButton);
+
 		final GroupLayout groupLayout = new GroupLayout(this.getContentPane());
 		groupLayout
 				.setHorizontalGroup(groupLayout
