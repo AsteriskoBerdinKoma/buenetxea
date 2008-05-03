@@ -1,5 +1,6 @@
 package buenetxea.kudeatzaileak;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import buenetxea.objektuak.Cliente;
@@ -36,5 +37,9 @@ public class Kudeatzailea {
 	}
 
 	public void venderInmueble(int referencia, String nan) {
+	}
+
+	public boolean existeCliente(String dni) throws IOException, SQLException {
+		return cliKud.getCliente(dni) != null;
 	}
 }

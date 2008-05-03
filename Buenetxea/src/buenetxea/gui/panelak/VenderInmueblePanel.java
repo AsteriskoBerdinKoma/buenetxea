@@ -1,12 +1,16 @@
 package buenetxea.gui.panelak;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.swing.GroupLayout;
+import javax.swing.InputVerifier;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,6 +37,7 @@ public class VenderInmueblePanel extends JPanel {
 	private JLabel label_1;
 	private JLabel label_2;
 	private JLabel label_3;
+	private JLabel errorLabel;
 
 	private Inmueble inmueble;
 
@@ -78,16 +83,38 @@ public class VenderInmueblePanel extends JPanel {
 				public void actionPerformed(final ActionEvent arg0) {
 				}
 			});
-			buscarClientesButton.setText("...");
+			buscarClientesButton.setText("Buscar Cliente");
 
 			dniTextField = new JFormattedTextField(new MaskFormatter(
 					"########U"));
+			dniTextField.setInputVerifier(new InputVerifier() {
+
+				@Override
+				public boolean verify(JComponent input) {
+					try {
+						boolean b = kud.existeCliente(dniTextField.getText());
+						if (!b)
+							errorLabel
+									.setText("No existen clientes con este DNI.");
+						else
+							errorLabel.setText("");
+						return b;
+					} catch (IOException e) {
+						e.printStackTrace();
+						return false;
+					} catch (SQLException e) {
+						e.printStackTrace();
+						return false;
+					}
+				}
+			});
 			dniTextField.setColumns(9);
 
 			JButton venderInmuebleButton;
 			venderInmuebleButton = new JButton();
 			venderInmuebleButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
+
 				}
 			});
 			venderInmuebleButton.setText("Vender inmueble");
@@ -150,106 +177,19 @@ public class VenderInmueblePanel extends JPanel {
 			JLabel label_5;
 			label_5 = new JLabel();
 			label_5.setText("€");
-			final GroupLayout groupLayout_3 = new GroupLayout(panel_2);
-			groupLayout_3.setHorizontalGroup(groupLayout_3.createParallelGroup(
-					GroupLayout.Alignment.LEADING).addGroup(
-					groupLayout_3.createSequentialGroup().addContainerGap()
-							.addComponent(dniLabel).addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(dniTextField,
-									GroupLayout.PREFERRED_SIZE, 68,
-									GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(buscarClientesButton)
-							.addContainerGap(263, Short.MAX_VALUE)));
-			groupLayout_3.setVerticalGroup(groupLayout_3.createParallelGroup(
-					GroupLayout.Alignment.LEADING).addGroup(
-					groupLayout_3.createSequentialGroup().addGroup(
-							groupLayout_3.createParallelGroup(
-									GroupLayout.Alignment.BASELINE)
-									.addComponent(dniLabel).addComponent(
-											dniTextField,
-											GroupLayout.PREFERRED_SIZE,
-											GroupLayout.DEFAULT_SIZE,
-											GroupLayout.PREFERRED_SIZE)
-									.addComponent(buscarClientesButton))
-							.addContainerGap(GroupLayout.DEFAULT_SIZE,
-									Short.MAX_VALUE)));
-			panel_2.setLayout(groupLayout_3);
-			final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
-			groupLayout_2
-					.setHorizontalGroup(groupLayout_2
-							.createParallelGroup(GroupLayout.Alignment.LEADING)
-							.addGroup(
-									groupLayout_2
-											.createSequentialGroup()
-											.addContainerGap()
-											.addGroup(
-													groupLayout_2
-															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
-															.addComponent(
-																	label,
-																	GroupLayout.Alignment.TRAILING)
-															.addComponent(
-																	zonaLabel,
-																	GroupLayout.Alignment.TRAILING)
-															.addComponent(
-																	referenciaLabel,
-																	GroupLayout.Alignment.TRAILING))
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addGroup(
-													groupLayout_2
-															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
-															.addComponent(
-																	label_1)
-															.addComponent(
-																	label_2)
-															.addComponent(
-																	label_3))
-											.addContainerGap(292,
-													Short.MAX_VALUE)));
-			groupLayout_2
-					.setVerticalGroup(groupLayout_2
-							.createParallelGroup(GroupLayout.Alignment.LEADING)
-							.addGroup(
-									groupLayout_2
-											.createSequentialGroup()
-											.addContainerGap()
-											.addGroup(
-													groupLayout_2
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	referenciaLabel)
-															.addComponent(
-																	label_1))
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addGroup(
-													groupLayout_2
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	zonaLabel)
-															.addComponent(
-																	label_2))
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addGroup(
-													groupLayout_2
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(label)
-															.addComponent(
-																	label_3))
-											.addContainerGap(
-													GroupLayout.DEFAULT_SIZE,
-													Short.MAX_VALUE)));
-			panel_1.setLayout(groupLayout_2);
+
+			errorLabel = new JLabel();
+			errorLabel.setForeground(new Color(255, 0, 0));
+			errorLabel.setText("New JLabel");
+
+			JButton crearClienteNuevoButton;
+			crearClienteNuevoButton = new JButton();
+			crearClienteNuevoButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent arg0) {
+
+				}
+			});
+			crearClienteNuevoButton.setText("Crear cliente nuevo");
 			final GroupLayout groupLayout = new GroupLayout(panel);
 			groupLayout
 					.setHorizontalGroup(groupLayout
@@ -381,9 +321,146 @@ public class VenderInmueblePanel extends JPanel {
 																	GroupLayout.DEFAULT_SIZE,
 																	GroupLayout.PREFERRED_SIZE))
 											.addGap(87, 87, 87)));
-			groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+			groupLayout.linkSize(javax.swing.SwingConstants.VERTICAL,
 					new java.awt.Component[] { textField, textField_2 });
 			panel.setLayout(groupLayout);
+			final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
+			groupLayout_2
+					.setHorizontalGroup(groupLayout_2
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout_2
+											.createSequentialGroup()
+											.addContainerGap()
+											.addGroup(
+													groupLayout_2
+															.createParallelGroup(
+																	GroupLayout.Alignment.LEADING)
+															.addComponent(
+																	label,
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	zonaLabel,
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	referenciaLabel,
+																	GroupLayout.Alignment.TRAILING))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout_2
+															.createParallelGroup(
+																	GroupLayout.Alignment.LEADING)
+															.addComponent(
+																	label_1)
+															.addComponent(
+																	label_2)
+															.addComponent(
+																	label_3))
+											.addContainerGap(292,
+													Short.MAX_VALUE)));
+			groupLayout_2
+					.setVerticalGroup(groupLayout_2
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout_2
+											.createSequentialGroup()
+											.addContainerGap()
+											.addGroup(
+													groupLayout_2
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	referenciaLabel)
+															.addComponent(
+																	label_1))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout_2
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	zonaLabel)
+															.addComponent(
+																	label_2))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout_2
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(label)
+															.addComponent(
+																	label_3))
+											.addContainerGap(
+													GroupLayout.DEFAULT_SIZE,
+													Short.MAX_VALUE)));
+			panel_1.setLayout(groupLayout_2);
+			final GroupLayout groupLayout_3 = new GroupLayout(panel_2);
+			groupLayout_3
+					.setHorizontalGroup(groupLayout_3
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout_3
+											.createSequentialGroup()
+											.addContainerGap()
+											.addGroup(
+													groupLayout_3
+															.createParallelGroup(
+																	GroupLayout.Alignment.LEADING)
+															.addGroup(
+																	groupLayout_3
+																			.createSequentialGroup()
+																			.addComponent(
+																					dniLabel)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					dniTextField,
+																					GroupLayout.PREFERRED_SIZE,
+																					68,
+																					GroupLayout.PREFERRED_SIZE)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					buscarClientesButton)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					crearClienteNuevoButton))
+															.addComponent(
+																	errorLabel))
+											.addContainerGap(74,
+													Short.MAX_VALUE)));
+			groupLayout_3
+					.setVerticalGroup(groupLayout_3
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout_3
+											.createSequentialGroup()
+											.addGroup(
+													groupLayout_3
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	dniLabel)
+															.addComponent(
+																	dniTextField,
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	buscarClientesButton)
+															.addComponent(
+																	crearClienteNuevoButton))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addComponent(errorLabel)
+											.addContainerGap(
+													GroupLayout.DEFAULT_SIZE,
+													Short.MAX_VALUE)));
+			panel_2.setLayout(groupLayout_3);
 			final GroupLayout groupLayout_1 = new GroupLayout(this);
 			groupLayout_1
 					.setHorizontalGroup(groupLayout_1
@@ -397,10 +474,10 @@ public class VenderInmueblePanel extends JPanel {
 															.createParallelGroup(
 																	GroupLayout.Alignment.LEADING)
 															.addComponent(
-																	panel,
+																	panel_2,
 																	GroupLayout.Alignment.TRAILING,
-																	GroupLayout.DEFAULT_SIZE,
-																	434,
+																	0,
+																	0,
 																	Short.MAX_VALUE)
 															.addComponent(
 																	panel_1,
@@ -408,9 +485,9 @@ public class VenderInmueblePanel extends JPanel {
 																	0,
 																	Short.MAX_VALUE)
 															.addComponent(
-																	panel_2,
-																	0,
-																	0,
+																	panel,
+																	GroupLayout.DEFAULT_SIZE,
+																	434,
 																	Short.MAX_VALUE)
 															.addComponent(
 																	venderInmuebleButton,
@@ -419,16 +496,13 @@ public class VenderInmueblePanel extends JPanel {
 			groupLayout_1.setVerticalGroup(groupLayout_1.createParallelGroup(
 					GroupLayout.Alignment.LEADING).addGroup(
 					groupLayout_1.createSequentialGroup().addComponent(panel_1,
-							GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE,
-									GroupLayout.DEFAULT_SIZE,
-									GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
+							GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+							Short.MAX_VALUE).addGap(3, 3, 3).addComponent(
+							panel_2, GroupLayout.PREFERRED_SIZE, 84,
+							GroupLayout.PREFERRED_SIZE).addPreferredGap(
+							LayoutStyle.ComponentPlacement.RELATED)
 							.addComponent(panel, GroupLayout.PREFERRED_SIZE,
-									144, Short.MAX_VALUE).addPreferredGap(
+									145, Short.MAX_VALUE).addPreferredGap(
 									LayoutStyle.ComponentPlacement.RELATED)
 							.addComponent(venderInmuebleButton)
 							.addContainerGap()));
