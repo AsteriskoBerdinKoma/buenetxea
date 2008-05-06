@@ -1,8 +1,10 @@
 package buenetxea.objektuak;
 
+import java.util.Calendar;
+
 public class Peritaje {
 	private int id;
-	private String fecha; // Fecha y hora del peritaje
+	private Calendar fecha; // Fecha y hora del peritaje
 	private String nombre_perito; // Nombre completo del perito
 	private String tipo_inmueble; // Piso, Local, Casa, Parking
 	private String tipo_venta; // Verde, Exclusiva
@@ -29,7 +31,7 @@ public class Peritaje {
 	private double gastos_comun;
 	private String observaciones;
 
-	public Peritaje(int id, String fecha, String nombre_perito, String tipo_inmueble,
+	public Peritaje(int id, Calendar fecha, String nombre_perito, String tipo_inmueble,
 			String tipo_venta, int m2_constr, String gas, String luminoso,
 			String techos, String exterior, int anos_finca, String portero,
 			boolean ascensor, int m2_utiles, String calefaccion,
@@ -75,11 +77,11 @@ public class Peritaje {
 		this.id = id;
 	}
 	
-	public String getFecha() {
+	public Calendar getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(Calendar fecha) {
 		this.fecha = fecha;
 	}
 
