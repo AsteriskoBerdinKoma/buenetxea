@@ -42,9 +42,8 @@ public class Kudeatzailea {
 	public boolean crearPropietario (Propietario p) throws SQLException
 	{
 		return this.propikud.InsertPropietario(p.getDni(), p.getNombre(), 
-				p.getApellido1(), p.getApellido2(), p.getCp(), p.getCiudad(), 
-				p.getTel_fijo(), p.getTel_movil(), p.getHorario_fijo(), p.getHorario_fijo(), 
-				p.getObservaciones());
+				p.getApellido1(), p.getApellido2(),p.getDomicilio_postal(), p.getCp(), p.getCiudad(), 
+				p.getTel_fijo(), p.getTel_movil(), p.getHorario_fijo(), p.getHorario_fijo());
 		
 	}
 

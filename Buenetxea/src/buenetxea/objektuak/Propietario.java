@@ -13,12 +13,11 @@ public class Propietario {
 	private int tel_movil;
 	private String horario_fijo;
 	private String horario_movil;
-	private String observaciones;
 	
 	public Propietario(String dni, String nombre, String apellido1,
 			String apellido2, String domicilio_postal, int cp, String ciudad,
 			int tel_fijo, int tel_movil, String horario_fijo,
-			String horario_movil, String observaciones) {
+			String horario_movil) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -31,7 +30,6 @@ public class Propietario {
 		this.tel_movil = tel_movil;
 		this.horario_fijo = horario_fijo;
 		this.horario_movil = horario_movil;
-		this.observaciones = observaciones;
 	}
 
 	public String getDomicilio_postal() {
@@ -82,9 +80,6 @@ public class Propietario {
 		return horario_movil;
 	}
 
-	public String getObservaciones() {
-		return observaciones;
-	}
 
 	public void setDni(String dni) {
 		this.dni = dni;
@@ -126,9 +121,7 @@ public class Propietario {
 		this.horario_movil = horario_movil;
 	}
 
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
-	}
+
 	
 	
 	

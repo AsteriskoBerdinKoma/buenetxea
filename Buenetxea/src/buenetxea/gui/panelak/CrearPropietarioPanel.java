@@ -171,8 +171,7 @@ public class CrearPropietarioPanel extends JPanel {
 				horario_movil =  orduak_movil + ": " + minutuak_movil ;
 				observaciones = textArea.getText();
 				Propietario propietario = new Propietario (dni, nombre, apellido1,apellido2,
-						domicilio_postal, cp, ciudad , tel_fijo, tel_movil, horario_fijo,horario_movil,
-						observaciones);
+						domicilio_postal, cp, ciudad , tel_fijo, tel_movil, horario_fijo,horario_movil);
 				try {
 					if (Kudeatzailea.getInstance().crearPropietario(propietario))
 					{
