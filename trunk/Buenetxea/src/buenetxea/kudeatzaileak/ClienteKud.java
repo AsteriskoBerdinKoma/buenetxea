@@ -73,7 +73,8 @@ class ClienteKud {
 			asesor = rs.getString("asesor");
 
 			Calendar cal = new GregorianCalendar();
-			String[] data = fecha.split("-");
+			String[] s = fecha.split(" ");
+			String[] data = s[0].split("-");
 			cal.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]),
 					Integer.parseInt(data[2]));
 
