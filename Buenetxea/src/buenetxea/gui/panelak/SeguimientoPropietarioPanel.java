@@ -62,6 +62,8 @@ public class SeguimientoPropietarioPanel extends JPanel {
 			}
 		});
 		button.setText("Buscar");
+
+		textField = new JTextField();
 		final GroupLayout groupLayout_1 = new GroupLayout((JComponent) panel);
 		groupLayout_1.setHorizontalGroup(
 			groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -78,24 +80,6 @@ public class SeguimientoPropietarioPanel extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(groupLayout_1);
-		final GroupLayout groupLayout_2 = new GroupLayout((JComponent) panel_1);
-		groupLayout_2.setHorizontalGroup(
-			groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(groupLayout_2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPane_1)
-					.addGap(17, 17, 17))
-		);
-		groupLayout_2.setVerticalGroup(
-			groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(groupLayout_2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		panel_1.setLayout(groupLayout_2);
-
-		textField = new JTextField();
 		final GroupLayout groupLayout_3 = new GroupLayout((JComponent) panel_2);
 		groupLayout_3.setHorizontalGroup(
 			groupLayout_3.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -119,6 +103,22 @@ public class SeguimientoPropietarioPanel extends JPanel {
 					.addContainerGap(29, Short.MAX_VALUE))
 		);
 		panel_2.setLayout(groupLayout_3);
+		final GroupLayout groupLayout_2 = new GroupLayout((JComponent) panel_1);
+		groupLayout_2.setHorizontalGroup(
+			groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(groupLayout_2.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane_1)
+					.addGap(17, 17, 17))
+		);
+		groupLayout_2.setVerticalGroup(
+			groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(groupLayout_2.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panel_1.setLayout(groupLayout_2);
 		final GroupLayout groupLayout = new GroupLayout((JComponent) this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
