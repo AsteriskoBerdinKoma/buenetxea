@@ -47,11 +47,11 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 DROP TABLE IF EXISTS `descripcion`;
 CREATE TABLE IF NOT EXISTS `descripcion` (
-  `fk_peritaje_fecha` datetime NOT NULL,
+  `fk_peritaje_id` int(10) unsigned NOT NULL,
   `tipo` varchar(45) NOT NULL,
   `m2` int(10) unsigned NOT NULL,
   `descripcion` varchar(45) NOT NULL,
-  PRIMARY KEY  (`fk_peritaje_fecha`)
+  PRIMARY KEY  (`fk_peritaje_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `inmueble` (
 
 DROP TABLE IF EXISTS `peritaje`;
 CREATE TABLE IF NOT EXISTS `peritaje` (
+  `id` int(10) unsigned NOT NULL auto_increment,
   `fecha` datetime NOT NULL COMMENT 'Fecha y hora del peritaje',
   `nombre_perito` varchar(45) NOT NULL COMMENT 'Nombre completo del perito',
   `tipo_inmueble` varchar(45) NOT NULL COMMENT 'Piso, Local, Casa, Parking',
@@ -113,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `peritaje` (
   `altura_real_piso` int(10) unsigned NOT NULL COMMENT 'Altura del inmueble en el edificio',
   `gastos_comun` double NOT NULL,
   `observaciones` text NOT NULL,
-  PRIMARY KEY  (`fecha`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
@@ -231,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `rel_inmueble_propietario` (
 
 DROP TABLE IF EXISTS `rel_peritaje_inmueble`;
 CREATE TABLE IF NOT EXISTS `rel_peritaje_inmueble` (
-  `fk_peritaje_fecha` datetime NOT NULL,
+  `fk_peritaje_id` int(10) unsigned NOT NULL,
   `fk_inmueble_referencia` int(10) unsigned NOT NULL,
   `llaves` tinyint(1) NOT NULL,
   `precio_venta` double NOT NULL,
@@ -242,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `rel_peritaje_inmueble` (
   `ideal_opcion_compra` double NOT NULL,
   `ideal_compra` double NOT NULL,
   `cartel` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`fk_peritaje_fecha`,`fk_inmueble_referencia`),
+  PRIMARY KEY  (`fk_peritaje_id`,`fk_inmueble_referencia`),
   KEY `FK_rel_peritaje_inmueble_2` (`fk_inmueble_referencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -303,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `rel_visita` (
 -- Filtros para la tabla `descripcion`
 -- 
 ALTER TABLE `descripcion`
-  ADD CONSTRAINT `FK_descripcion_1` FOREIGN KEY (`fk_peritaje_fecha`) REFERENCES `peritaje` (`fecha`);
+  ADD CONSTRAINT `FK_descripcion_1` FOREIGN KEY (`fk_peritaje_id`) REFERENCES `peritaje` (`id`);
 
 -- 
 -- Filtros para la tabla `preferencia`
@@ -329,7 +330,7 @@ ALTER TABLE `rel_inmueble_propietario`
 -- Filtros para la tabla `rel_peritaje_inmueble`
 -- 
 ALTER TABLE `rel_peritaje_inmueble`
-  ADD CONSTRAINT `FK_rel_peritaje_inmueble_1` FOREIGN KEY (`fk_peritaje_fecha`) REFERENCES `peritaje` (`fecha`),
+  ADD CONSTRAINT `FK_rel_peritaje_inmueble_1` FOREIGN KEY (`fk_peritaje_id`) REFERENCES `peritaje` (`id`),
   ADD CONSTRAINT `FK_rel_peritaje_inmueble_2` FOREIGN KEY (`fk_inmueble_referencia`) REFERENCES `inmueble` (`referencia`);
 
 -- 
