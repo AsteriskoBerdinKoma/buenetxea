@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import buenetxea.db.Connector;
+import buenetxea.objektuak.Inmueble;
 import buenetxea.objektuak.Peritaje;
 
 public class PeritajeKud {
@@ -108,8 +109,6 @@ public class PeritajeKud {
 					Integer.parseInt(ordua[0]), Integer.parseInt(ordua[1]),
 					Integer.parseInt(ordua[2]));
 
-			// ¿Como hace la partición?
-			System.out.println(s[2]);
 			peritaje = new Peritaje(id, cal, nombre_perito, tipo_inmueble,
 					tipo_venta, m2_constr, gas, luminoso, techos, exterior,
 					anos_finca, portero, ascensor, m2_utiles, calefaccion,
@@ -269,5 +268,18 @@ public class PeritajeKud {
 
 	public void deletePeritaje(int idPeritaje, int refInmueble) {
 		// TODO
+	}
+	
+	public int getLastPeritajeId() throws SQLException{
+		int id = -1;
+		String query = "SELECT id FROM Peritaje ORDER BY id";
+		PreparedStatement ps = this.connection.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			id = rs.getInt("id");
+		}
+		ps.close();
+		rs.close();
+		return id;
 	}
 }
