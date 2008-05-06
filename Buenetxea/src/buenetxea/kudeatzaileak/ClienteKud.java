@@ -72,11 +72,13 @@ class ClienteKud {
 			medio = rs.getString("medio");
 			asesor = rs.getString("asesor");
 
-			Calendar cal = new GregorianCalendar();
 			String[] s = fecha.split(" ");
 			String[] data = s[0].split("-");
-			cal.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]),
-					Integer.parseInt(data[2]));
+			String[] ordua = s[1].split(":");
+			Calendar cal = new GregorianCalendar(Integer.parseInt(data[0]),
+					Integer.parseInt(data[1]), Integer.parseInt(data[2]),
+					Integer.parseInt(ordua[0]), Integer.parseInt(ordua[1]),
+					Integer.parseInt(ordua[2]));
 
 			return new Cliente(dni, nombre, apellido1, apellido2, direccion,
 					nacionalidad, cal, telefono, medio, asesor);
