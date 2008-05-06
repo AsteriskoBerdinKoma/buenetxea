@@ -19,6 +19,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import buenetxea.gui.dialogs.CrearClienteDialog;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
 
@@ -93,10 +94,11 @@ public class VenderInmueblePanel extends JPanel {
 				public boolean verify(JComponent input) {
 					try {
 						boolean b = kud.existeCliente(dniTextField.getText());
-						if (!b)
+						if (!b) {
 							errorLabel
 									.setText("No existen clientes con este DNI.");
-						else
+							dniTextField.setText("");
+						} else
 							errorLabel.setText("");
 						return b;
 					} catch (IOException e) {
@@ -186,7 +188,11 @@ public class VenderInmueblePanel extends JPanel {
 			crearClienteNuevoButton = new JButton();
 			crearClienteNuevoButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent arg0) {
-
+					CrearClienteDialog ccd = new CrearClienteDialog();
+					ccd.setResultField(dniTextField);
+					ccd.pack();
+					ccd.setLocationRelativeTo(null);
+					ccd.setVisible(true);
 				}
 			});
 			crearClienteNuevoButton.setText("Crear cliente nuevo");

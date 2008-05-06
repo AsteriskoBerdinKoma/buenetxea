@@ -56,10 +56,10 @@ class ClienteKud {
 		int telefono;
 		String medio;
 		String asesor;
-		String query = " SELECT * FROM Cliente WHERE dni = ?";
+		String query = "SELECT * FROM Cliente WHERE dni = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setString(1, nan);
-		ResultSet rs = this.statement.executeQuery(query);
+		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			dni = rs.getString("dni");
 			nombre = rs.getString("nombre");
