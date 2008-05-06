@@ -37,7 +37,7 @@ import com.toedter.calendar.JDateChooser;
 
 public class CrearClientePanel extends JPanel {
 
-	private JTextField textField_9;
+	private JTextField textField_dir;
 	private JTextArea textArea;
 	private JTextField textField_8;
 	private JTextField textField_4;
@@ -53,13 +53,13 @@ public class CrearClientePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JTextField textField;
+	private JTextField textField_nombre;
 	private JFormattedTextField formattedTextField;
-	private JTextField textField_7;
-	private JTextField textField_6;
-	private JTextField textField_5;
-	private JTextField textField_3;
-	private JTextField textField_2;
+	private JTextField textField_asesor;
+	private JTextField textField_medio;
+	private JTextField textField_tel;
+	private JTextField textField_apellido2;
+	private JTextField textField_apellido1;
 
 	/**
 	 * Create the panel
@@ -81,15 +81,15 @@ public class CrearClientePanel extends JPanel {
 				TitledBorder.DEFAULT_POSITION, null, null));
 		panel.setBackground(UIManager.getColor("Panel.background"));
 
-		textField_2 = new JTextField();
+		textField_apellido1 = new JTextField();
 
-		textField_3 = new JTextField();
+		textField_apellido2 = new JTextField();
 
-		textField_5 = new JTextField();
+		textField_tel = new JTextField();
 
-		textField_6 = new JTextField();
+		textField_medio = new JTextField();
 
-		textField_7 = new JTextField();
+		textField_asesor = new JTextField();
 
 		JLabel dniLabel;
 		dniLabel = new JLabel();
@@ -125,7 +125,7 @@ public class CrearClientePanel extends JPanel {
 			e1.printStackTrace();
 		}
 
-		textField = new JTextField();
+		textField_nombre = new JTextField();
 
 		JLabel nacionalidadLabel;
 		nacionalidadLabel = new JLabel();
@@ -175,14 +175,14 @@ public class CrearClientePanel extends JPanel {
 
 			public void actionPerformed(final ActionEvent arg0) {
 				String dni = formattedTextField.getText();
-				String nombre = textField.getText();
-				String apellido1 = textField_2.getText();
-				String apellido2 = textField_3.getText();
-				String direccion= textField_9.getText();
+				String nombre = textField_nombre.getText();
+				String apellido1 = textField_apellido1.getText();
+				String apellido2 = textField_apellido2.getText();
+				String direccion= textField_dir.getText();
 				String nacionalidad = comboBox.getSelectedItem().toString();
-				int telefono = Integer.parseInt(textField_5.getText());
-				String medio = textField_6.getText();
-				String asesor = textField_7.getText();
+				int telefono = Integer.parseInt(textField_tel.getText());
+				String medio = textField_medio.getText();
+				String asesor = textField_asesor.getText();
 
 				Calendar fecha;
 				if (radioButton.isSelected()) {
@@ -305,7 +305,7 @@ public class CrearClientePanel extends JPanel {
 
 		
 
-		textField_9 = new JTextField();
+		textField_dir = new JTextField();
 
 		final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
 		groupLayout_2.setHorizontalGroup(
@@ -428,20 +428,20 @@ public class CrearClientePanel extends JPanel {
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 									.addComponent(nombreLabel)
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(textField, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
+									.addComponent(textField_nombre, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
 								.addGroup(groupLayout_1.createSequentialGroup()
 									.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
-										.addComponent(textField_9, GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+										.addComponent(textField_dir, GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
 										.addGroup(groupLayout_1.createSequentialGroup()
-											.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
+											.addComponent(textField_apellido1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-											.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+											.addComponent(textField_apellido2, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
 										.addGroup(groupLayout_1.createSequentialGroup()
-											.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+											.addComponent(textField_medio, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 											.addComponent(asesorLabel)
 											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-											.addComponent(textField_7, GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
+											.addComponent(textField_asesor, GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
 										.addGroup(groupLayout_1.createSequentialGroup()
 											.addComponent(actualRadioButton)
 											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -456,7 +456,7 @@ public class CrearClientePanel extends JPanel {
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 							.addComponent(telefonoLabel)
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+							.addComponent(textField_tel, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
 							.addGap(162, 162, 162)))
 					.addContainerGap())
 		);
@@ -467,30 +467,30 @@ public class CrearClientePanel extends JPanel {
 						.addComponent(dniLabel)
 						.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(nombreLabel)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_nombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(apellido1Label)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_apellido1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_apellido2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(nacionalidadLabel)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(telefonoLabel)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_tel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(direccionLabel)
-						.addComponent(textField_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_dir, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
 						.addComponent(medioLabel, GroupLayout.Alignment.LEADING)
 						.addGroup(groupLayout_1.createSequentialGroup()
 							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textField_asesor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(asesorLabel)
-								.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(textField_medio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(groupLayout_1.createSequentialGroup()
 									.addGap(4, 4, 4)
