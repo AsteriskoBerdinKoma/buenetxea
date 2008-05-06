@@ -13,6 +13,7 @@ public class Cliente {
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
+	private String direccion;
 	private String nacionalidad;
 	private Calendar fecha;
 	private int telefono;
@@ -33,8 +34,10 @@ public class Cliente {
 	 * @param medio
 	 * @param asesor
 	 */
+
+	
 	public Cliente(String dni, String nombre, String apellido1,
-			String apellido2,
+			String apellido2, String direccion,
 
 			String nacionalidad, Calendar fecha, int telefono, String medio,
 			String asesor)
@@ -44,6 +47,7 @@ public class Cliente {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
+		this.direccion=direccion;
 		this.apellido2 = apellido2;
 		this.nacionalidad = nacionalidad;
 		this.fecha = fecha;
@@ -123,6 +127,14 @@ public class Cliente {
 	 */
 	public String getDni() {
 		return dni;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 }
