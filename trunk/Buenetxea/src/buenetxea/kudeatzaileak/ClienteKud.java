@@ -109,12 +109,13 @@ class ClienteKud {
 				+ (fecha.get(Calendar.MONTH) + 1) + "/"
 				+ fecha.get(Calendar.DAY_OF_MONTH);
 		
-		//System.out.println(nan + " "+nombre + " "+ apellido1+ " "+ apellido2+ " "+ direccion + " "+data + " "+nacionalidad + " "+telefono + " "+medio + " "+asesor);
+		System.out.println(nan + " "+nombre + " "+ apellido1+ " "+ apellido2+ " "+ direccion + " "+data + " "+nacionalidad + " "+telefono + " "+medio + " "+asesor);
 		
 		//String query = "INSERT INTO cliente SET dni = ?, fecha = ?, asesor = ?, medio = ?, apellido1 = ?, apellido2 = ?, nombre = ?, nacionalidad = ?, direccion = ?, telefono = ?";
-		String query= "INSERT INTO cliente VALUES (?,?,?,?,?,?,?,?,?,?)";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setString(1, nan);
+		statement.execute("INSERT INTO cliente SET dni= " + nan + ", fecha= " + data + ", asesor= " + asesor + ", medio= " + medio + ", apellido1= " + apellido1 + ", apellido2= " + apellido2 + ", nombre= " + nombre + ", nacionalidad= "+ nacionalidad+ ", direccion= "+ direccion+ ", telefono= "+ telefono);
+		//String query= "INSERT INTO cliente VALUES (?,?,?,?,?,?,?,?,?,?)";
+		//PreparedStatement ps = connection.prepareStatement(query);
+		/*ps.setString(1, nan);
 		ps.setString(7, nombre);
 		ps.setString(5, apellido1);
 		ps.setString(6, apellido2);
@@ -123,11 +124,12 @@ class ClienteKud {
 		ps.setString(9, direccion);
 		ps.setInt(10, telefono);
 		ps.setString(4, medio);
-		ps.setString(3, asesor);
+		ps.setString(3, asesor);*/
 
-		int rs = statement.executeUpdate(query);
+		//int rs = statement.executeUpdate(query);
 
-		return rs > 0;
+		//return rs > 0;
+		return true;
 	}
 
 }
