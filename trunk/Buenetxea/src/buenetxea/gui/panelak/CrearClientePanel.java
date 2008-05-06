@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.ButtonGroup;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -37,6 +38,7 @@ import com.toedter.calendar.JDateChooser;
 
 public class CrearClientePanel extends JPanel {
 
+	private ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField textField_dir;
 	private JTextArea textArea;
 	private JTextField textField_8;
@@ -48,6 +50,7 @@ public class CrearClientePanel extends JPanel {
 	private JSpinner spinner_2;
 	private JSpinner spinner;
 	private JComboBox comboBox;
+	private JRadioButton actualRadioButton;
 	/**
 	 * 
 	 */
@@ -60,7 +63,8 @@ public class CrearClientePanel extends JPanel {
 	private JTextField textField_tel;
 	private JTextField textField_apellido2;
 	private JTextField textField_apellido1;
-
+	private JDateChooser dateChooser;
+	private JRadioButton radioButton;
 	/**
 	 * Create the panel
 	 * 
@@ -140,20 +144,39 @@ public class CrearClientePanel extends JPanel {
 		fechaLabel = new JLabel();
 		fechaLabel.setText("Fecha:");
 
-		JRadioButton actualRadioButton;
+		
 		actualRadioButton = new JRadioButton();
+		actualRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				if (actualRadioButton.isSelected())	
+					dateChooser.setEnabled(false);
+				else
+					dateChooser.setEnabled(true);
+			}
+		});
+		buttonGroup.add(actualRadioButton);
 		actualRadioButton.setSelected(true);
 		actualRadioButton.setText("Actual");
 
-		final JRadioButton radioButton;
+		
 		radioButton = new JRadioButton();
+		radioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				if (radioButton.isSelected())	
+					dateChooser.setEnabled(true);
+				else
+					dateChooser.setEnabled(false);
+			}
+		});
+		buttonGroup.add(radioButton);
+		
 
-		final JDateChooser dateChooser;
 		dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("d/M/yyyy");
 		Calendar cal = new GregorianCalendar();
 		cal.setTime(new Date());
 		dateChooser.setCalendar(cal);
+		dateChooser.setEnabled(false);
 
 		JPanel panel_1;
 		panel_1 = new JPanel();
@@ -307,106 +330,6 @@ public class CrearClientePanel extends JPanel {
 
 		textField_dir = new JTextField();
 
-		final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
-		groupLayout_2.setHorizontalGroup(
-			groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(groupLayout_2.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-						.addGroup(groupLayout_2.createSequentialGroup()
-							.addComponent(numHabitacionesLabel)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout_2.createSequentialGroup()
-							.addComponent(label)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(spinner_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(aseosLabel)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(spinner_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(exteriorCheckBox)
-						.addGroup(groupLayout_2.createSequentialGroup()
-							.addComponent(presupuestoLabel)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(label_1))
-						.addComponent(obserbacionesLabel)
-						.addGroup(groupLayout_2.createSequentialGroup()
-							.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(groupLayout_2.createSequentialGroup()
-									.addComponent(zonaLabel)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-								.addGroup(groupLayout_2.createSequentialGroup()
-									.addComponent(metrosCuadradosLabel)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(desdeLabel)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(m2Label)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(hastaLabel)))
-							.addGap(4, 4, 4)
-							.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(groupLayout_2.createSequentialGroup()
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(m2Label_1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout_2.createSequentialGroup()
-									.addComponent(tipoLabel)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(textField_8, GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)))
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
-					.addGap(1, 1, 1))
-		);
-		groupLayout_2.setVerticalGroup(
-			groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(groupLayout_2.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(zonaLabel)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(tipoLabel))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(metrosCuadradosLabel)
-						.addComponent(desdeLabel)
-						.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(m2Label)
-						.addComponent(hastaLabel)
-						.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(m2Label_1))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(numHabitacionesLabel)
-						.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(label)
-						.addComponent(spinner_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(aseosLabel)
-						.addComponent(spinner_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(exteriorCheckBox)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(presupuestoLabel)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_1))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(obserbacionesLabel)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		panel_1.setLayout(groupLayout_2);
-
 		final GroupLayout groupLayout_1 = new GroupLayout(panel);
 		groupLayout_1.setHorizontalGroup(
 			groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -505,14 +428,114 @@ public class CrearClientePanel extends JPanel {
 					.addGap(35, 35, 35))
 		);
 		panel.setLayout(groupLayout_1);
+
+		final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
+		groupLayout_2.setHorizontalGroup(
+			groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(groupLayout_2.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+						.addGroup(groupLayout_2.createSequentialGroup()
+							.addComponent(numHabitacionesLabel)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout_2.createSequentialGroup()
+							.addComponent(label)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(spinner_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(aseosLabel)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(spinner_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(exteriorCheckBox)
+						.addGroup(groupLayout_2.createSequentialGroup()
+							.addComponent(presupuestoLabel)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(label_1))
+						.addComponent(obserbacionesLabel)
+						.addGroup(groupLayout_2.createSequentialGroup()
+							.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addGroup(groupLayout_2.createSequentialGroup()
+									.addComponent(zonaLabel)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+								.addGroup(groupLayout_2.createSequentialGroup()
+									.addComponent(metrosCuadradosLabel)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(desdeLabel)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(m2Label)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(hastaLabel)))
+							.addGap(4, 4, 4)
+							.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addGroup(groupLayout_2.createSequentialGroup()
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(m2Label_1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout_2.createSequentialGroup()
+									.addComponent(tipoLabel)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(textField_8, GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
+					.addGap(1, 1, 1))
+		);
+		groupLayout_2.setVerticalGroup(
+			groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(groupLayout_2.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(zonaLabel)
+						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tipoLabel))
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(metrosCuadradosLabel)
+						.addComponent(desdeLabel)
+						.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(m2Label)
+						.addComponent(hastaLabel)
+						.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(m2Label_1))
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(numHabitacionesLabel)
+						.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(label)
+						.addComponent(spinner_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(aseosLabel)
+						.addComponent(spinner_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(exteriorCheckBox)
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(presupuestoLabel)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label_1))
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(obserbacionesLabel)
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		panel_1.setLayout(groupLayout_2);
 		final GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-						.addComponent(panel, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
 						.addComponent(panel_1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
 						.addComponent(guardarButton))
 					.addContainerGap())
 		);
@@ -520,8 +543,8 @@ public class CrearClientePanel extends JPanel {
 			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
-					.addGap(29, 29, 29)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(guardarButton)
 					.addContainerGap())
