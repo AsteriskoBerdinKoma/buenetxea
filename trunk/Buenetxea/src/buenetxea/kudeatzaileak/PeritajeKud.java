@@ -148,7 +148,8 @@ String query = "SELECT * "
 		+ "FROM peritaje P INNER JOIN rel_peritaje_inmueble R ON "
 		+ "P.fecha = R.fk_peritaje_fecha INNNER JOIN inmueble I ON "
 		+ "I.referencia = R.fk_inmueble_referencia "
-		+ "WHERE referencia = ?";
+		+ "WHERE referencia = ?"
+		+ "ORDER BY P.id DESC";
 PreparedStatement ps = this.connection.prepareStatement(query);
 ps.setInt(1, refInmueble);
 ResultSet rs = ps.executeQuery();
