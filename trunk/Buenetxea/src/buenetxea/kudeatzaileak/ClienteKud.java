@@ -72,7 +72,7 @@ class ClienteKud {
 			medio = rs.getString("medio");
 			asesor = rs.getString("asesor");
 
-			String[] s = fecha.split(" ");
+			String[] s = fecha.substring(0, fecha.indexOf('.')).split(" ");
 			String[] data = s[0].split("-");
 			String[] ordua = s[1].split(":");
 			Calendar cal = new GregorianCalendar(Integer.parseInt(data[0]),
