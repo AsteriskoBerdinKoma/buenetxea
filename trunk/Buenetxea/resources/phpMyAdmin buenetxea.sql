@@ -262,7 +262,7 @@ DROP TABLE IF EXISTS `rel_visita`;
 CREATE TABLE IF NOT EXISTS `rel_visita` (
   `fecha` datetime NOT NULL,
   `representante` varchar(45) NOT NULL,
-  `precio` double NOT NULL,
+  `precio` tinyint(1) NOT NULL,
   `no_le_gusta_zona` tinyint(1) NOT NULL,
   `quieren_mas_alto` tinyint(1) NOT NULL,
   `muchas_reformas` tinyint(1) NOT NULL,
@@ -283,8 +283,6 @@ CREATE TABLE IF NOT EXISTS `rel_visita` (
   `alquilado_en_esta_visita` tinyint(1) NOT NULL,
   `gestion_venta_otra_agencia` tinyint(1) NOT NULL,
   `podriamos_peritar` tinyint(1) NOT NULL,
-  `nombre_trabajador` varchar(45) NOT NULL,
-  `categoria_trabajador` varchar(45) NOT NULL,
   `fk_inmueble_referencia` int(10) unsigned NOT NULL,
   `fk_cliente_dni` varchar(9) NOT NULL,
   PRIMARY KEY  USING BTREE (`fk_inmueble_referencia`,`fk_cliente_dni`),
