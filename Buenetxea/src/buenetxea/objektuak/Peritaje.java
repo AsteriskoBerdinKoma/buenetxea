@@ -1,6 +1,7 @@
 package buenetxea.objektuak;
 
 public class Peritaje {
+	private int id;
 	private String fecha; // Fecha y hora del peritaje
 	private String nombre_perito; // Nombre completo del perito
 	private String tipo_inmueble; // Piso, Local, Casa, Parking
@@ -28,7 +29,7 @@ public class Peritaje {
 	private double gastos_comun;
 	private String observaciones;
 
-	public Peritaje(String fecha, String nombre_perito, String tipo_inmueble,
+	public Peritaje(int id, String fecha, String nombre_perito, String tipo_inmueble,
 			String tipo_venta, int m2_constr, String gas, String luminoso,
 			String techos, String exterior, int anos_finca, String portero,
 			boolean ascensor, int m2_utiles, String calefaccion,
@@ -37,6 +38,7 @@ public class Peritaje {
 			String muebles, int altura_edif, int altura_real_piso,
 			double gastos_comun, String observaciones) {
 		super();
+		this.id = id;
 		this.fecha = fecha;
 		this.nombre_perito = nombre_perito;
 		this.tipo_inmueble = tipo_inmueble;
@@ -65,6 +67,14 @@ public class Peritaje {
 		this.observaciones = observaciones;
 	}
 
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getFecha() {
 		return fecha;
 	}
