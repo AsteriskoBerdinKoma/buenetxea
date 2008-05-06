@@ -100,13 +100,14 @@ public class PeritajeKud {
 			gastos_comun = rs.getDouble("gastos_comun");
 			observaciones = rs.getString("observaciones");
 
-			String[] s = fecha.split(" ");
-			String[] sData = s[0].split("-");
-			String[] sOrdu = s[1].split(":");
-			Calendar cal = new GregorianCalendar(Integer.parseInt(sData[0]),
-					Integer.parseInt(sData[1]) - 1, Integer.parseInt(sData[2]),
-					Integer.parseInt(sOrdu[0]), Integer.parseInt(sOrdu[1]),
-					Integer.parseInt(sOrdu[2]));
+			String[] s = fecha.substring(0, fecha.indexOf('.')).split(" ");
+			String[] data = s[0].split("-");
+			String[] ordua = s[1].split(":");
+			Calendar cal = new GregorianCalendar(Integer.parseInt(data[0]),
+					Integer.parseInt(data[1]), Integer.parseInt(data[2]),
+					Integer.parseInt(ordua[0]), Integer.parseInt(ordua[1]),
+					Integer.parseInt(ordua[2]));
+
 			// ¿Como hace la partición?
 			System.out.println(s[2]);
 			peritaje = new Peritaje(id, cal, nombre_perito, tipo_inmueble,
@@ -122,19 +123,53 @@ public class PeritajeKud {
 
 	}
 
-	public void insertPeritaje(Peritaje p) throws SQLException {
-		String query = "INSERT INTO peritaje "
-				+ "(fecha, nombre_perito, tipo_inmueble, tipo_venta, m2_constr, gas, "
-				+ "luminoso, techos, exterior, anos_finca, portero, ascensor, m2_utiles, "
-				+ "calefaccion, pintura, tipo_suelo, orientacion, desalojo, m2_parcela, "
-				+ "puertas, ventanas, muebles, altura_edif, altura_real_piso, gastos_comun, "
-				+ "observaciones) VALUES ("
-				+ "FROM peritaje P INNER JOIN rel_peritaje_inmueble R ON "
-				+ "P.id = R.fk_peritaje_id INNNER JOIN inmueble I ON "
-				+ "I.referencia = R.fk_inmueble_referencia "
-				+ "WHERE I.referencia = ? AND P.id = ?";
+	public boolean insertPeritaje(Peritaje p) throws SQLException {
+		String query = "INSERT INTO peritaje SET fecha = ?, nombre_perito = ?, tipo_inmueble = ?, tipo_venta = ?, m2_constr = ?, gas = ?, "
+				+ "luminoso = ?, techos = ?, exterior = ?, anos_finca = ?, portero = ?, ascensor = ?, m2_utiles = ?, "
+				+ "calefaccion = ?, pintura = ?, tipo_suelo = ?, orientacion = ?, desalojo = ?, m2_parcela = ?, "
+				+ "puertas = ?, ventanas = ?, muebles = ?, altura_edif = ?, altura_real_piso = ?, gastos_comun = ?, "
+				+ "observaciones = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
-		ps.executeUpdate();
+
+		Calendar cal = p.getFecha();
+		String data = cal.get(Calendar.YEAR) + "-"
+				+ (cal.get(Calendar.MONTH) + 1) + "-"
+				+ cal.get(Calendar.DAY_OF_MONTH) + " "
+				+ cal.get(Calendar.HOUR) + ":"
+				+ cal.get(Calendar.MINUTE)+ ":"
+				+ "00.000";
+
+		ps.setString(1, data); // Fecha y hora del peritaje
+		ps.setString(2, p.getNombre_perito());
+		ps.setString(3, p.getTipo_inmueble());
+		ps.setString(4, p.getTipo_venta()); // Verde, Exclusiva
+		ps.setInt(5, p.getM2_constr());
+		ps.setString(6, p.getGas());
+		ps.setString(7, p.getLuminoso());
+		ps.setString(8, p.getTechos());
+		ps.setString(9, p.getExterior());
+		ps.setInt(10, p.getAnos_finca());
+		ps.setString(11, p.getPortero());
+		ps.setBoolean(12, p.isAscensor());
+		ps.setInt(13, p.getM2_utiles());
+		ps.setString(14, p.getCalefaccion());
+		ps.setString(15, p.getPintura());
+		ps.setString(16, p.getTipo_suelo());
+		ps.setString(17, p.getOrientacion());
+		ps.setBoolean(18, p.isDesalojo());
+		ps.setInt(19, p.getM2_parcela());
+		ps.setString(20, p.getPuertas());
+		ps.setString(21, p.getVentanas());
+		ps.setString(22, p.getMuebles());
+		ps.setInt(23, p.getAltura_edif()); // Altura en pisos del edificio
+		ps.setInt(24, p.getAltura_real_piso()); // Altura del inmueble en el
+												// edificio
+		ps.setDouble(25, p.getGastos_comun());
+		ps.setString(26, p.getObservaciones());
+
+		int result = ps.executeUpdate();
+
+		return result > 0;
 	}
 
 	/* Etxe baten azken peritajea lortzeko */
@@ -207,15 +242,13 @@ public class PeritajeKud {
 			gastos_comun = rs.getDouble("gastos_comun");
 			observaciones = rs.getString("observaciones");
 
-			String[] s = fecha.split(" ");
-			String[] sData = s[0].split("-");
-			String[] sOrdu = s[1].split(":");
-			Calendar cal = new GregorianCalendar(Integer.parseInt(sData[0]),
-					Integer.parseInt(sData[1]) - 1, Integer.parseInt(sData[2]),
-					Integer.parseInt(sOrdu[0]), Integer.parseInt(sOrdu[1]),
-					Integer.parseInt(sOrdu[2]));
-			// ¿Como hace la partición?
-			System.out.println(s[2]);
+			String[] s = fecha.substring(0, fecha.indexOf('.')).split(" ");
+			String[] data = s[0].split("-");
+			String[] ordua = s[1].split(":");
+			Calendar cal = new GregorianCalendar(Integer.parseInt(data[0]),
+					Integer.parseInt(data[1]), Integer.parseInt(data[2]),
+					Integer.parseInt(ordua[0]), Integer.parseInt(ordua[1]),
+					Integer.parseInt(ordua[2]));
 
 			peritaje = new Peritaje(id, cal, nombre_perito, tipo_inmueble,
 					tipo_venta, m2_constr, gas, luminoso, techos, exterior,
