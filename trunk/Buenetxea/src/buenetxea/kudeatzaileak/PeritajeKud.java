@@ -114,37 +114,37 @@ public class PeritajeKud {
 	
 /*Etxe baten azken peritajea lortzeko*/
 	
-	public Peritaje getUltimoPeritaje(int refInmueble)
-	throws SQLException {
-int id;
-String fecha;
-String nombre_perito;
-String tipo_inmueble;
-String tipo_venta;
-int m2_constr;
-String gas;
-String luminoso;
-String techos;
-String exterior;
-int anos_finca;
-String portero;
-boolean ascensor;
-int m2_utiles;
-String calefaccion;
-String pintura;
-String tipo_suelo;
-String orientacion;
-boolean desalojo;
-int m2_parcela;
-String puertas;
-String ventanas;
-String muebles;
-int altura_edif;
-int altura_real_piso;
-double gastos_comun;
-String observaciones;
+  public Peritaje getUltimoPeritaje(int refInmueble)
+		throws SQLException {
+	int id;
+	String fecha;
+	String nombre_perito;
+	String tipo_inmueble;
+	String tipo_venta;
+	int m2_constr;
+	String gas;
+	String luminoso;
+	String techos;
+	String exterior;
+	int anos_finca;
+	String portero;
+	boolean ascensor;
+	int m2_utiles;
+	String calefaccion;
+	String pintura;
+	String tipo_suelo;
+	String orientacion;
+	boolean desalojo;
+	int m2_parcela;
+	String puertas;
+	String ventanas;
+	String muebles;
+	int altura_edif;
+	int altura_real_piso;
+	double gastos_comun;
+	String observaciones;
 
-String query = "SELECT * "
+	String query = "SELECT * "
 		+ "FROM peritaje P INNER JOIN rel_peritaje_inmueble R ON "
 		+ "P.fecha = R.fk_peritaje_fecha INNNER JOIN inmueble I ON "
 		+ "I.referencia = R.fk_inmueble_referencia "
