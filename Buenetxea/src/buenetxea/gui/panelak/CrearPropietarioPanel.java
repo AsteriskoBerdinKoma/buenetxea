@@ -1,6 +1,9 @@
 package buenetxea.gui.panelak;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.swing.GroupLayout;
@@ -16,24 +19,28 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
+
+import buenetxea.objektuak.Propietario;
+import buenetxea.kudeatzaileak.Kudeatzailea;
 /**
  * @author Mireia
  *
  */
 public class CrearPropietarioPanel extends JPanel {
 
-	private JTextField textField_7;
+	private JTextField textField_ciudad;
+	private JTextField textField_telfijo;
+	private JTextField textField_apellido2;
+	private JTextField textField_apellido1;
+	private JTextField textField_domi;
 	private JComboBox comboBox_4;
 	private JComboBox comboBox_3;
 	private JComboBox comboBox_1;
 	private JComboBox comboBox;
 	private JTextArea textArea;
-	private JTextField textField_6;
-	private JTextField textField_5;
-	private JTextField textField_4;
-	private JTextField textField_3;
-	private JTextField textField_1;
-	private JTextField textField;
+	private JTextField textField_telmovil;
+	private JTextField textField_cp;
+	private JTextField textField_nombre;
 	private JFormattedTextField formattedTextField;
 	/**
 	 * Create the panel
@@ -60,37 +67,27 @@ public class CrearPropietarioPanel extends JPanel {
 		nombreLabel = new JLabel();
 		nombreLabel.setText("Nombre:");
 
-		textField = new JTextField();
+		textField_nombre = new JTextField();
 
 		JLabel apellidosLabel;
 		apellidosLabel = new JLabel();
 		apellidosLabel.setText("Apellidos:");
 
-		textField_1 = new JTextField();
-
 		JLabel cpLabel;
 		cpLabel = new JLabel();
 		cpLabel.setText("C.P:");
 
-		textField_3 = new JTextField();
-
-		JLabel telefonoLabel;
-		telefonoLabel = new JLabel();
-		telefonoLabel.setText("Ciudad:");
-
-		textField_4 = new JTextField();
+		textField_cp = new JTextField();
 
 		JLabel telfFijoLabel;
 		telfFijoLabel = new JLabel();
 		telfFijoLabel.setText("Telf. fijo:");
 
-		textField_5 = new JTextField();
+		textField_telmovil = new JTextField();
 
 		JLabel telfMovilLabel;
 		telfMovilLabel = new JLabel();
 		telfMovilLabel.setText("Telf. movil:");
-
-		textField_6 = new JTextField();
 
 		JLabel observacionesLabel;
 		observacionesLabel = new JLabel();
@@ -143,83 +140,141 @@ public class CrearPropietarioPanel extends JPanel {
 
 		JButton guardarButton;
 		guardarButton = new JButton();
+		guardarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				String dni;
+				String apellido1;
+				String apellido2;
+				String nombre;
+				String domicilio_postal;
+				int cp;
+				String ciudad;
+				int tel_fijo;
+				int tel_movil;
+				String horario_fijo;
+				String horario_movil;
+				String observaciones;
+				dni = formattedTextField.getText();
+				apellido1 = textField_apellido1.getText();
+				apellido2=  textField_apellido2.getText();
+				nombre = textField_nombre.getText();
+				domicilio_postal = textField_domi.getText();
+				cp = Integer.parseInt(textField_cp.getText());
+				ciudad = textField_ciudad.getText();
+				tel_fijo = Integer.parseInt(textField_telfijo.getText());
+				tel_movil = Integer.parseInt(textField_telmovil.getText());
+				int orduak_fijo = Integer.parseInt(comboBox.getSelectedItem().toString());
+				int minutuak_fijo =  Integer.parseInt(comboBox_1.getSelectedItem().toString());
+				horario_fijo = orduak_fijo + ": " + minutuak_fijo ;
+				int orduak_movil = Integer.parseInt(comboBox_3.getSelectedItem().toString());
+				int minutuak_movil =  Integer.parseInt(comboBox_4.getSelectedItem().toString());
+				horario_movil =  orduak_movil + ": " + minutuak_movil ;
+				observaciones = textArea.getText();
+				Propietario propietario = new Propietario (dni, nombre, apellido1,apellido2,
+						domicilio_postal, cp, ciudad , tel_fijo, tel_movil, horario_fijo,horario_movil,
+						observaciones);
+				try {
+					if (Kudeatzailea.getInstance().crearPropietario(propietario))
+					{
+						
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		guardarButton.setText("Guardar");
 
 		JLabel domicilioPostalLabel;
 		domicilioPostalLabel = new JLabel();
 		domicilioPostalLabel.setText("Domicilio postal:");
 
-		textField_7 = new JTextField();
+		textField_domi = new JTextField();
+
+		textField_apellido1 = new JTextField();
+
+		textField_apellido2 = new JTextField();
+
+		textField_telfijo = new JTextField();
+
+		JLabel ciudadLabel;
+		ciudadLabel = new JLabel();
+		ciudadLabel.setText("Ciudad:");
+
+		textField_ciudad = new JTextField();
 		
 		
 		final GroupLayout groupLayout_1 = new GroupLayout((JComponent) panel);
 		groupLayout_1.setHorizontalGroup(
-			groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
+			groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(groupLayout_1.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(horarioFijoLabel, GroupLayout.Alignment.TRAILING)
-						.addComponent(telfFijoLabel, GroupLayout.Alignment.TRAILING)
-						.addComponent(domicilioPostalLabel, GroupLayout.Alignment.TRAILING)
-						.addComponent(cpLabel, GroupLayout.Alignment.TRAILING)
-						.addComponent(apellidosLabel, GroupLayout.Alignment.TRAILING)
-						.addComponent(dniLabel, GroupLayout.Alignment.TRAILING))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(groupLayout_1.createSequentialGroup()
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(label)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(horarioMovilLabel)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(comboBox_4, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(24, Short.MAX_VALUE))
-						.addGroup(groupLayout_1.createSequentialGroup()
-							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(textField_6, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField_3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(textArea, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
 								.addGroup(groupLayout_1.createSequentialGroup()
 									.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
-										.addComponent(telefonoLabel, GroupLayout.Alignment.TRAILING)
-										.addComponent(nombreLabel, GroupLayout.Alignment.TRAILING))
+										.addComponent(horarioFijoLabel, GroupLayout.Alignment.TRAILING)
+										.addComponent(telfFijoLabel, GroupLayout.Alignment.TRAILING)
+										.addComponent(domicilioPostalLabel, GroupLayout.Alignment.TRAILING)
+										.addComponent(cpLabel, GroupLayout.Alignment.TRAILING)
+										.addComponent(apellidosLabel, GroupLayout.Alignment.TRAILING)
+										.addComponent(dniLabel, GroupLayout.Alignment.TRAILING))
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 									.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
-										.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
-									.addGap(14, 14, 14))
-								.addGroup(groupLayout_1.createSequentialGroup()
-									.addComponent(telfMovilLabel)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))))))
-				.addGroup(groupLayout_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(observacionesLabel)
-					.addContainerGap(403, Short.MAX_VALUE))
-				.addGroup(GroupLayout.Alignment.LEADING, groupLayout_1.createSequentialGroup()
-					.addGap(90, 90, 90)
-					.addComponent(textField_7, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
-					.addContainerGap(14, Short.MAX_VALUE))
-				.addGroup(groupLayout_1.createSequentialGroup()
-					.addContainerGap(88, Short.MAX_VALUE)
-					.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-					.addGap(249, 249, 249))
-				.addGroup(groupLayout_1.createSequentialGroup()
-					.addGap(88, 88, 88)
-					.addComponent(formattedTextField, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-					.addGap(249, 249, 249))
-				.addGroup(GroupLayout.Alignment.LEADING, groupLayout_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
-					.addContainerGap())
+										.addComponent(textField_domi, GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+										.addGroup(groupLayout_1.createSequentialGroup()
+											.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+											.addComponent(nombreLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+											.addGap(6, 6, 6)
+											.addComponent(textField_nombre, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+										.addGroup(groupLayout_1.createSequentialGroup()
+											.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
+												.addGroup(groupLayout_1.createSequentialGroup()
+													.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+													.addComponent(label)
+													.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+													.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+												.addComponent(textField_telfijo, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
+												.addGroup(groupLayout_1.createSequentialGroup()
+													.addGap(13, 13, 13)
+													.addComponent(telfMovilLabel))
+												.addGroup(groupLayout_1.createSequentialGroup()
+													.addGap(4, 4, 4)
+													.addComponent(horarioMovilLabel)))
+											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
+												.addComponent(textField_telmovil, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
+												.addGroup(groupLayout_1.createSequentialGroup()
+													.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+													.addComponent(label_1)
+													.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+													.addComponent(comboBox_4, 0, 0, Short.MAX_VALUE))))
+										.addGroup(groupLayout_1.createSequentialGroup()
+											.addComponent(textField_apellido1, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+											.addComponent(textField_apellido2, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+										.addGroup(groupLayout_1.createSequentialGroup()
+											.addComponent(textField_cp, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+											.addComponent(ciudadLabel)
+											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+											.addComponent(textField_ciudad, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)))))
+							.addGap(34, 34, 34))
+						.addGroup(groupLayout_1.createSequentialGroup()
+							.addComponent(observacionesLabel)
+							.addContainerGap(387, Short.MAX_VALUE))))
 		);
 		groupLayout_1.setVerticalGroup(
 			groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -229,37 +284,38 @@ public class CrearPropietarioPanel extends JPanel {
 						.addComponent(dniLabel)
 						.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(nombreLabel)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_nombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(apellidosLabel)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_apellido1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_apellido2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(cpLabel)
-						.addComponent(telefonoLabel)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_cp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(ciudadLabel)
+						.addComponent(textField_ciudad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(domicilioPostalLabel)
-						.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_domi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(telfFijoLabel)
-						.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(telfMovilLabel)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_telfijo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_telmovil, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(11, 11, 11)
 					.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(horarioFijoLabel)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label)
+						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(horarioMovilLabel)
 						.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(comboBox_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_1))
+						.addComponent(label_1)
+						.addComponent(comboBox_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(observacionesLabel)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -267,17 +323,19 @@ public class CrearPropietarioPanel extends JPanel {
 					.addContainerGap())
 		);
 		groupLayout_1.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {comboBox, comboBox_1});
+		groupLayout_1.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {formattedTextField, textField_telfijo});
+		groupLayout_1.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {comboBox_3, comboBox_4});
 		groupLayout_1.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboBox, comboBox_1});
 		panel.setLayout(groupLayout_1);
 		final GroupLayout groupLayout = new GroupLayout((JComponent) this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+			groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(guardarButton, GroupLayout.Alignment.TRAILING)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
-					.addContainerGap())
+					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+						.addComponent(guardarButton)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 488, Short.MAX_VALUE))
+					.addGap(16, 16, 16))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)

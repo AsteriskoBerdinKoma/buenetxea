@@ -2,7 +2,7 @@ package buenetxea.objektuak;
 
 public class Propietario {
 	
-	private int dni;
+	private String  dni;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
@@ -15,7 +15,7 @@ public class Propietario {
 	private String horario_movil;
 	private String observaciones;
 	
-	public Propietario(int dni, String nombre, String apellido1,
+	public Propietario(String dni, String nombre, String apellido1,
 			String apellido2, String domicilio_postal, int cp, String ciudad,
 			int tel_fijo, int tel_movil, String horario_fijo,
 			String horario_movil, String observaciones) {
@@ -42,7 +42,7 @@ public class Propietario {
 		this.domicilio_postal = domicilio_postal;
 	}
 
-	public int getDni() {
+	public String getDni() {
 		return dni;
 	}
 
@@ -86,7 +86,7 @@ public class Propietario {
 		return observaciones;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 

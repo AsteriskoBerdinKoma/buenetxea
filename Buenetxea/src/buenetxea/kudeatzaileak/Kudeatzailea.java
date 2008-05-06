@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import buenetxea.objektuak.Cliente;
 import buenetxea.objektuak.Inmueble;
+import buenetxea.objektuak.Propietario;
 
 public class Kudeatzailea {
 
@@ -12,10 +13,12 @@ public class Kudeatzailea {
 
 	private final InmuebleKud inmKud;
 	private final ClienteKud cliKud;
-
+	private final PropietarioKud propikud;
+	
 	private Kudeatzailea() throws SQLException, ClassNotFoundException {
 		this.inmKud = InmuebleKud.getInstance();
 		this.cliKud = ClienteKud.getInstance();
+		this.propikud =  PropietarioKud.getInstance();
 	}
 
 	public static Kudeatzailea getInstance() throws SQLException,
@@ -34,6 +37,15 @@ public class Kudeatzailea {
 				.getApellido1(), c.getApellido2(), c.getDireccion(), c.getFecha(), c
 				.getNacionalidad(), c.getTelefono(), c.getMedio(), c
 				.getAsesor());
+	}
+	
+	public boolean crearPropietario (Propietario p) throws SQLException
+	{
+		return this.propikud.InsertPropietario(p.getDni(), p.getNombre(), 
+				p.getApellido1(), p.getApellido2(), p.getCp(), p.getCiudad(), 
+				p.getTel_fijo(), p.getTel_movil(), p.getHorario_fijo(), p.getHorario_fijo(), 
+				p.getObservaciones());
+		
 	}
 
 	public void venderInmueble(int referencia, String nan) {

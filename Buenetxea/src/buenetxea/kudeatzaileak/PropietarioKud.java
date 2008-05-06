@@ -26,9 +26,9 @@ public class PropietarioKud {
 	return instance;
 }
 	
-	Propietario getPropietario (int nan) throws SQLException 
+	Propietario getPropietario (String nan) throws SQLException 
 	{
-		 int dni;
+		 String dni;
 		 String nombre;
 		 String apellido1;
 		 String apellido2;
@@ -44,7 +44,7 @@ public class PropietarioKud {
 		 ResultSet rs= this.statement.executeQuery(query);
 		 if (rs.next())
 		 {
-			 dni=rs.getInt("dni");
+			 dni=rs.getString("dni");
 			 nombre=rs.getString("nombre");
 			 nombre=rs.getString("nombre");
 			 apellido1=rs.getString("apellido1");
@@ -66,20 +66,22 @@ public class PropietarioKud {
 			 return null;
 		 
 	}
-	public void InsertPropietario (int dni, String nombre, String apellido1, String apellido2, 
+	public boolean InsertPropietario (String dni, String nombre, String apellido1, String apellido2, 
 			int cp, String ciudad, int tel_fijo, int tel_movil,String horario_fijo, String horario_movil,
 			String observaciones) throws SQLException
-	{	if (getPropietario(dni)!=null)
+	{	if (getPropietario(dni) == null )
 			{String query="INSERT INTO Propietario VALUES (" + dni +","+ nombre+","+apellido1+","+ apellido2+
 			","+ cp +","+ ciudad +","+ tel_fijo+","+tel_movil+","+horario_fijo+","+horario_movil+","+ observaciones+
 			")";
 			try {
 				int rs= this.statement.executeUpdate(query);
+				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				return false;
 			}
 		
+			}
+		return false;
 	}
 }
