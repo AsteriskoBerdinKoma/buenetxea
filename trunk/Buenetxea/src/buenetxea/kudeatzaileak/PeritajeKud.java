@@ -28,8 +28,9 @@ public class PeritajeKud {
 		return instance;
 	}
 
-	public Peritaje getPeritaje(String fechaPeritaje, int refInmueble)
+	public Peritaje getPeritaje(int idPeritaje, int refInmueble)
 			throws SQLException {
+		int id;
 		String fecha;
 		String nombre_perito;
 		String tipo_inmueble;
@@ -59,16 +60,17 @@ public class PeritajeKud {
 
 		String query = "SELECT * "
 				+ "FROM peritaje P INNER JOIN rel_peritaje_inmueble R ON "
-				+ "P.fecha = R.fk_peritaje_fecha INNNER JOIN inmueble I ON "
+				+ "P.id = R.fk_peritaje_id INNNER JOIN inmueble I ON "
 				+ "I.referencia = R.fk_inmueble_referencia "
-				+ "WHERE referencia = ? AND fecha = ?";
+				+ "WHERE I.referencia = ? AND P.id = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setInt(1, refInmueble);
-		ps.setString(2, fechaPeritaje);
+		ps.setInt(2, idPeritaje);
 		ResultSet rs = ps.executeQuery();
 		Peritaje peritaje = null;
 
 		if (rs.next()) {
+			id = rs.getInt("id");
 			fecha = rs.getString("fecha");
 			nombre_perito = rs.getString("nombre_perito");
 			tipo_inmueble = rs.getString("tipo_inmueble");
@@ -96,7 +98,7 @@ public class PeritajeKud {
 			gastos_comun = rs.getDouble("gastos_comun");
 			observaciones = rs.getString("observaciones");
 
-			peritaje = new Peritaje(fecha, nombre_perito, tipo_inmueble,
+			peritaje = new Peritaje(id, fecha, nombre_perito, tipo_inmueble,
 					tipo_venta, m2_constr, gas, luminoso, techos, exterior,
 					anos_finca, portero, ascensor, m2_utiles, calefaccion,
 					pintura, tipo_suelo, orientacion, desalojo, m2_parcela,
@@ -108,15 +110,15 @@ public class PeritajeKud {
 		return peritaje;
 
 	}
-	public void insertPeritaje(String fechaPeritaje,int refInmueble){
+	public void insertPeritaje(int idPeritaje,int refInmueble){
 		//TODO
 	}
 	
-	public void updatePeritaje(String fechaPeritaje,int refInmueble){
+	public void updatePeritaje(int idPeritaje,int refInmueble){
 		//TODO
 	}
 	
-	public void deletePeritaje(String fechaPeritaje,int refInmueble){
+	public void deletePeritaje(int idPeritaje,int refInmueble){
 		//TODO
 	}
 }
