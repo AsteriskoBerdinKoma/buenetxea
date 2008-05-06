@@ -71,7 +71,7 @@ public class PropietarioKud {
 			int cp, String ciudad, int tel_fijo, int tel_movil,String horario_fijo, String horario_movil) throws SQLException
 	{	
 		int result=0;
-			String query="INSERT INTO Propietario SET dni = ?, apellido = ?,apellido2 = ?, nombre = ?,domicilio_postal = ?,codigo_postal = ?,ciudad = ?,tel_fijo = ?,tel_movil=?,horario_fijo=?,horario_movil=?";
+			String query="INSERT INTO Propietario SET dni = ?, apellido1 = ?,apellido2 = ?, nombre = ?,domicilio_postal = ?,codigo_postal = ?,ciudad = ?,tel_fijo = ?,tel_movil=?,horario_fijo=?,horario_movil=?";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, dni);
 			ps.setString(2, apellido1);
