@@ -6,10 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import buenetxea.db.Connector;
@@ -69,7 +66,7 @@ class ClienteKud {
 			apellido1 = rs.getString("apellido1");
 			apellido2 = rs.getString("apellido2");
 			nacionalidad = rs.getString("nacionalidad");
-			direccion=rs.getString("direccion");
+			direccion = rs.getString("direccion");
 			fecha = rs.getString("fecha");
 			telefono = rs.getInt("telefono");
 			medio = rs.getString("medio");
@@ -80,8 +77,8 @@ class ClienteKud {
 			cal.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]),
 					Integer.parseInt(data[2]));
 
-			return new Cliente(dni, nombre, apellido1, apellido2, direccion,nacionalidad,
-					cal, telefono, medio, asesor);
+			return new Cliente(dni, nombre, apellido1, apellido2, direccion,
+					nacionalidad, cal, telefono, medio, asesor);
 		} else
 			return null;
 	}
@@ -100,36 +97,32 @@ class ClienteKud {
 	 * @param asesor
 	 * @throws SQLException
 	 */
-	
+
 	public boolean insertCliente(String nan, String nombre, String apellido1,
-			String apellido2, String direccion, Calendar fecha, String nacionalidad,
-			int telefono, String medio, String asesor) throws SQLException {
+			String apellido2, String direccion, Calendar fecha,
+			String nacionalidad, int telefono, String medio, String asesor)
+			throws SQLException {
 
 		String data = fecha.get(Calendar.YEAR) + "/"
 				+ (fecha.get(Calendar.MONTH) + 1) + "/"
 				+ fecha.get(Calendar.DAY_OF_MONTH);
-		
-		System.out.println(nan + " "+nombre + " "+ apellido1+ " "+ apellido2+ " "+ direccion + " "+data + " "+nacionalidad + " "+telefono + " "+medio + " "+asesor);
-		
-		//String query = "INSERT INTO cliente SET dni = ?, fecha = ?, asesor = ?, medio = ?, apellido1 = ?, apellido2 = ?, nombre = ?, nacionalidad = ?, direccion = ?, telefono = ?";
-		statement.execute("INSERT INTO cliente SET dni= " + nan + ", fecha= " + data + ", asesor= " + asesor + ", medio= " + medio + ", apellido1= " + apellido1 + ", apellido2= " + apellido2 + ", nombre= " + nombre + ", nacionalidad= "+ nacionalidad+ ", direccion= "+ direccion+ ", telefono= "+ telefono);
-		//String query= "INSERT INTO cliente VALUES (?,?,?,?,?,?,?,?,?,?)";
-		//PreparedStatement ps = connection.prepareStatement(query);
-		/*ps.setString(1, nan);
+
+		String query = "INSERT INTO cliente SET dni = ?, fecha = ?, asesor = ?, medio = ?, apellido1 = ?, apellido2 = ?, nombre = ?, nacionalidad = ?, direccion = ?, telefono = ?";
+
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setString(1, nan);
 		ps.setString(7, nombre);
 		ps.setString(5, apellido1);
 		ps.setString(6, apellido2);
-		ps.setString(2, data) ;
+		ps.setString(2, data);
 		ps.setString(8, nacionalidad);
 		ps.setString(9, direccion);
 		ps.setInt(10, telefono);
 		ps.setString(4, medio);
-		ps.setString(3, asesor);*/
+		ps.setString(3, asesor);
 
-		//int rs = statement.executeUpdate(query);
+		int result = ps.executeUpdate();
 
-		//return rs > 0;
-		return true;
+		return result > 0;
 	}
-
 }
