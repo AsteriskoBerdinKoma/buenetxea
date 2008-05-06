@@ -168,6 +168,7 @@ public class PeritajeKud {
 
 		int result = ps.executeUpdate();
 
+		ps.close();
 		return result > 0;
 	}
 
