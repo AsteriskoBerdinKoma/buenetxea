@@ -1,10 +1,7 @@
 package buenetxea.gui.panelak;
 
-import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -22,7 +19,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
 import buenetxea.db.ResultSetTableModel;
-import buenetxea.gui.Nagusia;
+import buenetxea.gui.dialogs.BuscarClienteDialog;
 
 public class BucarClientePanel extends JPanel {
 
@@ -38,11 +35,16 @@ public class BucarClientePanel extends JPanel {
 	private JTextField nombreTextField;
 	private ResultSetTableModel tableModel;
 
+	private BuscarClienteDialog jabea;
+	private boolean closeAfterSave;
+
 	/**
 	 * Create the panel
 	 */
 	public BucarClientePanel() {
 		super();
+
+		closeAfterSave = false;
 
 		try {
 			setBorder(new TitledBorder(null, "Buscar Cliente",
@@ -84,59 +86,17 @@ public class BucarClientePanel extends JPanel {
 
 			JButton venderInmuebleAlButton;
 			venderInmuebleAlButton = new JButton();
-			venderInmuebleAlButton.setText("Seleccionar cliente");
-
-			JButton crearUnClienteButton;
-			crearUnClienteButton = new JButton();
-			crearUnClienteButton.addActionListener(new ActionListener() {
+			venderInmuebleAlButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent arg0) {
-					Dialog d = new Dialog(Nagusia.getInstance(),
-							"Crear cliente nuevo", true);
-					d.addWindowListener(new WindowListener() {
-
-						@Override
-						public void windowActivated(WindowEvent e) {
-							System.out.println("activated");
-						}
-
-						@Override
-						public void windowClosed(WindowEvent e) {
-							System.out.println("closed");
-						}
-
-						@Override
-						public void windowClosing(WindowEvent e) {
-							System.out.println("closing");
-							e.getWindow().dispose();
-						}
-
-						@Override
-						public void windowDeactivated(WindowEvent e) {
-							System.out.println("deactivated");
-						}
-
-						@Override
-						public void windowDeiconified(WindowEvent e) {
-							System.out.println("deiconified");
-						}
-
-						@Override
-						public void windowIconified(WindowEvent e) {
-							System.out.println("iconified");
-						}
-
-						@Override
-						public void windowOpened(WindowEvent e) {
-							System.out.println("opened");
-						}
-					});
-					d.add(new CrearClientePanel());
-					d.pack();
-					d.setLocationRelativeTo(null);
-					d.setVisible(true);
+					String dni = (String) table.getValueAt(table
+							.getSelectedRow(), 0);
+					if (closeAfterSave) {
+						jabea.setSavedDNI(dni);
+						jabea.dispose();
+					}
 				}
 			});
-			crearUnClienteButton.setText("Crear un cliente nuevo");
+			venderInmuebleAlButton.setText("Seleccionar cliente");
 
 			apellido2TextField = new JTextField();
 
@@ -288,15 +248,8 @@ public class BucarClientePanel extends JPanel {
 																	GroupLayout.DEFAULT_SIZE,
 																	495,
 																	Short.MAX_VALUE)
-															.addGroup(
-																	groupLayout_1
-																			.createSequentialGroup()
-																			.addComponent(
-																					crearUnClienteButton)
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addComponent(
-																					venderInmuebleAlButton))
+															.addComponent(
+																	venderInmuebleAlButton)
 															.addComponent(
 																	panel_2,
 																	GroupLayout.Alignment.LEADING,
@@ -304,33 +257,19 @@ public class BucarClientePanel extends JPanel {
 																	495,
 																	Short.MAX_VALUE))
 											.addContainerGap()));
-			groupLayout_1
-					.setVerticalGroup(groupLayout_1
-							.createParallelGroup(GroupLayout.Alignment.TRAILING)
-							.addGroup(
-									groupLayout_1
-											.createSequentialGroup()
-											.addContainerGap()
-											.addComponent(panel_2,
-													GroupLayout.PREFERRED_SIZE,
-													GroupLayout.DEFAULT_SIZE,
-													GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addComponent(scrollPane,
-													GroupLayout.DEFAULT_SIZE,
-													116, Short.MAX_VALUE)
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addGroup(
-													groupLayout_1
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	venderInmuebleAlButton)
-															.addComponent(
-																	crearUnClienteButton))
-											.addContainerGap()));
+			groupLayout_1.setVerticalGroup(groupLayout_1.createParallelGroup(
+					GroupLayout.Alignment.TRAILING).addGroup(
+					groupLayout_1.createSequentialGroup().addContainerGap()
+							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE,
+									GroupLayout.DEFAULT_SIZE,
+									GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
+									116, Short.MAX_VALUE).addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(venderInmuebleAlButton)
+							.addContainerGap()));
 			setLayout(groupLayout_1);
 			//
 		} catch (ParseException e1) {
@@ -365,5 +304,10 @@ public class BucarClientePanel extends JPanel {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void setCloseAfterSave(BuscarClienteDialog owner, boolean close) {
+		this.jabea = owner;
+		this.closeAfterSave = close;
 	}
 }

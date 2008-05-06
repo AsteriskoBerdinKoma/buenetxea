@@ -19,6 +19,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import buenetxea.gui.dialogs.BuscarClienteDialog;
 import buenetxea.gui.dialogs.CrearClienteDialog;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
@@ -82,6 +83,11 @@ public class VenderInmueblePanel extends JPanel {
 			buscarClientesButton = new JButton();
 			buscarClientesButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent arg0) {
+					BuscarClienteDialog bcd = new BuscarClienteDialog();
+					bcd.setResultField(dniTextField);
+					bcd.pack();
+					bcd.setLocationRelativeTo(null);
+					bcd.setVisible(true);
 				}
 			});
 			buscarClientesButton.setText("Buscar Cliente");
@@ -116,7 +122,11 @@ public class VenderInmueblePanel extends JPanel {
 			venderInmuebleButton = new JButton();
 			venderInmuebleButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-
+					CrearClienteDialog ccd = new CrearClienteDialog();
+					ccd.setResultField(dniTextField);
+					ccd.pack();
+					ccd.setLocationRelativeTo(null);
+					ccd.setVisible(true);
 				}
 			});
 			venderInmuebleButton.setText("Vender inmueble");

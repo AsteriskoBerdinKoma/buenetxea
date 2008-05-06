@@ -8,24 +8,6 @@ import buenetxea.gui.panelak.CrearClientePanel;
 
 public class CrearClienteDialog extends JDialog {
 
-	// /**
-	// * Launch the application
-	// * @param args
-	// */
-	// public static void main(String args[]) {
-	// try {
-	// CrearClienteDialog dialog = new CrearClienteDialog();
-	// dialog.addWindowListener(new WindowAdapter() {
-	// public void windowClosing(WindowEvent e) {
-	// System.exit(0);
-	// }
-	// });
-	// dialog.setVisible(true);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-
 	/**
 	 * 
 	 */
