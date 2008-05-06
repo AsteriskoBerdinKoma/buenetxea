@@ -40,6 +40,7 @@ public class VenderInmueblePanel extends JPanel {
 	private JLabel label_2;
 	private JLabel label_3;
 	private JLabel errorLabel;
+	private JButton venderInmuebleButton;
 
 	private Inmueble inmueble;
 
@@ -56,8 +57,6 @@ public class VenderInmueblePanel extends JPanel {
 
 		try {
 			kud = Kudeatzailea.getInstance();
-
-			inmueble = new Inmueble(1, "zona", "direccion", false);
 
 			setBorder(new TitledBorder(null, "Vender Inmueble",
 					TitledBorder.DEFAULT_JUSTIFICATION,
@@ -104,8 +103,11 @@ public class VenderInmueblePanel extends JPanel {
 							errorLabel
 									.setText("No existen clientes con este DNI.");
 							dniTextField.setText("");
-						} else
+							venderInmuebleButton.setEnabled(false);
+						} else {
 							errorLabel.setText("");
+							venderInmuebleButton.setEnabled(true);
+						}
 						return b;
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -118,15 +120,11 @@ public class VenderInmueblePanel extends JPanel {
 			});
 			dniTextField.setColumns(9);
 
-			JButton venderInmuebleButton;
 			venderInmuebleButton = new JButton();
+			venderInmuebleButton.setEnabled(false);
 			venderInmuebleButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					CrearClienteDialog ccd = new CrearClienteDialog();
-					ccd.setResultField(dniTextField);
-					ccd.pack();
-					ccd.setLocationRelativeTo(null);
-					ccd.setVisible(true);
+
 				}
 			});
 			venderInmuebleButton.setText("Vender inmueble");
@@ -192,7 +190,6 @@ public class VenderInmueblePanel extends JPanel {
 
 			errorLabel = new JLabel();
 			errorLabel.setForeground(new Color(255, 0, 0));
-			errorLabel.setText("New JLabel");
 
 			JButton crearClienteNuevoButton;
 			crearClienteNuevoButton = new JButton();
@@ -542,29 +539,4 @@ public class VenderInmueblePanel extends JPanel {
 		this.label_2.setText(inmueble.getZona());
 		this.label_3.setText(inmueble.getDireccion());
 	}
-
-	// private String getBuscarClientesQuery() {
-	// String dni = dniTextField.getText().trim();
-	//
-	// String query = "SELECT * FROM cliente WHERE";
-	// if (dni != "")
-	// query += " dni LIKE '" + dni + "%' AND";
-	// query += " nombre LIKE '" + nombre + "%' AND apellido1 LIKE '"
-	// + apellido1 + "%' AND apellido2 LIKE '" + apellido2 + "%'";
-	// return query;
-	// }
-
-	// private final class BuscarClientes implements ActionListener {
-	// public void actionPerformed(final ActionEvent arg0) {
-	// try {
-	// tableModel.setQuery(getBuscarClientesQuery());
-	// } catch (IllegalStateException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
-	// }
 }

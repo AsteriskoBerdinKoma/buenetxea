@@ -8,6 +8,10 @@ import buenetxea.gui.panelak.BucarClientePanel;
 
 public class BuscarClienteDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField dniTextField;
 
 	/**
@@ -15,9 +19,12 @@ public class BuscarClienteDialog extends JDialog {
 	 */
 	public BuscarClienteDialog() {
 		super();
+		setTitle("Buscar clientes");
+		setModal(true);
 
 		BucarClientePanel bucarClientePanel;
 		bucarClientePanel = new BucarClientePanel();
+		bucarClientePanel.setCloseAfterSave(this, true);
 		final GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addComponent(bucarClientePanel,
