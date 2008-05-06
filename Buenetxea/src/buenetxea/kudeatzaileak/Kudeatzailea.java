@@ -31,7 +31,7 @@ public class Kudeatzailea {
 
 	public boolean crearCliente(Cliente c) throws SQLException {
 		return this.cliKud.insertCliente(c.getDni(), c.getNombre(), c
-				.getApellido1(), c.getApellido2(), c.getFecha(), c
+				.getApellido1(), c.getApellido2(), c.getDireccion(), c.getFecha(), c
 				.getNacionalidad(), c.getTelefono(), c.getMedio(), c
 				.getAsesor());
 	}
