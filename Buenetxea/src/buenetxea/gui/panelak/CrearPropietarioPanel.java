@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -175,14 +176,34 @@ public class CrearPropietarioPanel extends JPanel {
 				try {
 					if (Kudeatzailea.getInstance().crearPropietario(propietario))
 					{
-						
+						JOptionPane jop = new JOptionPane(
+								"El propietario se ha creado correctamente.",
+								JOptionPane.INFORMATION_MESSAGE);
+						jop.createDialog("Cliente creado").setVisible(true);
+					}
+					else{
+						JOptionPane jop = new JOptionPane(
+								"No se ha podido crear el propietario.",
+								JOptionPane.ERROR_MESSAGE);
+						jop.createDialog("Error al crear el cliente")
+								.setVisible(true);
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					JOptionPane jop = new JOptionPane(
+							"No se ha podido crear el propietario."+" \n" + e1.getMessage(),
+							JOptionPane.ERROR_MESSAGE);
+					jop.createDialog("Error al crear el propietario").setVisible(
+							true);
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					JOptionPane jop = new JOptionPane(
+							"No se ha podido crear el propietario.",
+							JOptionPane.ERROR_MESSAGE);
+					jop.createDialog("Error al crear el propietario").setVisible(
+							true);
 				}
 				
 			}

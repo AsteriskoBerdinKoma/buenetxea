@@ -3,6 +3,7 @@ package buenetxea.gui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.text.ParseException;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ import javax.swing.border.MatteBorder;
 import buenetxea.gui.panelak.CrearClientePanel;
 import buenetxea.gui.panelak.LocalizadorPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
+import buenetxea.gui.panelak.CrearPropietarioPanel;
 
 public class Nagusia extends JFrame {
 
@@ -115,6 +117,16 @@ public class Nagusia extends JFrame {
 										GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)));
+
+		CrearPropietarioPanel crearPropietarioPanel=null;
+		try {
+			crearPropietarioPanel = new CrearPropietarioPanel();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		crearPropietarioPanel.setName("crearPropietarioPanel");
+		panel.add(crearPropietarioPanel, crearPropietarioPanel.getName());
 
 		final VenderInmueblePanel venderInmueblePanel = new VenderInmueblePanel();
 		venderInmueblePanel.setName("venderInmueblePanel");
