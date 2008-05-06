@@ -16,6 +16,8 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import buenetxea.objektuak.Tasacion;
+
 /**
  *
  * @author  Torwidev
@@ -244,6 +246,20 @@ public class DatosTasacionPanel extends JPanel {
 	public boolean comprobarDatos(){
 		boolean correcto = false;
 		return correcto;
+	}
+	
+	public Tasacion generarTasacion(int peritajeId,int refInmueble){
+		return new Tasacion(
+				peritajeId,refInmueble,llavesSi.isSelected(),
+				Double.parseDouble(precioVentaTextfield.getText()),
+				Double.parseDouble(precioComisionTextfield.getText()),
+				Double.parseDouble(ivaTextfield.getText()),
+				Double.parseDouble(netoPropietarioTextfield.getText()),
+				Double.parseDouble(precioIdealVentaTextfield.getText()),
+				Double.parseDouble(precioIdealOpCompraTextfield.getText()),
+				Double.parseDouble(precioIdealCompraTextfield.getText()),
+				cartelSi.isSelected()
+						);
 	}
 	public static void main (String[] args){
 		DatosTasacionPanel x = new DatosTasacionPanel();
