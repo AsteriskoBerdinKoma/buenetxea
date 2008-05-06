@@ -70,9 +70,8 @@ public class PropietarioKud {
 			int cp, String ciudad, int tel_fijo, int tel_movil,String horario_fijo, String horario_movil,
 			String observaciones) throws SQLException
 	{	if (getPropietario(dni) == null )
-			{String query="INSERT INTO Propietario VALUES (" + dni +","+ nombre+","+apellido1+","+ apellido2+
-			","+ cp +","+ ciudad +","+ tel_fijo+","+tel_movil+","+horario_fijo+","+horario_movil+","+ observaciones+
-			")";
+			{
+			String query="INSERT INTO Propietario SET " ;
 			try {
 				int rs= this.statement.executeUpdate(query);
 				return true;
