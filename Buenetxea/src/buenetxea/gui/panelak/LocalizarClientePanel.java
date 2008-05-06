@@ -1,5 +1,7 @@
 package buenetxea.gui.panelak;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -67,6 +69,11 @@ public class LocalizarClientePanel extends JPanel {
 
 		JButton buscarButton;
 		buscarButton = new JButton();
+		buscarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				
+			}
+		});
 		buscarButton.setText("Buscar");
 
 		JPanel panel_1;
@@ -92,9 +99,11 @@ public class LocalizarClientePanel extends JPanel {
 				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
 		);
 		groupLayout_2.setVerticalGroup(
+
 			groupLayout_2.createParallelGroup(GroupLayout.Alignment.TRAILING)
 				.addGroup(groupLayout_2.createSequentialGroup()
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(imprimirButton))
 		);
