@@ -19,6 +19,7 @@ import javax.swing.border.MatteBorder;
 
 import buenetxea.gui.panelak.CrearClientePanel;
 import buenetxea.gui.panelak.LocalizadorPanel;
+import buenetxea.gui.panelak.VenderInmueblePanel;
 
 public class Nagusia extends JFrame {
 
@@ -114,6 +115,10 @@ public class Nagusia extends JFrame {
 										GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)));
+
+		final VenderInmueblePanel venderInmueblePanel = new VenderInmueblePanel();
+		venderInmueblePanel.setName("venderInmueblePanel");
+		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
 
 		final CrearClientePanel crearClientePanel = new CrearClientePanel();
 		crearClientePanel.setName("crearClientePanel");
