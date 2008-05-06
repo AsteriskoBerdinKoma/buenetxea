@@ -1,24 +1,24 @@
 package buenetxea.objektuak;
 
 public class Tasacion {
-	private String fk_peritaje_fecha;
+	private int fk_peritaje_id;
 	private int fk_inmueble_referencia;
 	private boolean llaves;
-	private float precio_venta;
-	private float precio_comision;
-	private float iva;
-	private float neto_propietario;
-	private float ideal_venta;
-	private float ideal_opcion_compra;
-	private float ideal_compra;
+	private double precio_venta;
+	private double precio_comision;
+	private double iva;
+	private double neto_propietario;
+	private double ideal_venta;
+	private double ideal_opcion_compra;
+	private double ideal_compra;
 	private boolean cartel;
 
-	public Tasacion(String fk_peritaje_fecha, int fk_inmueble_referencia,
-			boolean llaves, float precio_venta, float precio_comision,
-			float iva, float neto_propietario, float ideal_venta,
-			float ideal_opcion_compra, float ideal_compra, boolean cartel) {
+	public Tasacion(int fk_peritaje_id, int fk_inmueble_referencia,
+			boolean llaves, double precio_venta, double precio_comision,
+			double iva, double neto_propietario, double ideal_venta,
+			double ideal_opcion_compra, double ideal_compra, boolean cartel) {
 		super();
-		this.fk_peritaje_fecha = fk_peritaje_fecha;
+		this.fk_peritaje_id = fk_peritaje_id;
 		this.fk_inmueble_referencia = fk_inmueble_referencia;
 		this.llaves = llaves;
 		this.precio_venta = precio_venta;
@@ -31,12 +31,12 @@ public class Tasacion {
 		this.cartel = cartel;
 	}
 
-	public String getFk_peritaje_fecha() {
-		return fk_peritaje_fecha;
+	public int getFk_peritaje_id() {
+		return fk_peritaje_id;
 	}
 
-	public void setFk_peritaje_fecha(String fk_peritaje_fecha) {
-		this.fk_peritaje_fecha = fk_peritaje_fecha;
+	public void setFk_peritaje_fecha(int fk_peritaje_fecha) {
+		this.fk_peritaje_id = fk_peritaje_fecha;
 	}
 
 	public int getFk_inmueble_referencia() {
@@ -55,59 +55,59 @@ public class Tasacion {
 		this.llaves = llaves;
 	}
 
-	public float getPrecio_venta() {
+	public double getPrecio_venta() {
 		return precio_venta;
 	}
 
-	public void setPrecio_venta(float precio_venta) {
+	public void setPrecio_venta(double precio_venta) {
 		this.precio_venta = precio_venta;
 	}
 
-	public float getPrecio_comision() {
+	public double getPrecio_comision() {
 		return precio_comision;
 	}
 
-	public void setPrecio_comision(float precio_comision) {
+	public void setPrecio_comision(double precio_comision) {
 		this.precio_comision = precio_comision;
 	}
 
-	public float getIva() {
+	public double getIva() {
 		return iva;
 	}
 
-	public void setIva(float iva) {
+	public void setIva(double iva) {
 		this.iva = iva;
 	}
 
-	public float getNeto_propietario() {
+	public double getNeto_propietario() {
 		return neto_propietario;
 	}
 
-	public void setNeto_propietario(float neto_propietario) {
+	public void setNeto_propietario(double neto_propietario) {
 		this.neto_propietario = neto_propietario;
 	}
 
-	public float getIdeal_venta() {
+	public double getIdeal_venta() {
 		return ideal_venta;
 	}
 
-	public void setIdeal_venta(float ideal_venta) {
+	public void setIdeal_venta(double ideal_venta) {
 		this.ideal_venta = ideal_venta;
 	}
 
-	public float getIdeal_opcion_compra() {
+	public double getIdeal_opcion_compra() {
 		return ideal_opcion_compra;
 	}
 
-	public void setIdeal_opcion_compra(float ideal_opcion_compra) {
+	public void setIdeal_opcion_compra(double ideal_opcion_compra) {
 		this.ideal_opcion_compra = ideal_opcion_compra;
 	}
 
-	public float getIdeal_compra() {
+	public double getIdeal_compra() {
 		return ideal_compra;
 	}
 
-	public void setIdeal_compra(float ideal_compra) {
+	public void setIdeal_compra(double ideal_compra) {
 		this.ideal_compra = ideal_compra;
 	}
 
