@@ -14,11 +14,13 @@ public class Kudeatzailea {
 	private final InmuebleKud inmKud;
 	private final ClienteKud cliKud;
 	private final PropietarioKud propikud;
-	
+	private final VentasKud ventasKud;
+
 	private Kudeatzailea() throws SQLException, ClassNotFoundException {
 		this.inmKud = InmuebleKud.getInstance();
 		this.cliKud = ClienteKud.getInstance();
-		this.propikud =  PropietarioKud.getInstance();
+		this.propikud = PropietarioKud.getInstance();
+		this.ventasKud = VentasKud.getInstance();
 	}
 
 	public static Kudeatzailea getInstance() throws SQLException,
@@ -34,20 +36,24 @@ public class Kudeatzailea {
 
 	public boolean crearCliente(Cliente c) throws SQLException {
 		return this.cliKud.insertCliente(c.getDni(), c.getNombre(), c
-				.getApellido1(), c.getApellido2(), c.getDireccion(), c.getFecha(), c
-				.getNacionalidad(), c.getTelefono(), c.getMedio(), c
-				.getAsesor());
-	}
-	
-	public boolean crearPropietario (Propietario p) throws SQLException
-	{
-		return this.propikud.InsertPropietario(p.getDni(), p.getNombre(), 
-				p.getApellido1(), p.getApellido2(),p.getDomicilio_postal(), p.getCp(), p.getCiudad(), 
-				p.getTel_fijo(), p.getTel_movil(), p.getHorario_fijo(), p.getHorario_fijo());
-		
+				.getApellido1(), c.getApellido2(), c.getDireccion(), c
+				.getFecha(), c.getNacionalidad(), c.getTelefono(),
+				c.getMedio(), c.getAsesor());
 	}
 
-	public void venderInmueble(int referencia, String nan) {
+	public boolean crearPropietario(Propietario p) throws SQLException {
+		return this.propikud.InsertPropietario(p.getDni(), p.getNombre(), p
+				.getApellido1(), p.getApellido2(), p.getDomicilio_postal(), p
+				.getCp(), p.getCiudad(), p.getTel_fijo(), p.getTel_movil(), p
+				.getHorario_fijo(), p.getHorario_fijo());
+
+	}
+
+	public boolean venderInmueble(int referencia, String nan,
+			double precioVenta, double precioPropietario, float honorarios,
+			float iva) {
+		return ventasKud.insertVenta(referencia, nan, precioVenta,
+				precioPropietario, honorarios, iva);
 	}
 
 	public boolean existeCliente(String dni) throws IOException, SQLException {
