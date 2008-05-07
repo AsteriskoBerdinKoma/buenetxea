@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import buenetxea.objektuak.Cliente;
 import buenetxea.objektuak.Inmueble;
+import buenetxea.objektuak.Peritaje;
 import buenetxea.objektuak.Propietario;
 
 public class Kudeatzailea {
@@ -15,13 +16,16 @@ public class Kudeatzailea {
 	private final InmuebleKud inmKud;
 	private final ClienteKud cliKud;
 	private final PropietarioKud propikud;
+	private final PeritajeKud periKud;
 	private final VentasKud ventasKud;
+
 
 	private Kudeatzailea() throws SQLException, ClassNotFoundException {
 		this.inmKud = InmuebleKud.getInstance();
 		this.cliKud = ClienteKud.getInstance();
 		this.propikud = PropietarioKud.getInstance();
 		this.ventasKud = VentasKud.getInstance();
+		this.periKud = PeritajeKud.getInstance();
 	}
 
 	public static Kudeatzailea getInstance() throws SQLException,
@@ -59,5 +63,13 @@ public class Kudeatzailea {
 
 	public boolean existeCliente(String dni) throws IOException, SQLException {
 		return cliKud.getCliente(dni) != null;
+	}
+	
+	public boolean crearPeritaje(Peritaje p) throws SQLException{
+		return this.periKud.insertPeritaje(p);
+	}
+	
+	public int getLastPeritajeId() throws SQLException{
+		return this.periKud.getLastPeritajeId();
 	}
 }
