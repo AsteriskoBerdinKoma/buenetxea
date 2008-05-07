@@ -55,9 +55,7 @@ class VisitaKud {
 		boolean alquiladoenestavisita;
 		boolean gestiondeventa;
 		boolean peritarpiso;
-		int fk_inmueble_referencia;
-		String fk_cliente_dni;
-		
+				
 		
 
 		String query = " SELECT * FROM Visita WHERE  fk_inmueble_referencia = ?,fk_cliente_dni = ?";
@@ -91,8 +89,7 @@ class VisitaKud {
 			peritarpiso = rs.getBoolean("peritarpiso");
 			fk_inmueble_referencia = rs.getInt("fk_inmueble_referencia");
 			fk_cliente_dni = rs.getString("fk_cliente_dni");
-			
-	
+		
 			String[] s = fecha.substring(0, fecha.indexOf('.')).split(" ");
 			String[] data = s[0].split("-");
 			String[] ordua = s[1].split(":");
@@ -109,11 +106,17 @@ class VisitaKud {
 					vendidoenestavisita,planton,legusta,todoexterior,
 					quierenbalconterraza,nogustadistribucion,alquiladoenestavisita,
 					gestiondeventa,peritarpiso,fk_inmueble_referencia,fk_cliente_dni);
-		}else
-	
-		return null;
+		
+		}
+
+		else			
+			{return null;}
+		rs.close();
+		ps.close();
 	}
-	public boolean InsertarVisita(Calendar fecha,String representante,Boolean precio,Boolean nolegustalazona,Boolean loquierenmasalto,
+	
+	
+	public boolean InsertarVisita(String fecha,String representante,Boolean precio,Boolean nolegustalazona,Boolean loquierenmasalto,
 			Boolean muchasreformas,Boolean quierenmashabitaciones,Boolean visitaanuladacomprador,
 			Boolean visitaanuladapropietario,Boolean oscuro,Boolean loquierenmasgrande,
 			Boolean notieneascensor,Boolean quierenmasbaños,Boolean concertada2visita,
@@ -147,7 +150,7 @@ class VisitaKud {
 		ps.setBoolean(21, alquiladoenestavisita);
 		ps.setBoolean(22, gestiondeventa);
 		ps.setBoolean(23, peritarpiso);
-		ps.setint(24, fk_inmueble_referencia);
+		ps.setInt(24, fk_inmueble_referencia);
 		ps.setString(25, fk_cliente_dni);
 		
 		
