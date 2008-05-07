@@ -1,11 +1,16 @@
 package buenetxea.gui.panelak;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -14,6 +19,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
+
+import buenetxea.kudeatzaileak.Kudeatzailea;
+import buenetxea.objektuak.Inmueble;
 
 public class LocalizarInmueblePanel extends JPanel {
 
@@ -51,7 +59,6 @@ public class LocalizarInmueblePanel extends JPanel {
 
 		final JPanel panel = new JPanel();
 		tabbedPane.addTab("Referencia", null, panel, null);
-
 		JLabel referenciaLabel;
 		referenciaLabel = new JLabel();
 		referenciaLabel.setText("Referencia:");
@@ -60,6 +67,24 @@ public class LocalizarInmueblePanel extends JPanel {
 
 		JButton localizarButton;
 		localizarButton = new JButton();
+		localizarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				int referencia;
+				referencia=Integer.parseInt(textField.getText());
+				try {
+					Inmueble inmueble= Kudeatzailea.getInstance().getInmueble(referencia);
+					//inmueble.get
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane joptionpane = new JOptionPane("La referencia del inmueble introducida no se encuentra en la base de datos.", JOptionPane.ERROR_MESSAGE);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+		);
 		localizarButton.setText("Localizar");
 		final GroupLayout groupLayout_1 = new GroupLayout(panel);
 		groupLayout_1.setHorizontalGroup(
@@ -144,11 +169,19 @@ public class LocalizarInmueblePanel extends JPanel {
 		button_1 = new JButton();
 		button_1.setText("Añadir población");
 		button_2 = new JButton();
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+			}
+		});
 		button_2.setText("Añadir provincia");
 
 		comboBox_1 = new JComboBox();
 
 		comboBox_2 = new JComboBox();
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] { "Gipuzkoa", "Bizkaia",
+		"Araba"}));
+
+		
 
 		spinner = new JSpinner();
 		precioLabel = new JLabel();
@@ -334,7 +367,20 @@ public class LocalizarInmueblePanel extends JPanel {
 		JScrollPane scrollPane;
 		scrollPane = new JScrollPane();
 
-		table = new JTable();
+		String[] zutabeIzenak = { "Referencia" , "Zona" , "Direccion", "Estado", "kaka"};
+		Object[][] data = {
+			    {"Mary", "Campione",
+			     "Snowboarding", new Integer(5), new Boolean(false)},
+			    {"Alison", "Huml",
+			     "Rowing", new Integer(3), new Boolean(true)},
+			    {"Kathy", "Walrath",
+			     "Knitting", new Integer(2), new Boolean(false)},
+			    {"Sharon", "Zakhour",
+			     "Speed reading", new Integer(20), new Boolean(true)},
+			    {"Philip", "Milne",
+			     "Pool", new Integer(10), new Boolean(false)}
+			};
+		table = new JTable(data, zutabeIzenak);
 		scrollPane.setViewportView(table);
 		final GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
