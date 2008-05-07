@@ -148,9 +148,8 @@ public class CrearClientePanel extends JPanel {
 		nacionalidadLabel.setText("Nacionalidad:");
 
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Rumano",
-				"Rumano", "Rumano", "Rumano", "Rumano", "Rumano", "Rumano",
-				"Rumano", "Rumano" }));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Español", "Frances",
+				""}));
 
 		JLabel fechaLabel;
 		fechaLabel = new JLabel();
