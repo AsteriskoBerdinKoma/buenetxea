@@ -18,6 +18,9 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
 
+import buenetxea.gui.panelak.azpipanelak.DatosInmueblePanel;
+import buenetxea.gui.panelak.azpipanelak.DatosPropietario;
+import buenetxea.gui.panelak.azpipanelak.DatosTasacionPanel;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Descripcion;
 import buenetxea.objektuak.Inmueble;
