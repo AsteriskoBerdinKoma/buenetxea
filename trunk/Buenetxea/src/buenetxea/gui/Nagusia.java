@@ -120,6 +120,10 @@ public class Nagusia extends JFrame {
 
 		CrearPropietarioPanel crearPropietarioPanel=null;
 		try {
+
+		final LocalizarInmueblePanel localizarInmueblePanel = new LocalizarInmueblePanel();
+		localizarInmueblePanel.setName("localizarInmueblePanel");
+		panel.add(localizarInmueblePanel, localizarInmueblePanel.getName());
 			crearPropietarioPanel = new CrearPropietarioPanel();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
