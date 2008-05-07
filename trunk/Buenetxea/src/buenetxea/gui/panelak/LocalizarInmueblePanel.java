@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 
-public class LocalizadorPanel extends JPanel {
+public class LocalizarInmueblePanel extends JPanel {
 
 	/**
 	 * 
@@ -40,7 +40,7 @@ public class LocalizadorPanel extends JPanel {
 	/**
 	 * Create the panel
 	 */
-	public LocalizadorPanel() {
+	public LocalizarInmueblePanel() {
 		super();
 		setBorder(new TitledBorder(null, "Localizador",
 				TitledBorder.DEFAULT_JUSTIFICATION,
@@ -257,14 +257,14 @@ public class LocalizadorPanel extends JPanel {
 											.addComponent(button_2))
 										.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(groupLayout_2.createSequentialGroup()
-									.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+									.addGroup(groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
 										.addGroup(groupLayout_2.createSequentialGroup()
 											.addComponent(hastaLabel_1)
 											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 											.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-											.addComponent(label_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addGroup(GroupLayout.Alignment.LEADING, groupLayout_2.createSequentialGroup()
+											.addComponent(label_1, GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE))
+										.addGroup(groupLayout_2.createSequentialGroup()
 											.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 											.addComponent(asceensorLabel)))
