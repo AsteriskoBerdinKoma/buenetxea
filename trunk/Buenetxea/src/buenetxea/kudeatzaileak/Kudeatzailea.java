@@ -2,6 +2,7 @@ package buenetxea.kudeatzaileak;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import buenetxea.objektuak.Cliente;
 import buenetxea.objektuak.Inmueble;
@@ -51,9 +52,9 @@ public class Kudeatzailea {
 
 	public boolean venderInmueble(int referencia, String nan,
 			double precioVenta, double precioPropietario, float honorarios,
-			float iva) {
+			float iva, Calendar cal) throws SQLException {
 		return ventasKud.insertVenta(referencia, nan, precioVenta,
-				precioPropietario, honorarios, iva);
+				precioPropietario, honorarios, iva, cal);
 	}
 
 	public boolean existeCliente(String dni) throws IOException, SQLException {

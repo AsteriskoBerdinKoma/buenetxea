@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.GroupLayout;
 import javax.swing.InputVerifier;
@@ -24,6 +26,8 @@ import buenetxea.gui.dialogs.CrearClienteDialog;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
 
+import com.toedter.calendar.JDateChooser;
+
 public class VenderInmueblePanel extends JPanel {
 
 	private JTextField textField_3;
@@ -41,6 +45,7 @@ public class VenderInmueblePanel extends JPanel {
 	private JLabel label_3;
 	private JLabel errorLabel;
 	private JButton venderInmuebleButton;
+	private JDateChooser dateChooser;
 
 	private Inmueble inmueble;
 
@@ -124,17 +129,25 @@ public class VenderInmueblePanel extends JPanel {
 			venderInmuebleButton.setEnabled(false);
 			venderInmuebleButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					String dni = dniTextField.getText().trim();
-					double precioVenta = Double.parseDouble(textField.getText()
-							.trim());
-					double precioPropietario = Double.parseDouble(textField_2
-							.getText().trim());
-					float honorarios = Float.parseFloat(textField_1.getText()
-							.trim());
-					float iva = Float.parseFloat(textField_3.getText().trim());
+					try {
+						String dni = dniTextField.getText().trim();
+						double precioVenta = Double.parseDouble(textField
+								.getText().trim());
+						double precioPropietario = Double
+								.parseDouble(textField_2.getText().trim());
+						float honorarios = Float.parseFloat(textField_1
+								.getText().trim());
+						float iva = Float.parseFloat(textField_3.getText()
+								.trim());
+						Calendar cal = dateChooser.getCalendar();
 
-					kud.venderInmueble(inmueble.getReferencia(), dni,
-							precioVenta, precioPropietario, honorarios, iva);
+						kud.venderInmueble(inmueble.getReferencia(), dni,
+								precioVenta, precioPropietario, honorarios,
+								iva, cal);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			});
 			venderInmuebleButton.setText("Vender inmueble");
@@ -221,6 +234,14 @@ public class VenderInmueblePanel extends JPanel {
 			JLabel label_7;
 			label_7 = new JLabel();
 			label_7.setText("%");
+
+			JLabel fechaDeVentaLabel;
+			fechaDeVentaLabel = new JLabel();
+			fechaDeVentaLabel.setText("Fecha de venta:");
+
+			dateChooser = new JDateChooser();
+			dateChooser.setDate(new Date());
+			dateChooser.setDateFormatString("d/M/yyy");
 			final GroupLayout groupLayout_2 = new GroupLayout(panel_1);
 			groupLayout_2
 					.setHorizontalGroup(groupLayout_2
@@ -361,7 +382,7 @@ public class VenderInmueblePanel extends JPanel {
 			final GroupLayout groupLayout = new GroupLayout(panel);
 			groupLayout
 					.setHorizontalGroup(groupLayout
-							.createParallelGroup(GroupLayout.Alignment.TRAILING)
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
 							.addGroup(
 									groupLayout
 											.createSequentialGroup()
@@ -369,19 +390,17 @@ public class VenderInmueblePanel extends JPanel {
 											.addGroup(
 													groupLayout
 															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
-															.addComponent(
-																	ivaLabel,
 																	GroupLayout.Alignment.TRAILING)
 															.addComponent(
-																	honorariosLabel,
-																	GroupLayout.Alignment.TRAILING)
+																	ivaLabel)
 															.addComponent(
-																	precioDelPropietarioLabel,
-																	GroupLayout.Alignment.TRAILING)
+																	honorariosLabel)
 															.addComponent(
-																	precioDeVentaLabel,
-																	GroupLayout.Alignment.TRAILING))
+																	precioDelPropietarioLabel)
+															.addComponent(
+																	precioDeVentaLabel)
+															.addComponent(
+																	fechaDeVentaLabel))
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
 											.addGroup(
@@ -404,16 +423,14 @@ public class VenderInmueblePanel extends JPanel {
 																			.addGroup(
 																					groupLayout
 																							.createParallelGroup(
-																									GroupLayout.Alignment.TRAILING,
+																									GroupLayout.Alignment.LEADING,
 																									false)
 																							.addComponent(
-																									textField_1,
-																									GroupLayout.Alignment.LEADING)
+																									textField_1)
 																							.addComponent(
 																									textField_3,
-																									GroupLayout.Alignment.LEADING,
 																									GroupLayout.DEFAULT_SIZE,
-																									54,
+																									60,
 																									Short.MAX_VALUE))
 																			.addPreferredGap(
 																					LayoutStyle.ComponentPlacement.RELATED)
@@ -424,7 +441,12 @@ public class VenderInmueblePanel extends JPanel {
 																							.addComponent(
 																									label_7)
 																							.addComponent(
-																									label_6))))
+																									label_6)))
+															.addComponent(
+																	dateChooser,
+																	GroupLayout.DEFAULT_SIZE,
+																	118,
+																	Short.MAX_VALUE))
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
 											.addGroup(
@@ -473,8 +495,20 @@ public class VenderInmueblePanel extends JPanel {
 													GroupLayout.PREFERRED_SIZE,
 													GroupLayout.DEFAULT_SIZE,
 													GroupLayout.PREFERRED_SIZE)
-											.addComponent(label_7)).addGap(87,
-									87, 87)));
+											.addComponent(label_7))
+							.addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(
+									groupLayout.createParallelGroup(
+											GroupLayout.Alignment.LEADING)
+											.addComponent(dateChooser,
+													GroupLayout.DEFAULT_SIZE,
+													GroupLayout.DEFAULT_SIZE,
+													Short.MAX_VALUE)
+											.addComponent(fechaDeVentaLabel,
+													GroupLayout.DEFAULT_SIZE,
+													20, Short.MAX_VALUE))
+							.addGap(31, 31, 31)));
 			groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
 					new java.awt.Component[] { textField, textField_2 });
 			groupLayout.linkSize(javax.swing.SwingConstants.VERTICAL,
@@ -483,7 +517,7 @@ public class VenderInmueblePanel extends JPanel {
 			final GroupLayout groupLayout_1 = new GroupLayout(this);
 			groupLayout_1
 					.setHorizontalGroup(groupLayout_1
-							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.createParallelGroup(GroupLayout.Alignment.TRAILING)
 							.addGroup(
 									groupLayout_1
 											.createSequentialGroup()
@@ -491,37 +525,39 @@ public class VenderInmueblePanel extends JPanel {
 											.addGroup(
 													groupLayout_1
 															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	panel,
+																	GroupLayout.Alignment.LEADING,
+																	GroupLayout.PREFERRED_SIZE,
+																	434,
+																	Short.MAX_VALUE)
 															.addComponent(
 																	panel_2,
-																	GroupLayout.Alignment.TRAILING,
 																	0,
 																	0,
 																	Short.MAX_VALUE)
 															.addComponent(
 																	panel_1,
+																	GroupLayout.Alignment.LEADING,
 																	0,
 																	0,
 																	Short.MAX_VALUE)
 															.addComponent(
-																	panel,
-																	GroupLayout.PREFERRED_SIZE,
-																	434,
-																	Short.MAX_VALUE)
-															.addComponent(
-																	venderInmuebleButton,
-																	GroupLayout.Alignment.TRAILING))
+																	venderInmuebleButton))
 											.addContainerGap()));
 			groupLayout_1.setVerticalGroup(groupLayout_1.createParallelGroup(
 					GroupLayout.Alignment.LEADING).addGroup(
 					groupLayout_1.createSequentialGroup().addComponent(panel_1,
-							GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-							Short.MAX_VALUE).addGap(3, 3, 3).addComponent(
-							panel_2, GroupLayout.PREFERRED_SIZE, 84,
-							GroupLayout.PREFERRED_SIZE).addPreferredGap(
-							LayoutStyle.ComponentPlacement.RELATED)
+							GroupLayout.PREFERRED_SIZE,
+							GroupLayout.DEFAULT_SIZE,
+							GroupLayout.PREFERRED_SIZE).addGap(3, 3, 3)
+							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE,
+									84, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
 							.addComponent(panel, GroupLayout.PREFERRED_SIZE,
-									145, Short.MAX_VALUE).addPreferredGap(
+									169, Short.MAX_VALUE).addPreferredGap(
 									LayoutStyle.ComponentPlacement.RELATED)
 							.addComponent(venderInmuebleButton)
 							.addContainerGap()));

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Calendar;
 
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Visita;
@@ -17,20 +16,21 @@ class VisitaKud {
 	private static VisitaKud instance;
 	private final Connection connection;
 	private final Statement statement;
-	
+
 	private VisitaKud() throws SQLException, ClassNotFoundException {
 		this.connection = Connector.getConnection();
 		this.statement = Connector.getStatement();
 	}
-	
+
 	public static VisitaKud getInstance() throws SQLException,
-	ClassNotFoundException {
+			ClassNotFoundException {
 		if (null == instance)
 			instance = new VisitaKud();
 		return instance;
 	}
-	
-	public Visita getVisita(int fk_inmueble_referencia,String fk_cliente_dni) throws SQLException {
+
+	public Visita getVisita(int fk_inmueble_referencia, String fk_cliente_dni)
+			throws SQLException {
 
 		String fecha;
 		String representante;
@@ -55,8 +55,6 @@ class VisitaKud {
 		boolean alquiladoenestavisita;
 		boolean gestiondeventa;
 		boolean peritarpiso;
-				
-		
 
 		String query = " SELECT * FROM Visita WHERE  fk_inmueble_referencia = ?,fk_cliente_dni = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
@@ -72,7 +70,8 @@ class VisitaKud {
 			muchasreformas = rs.getBoolean("muchasreformas");
 			quierenmashabitaciones = rs.getBoolean("quierenmashabitaciones");
 			visitaanuladacomprador = rs.getBoolean("visitaanuladacomprador");
-			visitaanuladapropietario = rs.getBoolean("visitaanuladapropietario");
+			visitaanuladapropietario = rs
+					.getBoolean("visitaanuladapropietario");
 			oscuro = rs.getBoolean("oscuro");
 			loquierenmasgrande = rs.getBoolean("loquierenmasgrande");
 			notieneascensor = rs.getBoolean("notieneascensor");
@@ -89,7 +88,7 @@ class VisitaKud {
 			peritarpiso = rs.getBoolean("peritarpiso");
 			fk_inmueble_referencia = rs.getInt("fk_inmueble_referencia");
 			fk_cliente_dni = rs.getString("fk_cliente_dni");
-		
+
 			String[] s = fecha.substring(0, fecha.indexOf('.')).split(" ");
 			String[] data = s[0].split("-");
 			String[] ordua = s[1].split(":");
@@ -97,33 +96,40 @@ class VisitaKud {
 					Integer.parseInt(data[1]), Integer.parseInt(data[2]),
 					Integer.parseInt(ordua[0]), Integer.parseInt(ordua[1]),
 					Integer.parseInt(ordua[2]));
-			
 
-			return new Visita(cal,representante,precio,nolegustalazona,loquierenmasalto,
-					muchasreformas,quierenmashabitaciones,visitaanuladacomprador,
-					visitaanuladapropietario,oscuro,loquierenmasgrande,
-					notieneascensor,quierenmasbaños,concertada2visita,
-					vendidoenestavisita,planton,legusta,todoexterior,
-					quierenbalconterraza,nogustadistribucion,alquiladoenestavisita,
-					gestiondeventa,peritarpiso,fk_inmueble_referencia,fk_cliente_dni);
-		
+			rs.close();
+			ps.close();
+
+			return new Visita(cal, representante, precio, nolegustalazona,
+					loquierenmasalto, muchasreformas, quierenmashabitaciones,
+					visitaanuladacomprador, visitaanuladapropietario, oscuro,
+					loquierenmasgrande, notieneascensor, quierenmasbaños,
+					concertada2visita, vendidoenestavisita, planton, legusta,
+					todoexterior, quierenbalconterraza, nogustadistribucion,
+					alquiladoenestavisita, gestiondeventa, peritarpiso,
+					fk_inmueble_referencia, fk_cliente_dni);
+
 		}
 
-		else			
-			{return null;}
-		rs.close();
-		ps.close();
+		else {
+			rs.close();
+			ps.close();
+			return null;
+		}
 	}
-	
-	
-	public boolean InsertarVisita(String fecha,String representante,Boolean precio,Boolean nolegustalazona,Boolean loquierenmasalto,
-			Boolean muchasreformas,Boolean quierenmashabitaciones,Boolean visitaanuladacomprador,
-			Boolean visitaanuladapropietario,Boolean oscuro,Boolean loquierenmasgrande,
-			Boolean notieneascensor,Boolean quierenmasbaños,Boolean concertada2visita,
-			Boolean vendidoenestavisita,Boolean planton,Boolean legusta,Boolean todoexterior,
-			Boolean quierenbalconterraza,Boolean nogustadistribucion,Boolean alquiladoenestavisita,
-			Boolean gestiondeventa,Boolean peritarpiso,int fk_inmueble_referencia,String fk_cliente_dni) throws SQLException {
 
+	public boolean InsertarVisita(String fecha, String representante,
+			Boolean precio, Boolean nolegustalazona, Boolean loquierenmasalto,
+			Boolean muchasreformas, Boolean quierenmashabitaciones,
+			Boolean visitaanuladacomprador, Boolean visitaanuladapropietario,
+			Boolean oscuro, Boolean loquierenmasgrande,
+			Boolean notieneascensor, Boolean quierenmasbaños,
+			Boolean concertada2visita, Boolean vendidoenestavisita,
+			Boolean planton, Boolean legusta, Boolean todoexterior,
+			Boolean quierenbalconterraza, Boolean nogustadistribucion,
+			Boolean alquiladoenestavisita, Boolean gestiondeventa,
+			Boolean peritarpiso, int fk_inmueble_referencia,
+			String fk_cliente_dni) throws SQLException {
 
 		String query = "INSERT INTO Visita  SET fecha = ?,representante = ?,precio = ?, nolegustalazona = ?,loquierenmasalto =  ?,muchasreformas = ?, quierenmashabitaciones = ?, visitaanuladacomprador = ?, visitaanuladapropietario = ?,oscuro = ?,loquierenmasgrande = ?,notieneascensor = ?,quierenmasbaños = ?,concertada2visita = ?,vendidoenestavisita = ?,planton = ?,legusta = ?,todoexterior = ?,quierenbalconterraza = ?,nogustadistribucion = ?,alquiladoenestavisita = ?,gestiondeventa = ?,peritarpiso = ?,fk_inmueble_referencia = ?,fk_cliente_dni = ?,hora = ?,minutos = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
@@ -152,9 +158,6 @@ class VisitaKud {
 		ps.setBoolean(23, peritarpiso);
 		ps.setInt(24, fk_inmueble_referencia);
 		ps.setString(25, fk_cliente_dni);
-		
-		
-		
 
 		int rs = this.statement.executeUpdate(query);
 
@@ -162,23 +165,3 @@ class VisitaKud {
 	}
 
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
