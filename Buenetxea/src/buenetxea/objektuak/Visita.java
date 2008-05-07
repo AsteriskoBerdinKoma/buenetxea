@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class Visita {
 	
-	private String fecha;
+	private Calendar fecha;
 	private String representante;
 	private boolean precio;
 	private boolean nolegustalazona;
@@ -31,7 +31,7 @@ public class Visita {
 	private String fk_cliente_dni;
 	
 	
-	public Visita(String fecha,boolean precio,boolean nolegustalazona,boolean loquierenmasalto,
+	public Visita(Calendar fecha,String representante,boolean precio,boolean nolegustalazona,boolean loquierenmasalto,
 			boolean muchasreformas,boolean quierenmashabitaciones,boolean visitaanuladacomprador,
 			boolean visitaanuladapropietario,boolean oscuro,boolean loquierenmasgrande,
 			boolean notieneascensor,boolean quierenmasbaños,boolean concertada2visita,
@@ -40,6 +40,7 @@ public class Visita {
 			boolean gestiondeventa,boolean peritarpiso,int fk_inmueble_referencia,String fk_cliente_dni){
 		
 		this.fecha = fecha;
+		this.representante = representante;
 		this.precio = precio;
 		this.nolegustalazona = nolegustalazona;
 		this.loquierenmasalto = loquierenmasalto;
@@ -69,6 +70,12 @@ public class Visita {
 	
 	public int getfk_inmueble_referencia(){
 		return fk_inmueble_referencia;
+	}
+	public String getrepresentante(){
+		return representante;
+	}
+	public String isrepresentante() {
+		return representante;
 	}
 	
 	public String getfk_cliente_dni(){
