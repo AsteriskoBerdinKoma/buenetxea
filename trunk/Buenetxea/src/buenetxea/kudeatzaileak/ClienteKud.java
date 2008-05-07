@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.*;
 
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Cliente;
@@ -85,6 +86,58 @@ class ClienteKud {
 		} else
 			return null;
 	}
+	
+	/**getCliente2 funtzioak nazionalitatea,izena,abizena1 eta abizena2 aldagaiak emanda, cliente motako objektu bat itzuliko digu.
+	 * */
+	
+	public Vector getCliente2(String nan, String Nazionalitatea,String Izena,String Abizena1,String Abizena2) throws IOException, SQLException {
+		String dni;
+		String nombre;
+		String apellido1;
+		String apellido2;
+		String fecha;
+		String nacionalidad;
+		int telefono;
+		String medio;
+		String asesor;
+		String direccion;
+		String query = " SELECT * FROM Cliente WHERE dni =? and nacionalidad = ? and nombre = ? and apellido1 = ? and apellido2 = ?";
+		PreparedStatement ps = this.connection.prepareStatement(query);
+		ps.setString(1, nan);
+		ps.setString(2, Nazionalitatea);
+		ps.setString(3,Izena);
+		ps.setString(4,Abizena1);
+		ps.setString(5,Abizena2);
+		ResultSet rs = this.statement.executeQuery(query);
+		Vector v=new Vector();
+		
+		while (rs.next()) {
+			dni = rs.getString("dni");
+			nombre = rs.getString("nombre");
+			apellido1 = rs.getString("apellido1");
+			apellido2 = rs.getString("apellido2");
+			direccion=rs.getString("direccion");
+			nacionalidad = rs.getString("nacionalidad");
+			fecha = rs.getString("fecha");
+			telefono = rs.getInt("telefono");
+			medio = rs.getString("medio");
+			asesor = rs.getString("asesor");
+
+			Calendar cal = new GregorianCalendar();
+			String[] data = fecha.split("-");
+			cal.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]),
+					Integer.parseInt(data[2]));
+
+			
+			Cliente Clientea = new Cliente(dni, nombre, apellido1, apellido2, direccion,nacionalidad,
+					cal, telefono, medio, asesor);
+			v.addElement(Clientea);
+			
+		} 
+		return v;
+		
+	}
+	
 
 	/**
 	 * Bezero berri baten datuak datu basean sartzen ditu
