@@ -108,7 +108,7 @@ class VisitaKud {
 					notieneascensor,quierenmasbaños,concertada2visita,
 					vendidoenestavisita,planton,legusta,todoexterior,
 					quierenbalconterraza,nogustadistribucion,alquiladoenestavisita,
-					gestiondeventa,peritarpiso,fk_inmueble_referencia,fk_cliente_dni,hora,minutos);
+					gestiondeventa,peritarpiso,fk_inmueble_referencia,fk_cliente_dni);
 		}else
 	
 		return null;
@@ -119,7 +119,7 @@ class VisitaKud {
 			Boolean notieneascensor,Boolean quierenmasbaños,Boolean concertada2visita,
 			Boolean vendidoenestavisita,Boolean planton,Boolean legusta,Boolean todoexterior,
 			Boolean quierenbalconterraza,Boolean nogustadistribucion,Boolean alquiladoenestavisita,
-			Boolean gestiondeventa,Boolean peritarpiso,int fk_inmueble_referencia,String fk_cliente_dni,int hora,int minutos) throws SQLException {
+			Boolean gestiondeventa,Boolean peritarpiso,int fk_inmueble_referencia,String fk_cliente_dni) throws SQLException {
 
 
 		String query = "INSERT INTO Visita  SET fecha = ?,representante = ?,precio = ?, nolegustalazona = ?,loquierenmasalto =  ?,muchasreformas = ?, quierenmashabitaciones = ?, visitaanuladacomprador = ?, visitaanuladapropietario = ?,oscuro = ?,loquierenmasgrande = ?,notieneascensor = ?,quierenmasbaños = ?,concertada2visita = ?,vendidoenestavisita = ?,planton = ?,legusta = ?,todoexterior = ?,quierenbalconterraza = ?,nogustadistribucion = ?,alquiladoenestavisita = ?,gestiondeventa = ?,peritarpiso = ?,fk_inmueble_referencia = ?,fk_cliente_dni = ?,hora = ?,minutos = ?";
