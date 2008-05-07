@@ -4,7 +4,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
-import buenetxea.gui.panelak.BucarClientePanel;
+import buenetxea.gui.panelak.dialogPanels.BucarClientePanel;
 
 public class BuscarClienteDialog extends JDialog {
 
