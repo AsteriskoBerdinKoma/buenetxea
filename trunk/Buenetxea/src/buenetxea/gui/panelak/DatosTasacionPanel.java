@@ -5,16 +5,15 @@
  */
 
 package buenetxea.gui.panelak;
-import java.text.NumberFormat;
 import java.text.ParseException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
