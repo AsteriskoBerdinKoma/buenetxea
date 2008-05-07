@@ -1,8 +1,11 @@
 package buenetxea.objektuak;
 
+import java.util.Calendar;
+
 public class Visita {
 	
-	private int ref;
+	private String fecha;
+	private String representante;
 	private boolean precio;
 	private boolean nolegustalazona;
 	private boolean loquierenmasalto;
@@ -24,16 +27,19 @@ public class Visita {
 	private boolean alquiladoenestavisita;
 	private boolean gestiondeventa;
 	private boolean peritarpiso;
+	private int fk_inmueble_referencia;
+	private String fk_cliente_dni;
 	
-	public Visita(int referencia,boolean precio,boolean nolegustalazona,boolean loquierenmasalto,
+	
+	public Visita(String fecha,boolean precio,boolean nolegustalazona,boolean loquierenmasalto,
 			boolean muchasreformas,boolean quierenmashabitaciones,boolean visitaanuladacomprador,
 			boolean visitaanuladapropietario,boolean oscuro,boolean loquierenmasgrande,
 			boolean notieneascensor,boolean quierenmasbaños,boolean concertada2visita,
 			boolean vendidoenestavisita,boolean planton,boolean legusta,boolean todoexterior,
 			boolean quierenbalconterraza,boolean nogustadistribucion,boolean alquiladoenestavisita,
-			boolean gestiondeventa,boolean peritarpiso){
+			boolean gestiondeventa,boolean peritarpiso,int fk_inmueble_referencia,String fk_cliente_dni){
 		
-		this.ref = referencia;
+		this.fecha = fecha;
 		this.precio = precio;
 		this.nolegustalazona = nolegustalazona;
 		this.loquierenmasalto = loquierenmasalto;
@@ -55,13 +61,26 @@ public class Visita {
 		this.alquiladoenestavisita = alquiladoenestavisita;
 		this.gestiondeventa = gestiondeventa;
 		this.peritarpiso = peritarpiso;
+		this.fk_inmueble_referencia = fk_inmueble_referencia;
+		this.fk_cliente_dni = fk_cliente_dni;
+		}
 		
+
+	
+	public int getfk_inmueble_referencia(){
+		return fk_inmueble_referencia;
 	}
 	
-	public int getRef() {
-		return ref;
+	public String getfk_cliente_dni(){
+		return fk_cliente_dni;
 	}
-
+	public int isfk_inmueble_referencia() {
+		return fk_inmueble_referencia;
+	}
+	public String fk_cliente_dni() {
+		return fk_cliente_dni;
+	}
+	
 	public boolean getPrecio(){
 		return precio;
 	}
