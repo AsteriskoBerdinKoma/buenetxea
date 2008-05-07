@@ -2,10 +2,13 @@ package buenetxea.gui.panelak;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,6 +17,9 @@ import javax.swing.JToolBar;
 import javax.swing.LayoutStyle;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import buenetxea.kudeatzaileak.Kudeatzailea;
+import buenetxea.objektuak.Inmueble;
 
 public class SeguimientoPropietarioPanel extends JPanel {
 
@@ -59,6 +65,19 @@ public class SeguimientoPropietarioPanel extends JPanel {
 		button = new JButton();
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
+				int numReferencia;
+				numReferencia=Integer.parseInt(textField.getText());
+				try {
+					Inmueble inmueble= Kudeatzailea.getInstance().getInmueble(numReferencia);
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane joptionpane = new JOptionPane("La referencia del inmueble introducida no se encuentra en la base de datos.", JOptionPane.ERROR_MESSAGE);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		button.setText("Buscar");
@@ -69,7 +88,7 @@ public class SeguimientoPropietarioPanel extends JPanel {
 			groupLayout_1.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(groupLayout_1.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPane)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(17, 17, 17))
 		);
 		groupLayout_1.setVerticalGroup(
@@ -108,7 +127,7 @@ public class SeguimientoPropietarioPanel extends JPanel {
 			groupLayout_2.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(groupLayout_2.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPane_1)
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(17, 17, 17))
 		);
 		groupLayout_2.setVerticalGroup(

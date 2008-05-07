@@ -19,7 +19,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.MatteBorder;
 
 import buenetxea.gui.panelak.CrearClientePanel;
-import buenetxea.gui.panelak.LocalizadorPanel;
+import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
 import buenetxea.gui.panelak.CrearPropietarioPanel;
 
@@ -136,7 +136,7 @@ public class Nagusia extends JFrame {
 		crearClientePanel.setName("crearClientePanel");
 		panel.add(crearClientePanel, crearClientePanel.getName());
 
-		final LocalizadorPanel localizadorPanel = new LocalizadorPanel();
+		final LocalizarInmueblePanel localizadorPanel = new LocalizarInmueblePanel();
 		localizadorPanel.setName("localizadorPanel");
 		panel.add(localizadorPanel, localizadorPanel.getName());
 		final JButton peritajeButton = new JButton();
