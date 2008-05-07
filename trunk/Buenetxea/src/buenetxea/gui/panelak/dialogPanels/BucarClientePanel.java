@@ -1,4 +1,4 @@
-package buenetxea.gui.panelak;
+package buenetxea.gui.panelak.dialogPanels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
