@@ -5,16 +5,20 @@
  */
 
 package buenetxea.gui.panelak;
+import java.text.NumberFormat;
+import java.text.ParseException;
+
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 
 import buenetxea.objektuak.Tasacion;
 
@@ -24,9 +28,9 @@ import buenetxea.objektuak.Tasacion;
  */
 public class DatosTasacionPanel extends JPanel {
     
-    private JTextField precioIdealVentaTextfield;
-    private JTextField precioIdealOpCompraTextfield;
-    private JTextField precioVentaTextfield;
+    private JFormattedTextField precioIdealVentaTextfield;
+    private JFormattedTextField precioIdealOpCompraTextfield;
+    private JFormattedTextField precioVentaTextfield;
     private JPanel jPanel1;
     private JLabel llavesLabel;
     private JLabel cartelPublicidadLabel;
@@ -39,10 +43,10 @@ public class DatosTasacionPanel extends JPanel {
    
     private JPanel jPanel2;
     
-    private JTextField precioIdealCompraTextfield;
-    private JTextField netoPropietarioTextfield;
-    private JTextField ivaTextfield;
-    private JTextField precioComisionTextfield;
+    private JFormattedTextField precioIdealCompraTextfield;
+    private JFormattedTextField netoPropietarioTextfield;
+    private JFormattedTextField ivaTextfield;
+    private JFormattedTextField precioComisionTextfield;
     private JLabel ivaLabel;
     
    
@@ -59,12 +63,13 @@ public class DatosTasacionPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	/** Creates new form Form */
-    public DatosTasacionPanel() {
+	/** Creates new form Form 
+	 * @throws ParseException */
+    public DatosTasacionPanel() throws ParseException {
         initComponents();
     }
     
-    private void initComponents() {
+    private void initComponents() throws ParseException {
         
     	setBorder(new TitledBorder(new EmptyBorder(0, 0, 0, 0), "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
     	
@@ -104,11 +109,13 @@ public class DatosTasacionPanel extends JPanel {
         netoPropietarioLabel = new JLabel();
         precioIdealCompraLabel = new JLabel();
         ivaPorcentajeLabel = new JLabel();
-        precioComisionTextfield = new JTextField();
-        ivaTextfield = new JTextField();
-        netoPropietarioTextfield = new JTextField();
-        precioIdealCompraTextfield = new JTextField();
-        
+        precioComisionTextfield = new JFormattedTextField(new MaskFormatter("###############"));
+        ivaTextfield = new JFormattedTextField(new MaskFormatter("###############"));
+        netoPropietarioTextfield = new JFormattedTextField(new MaskFormatter("###############"));
+        precioIdealCompraTextfield = new JFormattedTextField(new MaskFormatter());
+       
+        //precioIdealCompraTextfield = new JFormattedTextField();
+    
         precioVentaLabel.setText("Precio venta");
         precioIdealVentaLabel.setText("Precio ideal venta");
         precioIdealOpcionCompraLabel.setText("Precio ideal opción de compra");
@@ -117,6 +124,36 @@ public class DatosTasacionPanel extends JPanel {
         ivaPorcentajeLabel.setText("%");
         netoPropietarioLabel.setText("Neto propietario");
         precioIdealCompraLabel.setText("Precio ideal compra");
+
+        precioVentaTextfield = new JFormattedTextField(new MaskFormatter("###############"));
+
+        precioIdealOpCompraTextfield = new JFormattedTextField(new MaskFormatter("###############"));
+
+        precioIdealVentaTextfield = new JFormattedTextField(new MaskFormatter("###############"));
+
+        JLabel label;
+        label = new JLabel();
+        label.setText("€");
+
+        JLabel label_1;
+        label_1 = new JLabel();
+        label_1.setText("€");
+
+        JLabel label_2;
+        label_2 = new JLabel();
+        label_2.setText("€");
+
+        JLabel label_3;
+        label_3 = new JLabel();
+        label_3.setText("€");
+
+        JLabel label_3_1;
+        label_3_1 = new JLabel();
+        label_3_1.setText("€");
+
+        JLabel label_3_2;
+        label_3_2 = new JLabel();
+        label_3_2.setText("€");
 
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -137,7 +174,7 @@ public class DatosTasacionPanel extends JPanel {
 				        	.addComponent(llavesSi)
 				        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 				        	.addComponent(llavesNo)))
-		        	.addContainerGap(340, Short.MAX_VALUE))
+		        	.addContainerGap(281, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
         	jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -155,12 +192,6 @@ public class DatosTasacionPanel extends JPanel {
         );
         jPanel1.setLayout(jPanel1Layout);
 
-        precioVentaTextfield = new JTextField();
-
-        precioIdealOpCompraTextfield = new JTextField();
-
-        precioIdealVentaTextfield = new JTextField();
-
         
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -174,25 +205,43 @@ public class DatosTasacionPanel extends JPanel {
 			        	.addComponent(precioComisionLabel)
 			        	.addComponent(ivaLabel))
 		        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-		        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+		        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 			        	.addGroup(jPanel2Layout.createSequentialGroup()
 				        	.addComponent(ivaTextfield, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
 				        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 				        	.addComponent(ivaPorcentajeLabel))
-			        	.addComponent(precioComisionTextfield)
-			        	.addComponent(precioVentaTextfield, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-			        	.addComponent(netoPropietarioTextfield))
+			        	.addComponent(precioVentaTextfield, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+			        	.addComponent(precioComisionTextfield, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+			        	.addComponent(netoPropietarioTextfield, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
 		        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 		        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-			        	.addComponent(precioIdealOpcionCompraLabel)
-			        	.addComponent(precioIdealVentaLabel)
-			        	.addComponent(precioIdealCompraLabel))
+			        	.addGroup(jPanel2Layout.createSequentialGroup()
+				        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+					        	.addGroup(jPanel2Layout.createSequentialGroup()
+						        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+							        	.addComponent(label_1, GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+							        	.addComponent(label, GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE))
+						        	.addGap(6, 6, 6)
+						        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+							        	.addComponent(precioIdealVentaLabel)
+							        	.addComponent(precioIdealOpcionCompraLabel)))
+					        	.addComponent(precioIdealCompraLabel))
+				        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+				        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+					        	.addComponent(precioIdealCompraTextfield, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+					        	.addComponent(precioIdealOpCompraTextfield, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+					        	.addGroup(jPanel2Layout.createSequentialGroup()
+						        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						        	.addComponent(precioIdealVentaTextfield, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)))
+				        	.addGap(10, 10, 10))
+			        	.addGroup(jPanel2Layout.createSequentialGroup()
+				        	.addComponent(label_2)
+				        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)))
 		        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-		        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-			        	.addComponent(precioIdealCompraTextfield, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-			        	.addComponent(precioIdealVentaTextfield, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-			        	.addComponent(precioIdealOpCompraTextfield, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-		        	.addContainerGap())
+		        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+			        	.addComponent(label_3)
+			        	.addComponent(label_3_1, GroupLayout.PREFERRED_SIZE, 6, GroupLayout.PREFERRED_SIZE)
+			        	.addComponent(label_3_2, GroupLayout.PREFERRED_SIZE, 6, GroupLayout.PREFERRED_SIZE)))
         );
         jPanel2Layout.setVerticalGroup(
         	jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -200,24 +249,30 @@ public class DatosTasacionPanel extends JPanel {
 		        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 			        	.addComponent(precioVentaLabel)
 			        	.addComponent(precioVentaTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+			        	.addComponent(label)
 			        	.addComponent(precioIdealVentaLabel)
+			        	.addComponent(label_3)
 			        	.addComponent(precioIdealVentaTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 		        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 			        	.addComponent(precioComisionLabel)
-			        	.addComponent(precioComisionTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+			        	.addComponent(label_1)
 			        	.addComponent(precioIdealOpcionCompraLabel)
-			        	.addComponent(precioIdealOpCompraTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+			        	.addComponent(precioIdealOpCompraTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+			        	.addComponent(label_3_1)
+			        	.addComponent(precioComisionTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 		        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 			        	.addComponent(ivaLabel)
 			        	.addComponent(ivaTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 			        	.addComponent(ivaPorcentajeLabel)
 			        	.addComponent(precioIdealCompraLabel)
-			        	.addComponent(precioIdealCompraTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+			        	.addComponent(precioIdealCompraTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+			        	.addComponent(label_3_2))
 		        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 		        	.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 			        	.addComponent(netoPropietarioLabel)
+			        	.addComponent(label_2)
 			        	.addComponent(netoPropietarioTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		        	.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -229,8 +284,8 @@ public class DatosTasacionPanel extends JPanel {
 	        	.addGroup(layout.createSequentialGroup()
 		        	.addContainerGap()
 		        	.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-			        	.addComponent(jPanel2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
-			        	.addComponent(jPanel1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE))
+			        	.addComponent(jPanel2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+			        	.addComponent(jPanel1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
 		        	.addContainerGap())
         );
         layout.setVerticalGroup(
@@ -239,7 +294,7 @@ public class DatosTasacionPanel extends JPanel {
 		        	.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		        	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 		        	.addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-		        	.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		        	.addContainerGap(144, Short.MAX_VALUE))
         );
         this.setLayout(layout);
     }	
@@ -262,7 +317,13 @@ public class DatosTasacionPanel extends JPanel {
 						);
 	}
 	public static void main (String[] args){
-		DatosTasacionPanel x = new DatosTasacionPanel();
+		DatosTasacionPanel x=null;
+		try {
+			x = new DatosTasacionPanel();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JFrame y = new JFrame();
 		y.add(x);
 		y.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
