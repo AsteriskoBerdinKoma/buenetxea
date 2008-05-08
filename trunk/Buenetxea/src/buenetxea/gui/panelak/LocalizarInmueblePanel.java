@@ -386,7 +386,7 @@ public class LocalizarInmueblePanel extends JPanel {
 		JScrollPane scrollPane;
 		scrollPane = new JScrollPane();
 
-		String[] zutabeIzenak = { "Referencia" , "Zona" , "Direccion", "Estado", "kaka"};
+		String[] zutabeIzenak = { "Referencia" , "Zona" , "Direccion", "Vendido", "kaka"};
 		Object[][] data = {
 			    {"Mary", "Campione",
 			     "Snowboarding", new Integer(5), new Boolean(false)},
