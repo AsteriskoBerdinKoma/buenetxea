@@ -156,7 +156,14 @@ public class LocalizarInmueblePanel extends JPanel {
 		textField_1 = new JTextField();
 
 		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Centro", "Parte vieja",
+		"A las afueras"}));
 		button = new JButton();
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				
+			}
+		});
 		button.setText("Añadir zona");
 		label = new JLabel();
 		label.setText("Población:");
@@ -167,16 +174,23 @@ public class LocalizarInmueblePanel extends JPanel {
 
 		textField_3 = new JTextField();
 		button_1 = new JButton();
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				
+			}
+		});
 		button_1.setText("Añadir población");
 		button_2 = new JButton();
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
+				
 			}
 		});
 		button_2.setText("Añadir provincia");
 
 		comboBox_1 = new JComboBox();
-
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "Donostia", "Irun",
+		"Bilbo", "Barakaldo", "Gasteiz"}));
 		comboBox_2 = new JComboBox();
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] { "Gipuzkoa", "Bizkaia",
 		"Araba"}));
@@ -228,6 +242,11 @@ public class LocalizarInmueblePanel extends JPanel {
 		estadoLabel = new JLabel();
 		estadoLabel.setText("Estados:");
 		localizarButton_1 = new JButton();
+		localizarButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				
+			}
+		});
 		localizarButton_1.setText("Localizar");
 
 		JLabel label_1;
