@@ -22,7 +22,10 @@ import javax.swing.border.MatteBorder;
 
 import buenetxea.gui.panelak.CrearClientePanel;
 import buenetxea.gui.panelak.CrearPropietarioPanel;
+import buenetxea.gui.panelak.IntroducirInmueblePanel;
+import buenetxea.gui.panelak.LocalizarClientePanel;
 import buenetxea.gui.panelak.LocalizarInmueblePanel;
+import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
 
 public class Nagusia extends JFrame {
@@ -124,6 +127,24 @@ public class Nagusia extends JFrame {
 		CrearPropietarioPanel crearPropietarioPanel = null;
 		try {
 
+			final LocalizarClientePanel localizarClientePanel = new LocalizarClientePanel();
+			localizarClientePanel.setName("localizarCliente");
+			panel.add(localizarClientePanel, localizarClientePanel.getName());
+
+			final SeguimientoPropietarioPanel seguimientoPropietarioPanel = new SeguimientoPropietarioPanel();
+			seguimientoPropietarioPanel.setName("seguimientoPropietario");
+			panel.add(seguimientoPropietarioPanel, seguimientoPropietarioPanel
+					.getName());
+
+			final IntroducirInmueblePanel introducirInmueblePanel = new IntroducirInmueblePanel();
+			introducirInmueblePanel.setName("peritaje");
+			panel.add(introducirInmueblePanel, introducirInmueblePanel
+					.getName());
+
+			final CrearClientePanel crearClientePanel = new CrearClientePanel();
+			crearClientePanel.setName("crearClientePanel");
+			panel.add(crearClientePanel, crearClientePanel.getName());
+
 			final LocalizarInmueblePanel localizarInmueblePanel = new LocalizarInmueblePanel();
 			localizarInmueblePanel.setName("localizarInmueble");
 			panel.add(localizarInmueblePanel, localizarInmueblePanel.getName());
@@ -139,14 +160,15 @@ public class Nagusia extends JFrame {
 		venderInmueblePanel.setName("venderInmueblePanel");
 		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
 
-		final CrearClientePanel crearClientePanel = new CrearClientePanel();
-		crearClientePanel.setName("crearClientePanel");
-		panel.add(crearClientePanel, crearClientePanel.getName());
-
 		final LocalizarInmueblePanel localizadorPanel = new LocalizarInmueblePanel();
 		localizadorPanel.setName("localizador");
 		panel.add(localizadorPanel, localizadorPanel.getName());
 		final JButton peritajeButton = new JButton();
+		peritajeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				((CardLayout) panel.getLayout()).show(panel, "peritaje");
+			}
+		});
 		peritajeButton.setText("Peritaje");
 		toolBar.add(peritajeButton);
 
@@ -164,14 +186,30 @@ public class Nagusia extends JFrame {
 		toolBar.add(buscasButton);
 
 		final JButton seguimientoPropietariosButton = new JButton();
+		seguimientoPropietariosButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel,
+						"seguimientoPropietario");
+			}
+		});
 		seguimientoPropietariosButton.setText("Seguimiento propietarios");
 		toolBar.add(seguimientoPropietariosButton);
 
 		final JButton visitasButton = new JButton();
+		visitasButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+			}
+		});
 		visitasButton.setText("Visitas");
 		toolBar.add(visitasButton);
 
 		final JButton localizarClienteButton = new JButton();
+		localizarClienteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout())
+						.show(panel, "localizarCliente");
+			}
+		});
 		localizarClienteButton.setText("Localizar cliente");
 		toolBar.add(localizarClienteButton);
 		this.getContentPane().setLayout(groupLayout);
