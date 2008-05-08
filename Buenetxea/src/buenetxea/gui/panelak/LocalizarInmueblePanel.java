@@ -18,6 +18,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
 import buenetxea.kudeatzaileak.Kudeatzailea;
@@ -202,11 +203,14 @@ public class LocalizarInmueblePanel extends JPanel {
 		precioLabel.setText("Precio:");
 		checkBox = new JCheckBox();
 		checkBox.setText("Nº Habitaciones:");
-		deLabel = new JLabel();
-		deLabel.setText("De");
-		hastaLabel = new JLabel();
-		hastaLabel.setText("hasta");
-
+		//if checkBox.isSelected(){
+			//selekzionau zenbat abitaziokin nahi dan
+			deLabel = new JLabel();
+			deLabel.setText("De");
+			//spinner_1 = new JSpinner();//
+			hastaLabel = new JLabel();
+			hastaLabel.setText("hasta");
+		//}
 		spinner_1 = new JSpinner();
 
 		textField_4 = new JTextField();
