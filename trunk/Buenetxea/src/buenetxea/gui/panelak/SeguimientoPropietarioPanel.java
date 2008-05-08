@@ -47,10 +47,27 @@ public class SeguimientoPropietarioPanel extends JPanel {
 		table_1 = new JTable();
 		scrollPane_1.setViewportView(table_1);
 
+		String[] zutabeIzenak = { "Fecha" , "Resultado de visitas"};
+		Object[][] data = {
+			    {new Integer(5), "Resultado bueno"},
+			    {new Integer(3), "Resultado fallido"},
+			};
+		table_1 = new JTable(data, zutabeIzenak);
+		//scrollPane.setViewportView(table_1);
+		
 		JScrollPane scrollPane;
 		scrollPane = new JScrollPane();
 
 		table = new JTable();
+		scrollPane_1.setViewportView(table);
+
+		String[] zutabeIzenak1 = { "Fecha" , "Observaciones", "Nuevo precio"};
+		Object[][] data1 = {
+			    {new Integer(5), "Resultado bueno", new Integer(10000)},
+			    {new Integer(3), "Resultado fallido", new Integer(20000)},
+			};
+		table_1 = new JTable(data1, zutabeIzenak1);
+		//scrollPane.setViewportView(table);
 		scrollPane.setCorner(JScrollPane.UPPER_LEFT_CORNER, table);
 
 		JPanel panel_2;
