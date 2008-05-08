@@ -45,9 +45,11 @@ public class InprimagailuKudeatzailea {
 		String observaciones;
 		boolean llaves;
 		int altura_real_piso,altura_edif;
-		String orientacion;
+		String orientacion,tipo_inmueble,tipo_venta;
 		double gastos_comun;
 		int anos_finca;
+		boolean vendido = false;
+		
 		HashMap parameters = new HashMap();
 		
 		
@@ -72,6 +74,11 @@ public class InprimagailuKudeatzailea {
 			orientacion = rs.getString("orientacion");
 			gastos_comun = rs.getDouble("gastos_comun");
 			anos_finca = rs.getInt("anos_finca");
+			vendido = rs.getBoolean("vendido");
+			tipo_inmueble = rs.getString("tipo_inmueble");
+			tipo_venta = rs.getString("tipo_Venta");
+			parameters.put("tipo_venta",tipo_venta);
+			parameters.put("tipo_inmueble",tipo_inmueble);
 			parameters.put("direccion",direccion);
 			parameters.put("zona",zona);
 			parameters.put("referencia",inmuebleref);
@@ -87,20 +94,42 @@ public class InprimagailuKudeatzailea {
 			parameters.put("gastos_comun",gastos_comun);
 			parameters.put("anos_finca",anos_finca);
 			parameters.put("representante",representante);
+			if(vendido){
+				parameters.put("vendido","vendido");
+			}
+			else{
+				parameters.put("vendido","en venta");
+			}
 			}
 		ps.close();
 		rs.close();
 		
+		if(vendido){
+			
+			String query3 = "SELECT precio_venta FROM rel_cliente_inmueble WHERE fk_inmueble_referencia = ? ORDER BY fk_inmueble_referencia DESC";
+			PreparedStatement ps3 = this.connection.prepareStatement(query3);
+			ps3.setInt(1, inmuebleref);
+			ResultSet rs3 = ps3.executeQuery();
+			if (rs3.next()) {
+				precio = rs3.getDouble("precio_venta");
+				parameters.put("nuevo_precio",precio);
+			}
+			ps3.close();
+			rs3.close();
+			
+		}
+		else{
 		String query2 = "SELECT nuevo_precio FROM rel_inmueble_propietario WHERE fk_inmueble_referencia = ? ORDER BY fk_inmueble_referencia DESC";
 		PreparedStatement ps2 = this.connection.prepareStatement(query2);
 		ps2.setInt(1, inmuebleref);
 		ResultSet rs2 = ps2.executeQuery();
 		if (rs2.next()) {
 			precio = rs2.getDouble("nuevo_precio");
-			parameters.put("precio",precio);
+			parameters.put("nuevo_precio",precio);
 		}
 		ps2.close();
 		rs2.close();
+		}
 		return parameters;
 	}
 	
@@ -109,21 +138,27 @@ public class InprimagailuKudeatzailea {
 		String zona;
 		String nombre;
 		String apellido1;
+		String representante;
 		int telefono;
 		double nuevo_precio;
 		double preciopesetas;
+		boolean llaves;
 		HashMap parameters = new HashMap();
-		String query = "SELECT * FROM inmueble,cliente WHERE referencia = ? AND dni = ?";
+		String query = "SELECT * FROM inmueble,cliente,rel_visita WHERE referencia = ? AND dni = ? AND fk_cliente_dni = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setInt(1, inmuebleref);
 		ps.setString(2, clientedni);
+		ps.setString(3, clientedni);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			zona = rs.getString("zona");
 			direccion = rs.getString("direccion");
+			representante = rs.getString("representante");
 			nombre = rs.getString("nombre");
 			apellido1 = rs.getString("apellido1");
 			telefono = rs.getInt("telefono");
+			llaves = rs.getBoolean("llaves");
+			parameters.put("dni", clientedni);
 			parameters.put("direccion",direccion);
 			parameters.put("zona",zona);
 			parameters.put("nombre",nombre);
@@ -132,6 +167,7 @@ public class InprimagailuKudeatzailea {
 			parameters.put("fecha",fecha);
 			parameters.put("hora",hora);
 			parameters.put("minuto",minuto);
+			parameters.put("representante",representante);
 			
 		}
 		ps.close();
@@ -149,6 +185,23 @@ public class InprimagailuKudeatzailea {
 		}
 		ps2.close();
 		rs2.close();
+		
+		String query3 = "SELECT llaves FROM rel_peritaje_inmueble WHERE fk_peritaje_referencia = ? ORDER BY fk_peritaje_fecha DESC";
+		PreparedStatement ps3 = this.connection.prepareStatement(query3);
+		ps3.setInt(1, inmuebleref);
+		ResultSet rs3 = ps3.executeQuery();
+		if (rs3.next()) {
+			llaves = rs3.getBoolean("llaves");
+		
+			if(llaves){
+				parameters.put("llaves","si");
+				}
+				else{
+				parameters.put("llaves","no");
+				}
+		}
+		ps3.close();
+		rs3.close();
 		return parameters;
 		
 	}
@@ -157,6 +210,7 @@ public class InprimagailuKudeatzailea {
 		
 		String nombre;
 		String apellido1;
+		String medio;
 		int telefono;
 		String asesor;
 		HashMap parameters = new HashMap();
@@ -169,11 +223,13 @@ public class InprimagailuKudeatzailea {
 			apellido1 = rs.getString("apellido1");
 			telefono = rs.getInt("telefono");
 			asesor = rs.getString("asesor");
+			medio = rs.getString("medio");
 			parameters.put("nombre",nombre);
 			parameters.put("apellido1",apellido1);
 			parameters.put("telefono",telefono);
 			parameters.put("dni",clientedni);
 			parameters.put("informadora",asesor);
+			parameters.put("medio",medio);
 		}
 		ps.close();
 		rs.close();
