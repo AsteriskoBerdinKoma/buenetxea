@@ -9,7 +9,7 @@ import java.text.ParseException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
-import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,9 +27,13 @@ import buenetxea.objektuak.Tasacion;
  */
 public class DatosTasacionPanel extends JPanel {
     
-    private JFormattedTextField precioIdealVentaTextfield;
-    private JFormattedTextField precioIdealOpCompraTextfield;
-    private JFormattedTextField precioVentaTextfield;
+    private JTextField precioIdealVentaTextfield;
+    private JTextField precioIdealOpCompraTextfield;
+    private JTextField precioVentaTextfield;
+    private JTextField precioIdealCompraTextfield;
+    private JTextField netoPropietarioTextfield;
+    private JTextField ivaTextfield;
+    private JTextField precioComisionTextfield;
     private JPanel jPanel1;
     private JLabel llavesLabel;
     private JLabel cartelPublicidadLabel;
@@ -42,10 +46,7 @@ public class DatosTasacionPanel extends JPanel {
    
     private JPanel jPanel2;
     
-    private JFormattedTextField precioIdealCompraTextfield;
-    private JFormattedTextField netoPropietarioTextfield;
-    private JFormattedTextField ivaTextfield;
-    private JFormattedTextField precioComisionTextfield;
+    
     private JLabel ivaLabel;
     
    
@@ -108,12 +109,6 @@ public class DatosTasacionPanel extends JPanel {
         netoPropietarioLabel = new JLabel();
         precioIdealCompraLabel = new JLabel();
         ivaPorcentajeLabel = new JLabel();
-        precioComisionTextfield = new JFormattedTextField(new MaskFormatter("###############"));
-        ivaTextfield = new JFormattedTextField(new MaskFormatter("###############"));
-        netoPropietarioTextfield = new JFormattedTextField(new MaskFormatter("###############"));
-        precioIdealCompraTextfield = new JFormattedTextField(new MaskFormatter());
-       
-        //precioIdealCompraTextfield = new JFormattedTextField();
     
         precioVentaLabel.setText("Precio venta");
         precioIdealVentaLabel.setText("Precio ideal venta");
@@ -124,11 +119,19 @@ public class DatosTasacionPanel extends JPanel {
         netoPropietarioLabel.setText("Neto propietario");
         precioIdealCompraLabel.setText("Precio ideal compra");
 
-        precioVentaTextfield = new JFormattedTextField(new MaskFormatter("###############"));
+        precioComisionTextfield = new JTextField("0.0");
 
-        precioIdealOpCompraTextfield = new JFormattedTextField(new MaskFormatter("###############"));
+        ivaTextfield = new JTextField("0.0");
 
-        precioIdealVentaTextfield = new JFormattedTextField(new MaskFormatter("###############"));
+        netoPropietarioTextfield = new JTextField("0.0");
+
+        precioIdealCompraTextfield = new JTextField("0.0");
+
+        precioVentaTextfield = new JTextField("0.0");
+
+        precioIdealOpCompraTextfield = new JTextField("0.0");
+
+        precioIdealVentaTextfield = new JTextField("0.0");
 
         JLabel label;
         label = new JLabel();
