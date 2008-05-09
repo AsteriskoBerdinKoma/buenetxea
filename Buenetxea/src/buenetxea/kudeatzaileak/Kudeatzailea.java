@@ -3,6 +3,7 @@ package buenetxea.kudeatzaileak;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Vector;
 
 import buenetxea.objektuak.Cliente;
 import buenetxea.objektuak.Inmueble;
@@ -74,6 +75,13 @@ public class Kudeatzailea {
 
 	public int getLastPeritajeId() throws SQLException {
 		return this.periKud.getLastPeritajeId();
+	}
+	
+	public Vector<Propietario> getPropietarios() throws SQLException{
+		return this.propikud.getPropietarios();
+	}
+	public boolean crearInmueble(Inmueble i) throws SQLException{
+		return this.inmKud.insertInmueble(i);
 	}
 	
 	public Peritaje getUltimoPeritaje(int refInmueble)throws SQLException{
