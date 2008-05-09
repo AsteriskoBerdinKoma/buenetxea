@@ -72,4 +72,8 @@ public class Kudeatzailea {
 	public int getLastPeritajeId() throws SQLException{
 		return this.periKud.getLastPeritajeId();
 	}
+	
+	public Peritaje getUltimoPeritaje(int refInmueble)throws SQLException{
+		return this.periKud.getUltimoPeritaje(refInmueble);
+	}
 }
