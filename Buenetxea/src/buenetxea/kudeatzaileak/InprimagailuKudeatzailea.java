@@ -235,5 +235,11 @@ public class InprimagailuKudeatzailea {
 		rs.close();
 		return parameters;
 	}
+	
+	public HashMap InprimatuPeritaje() throws SQLException{
+		HashMap parameters = new HashMap();
+		return parameters;
+	}
+		
 }
 	
