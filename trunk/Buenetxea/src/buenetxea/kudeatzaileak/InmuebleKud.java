@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Inmueble;
@@ -53,8 +54,19 @@ class InmuebleKud {
 		return inmueble;
 	}
 
-	public void insertInmueble(int refInmueble) {
-		// TODO
+	public boolean insertInmueble(Inmueble i) throws SQLException {
+		String query = "INSERT INTO inmueble SET referencia = ?, zona = ?, direccion = ?, vendido = ?";
+		PreparedStatement ps = this.connection.prepareStatement(query);
+
+		ps.setInt(1, i.getReferencia());
+		ps.setString(2, i.getZona());
+		ps.setString(3, i.getDireccion());
+		ps.setBoolean(4, i.isVendido());
+
+		int result = ps.executeUpdate();
+
+		ps.close();
+		return result > 0;
 	}
 
 	public boolean updateInmueble(int refInmueble, String zona,
