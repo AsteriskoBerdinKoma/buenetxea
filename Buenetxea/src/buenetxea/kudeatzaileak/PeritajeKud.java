@@ -273,7 +273,7 @@ public class PeritajeKud {
 	
 	public int getLastPeritajeId() throws SQLException{
 		int id = -1;
-		String query = "SELECT id FROM Peritaje ORDER BY id";
+		String query = "SELECT MAX(id) FROM peritaje";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
