@@ -390,18 +390,18 @@ public class LocalizarInmueblePanel extends JPanel {
 		JScrollPane scrollPane;
 		scrollPane = new JScrollPane();
 
-		String[] zutabeIzenak = { "Referencia" , "Zona" , "Direccion", "Vendido", "kaka"};
+		String[] zutabeIzenak = { "Referencia" , "Zona" , "Direccion", "Vendido"};
 		Object[][] data = {
 			    {"Mary", "Campione",
-			     "Snowboarding", new Integer(5), new Boolean(false)},
+			     "Snowboarding", new Integer(5)},
 			    {"Alison", "Huml",
-			     "Rowing", new Integer(3), new Boolean(true)},
+			     "Rowing", new Integer(3)},
 			    {"Kathy", "Walrath",
-			     "Knitting", new Integer(2), new Boolean(false)},
+			     "Knitting", new Integer(2)},
 			    {"Sharon", "Zakhour",
-			     "Speed reading", new Integer(20), new Boolean(true)},
+			     "Speed reading", new Integer(20)},
 			    {"Philip", "Milne",
-			     "Pool", new Integer(10), new Boolean(false)}
+			     "Pool", new Integer(10)}
 			};
 		table = new JTable(data, zutabeIzenak);
 		scrollPane.setViewportView(table);
