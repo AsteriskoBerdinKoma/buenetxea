@@ -181,4 +181,51 @@ class ClienteKud {
 
 		return result > 0;
 	}
+/*
+	public Vector BuscarClientePorPreferencias(String zona,int numerohab,Double precio)throws IOException, SQLException {
+		Vector ClienteVector = new Vector();
+		Cliente cliente;
+		String dni;
+		String nombre;
+		String apellido1;
+		String apellido2;
+		String fecha;
+		String nacionalidad;
+		int telefono;
+		String medio;
+		String asesor;
+		String direccion;
+		String query = "SELECT * FROM Cliente INNER JOIN preferencia ON fk_cliente_dni = dni WHERE zona = ? AND desde_habitacion < ? AND hasta_habitacion > ? AND presupuesto >= ?";
+		PreparedStatement ps = this.connection.prepareStatement(query);
+		ps.setString(1, zona);
+		ps.setInt(2,numerohab);
+		ps.setInt(3,numerohab);
+		ps.setDouble(4,precio);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			dni = rs.getString("dni");
+			nombre = rs.getString("nombre");
+			apellido1 = rs.getString("apellido1");
+			apellido2 = rs.getString("apellido2");
+			direccion=rs.getString("direccion");
+			nacionalidad = rs.getString("nacionalidad");
+			fecha = rs.getString("fecha");
+			telefono = rs.getInt("telefono");
+			medio = rs.getString("medio");
+			asesor = rs.getString("asesor");
+
+			Calendar cal = new GregorianCalendar();
+			String[] data = fecha.split("-");
+			cal.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]),
+					Integer.parseInt(data[2]));
+
+			
+			cliente = new Cliente(dni, nombre, apellido1, apellido2, direccion,nacionalidad,
+					cal, telefono, medio, asesor);
+			ClienteVector.addElement(cliente);
+			
+		} 
+		return ClienteVector;
+	}
+	*/
 }
