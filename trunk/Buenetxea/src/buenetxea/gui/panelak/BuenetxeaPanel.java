@@ -5,6 +5,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 
 import com.swtdesigner.SwingResourceManager;
 
@@ -20,6 +21,9 @@ public class BuenetxeaPanel extends JPanel {
 	 */
 	public BuenetxeaPanel() {
 		super();
+		setBorder(new TitledBorder(null, "Buenetxea Servicios Inmobiliarios",
+				TitledBorder.DEFAULT_JUSTIFICATION,
+				TitledBorder.DEFAULT_POSITION, null, null));
 
 		JLabel label;
 		label = new JLabel();
@@ -36,9 +40,10 @@ public class BuenetxeaPanel extends JPanel {
 								Short.MAX_VALUE).addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 353,
-								Short.MAX_VALUE).addContainerGap()));
+				GroupLayout.Alignment.TRAILING,
+				groupLayout.createSequentialGroup().addComponent(label,
+						GroupLayout.PREFERRED_SIZE, 364, Short.MAX_VALUE)
+						.addContainerGap()));
 		setLayout(groupLayout);
 		//
 	}
