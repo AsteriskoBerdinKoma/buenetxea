@@ -9,6 +9,7 @@ import java.text.ParseException;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -20,6 +21,7 @@ import javax.swing.JToolBar;
 import javax.swing.LayoutStyle;
 import javax.swing.border.MatteBorder;
 
+import buenetxea.gui.dialogs.SeleccionarInmuebleDialog;
 import buenetxea.gui.panelak.CrearClientePanel;
 import buenetxea.gui.panelak.CrearPropietarioPanel;
 import buenetxea.gui.panelak.IntroducirInmueblePanel;
@@ -49,33 +51,6 @@ public class Nagusia extends JFrame {
 
 		this.setJMenuBar(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		final JMenuBar menuBar = new JMenuBar();
-		this.setJMenuBar(menuBar);
-
-		final JMenu fichasMenu = new JMenu();
-		fichasMenu.setText("Fichas");
-		menuBar.add(fichasMenu);
-
-		final JMenu visitasMenu = new JMenu();
-		visitasMenu.setText("Visitas");
-		fichasMenu.add(visitasMenu);
-
-		final JMenuItem newItemMenuItem_2 = new JMenuItem();
-		newItemMenuItem_2.setText("Ver");
-		visitasMenu.add(newItemMenuItem_2);
-
-		final JMenuItem newItemMenuItem_3 = new JMenuItem();
-		newItemMenuItem_3.setText("Imprimir");
-		visitasMenu.add(newItemMenuItem_3);
-
-		final JMenuItem newItemMenuItem_1 = new JMenuItem();
-		newItemMenuItem_1.setText("Visitas");
-		fichasMenu.add(newItemMenuItem_1);
-
-		final JMenuItem newItemMenuItem = new JMenuItem();
-		newItemMenuItem.setText("New Item");
-		menuBar.add(newItemMenuItem);
 
 		JToolBar toolBar;
 		toolBar = new JToolBar();
@@ -157,7 +132,7 @@ public class Nagusia extends JFrame {
 		panel.add(crearPropietarioPanel, crearPropietarioPanel.getName());
 
 		final VenderInmueblePanel venderInmueblePanel = new VenderInmueblePanel();
-		venderInmueblePanel.setName("venderInmueblePanel");
+		venderInmueblePanel.setName("venderInmueble");
 		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
 
 		final LocalizarInmueblePanel localizadorPanel = new LocalizarInmueblePanel();
@@ -213,6 +188,27 @@ public class Nagusia extends JFrame {
 		localizarClienteButton.setText("Localizar cliente");
 		toolBar.add(localizarClienteButton);
 		this.getContentPane().setLayout(groupLayout);
+
+		final JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		final JMenu inmuebleMenu = new JMenu();
+		inmuebleMenu.setText("Inmueble");
+		menuBar.add(inmuebleMenu);
+
+		final JMenuItem newItemMenuItem_1 = new JMenuItem();
+		newItemMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				SeleccionarInmuebleDialog d = new SeleccionarInmuebleDialog();
+				d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				d.setLocationRelativeTo(null);
+				d.setJabea(venderInmueblePanel);
+				d.setVisible(true);
+				((CardLayout) panel.getLayout()).show(panel, "venderInmueble");
+			}
+		});
+		newItemMenuItem_1.setText("Vender Inmueble");
+		inmuebleMenu.add(newItemMenuItem_1);
 		this.pack();
 		//
 	}
