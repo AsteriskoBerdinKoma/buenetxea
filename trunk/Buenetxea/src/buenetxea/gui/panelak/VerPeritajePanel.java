@@ -8,8 +8,8 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -26,7 +26,7 @@ import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
 
-public class VerInmueblePanel extends JPanel {
+public class VerPeritajePanel extends JPanel {
 
 	/**
 	 * 
@@ -34,10 +34,6 @@ public class VerInmueblePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private final Nagusia jabea;
-
-	private int peritajeidazkena;
-	private int inmueblerefazkena;
-	private String representanteazkena;
 	
 	/**
 	 * Create the panel
@@ -45,16 +41,13 @@ public class VerInmueblePanel extends JPanel {
 	 * @throws JRException
 	 * @throws FileNotFoundException
 	 */
-	public VerInmueblePanel(Nagusia jabea, int peritajeid,int inmuebleref, String representante) {
+
+	public VerPeritajePanel(Nagusia jabea) {
 		super();
 
 		this.jabea = jabea;
-
-		this.peritajeidazkena = peritajeid;
-		this.inmueblerefazkena = inmuebleref;
-		this.representanteazkena = representante;
 		
-		this.setBorder(new TitledBorder(null, "Ver Inmueble",
+		this.setBorder(new TitledBorder(null, "Ver visita",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 
@@ -68,6 +61,7 @@ public class VerInmueblePanel extends JPanel {
 		final FlowLayout flowLayout = new FlowLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		this.add(panel_1, BorderLayout.SOUTH);
+		
 		try {
 			JasperReport jr;
 			JasperPrint jp;
@@ -82,12 +76,13 @@ public class VerInmueblePanel extends JPanel {
 				// behar lerro hau jartzea.
 				// jr =
 				// JasperCompileManager.compileReport("inmueble.jrxml");
-				jp = JasperFillManager.fillReport("inmueble.jasper",
-						inpr.InprimatuInmueble(inmueblerefazkena, peritajeidazkena,representanteazkena), datasource);
+				jp = JasperFillManager.fillReport("Peritaje.jasper",
+						inpr.InprimatuPeritaje(), datasource);
 				JRViewer jrv = new JRViewer(jp);
-				VerInmueblePanel.this.add(jrv, BorderLayout.CENTER);
-				VerInmueblePanel.this.validate();
-				VerInmueblePanel.this.repaint();
+				VerPeritajePanel.this.add(jrv, BorderLayout.CENTER);
+				VerPeritajePanel.this.validate();
+				VerPeritajePanel.this.repaint();
+				
 			} catch (JRException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -98,6 +93,7 @@ public class VerInmueblePanel extends JPanel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		
 		JButton button;
 		button = new JButton();
 		button.addActionListener(new ActionListener() {

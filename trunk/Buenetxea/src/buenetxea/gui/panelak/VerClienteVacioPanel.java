@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -26,7 +25,7 @@ import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
 
-public class VerInmueblePanel extends JPanel {
+public class VerClienteVacioPanel extends JPanel {
 
 	/**
 	 * 
@@ -34,10 +33,6 @@ public class VerInmueblePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private final Nagusia jabea;
-
-	private int peritajeidazkena;
-	private int inmueblerefazkena;
-	private String representanteazkena;
 	
 	/**
 	 * Create the panel
@@ -45,16 +40,13 @@ public class VerInmueblePanel extends JPanel {
 	 * @throws JRException
 	 * @throws FileNotFoundException
 	 */
-	public VerInmueblePanel(Nagusia jabea, int peritajeid,int inmuebleref, String representante) {
+
+	public VerClienteVacioPanel(Nagusia jabea) {
 		super();
 
 		this.jabea = jabea;
-
-		this.peritajeidazkena = peritajeid;
-		this.inmueblerefazkena = inmuebleref;
-		this.representanteazkena = representante;
 		
-		this.setBorder(new TitledBorder(null, "Ver Inmueble",
+		this.setBorder(new TitledBorder(null, "Ver cliente solicitado",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 
@@ -82,12 +74,12 @@ public class VerInmueblePanel extends JPanel {
 				// behar lerro hau jartzea.
 				// jr =
 				// JasperCompileManager.compileReport("inmueble.jrxml");
-				jp = JasperFillManager.fillReport("inmueble.jasper",
-						inpr.InprimatuInmueble(inmueblerefazkena, peritajeidazkena,representanteazkena), datasource);
+				jp = JasperFillManager.fillReport("ClienteVacio.jasper",
+						inpr.InprimatuPeritaje(), datasource);
 				JRViewer jrv = new JRViewer(jp);
-				VerInmueblePanel.this.add(jrv, BorderLayout.CENTER);
-				VerInmueblePanel.this.validate();
-				VerInmueblePanel.this.repaint();
+				VerClienteVacioPanel.this.add(jrv, BorderLayout.CENTER);
+				VerClienteVacioPanel.this.validate();
+				VerClienteVacioPanel.this.repaint();
 			} catch (JRException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
