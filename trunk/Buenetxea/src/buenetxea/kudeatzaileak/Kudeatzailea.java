@@ -19,7 +19,6 @@ public class Kudeatzailea {
 	private final PeritajeKud periKud;
 	private final VentasKud ventasKud;
 
-
 	private Kudeatzailea() throws SQLException, ClassNotFoundException {
 		this.inmKud = InmuebleKud.getInstance();
 		this.cliKud = ClienteKud.getInstance();
@@ -57,19 +56,23 @@ public class Kudeatzailea {
 	public boolean venderInmueble(int referencia, String nan,
 			double precioVenta, double precioPropietario, float honorarios,
 			float iva, Calendar cal) throws SQLException {
-		return ventasKud.insertVenta(referencia, nan, precioVenta,
+		boolean b = ventasKud.insertVenta(referencia, nan, precioVenta,
 				precioPropietario, honorarios, iva, cal);
+		if (b)
+			return inmKud.updateInmueble(referencia, true);
+		else
+			return false;
 	}
 
 	public boolean existeCliente(String dni) throws IOException, SQLException {
 		return cliKud.getCliente(dni) != null;
 	}
-	
-	public boolean crearPeritaje(Peritaje p) throws SQLException{
+
+	public boolean crearPeritaje(Peritaje p) throws SQLException {
 		return this.periKud.insertPeritaje(p);
 	}
-	
-	public int getLastPeritajeId() throws SQLException{
+
+	public int getLastPeritajeId() throws SQLException {
 		return this.periKud.getLastPeritajeId();
 	}
 	

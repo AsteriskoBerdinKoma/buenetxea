@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
@@ -86,10 +87,12 @@ public class VenderInmueblePanel extends JPanel {
 
 			JLabel dniLabel;
 			dniLabel = new JLabel();
+			dniLabel.setEnabled(false);
 			dniLabel.setText("DNI:");
 
 			JButton buscarClientesButton;
 			buscarClientesButton = new JButton();
+			buscarClientesButton.setEnabled(false);
 			buscarClientesButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent arg0) {
 					BuscarClienteDialog bcd = new BuscarClienteDialog();
@@ -103,6 +106,7 @@ public class VenderInmueblePanel extends JPanel {
 
 			dniTextField = new JFormattedTextField(new MaskFormatter(
 					"########U"));
+			dniTextField.setEnabled(false);
 			dniTextField.setInputVerifier(new InputVerifier() {
 
 				@Override
@@ -128,6 +132,7 @@ public class VenderInmueblePanel extends JPanel {
 			dniTextField.setColumns(9);
 
 			venderInmuebleButton = new JButton();
+			venderInmuebleButton.setEnabled(false);
 			venderInmuebleButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
 					try {
@@ -142,12 +147,49 @@ public class VenderInmueblePanel extends JPanel {
 								.trim());
 						Calendar cal = dateChooser.getCalendar();
 
-						kud.venderInmueble(inmueble.getReferencia(), dni,
-								precioVenta, precioPropietario, honorarios,
-								iva, cal);
+						if (!inmueble.isVendido())
+							if (!dni.equals("") && cal != null) {
+								if (kud.venderInmueble(
+										inmueble.getReferencia(), dni,
+										precioVenta, precioPropietario,
+										honorarios, iva, cal)) {
+									JOptionPane jop = new JOptionPane(
+											"El inmueble se ha vendido correctamente",
+											JOptionPane.INFORMATION_MESSAGE);
+									jop.createDialog("Inmueble vendido");
+									jop.setVisible(true);
+									setInmueble(kud.getInmueble(inmueble
+											.getReferencia()));
+								} else {
+									JOptionPane jop = new JOptionPane(
+											"Ha ocurrido un error al vender el inmueble seleccionado",
+											JOptionPane.ERROR_MESSAGE);
+									jop
+											.createDialog("No se ha podido vender el inmueble");
+									jop.setVisible(true);
+								}
+							} else {
+								JOptionPane jop = new JOptionPane(
+										"No es posible vender este inmueble al cliente seleccionado. Compruebe que el DNI del cliente y la fecha de venta son correctos.",
+										JOptionPane.ERROR_MESSAGE);
+								jop
+										.createDialog("No es posible realizar la venta");
+								jop.setVisible(true);
+							}
+						else {
+							JOptionPane jop = new JOptionPane(
+									"El inmueble seleccionado no está en venta",
+									JOptionPane.ERROR_MESSAGE);
+							jop.createDialog("El inmueble no está en venta");
+							jop.setVisible(true);
+						}
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
+						JOptionPane jop = new JOptionPane(
+								"Ha ocurrido un error al vender el inmueble seleccionado",
+								JOptionPane.ERROR_MESSAGE);
+						jop.createDialog("No se ha podido vender el inmueble");
+						jop.setVisible(true);
 					}
 				}
 			});
@@ -178,34 +220,44 @@ public class VenderInmueblePanel extends JPanel {
 
 			JLabel precioDeVentaLabel;
 			precioDeVentaLabel = new JLabel();
+			precioDeVentaLabel.setEnabled(false);
 			precioDeVentaLabel.setText("Precio de venta:");
 
 			JLabel honorariosLabel;
 			honorariosLabel = new JLabel();
+			honorariosLabel.setEnabled(false);
 			honorariosLabel.setText("Honorarios:");
 
 			JLabel precioDelPropietarioLabel;
 			precioDelPropietarioLabel = new JLabel();
+			precioDelPropietarioLabel.setEnabled(false);
 			precioDelPropietarioLabel.setText("Precio del propietario:");
 
 			JLabel ivaLabel;
 			ivaLabel = new JLabel();
+			ivaLabel.setEnabled(false);
 			ivaLabel.setText("IVA:");
 
 			textField = new JTextField();
+			textField.setEnabled(false);
 
 			textField_1 = new JTextField();
+			textField_1.setEnabled(false);
 
 			textField_2 = new JTextField();
+			textField_2.setEnabled(false);
 
 			textField_3 = new JTextField();
+			textField_3.setEnabled(false);
 
 			JLabel label_4;
 			label_4 = new JLabel();
+			label_4.setEnabled(false);
 			label_4.setText("€");
 
 			JLabel label_5;
 			label_5 = new JLabel();
+			label_5.setEnabled(false);
 			label_5.setText("€");
 
 			errorLabel = new JLabel();
@@ -213,6 +265,7 @@ public class VenderInmueblePanel extends JPanel {
 
 			JButton crearClienteNuevoButton;
 			crearClienteNuevoButton = new JButton();
+			crearClienteNuevoButton.setEnabled(false);
 			crearClienteNuevoButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent arg0) {
 					CrearClienteDialog ccd = new CrearClienteDialog();
@@ -226,17 +279,21 @@ public class VenderInmueblePanel extends JPanel {
 
 			JLabel label_6;
 			label_6 = new JLabel();
+			label_6.setEnabled(false);
 			label_6.setText("%");
 
 			JLabel label_7;
 			label_7 = new JLabel();
+			label_7.setEnabled(false);
 			label_7.setText("%");
 
 			JLabel fechaDeVentaLabel;
 			fechaDeVentaLabel = new JLabel();
+			fechaDeVentaLabel.setEnabled(false);
 			fechaDeVentaLabel.setText("Fecha de venta:");
 
 			dateChooser = new JDateChooser();
+			dateChooser.setEnabled(false);
 			dateChooser.setDate(new Date());
 			dateChooser.setDateFormatString("d/M/yyy");
 
@@ -382,9 +439,6 @@ public class VenderInmueblePanel extends JPanel {
 							.addGroup(
 									groupLayout
 											.createSequentialGroup()
-											.addContainerGap(
-													GroupLayout.DEFAULT_SIZE,
-													Short.MAX_VALUE)
 											.addGroup(
 													groupLayout
 															.createParallelGroup(
@@ -418,29 +472,31 @@ public class VenderInmueblePanel extends JPanel {
 											.addGroup(
 													groupLayout
 															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
+																	GroupLayout.Alignment.LEADING,
+																	false)
 															.addComponent(
 																	dateChooser,
-																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE,
 																	118,
-																	Short.MAX_VALUE)
+																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
 																	textField,
-																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE,
 																	118,
-																	Short.MAX_VALUE)
+																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
 																	textField_2,
-																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE,
 																	118,
-																	Short.MAX_VALUE)
+																	GroupLayout.PREFERRED_SIZE)
 															.addGroup(
 																	groupLayout
 																			.createSequentialGroup()
 																			.addGroup(
 																					groupLayout
 																							.createParallelGroup(
-																									GroupLayout.Alignment.LEADING)
+																									GroupLayout.Alignment.LEADING,
+																									false)
 																							.addComponent(
 																									textField_1,
 																									GroupLayout.PREFERRED_SIZE,
@@ -448,9 +504,9 @@ public class VenderInmueblePanel extends JPanel {
 																									GroupLayout.PREFERRED_SIZE)
 																							.addComponent(
 																									textField_3,
-																									GroupLayout.DEFAULT_SIZE,
+																									GroupLayout.PREFERRED_SIZE,
 																									58,
-																									Short.MAX_VALUE))
+																									GroupLayout.PREFERRED_SIZE))
 																			.addPreferredGap(
 																					LayoutStyle.ComponentPlacement.RELATED)
 																			.addGroup(
@@ -471,7 +527,7 @@ public class VenderInmueblePanel extends JPanel {
 																	label_4)
 															.addComponent(
 																	label_5))
-											.addGap(171, 171, 171)));
+											.addGap(181, 181, 181)));
 			groupLayout
 					.setVerticalGroup(groupLayout
 							.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -560,11 +616,12 @@ public class VenderInmueblePanel extends JPanel {
 																					GroupLayout.PREFERRED_SIZE,
 																					GroupLayout.DEFAULT_SIZE,
 																					GroupLayout.PREFERRED_SIZE)))
-											.addGap(55, 55, 55)));
+											.addContainerGap(43,
+													Short.MAX_VALUE)));
+			groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+					new java.awt.Component[] { textField, textField_2 });
 			groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
 					new java.awt.Component[] { textField_1, textField_3 });
-			groupLayout.linkSize(javax.swing.SwingConstants.VERTICAL,
-					new java.awt.Component[] { textField, textField_2 });
 			groupLayout.linkSize(javax.swing.SwingConstants.VERTICAL,
 					new java.awt.Component[] { textField_1, textField_3 });
 			panel.setLayout(groupLayout);
@@ -644,16 +701,21 @@ public class VenderInmueblePanel extends JPanel {
 			List<Component> l2 = Arrays.asList(panel.getComponents());
 			for (Component c : l2)
 				c.setEnabled(false);
-
+			venderInmuebleButton.setEnabled(false);
+			JOptionPane jop = new JOptionPane(
+					"El inmueble seleccionado no está en venta.",
+					JOptionPane.ERROR_MESSAGE);
+			jop.createDialog("El inmueble no está en venta");
+			jop.setVisible(true);
 		} else {
 			label_8.setText("En venta");
-
 			List<Component> l1 = Arrays.asList(panel_2.getComponents());
 			for (Component c : l1)
 				c.setEnabled(true);
 			List<Component> l2 = Arrays.asList(panel.getComponents());
 			for (Component c : l2)
 				c.setEnabled(true);
+			venderInmuebleButton.setEnabled(true);
 		}
 	}
 }
