@@ -101,7 +101,7 @@ public class Nagusia extends JFrame {
 
 		CrearPropietarioPanel crearPropietarioPanel = null;
 		try {
-
+			
 			final LocalizarClientePanel localizarClientePanel = new LocalizarClientePanel();
 			localizarClientePanel.setName("localizarCliente");
 			panel.add(localizarClientePanel, localizarClientePanel.getName());
