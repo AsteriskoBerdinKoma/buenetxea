@@ -22,6 +22,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.MatteBorder;
 
 import buenetxea.gui.dialogs.SeleccionarInmuebleDialog;
+import buenetxea.gui.panelak.BuenetxeaPanel;
 import buenetxea.gui.panelak.CrearClientePanel;
 import buenetxea.gui.panelak.CrearPropietarioPanel;
 import buenetxea.gui.panelak.IntroducirInmueblePanel;
@@ -40,6 +41,8 @@ public class Nagusia extends JFrame {
 	private JPanel panel;
 
 	private static Nagusia nagusia;
+
+	private VenderInmueblePanel venderInmueblePanel;
 
 	/**
 	 * Create the frame
@@ -101,7 +104,11 @@ public class Nagusia extends JFrame {
 
 		CrearPropietarioPanel crearPropietarioPanel = null;
 		try {
-			
+
+			final BuenetxeaPanel buenetxeaPanel = new BuenetxeaPanel();
+			buenetxeaPanel.setName("presentacion");
+			panel.add(buenetxeaPanel, buenetxeaPanel.getName());
+
 			final LocalizarClientePanel localizarClientePanel = new LocalizarClientePanel();
 			localizarClientePanel.setName("localizarCliente");
 			panel.add(localizarClientePanel, localizarClientePanel.getName());
@@ -131,13 +138,13 @@ public class Nagusia extends JFrame {
 		crearPropietarioPanel.setName("crearPropietario");
 		panel.add(crearPropietarioPanel, crearPropietarioPanel.getName());
 
-		final VenderInmueblePanel venderInmueblePanel = new VenderInmueblePanel();
-		venderInmueblePanel.setName("venderInmueble");
-		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
-
 		final LocalizarInmueblePanel localizadorPanel = new LocalizarInmueblePanel();
 		localizadorPanel.setName("localizador");
 		panel.add(localizadorPanel, localizadorPanel.getName());
+
+		venderInmueblePanel = new VenderInmueblePanel();
+		venderInmueblePanel.setName("venderInmueble");
+		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
 		final JButton peritajeButton = new JButton();
 		peritajeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
@@ -209,6 +216,19 @@ public class Nagusia extends JFrame {
 		});
 		newItemMenuItem_1.setText("Vender Inmueble");
 		inmuebleMenu.add(newItemMenuItem_1);
+
+		final JMenu verMenu = new JMenu();
+		verMenu.setText("Ver");
+		menuBar.add(verMenu);
+
+		final JMenuItem newItemMenuItem = new JMenuItem();
+		newItemMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel, "presentacion");
+			}
+		});
+		newItemMenuItem.setText("Presentación");
+		verMenu.add(newItemMenuItem);
 		this.pack();
 		//
 	}
