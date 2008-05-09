@@ -430,7 +430,7 @@ public class VenderInmueblePanel extends JPanel {
 																							.addComponent(
 																									textField_3,
 																									GroupLayout.DEFAULT_SIZE,
-																									60,
+																									58,
 																									Short.MAX_VALUE))
 																			.addPreferredGap(
 																					LayoutStyle.ComponentPlacement.RELATED)
@@ -502,15 +502,17 @@ public class VenderInmueblePanel extends JPanel {
 									groupLayout.createParallelGroup(
 											GroupLayout.Alignment.LEADING)
 											.addComponent(dateChooser,
+													GroupLayout.PREFERRED_SIZE,
 													GroupLayout.DEFAULT_SIZE,
-													GroupLayout.DEFAULT_SIZE,
-													Short.MAX_VALUE)
+													GroupLayout.PREFERRED_SIZE)
 											.addComponent(fechaDeVentaLabel,
 													GroupLayout.DEFAULT_SIZE,
 													20, Short.MAX_VALUE))
 							.addGap(31, 31, 31)));
 			groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
 					new java.awt.Component[] { textField, textField_2 });
+			groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+					new java.awt.Component[] { textField_1, textField_3 });
 			groupLayout.linkSize(javax.swing.SwingConstants.VERTICAL,
 					new java.awt.Component[] { textField_1, textField_3 });
 			panel.setLayout(groupLayout);
