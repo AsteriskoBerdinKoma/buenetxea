@@ -23,39 +23,30 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-	<parameter name="tipo_inmueble" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="direccion" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="zona" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="nuevo_precio" isForPrompting="false" class="java.lang.Long"/>
-	<parameter name="tipo_venta" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="tipo" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="m2" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="descripcion" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="observaciones" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="referencia" isForPrompting="false" class="java.lang.Integer"/>
-	<parameter name="llaves" isForPrompting="false" class="java.lang.Boolean"/>
-	<parameter name="anos_finca" isForPrompting="false" class="java.lang.Long"/>
-	<parameter name="orientacion" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="gastos_comun" isForPrompting="false" class="java.lang.Double"/>
-	<parameter name="m2_utiles" isForPrompting="false" class="java.lang.Long"/>
-	<parameter name="m2_constr" isForPrompting="false" class="java.lang.Long"/>
-	<parameter name="m2_parcela" isForPrompting="false" class="java.lang.Long"/>
-	<parameter name="altura_real_piso" isForPrompting="false" class="java.lang.Integer"/>
-	<parameter name="vendido" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="altura_edif" isForPrompting="false" class="java.lang.Integer"/>
 	<parameter name="m2estatikue" isForPrompting="false" class="java.lang.Object">
 		<parameterDescription><![CDATA[m²]]></parameterDescription>
 	</parameter>
-	<parameter name="fk_peritaje_id" isForPrompting="false" class="java.lang.Integer"/>
-	<queryString><![CDATA[SELECT
-     descripcion.`tipo` AS descripcion_tipo,
-     descripcion.`m2` AS descripcion_m2,
-     descripcion.`descripcion` AS descripcion_descripcion
-FROM
-     `descripcion` descripcion
-WHERE
-     descripcion.`fk_peritaje_id` = $P{fk_peritaje_id}]]></queryString>
+	<parameter name="SUBREPORT_DIR" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
 
+	<field name="tipo_inmueble" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="zona" class="java.lang.String"/>
+	<field name="nuevo_precio" class="java.lang.Long"/>
+	<field name="tipo_venta" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="referencia" class="java.lang.Integer"/>
+	<field name="llaves" class="java.lang.Boolean"/>
+	<field name="anos_finca" class="java.lang.Long"/>
+	<field name="orientacion" class="java.lang.String"/>
+	<field name="gastos_comun" class="java.lang.Double"/>
+	<field name="m2_utiles" class="java.lang.Long"/>
+	<field name="m2_constr" class="java.lang.Long"/>
+	<field name="m2_parcela" class="java.lang.Long"/>
+	<field name="altura_real_piso" class="java.lang.Integer"/>
+	<field name="vendido" class="java.lang.Boolean"/>
+	<field name="altura_edif" class="java.lang.Integer"/>
 	<field name="descripcion_tipo" class="java.lang.String"/>
 	<field name="descripcion_m2" class="java.lang.Integer"/>
 	<field name="descripcion_descripcion" class="java.lang.String"/>
@@ -194,7 +185,7 @@ WHERE
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{zona}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -207,7 +198,7 @@ WHERE
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Long"><![CDATA[$P{m2_utiles}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{m2_utiles}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -220,7 +211,7 @@ WHERE
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Long"><![CDATA[$P{m2_constr}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{m2_constr}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -233,7 +224,7 @@ WHERE
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Long"><![CDATA[$P{m2_parcela}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{m2_parcela}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -246,7 +237,7 @@ WHERE
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{tipo_inmueble}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{tipo_inmueble}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -259,7 +250,7 @@ WHERE
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{tipo_venta}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{tipo_venta}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -272,7 +263,7 @@ WHERE
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{vendido}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{vendido}.booleanValue() ? "Sí" : "No" )]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -285,7 +276,7 @@ WHERE
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{direccion}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -298,7 +289,7 @@ WHERE
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Long"><![CDATA[$P{nuevo_precio}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{nuevo_precio}]]></textFieldExpression>
 				</textField>
 			</band>
 		</pageHeader>
@@ -341,7 +332,7 @@ WHERE
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{observaciones}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{observaciones}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -458,7 +449,7 @@ WHERE
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Integer"><![CDATA[$P{referencia}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{referencia}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -471,7 +462,7 @@ WHERE
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Long"><![CDATA[$P{anos_finca}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{anos_finca}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -497,7 +488,7 @@ WHERE
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{orientacion}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{orientacion}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -510,7 +501,7 @@ WHERE
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Boolean"><![CDATA[$P{llaves}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{llaves}.booleanValue() ? "Sí" : "No" )]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -523,7 +514,7 @@ WHERE
 					<textElement textAlignment="Left">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Integer"><![CDATA[$P{altura_real_piso}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{altura_real_piso}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -536,7 +527,7 @@ WHERE
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Double"><![CDATA[$P{gastos_comun}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{gastos_comun}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -562,7 +553,7 @@ WHERE
 					<textElement textAlignment="Left">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Integer"><![CDATA[$P{altura_edif}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{altura_edif}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -603,6 +594,16 @@ WHERE
 					</textElement>
 				<text><![CDATA[DESCRIPCION]]></text>
 				</staticText>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="22"
+						y="63"
+						width="477"
+						height="95"
+						key="subreport-1"/>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "inmueble_subreport1.jasper"]]></subreportExpression>
+				</subreport>
 			</band>
 		</columnHeader>
 		<detail>
