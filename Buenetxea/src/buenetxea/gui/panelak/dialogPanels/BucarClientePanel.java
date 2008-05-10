@@ -284,7 +284,7 @@ public class BucarClientePanel extends JPanel {
 		String apellido1 = apellido1TextField.getText().trim();
 		String apellido2 = apellido2TextField.getText().trim();
 
-		String query = "SELECT * FROM cliente WHERE";
+		String query = "SELECT dni AS 'DNI', nombre AS 'Nombre', apellido1 AS 'Primer apellido', apellido2 AS 'Segundo apellido', nacionalidad AS 'Nacionalidad', telefono AS 'Teléfono', direccion AS 'Dirección', medio AS 'Medio', asesor AS 'Asesor', fecha AS 'Fecha' FROM cliente WHERE";
 		if (dni != "")
 			query += " dni LIKE '" + dni + "%' AND";
 		query += " nombre LIKE '" + nombre + "%' AND apellido1 LIKE '"
