@@ -1,19 +1,14 @@
 package buenetxea.gui.panelak.azpipanelak;
 
-import java.text.ParseException;
-
 import javax.swing.GroupLayout;
-import javax.swing.InputVerifier;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.Document;
-import javax.swing.text.MaskFormatter;
 
 /**
  * @author Mireia
@@ -47,7 +42,7 @@ public class AreaDatosPropietarioPanel extends JPanel {
 	 * @throws ParseException
 	 */
 
-	public AreaDatosPropietarioPanel() throws ParseException {
+	public AreaDatosPropietarioPanel() {
 		super();
 
 		setBorder(new TitledBorder(null, "Crear Propietario",
@@ -105,7 +100,7 @@ public class AreaDatosPropietarioPanel extends JPanel {
 		label.setText("a");
 
 		horaFijoFinCombobox = new JComboBox();
-		for (int i = 0; i <= 59; i++) {
+		for (int i = 0; i <= 23; i++) {
 			horaFijoFinCombobox.addItem(i);
 		}
 
@@ -120,7 +115,7 @@ public class AreaDatosPropietarioPanel extends JPanel {
 		label_1.setText("a");
 
 		horaMovilFinCombobox = new JComboBox();
-		for (int i = 0; i <= 59; i++) {
+		for (int i = 0; i <= 23; i++) {
 			horaMovilFinCombobox.addItem(i);
 		}
 
