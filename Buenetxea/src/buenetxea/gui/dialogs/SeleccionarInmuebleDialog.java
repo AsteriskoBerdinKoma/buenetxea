@@ -3,6 +3,7 @@ package buenetxea.gui.dialogs;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -70,6 +71,9 @@ public class SeleccionarInmuebleDialog extends JDialog {
 					// TODO Auto-generated catch block
 					ex.printStackTrace();
 				} catch (ClassNotFoundException ex) {
+					// TODO Auto-generated catch block
+					ex.printStackTrace();
+				} catch (IOException ex) {
 					// TODO Auto-generated catch block
 					ex.printStackTrace();
 				}
