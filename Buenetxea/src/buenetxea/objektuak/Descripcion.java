@@ -2,20 +2,30 @@ package buenetxea.objektuak;
 
 public class Descripcion {
 
+	private int id;
 	private int fk_peritaje_id;
 	private String tipo;
 	private double m2;
 	private String descripcion;
 
-	public Descripcion(int fk_peritaje_id, String tipo, double m2,
+	public Descripcion(int id, int fk_peritaje_id, String tipo, double m2,
 			String descripcion) {
 		super();
+		this.id = id;
 		this.fk_peritaje_id = fk_peritaje_id;
 		this.tipo = tipo;
 		this.m2 = m2;
 		this.descripcion = descripcion;
 	}
 
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
 	public int getFk_peritaje_id() {
 		return fk_peritaje_id;
 	}

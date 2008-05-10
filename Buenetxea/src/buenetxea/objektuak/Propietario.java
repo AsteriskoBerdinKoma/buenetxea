@@ -1,8 +1,9 @@
 package buenetxea.objektuak;
 
-public class Propietario {
-	
-	private String  dni;
+
+public class Propietario implements Comparable<Propietario> {
+
+	private String dni;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
@@ -13,7 +14,7 @@ public class Propietario {
 	private int tel_movil;
 	private String horario_fijo;
 	private String horario_movil;
-	
+
 	public Propietario(String dni, String nombre, String apellido1,
 			String apellido2, String domicilio_postal, int cp, String ciudad,
 			int tel_fijo, int tel_movil, String horario_fijo,
@@ -80,7 +81,6 @@ public class Propietario {
 		return horario_movil;
 	}
 
-
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
@@ -121,9 +121,27 @@ public class Propietario {
 		this.horario_movil = horario_movil;
 	}
 
-
-	
-	
-	
+//	@Override
+//	public int compareTo(Propietario o) {
+//		if (this.dni.equals(o.getDni()) && this.nombre.equals(o.getNombre())
+//				&& this.apellido1.equals(o.getApellido1())
+//				&& this.apellido2.equals(o.getApellido2())
+//				&& this.domicilio_postal.equals(o.getDomicilio_postal())
+//				&& this.cp == o.getCp() && this.ciudad.equals(o.getCiudad())
+//				&& this.tel_fijo == o.getTel_fijo()
+//				&& this.tel_movil == o.getTel_movil()
+//				&& this.horario_fijo.equals(o.getHorario_fijo())
+//				&& this.horario_movil.equals(o.getHorario_movil()))
+//			return 0;
+//		else
+//			return 1;
+//	}
+	@Override
+	public int compareTo(Propietario o) {
+		if (this.dni.equals(o.getDni()))
+			return 0;
+		else
+			return 1;
+	}
 
 }
