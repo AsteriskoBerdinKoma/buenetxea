@@ -212,7 +212,7 @@ DROP TABLE IF EXISTS `rel_inmueble_propietario`;
 CREATE TABLE IF NOT EXISTS `rel_inmueble_propietario` (
   `fk_inmueble_referencia` int(10) unsigned NOT NULL auto_increment,
   `fk_propietario_dni` varchar(9) NOT NULL,
-  `nuevo_precio` varchar(45) NOT NULL,
+  `nuevo_precio` double NOT NULL,
   `fecha` datetime NOT NULL,
   `observaciones` varchar(100) NOT NULL,
   PRIMARY KEY  (`fk_inmueble_referencia`,`fk_propietario_dni`),
