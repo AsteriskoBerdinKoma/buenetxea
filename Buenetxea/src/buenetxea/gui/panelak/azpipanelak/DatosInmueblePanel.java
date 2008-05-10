@@ -1399,31 +1399,31 @@ public class DatosInmueblePanel extends javax.swing.JPanel {
 	}
 
 	public Inmueble generarInmueble() {
-		return new Inmueble(Integer.parseInt(referencia.getText()), zona
+		return new Inmueble(Integer.parseInt(referencia.getText().trim()), zona
 				.getText(), direccion.getText(), false);
 	}
 
 	public Vector<Descripcion> generarDescripciones(int peritajeId) {
 		Vector<Descripcion> d = new Vector<Descripcion>();
 		for (int i = 0; i < jTable1.getRowCount(); i++) {
-//			if (!jTable1.getValueAt(i, 1).toString().isEmpty()
-//					&& !jTable1.getValueAt(i, 2).toString().isEmpty()
-//					&& !jTable1.getValueAt(i, 3).toString().isEmpty())
-			if (jTable1.getValueAt(i, 1)!=null
-					&& jTable1.getValueAt(i, 2)!=null
-					&& jTable1.getValueAt(i, 3)!=null)
-				d.add(new Descripcion(peritajeId, jTable1.getValueAt(i, 1)
-						.toString(), Integer.parseInt(jTable1.getValueAt(i, 2)
-						.toString()), jTable1.getValueAt(i, 3).toString()));
-//			if (!jTable2.getValueAt(i, 1).toString().isEmpty()
-//					&& !jTable2.getValueAt(i, 2).toString().isEmpty()
-//					&& !jTable2.getValueAt(i, 3).toString().isEmpty())
-			if (jTable2.getValueAt(i, 1)!=null
+			if (jTable1.getValueAt(i, 0)!=null
+					&& jTable1.getValueAt(i, 1)!=null
+					&& jTable1.getValueAt(i, 2)!=null 
+					&& !jTable1.getValueAt(i, 0).toString().isEmpty()
+					&& !jTable1.getValueAt(i, 1).toString().isEmpty()
+					&& !jTable1.getValueAt(i, 2).toString().isEmpty())
+				d.add(new Descripcion(-1,peritajeId, jTable1.getValueAt(i, 0)
+						.toString(), Integer.parseInt(jTable1.getValueAt(i, 1)
+						.toString()), jTable1.getValueAt(i, 2).toString()));
+			if (jTable2.getValueAt(i, 0)!=null
+					&& jTable2.getValueAt(i, 1)!=null
 					&& jTable2.getValueAt(i, 2)!=null
-					&& jTable2.getValueAt(i, 3)!=null)
-				d.add(new Descripcion(peritajeId, jTable2.getValueAt(i, 1)
-						.toString(), Integer.parseInt(jTable2.getValueAt(i, 2)
-						.toString()), jTable2.getValueAt(i, 3).toString()));
+					&& !jTable2.getValueAt(i, 0).toString().isEmpty()
+					&& !jTable2.getValueAt(i, 1).toString().isEmpty()
+					&& !jTable2.getValueAt(i, 2).toString().isEmpty())
+				d.add(new Descripcion(-1,peritajeId, jTable2.getValueAt(i, 0)
+						.toString(), Integer.parseInt(jTable2.getValueAt(i, 1)
+						.toString()), jTable2.getValueAt(i, 2).toString()));
 		}
 		return d;
 	}
