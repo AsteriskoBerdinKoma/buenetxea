@@ -2,6 +2,7 @@ package buenetxea.gui.panelak;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -18,7 +19,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
 import buenetxea.kudeatzaileak.Kudeatzailea;
@@ -82,6 +82,9 @@ public class LocalizarInmueblePanel extends JPanel {
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}

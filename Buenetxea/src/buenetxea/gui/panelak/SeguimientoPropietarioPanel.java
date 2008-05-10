@@ -2,6 +2,7 @@ package buenetxea.gui.panelak;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -92,6 +93,9 @@ public class SeguimientoPropietarioPanel extends JPanel {
 					e1.printStackTrace();
 					JOptionPane joptionpane = new JOptionPane("La referencia del inmueble introducida no se encuentra en la base de datos.", JOptionPane.ERROR_MESSAGE);
 				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
