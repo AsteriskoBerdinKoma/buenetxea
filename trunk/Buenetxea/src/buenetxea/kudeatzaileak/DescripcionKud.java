@@ -32,6 +32,7 @@ public class DescripcionKud {
 	public Vector<Descripcion> getDescripciones(int peritajeId) throws SQLException {
 
 		Vector<Descripcion> vd = new Vector<Descripcion>();
+		int id;
 		int fk_peritaje_id = peritajeId;
 		String tipo;
 		double m2;
@@ -42,10 +43,11 @@ public class DescripcionKud {
 		ps.setInt(1, peritajeId);
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
+			id = rs.getInt("id");
 			tipo = rs.getString("tipo");
 			m2 = rs.getDouble("m2");
 			descripcion = rs.getString("descripcion");
-			vd.add(new Descripcion(fk_peritaje_id,tipo,m2,descripcion));
+			vd.add(new Descripcion(id,fk_peritaje_id,tipo,m2,descripcion));
 		}
 		ps.close();
 		rs.close();
@@ -57,8 +59,9 @@ public class DescripcionKud {
 		PreparedStatement ps = connection.prepareStatement(query);
 		
 		ps.setInt(1, d.getFk_peritaje_id());
-		ps.setDouble(2, d.getM2());
-		ps.setString(3, d.getDescripcion());
+		ps.setString(2, d.getTipo());
+		ps.setDouble(3, d.getM2());
+		ps.setString(4, d.getDescripcion());
 		
 		
 		int result = ps.executeUpdate();
