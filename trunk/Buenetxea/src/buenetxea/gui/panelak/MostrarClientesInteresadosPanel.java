@@ -2,6 +2,8 @@ package buenetxea.gui.panelak;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -15,18 +17,18 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import buenetxea.db.ResultSetTableModel;
+import buenetxea.gui.Nagusia;
 import buenetxea.gui.dialogs.BuscarClienteDialog;
+import buenetxea.gui.dialogs.MostrarClienteSeleccionadoDialog;
+import buenetxea.objektuak.Cliente;
 
-public class MostrarClientesInteresadosPanel<ClienteKud> extends JPanel {
+public class MostrarClientesInteresadosPanel extends JPanel {
 
 	private JTable table_1;
 	private String zonaazkena;
 	private int num_habazkena;
 	private Double precioazkena;
-	private ResultSetTableModel tableModel;
-	//private BuscarClienteDialog jabea;
-	//private boolean closeAfterSave;
-	
+	private ResultSetTableModel tableModel;	
 	/**
 	 * Create the panel
 	 */
@@ -44,8 +46,18 @@ public class MostrarClientesInteresadosPanel<ClienteKud> extends JPanel {
 		
 		
 		table_1 = new JTable();
+		table_1.setSelectionModel(null);
 		table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table_1);
+		table_1.addMouseListener(new MouseAdapter(){
+		     public void mouseClicked(MouseEvent e){
+		    	 String clienteref;
+		      if (e.getClickCount() == 2){
+		           clienteref = (String) table_1.getValueAt(table_1.getSelectedRow(),1);
+		           MostrarClienteSeleccionadoDialog klientea = new MostrarClienteSeleccionadoDialog(clienteref);
+		       }
+		      }
+		     } );
 		final GroupLayout groupLayout = new GroupLayout((JComponent) this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)

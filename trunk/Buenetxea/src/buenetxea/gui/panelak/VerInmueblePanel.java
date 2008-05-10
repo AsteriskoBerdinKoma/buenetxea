@@ -5,7 +5,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -21,6 +23,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JRViewer;
+import buenetxea.db.Connector;
 import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
 import buenetxea.kudeatzaileak.Kudeatzailea;
@@ -38,18 +41,20 @@ public class VerInmueblePanel extends JPanel {
 	private int peritajeidazkena;
 	private int inmueblerefazkena;
 	private String representanteazkena;
-	
+		
 	/**
 	 * Create the panel
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
 	 * 
 	 * @throws JRException
 	 * @throws FileNotFoundException
 	 */
-	public VerInmueblePanel(Nagusia jabea, int peritajeid,int inmuebleref, String representante) {
+	public VerInmueblePanel(Nagusia jabea, int peritajeid,int inmuebleref, String representante) throws SQLException, ClassNotFoundException {
 		super();
 
 		this.jabea = jabea;
-
+		
 		this.peritajeidazkena = peritajeid;
 		this.inmueblerefazkena = inmuebleref;
 		this.representanteazkena = representante;
@@ -83,7 +88,7 @@ public class VerInmueblePanel extends JPanel {
 				// jr =
 				// JasperCompileManager.compileReport("inmueble.jrxml");
 				jp = JasperFillManager.fillReport("inmueble.jasper",
-						inpr.InprimatuInmueble(inmueblerefazkena, peritajeidazkena,representanteazkena), datasource);
+						inpr.InprimatuInmueble(inmueblerefazkena, peritajeidazkena,representanteazkena), Connector.getConnection());
 				JRViewer jrv = new JRViewer(jp);
 				VerInmueblePanel.this.add(jrv, BorderLayout.CENTER);
 				VerInmueblePanel.this.validate();
