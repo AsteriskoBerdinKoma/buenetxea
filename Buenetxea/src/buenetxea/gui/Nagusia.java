@@ -102,10 +102,6 @@ public class Nagusia extends JFrame {
 			final CrearClientePanel crearClientePanel = new CrearClientePanel();
 			crearClientePanel.setName("crearClientePanel");
 			panel.add(crearClientePanel, crearClientePanel.getName());
-
-			final LocalizarInmueblePanel localizarInmueblePanel = new LocalizarInmueblePanel();
-			localizarInmueblePanel.setName("localizarInmueble");
-			panel.add(localizarInmueblePanel, localizarInmueblePanel.getName());
 			crearPropietarioPanel = new CrearPropietarioPanel();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -132,17 +128,21 @@ public class Nagusia extends JFrame {
 		});
 		toolBar.add(peritajeButton);
 
-		final JButton localizarButton = new JButton();
-		localizarButton.addActionListener(new ActionListener() {
+		final JButton localizadorButton = new JButton();
+		localizadorButton.setIcon(SwingResourceManager.getIcon(Nagusia.class,
+				"/buenetxea/resources/localizador 48x48.png"));
+		localizadorButton.setToolTipText("Localizador");
+		localizadorButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
 				((CardLayout) panel.getLayout()).show(panel, "localizador");
 			}
 		});
-		localizarButton.setText("Localizador");
-		toolBar.add(localizarButton);
+		toolBar.add(localizadorButton);
 
 		final JButton buscasButton = new JButton();
-		buscasButton.setText("Buscas");
+		buscasButton.setIcon(SwingResourceManager.getIcon(Nagusia.class,
+				"/buenetxea/resources/buscas 48x48.png"));
+		buscasButton.setToolTipText("Buscas");
 		toolBar.add(buscasButton);
 
 		final JButton seguimientoPropietariosButton = new JButton();
