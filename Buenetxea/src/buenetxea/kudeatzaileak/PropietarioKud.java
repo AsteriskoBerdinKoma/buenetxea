@@ -109,7 +109,7 @@ public class PropietarioKud {
 			apellido1 = rs.getString("apellido1");
 			apellido2 = rs.getString("apellido2");
 			domicilio_postal = rs.getString("domicilio_postal");
-			cp = rs.getInt("cp");
+			cp = rs.getInt("codigo_postal");
 			ciudad = rs.getString("ciudad");
 			tel_fijo = rs.getInt("tel_fijo");
 			tel_movil = rs.getInt("tel_movil");
@@ -120,5 +120,31 @@ public class PropietarioKud {
 					horario_fijo, horario_movil));
 		}
 		return vAllProp;
+	}
+	
+	public boolean updatePropietario(Propietario p) throws SQLException {
+		String query = "UPDATE Propietario SET apellido1 = ?, " +
+				"apellido2 = ?, nombre = ?, domicilio_postal = ?, " +
+				"codigo_postal = ?, ciudad = ?, tel_fijo = ?, " +
+				"tel_movil=?, horario_fijo=?, horario_movil=? " +
+				"WHERE dni = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		
+		
+		ps.setString(1, p.getApellido1());
+		ps.setString(2, p.getApellido2());
+		ps.setString(3, p.getNombre());
+		ps.setString(4, p.getDomicilio_postal());
+		ps.setInt(5, p.getCp());
+		ps.setString(6, p.getCiudad());
+		ps.setInt(7, p.getTel_fijo());
+		ps.setInt(8, p.getTel_movil());
+		ps.setString(9, p.getHorario_fijo());
+		ps.setString(10, p.getHorario_movil());
+		ps.setString(11, p.getDni());
+		
+		int result = ps.executeUpdate();
+		
+		return result > 0;
 	}
 }
