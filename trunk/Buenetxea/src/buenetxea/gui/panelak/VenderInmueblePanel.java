@@ -34,15 +34,15 @@ import com.toedter.calendar.JDateChooser;
 
 public class VenderInmueblePanel extends JPanel {
 
-	private JTextField textField_3;
-	private JTextField textField_2;
-	private JTextField textField_1;
-	private JTextField textField;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JTextField textField_3;
+	private JTextField textField_2;
+	private JTextField textField_1;
+	private JTextField textField;
 	private JFormattedTextField dniTextField;
 	private JLabel label_1;
 	private JLabel label_2;
@@ -156,8 +156,8 @@ public class VenderInmueblePanel extends JPanel {
 									JOptionPane jop = new JOptionPane(
 											"El inmueble se ha vendido correctamente",
 											JOptionPane.INFORMATION_MESSAGE);
-									jop.createDialog("Inmueble vendido");
-									jop.setVisible(true);
+									jop.createDialog("Inmueble vendido")
+											.setVisible(true);
 									setInmueble(kud.getInmueble(inmueble
 											.getReferencia()));
 								} else {
@@ -165,31 +165,32 @@ public class VenderInmueblePanel extends JPanel {
 											"Ha ocurrido un error al vender el inmueble seleccionado",
 											JOptionPane.ERROR_MESSAGE);
 									jop
-											.createDialog("No se ha podido vender el inmueble");
-									jop.setVisible(true);
+											.createDialog(
+													"No se ha podido vender el inmueble")
+											.setVisible(true);
 								}
 							} else {
 								JOptionPane jop = new JOptionPane(
 										"No es posible vender este inmueble al cliente seleccionado. Compruebe que el DNI del cliente y la fecha de venta son correctos.",
 										JOptionPane.ERROR_MESSAGE);
-								jop
-										.createDialog("No es posible realizar la venta");
-								jop.setVisible(true);
+								jop.createDialog(
+										"No es posible realizar la venta")
+										.setVisible(true);
 							}
 						else {
 							JOptionPane jop = new JOptionPane(
 									"El inmueble seleccionado no está en venta",
 									JOptionPane.ERROR_MESSAGE);
-							jop.createDialog("El inmueble no está en venta");
-							jop.setVisible(true);
+							jop.createDialog("El inmueble no está en venta")
+									.setVisible(true);
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 						JOptionPane jop = new JOptionPane(
 								"Ha ocurrido un error al vender el inmueble seleccionado",
 								JOptionPane.ERROR_MESSAGE);
-						jop.createDialog("No se ha podido vender el inmueble");
-						jop.setVisible(true);
+						jop.createDialog("No se ha podido vender el inmueble")
+								.setVisible(true);
 					}
 				}
 			});
@@ -684,6 +685,9 @@ public class VenderInmueblePanel extends JPanel {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -704,8 +708,7 @@ public class VenderInmueblePanel extends JPanel {
 			JOptionPane jop = new JOptionPane(
 					"El inmueble seleccionado no está en venta.",
 					JOptionPane.ERROR_MESSAGE);
-			jop.createDialog("El inmueble no está en venta");
-			jop.setVisible(true);
+			jop.createDialog("El inmueble no está en venta").setVisible(true);
 		} else {
 			label_8.setText("En venta");
 			List<Component> l1 = Arrays.asList(panel_2.getComponents());
