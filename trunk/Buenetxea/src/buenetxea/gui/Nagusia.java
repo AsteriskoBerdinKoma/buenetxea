@@ -31,7 +31,6 @@ import buenetxea.gui.panelak.LocalizarClientePanel;
 import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
-import buenetxea.gui.panelak.VerFichaPanel2;
 
 import com.swtdesigner.SwingResourceManager;
 
@@ -85,10 +84,6 @@ public class Nagusia extends JFrame {
 
 		CrearPropietarioPanel crearPropietarioPanel = null;
 		try {
-
-			final VerFichaPanel2 verFichaPanel2 = new VerFichaPanel2();
-			verFichaPanel2.setName("verFichaPanel2");
-			panel.add(verFichaPanel2, verFichaPanel2.getName());
 
 			final BuenetxeaPanel buenetxeaPanel = new BuenetxeaPanel();
 			buenetxeaPanel.setName("presentacion");
