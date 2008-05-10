@@ -31,6 +31,8 @@ import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
 
+import com.swtdesigner.SwingResourceManager;
+
 public class Nagusia extends JFrame {
 
 	/**
@@ -75,32 +77,6 @@ public class Nagusia extends JFrame {
 
 		final JProgressBar progressBar = new JProgressBar();
 		panel_1.add(progressBar);
-		final GroupLayout groupLayout = new GroupLayout(this.getContentPane());
-		groupLayout
-				.setHorizontalGroup(groupLayout.createParallelGroup(
-						GroupLayout.Alignment.LEADING).addComponent(toolBar,
-						GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 492,
-								Short.MAX_VALUE).addGroup(
-								groupLayout.createSequentialGroup()
-										.addContainerGap().addComponent(panel,
-												GroupLayout.DEFAULT_SIZE, 468,
-												Short.MAX_VALUE)
-										.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-				GroupLayout.Alignment.LEADING)
-				.addGroup(
-						groupLayout.createSequentialGroup().addComponent(
-								toolBar, GroupLayout.PREFERRED_SIZE, 25,
-								GroupLayout.PREFERRED_SIZE).addPreferredGap(
-								LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(panel, GroupLayout.DEFAULT_SIZE,
-										254, Short.MAX_VALUE).addPreferredGap(
-										LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(panel_1,
-										GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)));
 
 		CrearPropietarioPanel crearPropietarioPanel = null;
 		try {
@@ -146,12 +122,14 @@ public class Nagusia extends JFrame {
 		venderInmueblePanel.setName("venderInmueble");
 		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
 		final JButton peritajeButton = new JButton();
+		peritajeButton.setToolTipText("Peritaje");
+		peritajeButton.setIcon(SwingResourceManager.getIcon(Nagusia.class,
+				"/buenetxea/resources/peritaje 48x48.png"));
 		peritajeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
 				((CardLayout) panel.getLayout()).show(panel, "peritaje");
 			}
 		});
-		peritajeButton.setText("Peritaje");
 		toolBar.add(peritajeButton);
 
 		final JButton localizarButton = new JButton();
@@ -168,32 +146,65 @@ public class Nagusia extends JFrame {
 		toolBar.add(buscasButton);
 
 		final JButton seguimientoPropietariosButton = new JButton();
+		seguimientoPropietariosButton
+				.setToolTipText("Seguimiento de propietario");
+		seguimientoPropietariosButton.setIcon(SwingResourceManager.getIcon(
+				Nagusia.class,
+				"/buenetxea/resources/seguimientoPropietario 48x48.png"));
 		seguimientoPropietariosButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				((CardLayout) panel.getLayout()).show(panel,
 						"seguimientoPropietario");
 			}
 		});
-		seguimientoPropietariosButton.setText("Seguimiento propietarios");
 		toolBar.add(seguimientoPropietariosButton);
 
 		final JButton visitasButton = new JButton();
+		visitasButton.setToolTipText("Visitas");
+		visitasButton.setIcon(SwingResourceManager.getIcon(Nagusia.class,
+				"/buenetxea/resources/visitas 48x48.png"));
 		visitasButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
 			}
 		});
-		visitasButton.setText("Visitas");
 		toolBar.add(visitasButton);
 
 		final JButton localizarClienteButton = new JButton();
+		localizarClienteButton.setIcon(SwingResourceManager.getIcon(
+				Nagusia.class,
+				"/buenetxea/resources/localizarCliente 48x48.png"));
+		localizarClienteButton.setToolTipText("Localizar cliente");
 		localizarClienteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				((CardLayout) panel.getLayout())
 						.show(panel, "localizarCliente");
 			}
 		});
-		localizarClienteButton.setText("Localizar cliente");
 		toolBar.add(localizarClienteButton);
+		final GroupLayout groupLayout = new GroupLayout(this.getContentPane());
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addComponent(panel_1,
+				GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE).addGroup(
+				groupLayout.createSequentialGroup().addContainerGap()
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 472,
+								Short.MAX_VALUE).addContainerGap())
+				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 492,
+						Short.MAX_VALUE));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
+				GroupLayout.Alignment.LEADING)
+				.addGroup(
+						groupLayout.createSequentialGroup().addComponent(
+								toolBar, GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE).addPreferredGap(
+								LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(panel, GroupLayout.DEFAULT_SIZE,
+										238, Short.MAX_VALUE).addPreferredGap(
+										LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(panel_1,
+										GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)));
 		this.getContentPane().setLayout(groupLayout);
 
 		final JMenuBar menuBar = new JMenuBar();
@@ -229,7 +240,7 @@ public class Nagusia extends JFrame {
 		});
 		newItemMenuItem.setText("Presentación");
 		verMenu.add(newItemMenuItem);
-		this.pack();
+		pack();
 		//
 	}
 
