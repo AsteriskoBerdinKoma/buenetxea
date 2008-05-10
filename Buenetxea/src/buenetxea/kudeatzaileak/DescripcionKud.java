@@ -52,8 +52,18 @@ public class DescripcionKud {
 		return vd;
 	}
 
-	public void insertDescripcion(Vector<Descripcion> vDescripciones) {
-		// TODO
+	public boolean insertDescripcion(Descripcion d) throws SQLException {
+		String query = "INSERT INTO descripcion SET fk_peritaje_id = ?, tipo = ?, m2 = ?, descripcion = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		
+		ps.setInt(1, d.getFk_peritaje_id());
+		ps.setDouble(2, d.getM2());
+		ps.setString(3, d.getDescripcion());
+		
+		
+		int result = ps.executeUpdate();
+		
+		return result > 0;
 	}
 
 }

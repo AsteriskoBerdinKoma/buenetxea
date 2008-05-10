@@ -63,28 +63,28 @@ public class PropietarioKud {
 			return null;
 
 	}
-
-	public boolean InsertPropietario(String dni, String nombre,
-			String apellido1, String apellido2, String domicilio_postal,
-			int cp, String ciudad, int tel_fijo, int tel_movil,
-			String horario_fijo, String horario_movil) throws SQLException {
-		int result = 0;
+	
+	public boolean InsertPropietario(Propietario p) throws SQLException{
 		String query = "INSERT INTO Propietario SET dni = ?, apellido1 = ?,apellido2 = ?, nombre = ?,domicilio_postal = ?,codigo_postal = ?,ciudad = ?,tel_fijo = ?,tel_movil=?,horario_fijo=?,horario_movil=?";
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setString(1, dni);
-		ps.setString(2, apellido1);
-		ps.setString(3, apellido2);
-		ps.setString(4, nombre);
-		ps.setString(5, domicilio_postal);
-		ps.setInt(6, cp);
-		ps.setString(7, ciudad);
-		ps.setInt(8, tel_fijo);
-		ps.setInt(9, tel_movil);
-		ps.setString(10, horario_fijo);
-		ps.setString(11, horario_movil);
-		result = ps.executeUpdate();
+		
+		ps.setString(1, p.getDni());
+		ps.setString(2, p.getApellido1());
+		ps.setString(3, p.getApellido2());
+		ps.setString(4, p.getNombre());
+		ps.setString(5, p.getDomicilio_postal());
+		ps.setInt(6, p.getCp());
+		ps.setString(7, p.getCiudad());
+		ps.setInt(8, p.getTel_fijo());
+		ps.setInt(9, p.getTel_movil());
+		ps.setString(10, p.getHorario_fijo());
+		ps.setString(11, p.getHorario_movil());
+		
+		int result = ps.executeUpdate();
+		
 		return result > 0;
 
+		
 	}
 	public Vector<Propietario> getPropietarios() throws SQLException{
 		Vector<Propietario> vAllProp = new Vector<Propietario>();
