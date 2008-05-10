@@ -6,6 +6,8 @@ import javax.swing.JTextField;
 
 import buenetxea.gui.panelak.CrearClientePanel;
 
+import com.swtdesigner.SwingResourceManager;
+
 public class CrearClienteDialog extends JDialog {
 
 	/**
@@ -20,6 +22,8 @@ public class CrearClienteDialog extends JDialog {
 	 */
 	public CrearClienteDialog() {
 		super();
+		setIconImage(SwingResourceManager.getImage(CrearClienteDialog.class,
+				"/buenetxea/resources/logo_buenetxea.png"));
 		setTitle("Crear un cliente nuevo");
 		setModal(true);
 

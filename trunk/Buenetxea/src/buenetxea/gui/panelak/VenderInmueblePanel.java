@@ -404,7 +404,7 @@ public class VenderInmueblePanel extends JPanel {
 																	label_3)
 															.addComponent(
 																	label_8))
-											.addContainerGap(308,
+											.addContainerGap(343,
 													Short.MAX_VALUE)));
 			groupLayout_2.setVerticalGroup(groupLayout_2.createParallelGroup(
 					GroupLayout.Alignment.LEADING).addGroup(
@@ -472,8 +472,7 @@ public class VenderInmueblePanel extends JPanel {
 											.addGroup(
 													groupLayout
 															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING,
-																	false)
+																	GroupLayout.Alignment.LEADING)
 															.addComponent(
 																	dateChooser,
 																	GroupLayout.PREFERRED_SIZE,
@@ -495,8 +494,7 @@ public class VenderInmueblePanel extends JPanel {
 																			.addGroup(
 																					groupLayout
 																							.createParallelGroup(
-																									GroupLayout.Alignment.LEADING,
-																									false)
+																									GroupLayout.Alignment.LEADING)
 																							.addComponent(
 																									textField_1,
 																									GroupLayout.PREFERRED_SIZE,
@@ -616,12 +614,13 @@ public class VenderInmueblePanel extends JPanel {
 																					GroupLayout.PREFERRED_SIZE,
 																					GroupLayout.DEFAULT_SIZE,
 																					GroupLayout.PREFERRED_SIZE)))
-											.addContainerGap(43,
+											.addContainerGap(
+													GroupLayout.DEFAULT_SIZE,
 													Short.MAX_VALUE)));
 			groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-					new java.awt.Component[] { textField, textField_2 });
-			groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
 					new java.awt.Component[] { textField_1, textField_3 });
+			groupLayout.linkSize(javax.swing.SwingConstants.VERTICAL,
+					new java.awt.Component[] { textField, textField_2 });
 			groupLayout.linkSize(javax.swing.SwingConstants.VERTICAL,
 					new java.awt.Component[] { textField_1, textField_3 });
 			panel.setLayout(groupLayout);
@@ -636,30 +635,29 @@ public class VenderInmueblePanel extends JPanel {
 											.addGroup(
 													groupLayout_1
 															.createParallelGroup(
-																	GroupLayout.Alignment.TRAILING)
+																	GroupLayout.Alignment.LEADING)
 															.addComponent(
 																	panel,
-																	GroupLayout.Alignment.LEADING,
 																	GroupLayout.PREFERRED_SIZE,
 																	434,
 																	Short.MAX_VALUE)
 															.addComponent(
 																	panel_1,
-																	GroupLayout.Alignment.LEADING,
 																	0,
 																	0,
 																	Short.MAX_VALUE)
 															.addComponent(
-																	venderInmuebleButton)
-															.addComponent(
 																	panel_2,
-																	GroupLayout.Alignment.LEADING,
 																	0,
 																	0,
-																	Short.MAX_VALUE))
+																	Short.MAX_VALUE)
+															.addComponent(
+																	venderInmuebleButton,
+																	GroupLayout.Alignment.TRAILING))
 											.addContainerGap()));
 			groupLayout_1.setVerticalGroup(groupLayout_1.createParallelGroup(
 					GroupLayout.Alignment.TRAILING).addGroup(
+					GroupLayout.Alignment.LEADING,
 					groupLayout_1.createSequentialGroup().addComponent(panel_1,
 							GroupLayout.PREFERRED_SIZE,
 							GroupLayout.DEFAULT_SIZE,
@@ -670,10 +668,11 @@ public class VenderInmueblePanel extends JPanel {
 							.addPreferredGap(
 									LayoutStyle.ComponentPlacement.RELATED)
 							.addComponent(panel, GroupLayout.PREFERRED_SIZE,
-									197, Short.MAX_VALUE).addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(venderInmuebleButton)
-							.addContainerGap()));
+									157, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED, 21,
+									Short.MAX_VALUE).addComponent(
+									venderInmuebleButton).addContainerGap()));
 			setLayout(groupLayout_1);
 			//
 		} catch (SQLException e) {
