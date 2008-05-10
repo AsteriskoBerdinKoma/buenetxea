@@ -47,11 +47,12 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 DROP TABLE IF EXISTS `descripcion`;
 CREATE TABLE IF NOT EXISTS `descripcion` (
+  `id` int(10) unsigned NOT NULL auto_increment,
   `fk_peritaje_id` int(10) unsigned NOT NULL,
   `tipo` varchar(45) NOT NULL,
   `m2` int(10) unsigned NOT NULL,
   `descripcion` varchar(45) NOT NULL,
-  PRIMARY KEY  (`fk_peritaje_id`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
