@@ -20,6 +20,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JRViewer;
+import buenetxea.db.Connector;
 import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
 import buenetxea.kudeatzaileak.Kudeatzailea;
@@ -75,7 +76,7 @@ public class VerClientePanel extends JPanel {
 				InprimagailuKudeatzailea inpr = InprimagailuKudeatzailea.getInstance();
 				
 					Collection<Inmueble> lista = new ArrayList<Inmueble>();
-					lista.add(Kudeatzailea.getInstance().getInmueble(1));
+				//	lista.add(Kudeatzailea.getInstance().getInmueble(1));
 					JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(
 							lista);
 
@@ -84,7 +85,7 @@ public class VerClientePanel extends JPanel {
 					// jr =
 					// JasperCompileManager.compileReport("inmueble.jrxml");
 					jp = JasperFillManager.fillReport("Cliente.jasper",
-							inpr.InprimatuCliente(clientedniazkena), datasource);
+							inpr.InprimatuCliente(clientedniazkena), Connector.getConnection());
 					JRViewer jrv = new JRViewer(jp);
 					VerClientePanel.this.add(jrv, BorderLayout.CENTER);
 					VerClientePanel.this.validate();

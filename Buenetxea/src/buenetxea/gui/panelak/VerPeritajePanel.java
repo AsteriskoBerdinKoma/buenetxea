@@ -5,7 +5,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -21,6 +23,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JRViewer;
+import buenetxea.db.Connector;
 import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
 import buenetxea.kudeatzaileak.Kudeatzailea;
@@ -34,19 +37,23 @@ public class VerPeritajePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private final Nagusia jabea;
-	
+	private final Connection connection;
+	private final Statement statement;
 	/**
 	 * Create the panel
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
 	 * 
 	 * @throws JRException
 	 * @throws FileNotFoundException
 	 */
 
-	public VerPeritajePanel(Nagusia jabea) {
+	public VerPeritajePanel(Nagusia jabea) throws SQLException, ClassNotFoundException {
 		super();
 
 		this.jabea = jabea;
-		
+		this.connection = Connector.getConnection();
+		this.statement = Connector.getStatement();
 		this.setBorder(new TitledBorder(null, "Ver visita",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
@@ -77,7 +84,7 @@ public class VerPeritajePanel extends JPanel {
 				// jr =
 				// JasperCompileManager.compileReport("inmueble.jrxml");
 				jp = JasperFillManager.fillReport("Peritaje.jasper",
-						inpr.InprimatuPeritaje(), datasource);
+						inpr.InprimatuPeritaje(),datasource);
 				JRViewer jrv = new JRViewer(jp);
 				VerPeritajePanel.this.add(jrv, BorderLayout.CENTER);
 				VerPeritajePanel.this.validate();

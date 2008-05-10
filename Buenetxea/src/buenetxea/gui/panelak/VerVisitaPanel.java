@@ -21,6 +21,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JRViewer;
+import buenetxea.db.Connector;
 import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
 import buenetxea.kudeatzaileak.Kudeatzailea;
@@ -88,7 +89,7 @@ public class VerVisitaPanel extends JPanel {
 				// jr =
 				// JasperCompileManager.compileReport("inmueble.jrxml");
 				jp = JasperFillManager.fillReport("Visita.jasper",
-						inpr.InprimatuVisita(clientedniazkena, inmueblerefazkena,fechaazkena,horaazkena,minutoazkena), datasource);
+						inpr.InprimatuVisita(clientedniazkena, inmueblerefazkena,fechaazkena,horaazkena,minutoazkena), Connector.getConnection());
 				JRViewer jrv = new JRViewer(jp);
 				VerVisitaPanel.this.add(jrv, BorderLayout.CENTER);
 				VerVisitaPanel.this.validate();
