@@ -37,7 +37,9 @@ public class AreaDatosPropietarioPanel extends JPanel {
 	private JTextField telMovilTextfield;
 	private JTextField cpTextfield;
 	private JTextField nombreTextfield;
-	private JFormattedTextField dniFormatedTextfield;
+	private JTextField dniTextfield;
+
+	private String dniPattern = "RWAGMYFPDXBNJZSQVHLCKET";
 
 	/**
 	 * Create the panel
@@ -56,10 +58,8 @@ public class AreaDatosPropietarioPanel extends JPanel {
 		dniLabel = new JLabel();
 		dniLabel.setText("DNI");
 
-		dniFormatedTextfield = new JFormattedTextField(new MaskFormatter(
-				"########U"));
-		dniFormatedTextfield.setInputVerifier(new ValidateDNI());
-		dniFormatedTextfield.setColumns(9);
+		dniTextfield = new JTextField();
+		dniTextfield.setColumns(9);
 
 		JLabel nombreLabel;
 		nombreLabel = new JLabel();
@@ -187,7 +187,7 @@ public class AreaDatosPropietarioPanel extends JPanel {
 																groupLayout_1
 																		.createSequentialGroup()
 																		.addComponent(
-																				dniFormatedTextfield,
+																				dniTextfield,
 																				GroupLayout.PREFERRED_SIZE,
 																				159,
 																				GroupLayout.PREFERRED_SIZE)
@@ -342,7 +342,7 @@ public class AreaDatosPropietarioPanel extends JPanel {
 																GroupLayout.Alignment.BASELINE)
 														.addComponent(dniLabel)
 														.addComponent(
-																dniFormatedTextfield,
+																dniTextfield,
 																GroupLayout.PREFERRED_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE)
@@ -464,8 +464,7 @@ public class AreaDatosPropietarioPanel extends JPanel {
 				new java.awt.Component[] { horaFijoFinCombobox,
 						horaFijoInicioComboBox });
 		groupLayout_1.linkSize(javax.swing.SwingConstants.VERTICAL,
-				new java.awt.Component[] { dniFormatedTextfield,
-						telFijoTextfield });
+				new java.awt.Component[] { dniTextfield, telFijoTextfield });
 		groupLayout_1.linkSize(javax.swing.SwingConstants.VERTICAL,
 				new java.awt.Component[] { horaMovilFinCombobox,
 						horaMovilInicioCombobox });
@@ -473,58 +472,38 @@ public class AreaDatosPropietarioPanel extends JPanel {
 		//
 	}
 
-	private final class ValidateDNI extends InputVerifier {
-
-		String pattern = "RWAGMYFPDXBNJZSQVHLCKET";
-
-		/**
-		 * Verifica un DNI.
-		 */
-		private boolean verifyDNI(String DNI) {
-			// Eliminamos caracteres de separación.
-			DNI = DNI.replaceAll("[.-]", "");
-			if (DNI.length() != 9)
-				return false;
-			// El último carácter debe ser una letra
-			if (!Character.isLetter(DNI.charAt(8)))
-				return false;
-			int digits;
-			try {
-				digits = Integer.parseInt(DNI.substring(0, 8));
-			} catch (NumberFormatException e) {
-				return false;
-			}
-			// El algoritmo mágico
-			int pos = (digits % 23);
-			if (pos == 0)
-				pos = pattern.length();
-			pos = pos - 1; // Las tiras en Java están basadas en cero!
-			return (pattern.charAt(pos) == DNI.charAt(8));
-		}
-
-		@Override
-		public boolean verify(JComponent input) {
-			if (input instanceof JFormattedTextField) {
-				Object o = ((JFormattedTextField) input).getValue();
-				if (o == null)
-					return true;
-				String value = o.toString();
-				return verifyDNI(value);
-			}
+	public boolean verifyDNI(String DNI) {
+		// Eliminamos caracteres de separación.
+		DNI = DNI.replaceAll("[.-]", "");
+		if (DNI.length() != 9)
+			return false;
+		// El último carácter debe ser una letra
+		if (!Character.isLetter(DNI.charAt(8)))
+			return false;
+		int digits;
+		try {
+			digits = Integer.parseInt(DNI.substring(0, 8));
+		} catch (NumberFormatException e) {
 			return false;
 		}
+		// El algoritmo mágico
+		int pos = (digits % 23);
+		if (pos == 0)
+			pos = dniPattern.length();
+		pos = pos - 1; // Las tiras en Java están basadas en cero!
+		return (dniPattern.charAt(pos) == DNI.charAt(8));
 	}
 
 	public String getDniFormatedTextfield() {
-		return dniFormatedTextfield.getText().trim();
+		return dniTextfield.getText().trim();
 	}
 
 	public Document getDniFormatedTextfieldModel() {
-		return dniFormatedTextfield.getDocument();
+		return dniTextfield.getDocument();
 	}
 
 	public void setDniFormatedTextfield(String dni) {
-		dniFormatedTextfield.setText(dni);
+		dniTextfield.setText(dni);
 	}
 
 	public String getNombreTextfield() {

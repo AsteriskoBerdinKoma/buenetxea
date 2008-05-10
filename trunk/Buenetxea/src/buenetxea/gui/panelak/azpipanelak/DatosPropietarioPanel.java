@@ -11,6 +11,8 @@ import javax.swing.LayoutStyle;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -74,27 +76,7 @@ public class DatosPropietarioPanel extends JPanel {
 								for (int i = e.getFirstIndex(); i <= e
 										.getLastIndex(); i++) {
 									if (lm.isSelectedIndex(i)) {
-										d.setDniFormatedTextfield(vPropCriterio
-												.elementAt(i).getDni());
-										d.setNombreTextfield(vPropCriterio
-												.elementAt(i).getNombre());
-										d.setApellido1Textfield(vPropCriterio
-												.elementAt(i).getApellido1());
-										d.setApellido2Textfield(vPropCriterio
-												.elementAt(i).getApellido2());
-										d.setCiudadTextfield(vPropCriterio
-												.elementAt(i).getCiudad());
-										d.setCpTextfield(vPropCriterio
-												.elementAt(i).getCp());
-										d.setDomicilioTextfield(vPropCriterio
-												.elementAt(i)
-												.getDomicilio_postal());
-										d.setTelFijoTextfield(vPropCriterio
-												.elementAt(i).getTel_fijo());
-										d.setTelMovilTextfield(vPropCriterio
-												.elementAt(i).getTel_movil());
-										// hora inicio hora fin movil fijo
-
+										rellenarCampos(i);
 										isUpdate = true;
 										break;
 									}
@@ -107,41 +89,17 @@ public class DatosPropietarioPanel extends JPanel {
 
 						@Override
 						public void changedUpdate(DocumentEvent e) {
-							isUpdate = false;
-							String dniCrit = d.getDniFormatedTextfield();
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 						@Override
 						public void insertUpdate(DocumentEvent e) {
-							isUpdate = false;
-							String dniCrit = d.getDniFormatedTextfield();
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 						@Override
 						public void removeUpdate(DocumentEvent e) {
-							isUpdate = false;
-							String dniCrit = d.getDniFormatedTextfield();
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 					});
@@ -151,48 +109,17 @@ public class DatosPropietarioPanel extends JPanel {
 
 						@Override
 						public void changedUpdate(DocumentEvent e) {
-							isUpdate = false;
-							System.out.println("cambiocambio");
-							String dniCrit = d.getDniFormatedTextfield();
-							System.out.println(dniCrit);
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 						@Override
 						public void insertUpdate(DocumentEvent e) {
-							isUpdate = false;
-							System.out.println("cambioinsert");
-							String dniCrit = d.getDniFormatedTextfield();
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							System.out.println(dniCrit + ":" + nomCrit + ":"
-									+ ap1Crit + ":" + ap2Crit);
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 						@Override
 						public void removeUpdate(DocumentEvent e) {
-							isUpdate = false;
-							System.out.println("cambioremove");
-							String dniCrit = d.getDniFormatedTextfield();
-							System.out.println(dniCrit);
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 					});
@@ -202,41 +129,17 @@ public class DatosPropietarioPanel extends JPanel {
 
 						@Override
 						public void changedUpdate(DocumentEvent e) {
-							isUpdate = false;
-							String dniCrit = d.getDniFormatedTextfield();
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 						@Override
 						public void insertUpdate(DocumentEvent e) {
-							isUpdate = false;
-							String dniCrit = d.getDniFormatedTextfield();
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 						@Override
 						public void removeUpdate(DocumentEvent e) {
-							isUpdate = false;
-							String dniCrit = d.getDniFormatedTextfield();
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 					});
@@ -246,57 +149,47 @@ public class DatosPropietarioPanel extends JPanel {
 
 						@Override
 						public void changedUpdate(DocumentEvent e) {
-							isUpdate = false;
-							String dniCrit = d.getDniFormatedTextfield();
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 						@Override
 						public void insertUpdate(DocumentEvent e) {
-							isUpdate = false;
-							String dniCrit = d.getDniFormatedTextfield();
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 						@Override
 						public void removeUpdate(DocumentEvent e) {
-							isUpdate = false;
-							String dniCrit = d.getDniFormatedTextfield();
-							String nomCrit = d.getNombreTextfield();
-							String ap1Crit = d.getApellido1Textfield();
-							String ap2Crit = d.getApellido2Textfield();
-							vPropCriterio.removeAllElements();
-							getPropietariosCriterio(dniCrit, nomCrit, ap1Crit,
-									ap2Crit);
-							t.setOwners(vPropCriterio);
+							notificarCambio();
 						}
 
 					});
 
 			final GroupLayout groupLayout = new GroupLayout((JComponent) this);
-			groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
-					GroupLayout.Alignment.TRAILING).addGroup(
-					groupLayout.createSequentialGroup().addGroup(
-							groupLayout.createParallelGroup(
-									GroupLayout.Alignment.TRAILING).addGroup(
-									groupLayout.createSequentialGroup().addGap(
-											10, 10, 10).addComponent(t,
-											GroupLayout.DEFAULT_SIZE, 593,
-											Short.MAX_VALUE)).addComponent(d,
-									GroupLayout.DEFAULT_SIZE, 603,
-									Short.MAX_VALUE)).addContainerGap()));
+			groupLayout
+					.setHorizontalGroup(groupLayout
+							.createParallelGroup(GroupLayout.Alignment.TRAILING)
+							.addGroup(
+									GroupLayout.Alignment.LEADING,
+									groupLayout
+											.createSequentialGroup()
+											.addGap(10, 10, 10)
+											.addGroup(
+													groupLayout
+															.createParallelGroup(
+																	GroupLayout.Alignment.LEADING)
+															.addComponent(
+																	t,
+																	GroupLayout.Alignment.TRAILING,
+																	GroupLayout.DEFAULT_SIZE,
+																	593,
+																	Short.MAX_VALUE)
+															.addComponent(
+																	d,
+																	GroupLayout.Alignment.TRAILING,
+																	GroupLayout.DEFAULT_SIZE,
+																	593,
+																	Short.MAX_VALUE))
+											.addContainerGap()));
 			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
 					GroupLayout.Alignment.LEADING).addGroup(
 					groupLayout.createSequentialGroup().addComponent(d,
@@ -337,14 +230,46 @@ public class DatosPropietarioPanel extends JPanel {
 		return false;
 	}
 
+	public synchronized void rellenarCampos(int i) {
+		Propietario prop = vPropCriterio.elementAt(i);
+		d.setDniFormatedTextfield(prop.getDni());
+		d.setNombreTextfield(prop.getNombre());
+		d.setApellido1Textfield(prop.getApellido1());
+		d.setApellido2Textfield(prop.getApellido2());
+		d.setCiudadTextfield(prop.getCiudad());
+		d.setCpTextfield(prop.getCp());
+		d.setDomicilioTextfield(prop.getDomicilio_postal());
+		d.setTelFijoTextfield(prop.getTel_fijo());
+		d.setTelMovilTextfield(prop.getTel_movil());
+		// hora inicio hora fin movil fijo
+	}
+
+	public void notificarCambio() {
+		isUpdate = false;
+		String dniCrit = d.getDniFormatedTextfield();
+		String nomCrit = d.getNombreTextfield();
+		String ap1Crit = d.getApellido1Textfield();
+		String ap2Crit = d.getApellido2Textfield();
+		vPropCriterio.removeAllElements();
+		getPropietariosCriterio(dniCrit, nomCrit, ap1Crit, ap2Crit);
+		if (dniCrit.isEmpty() && nomCrit.isEmpty() && ap1Crit.isEmpty()
+				&& ap2Crit.isEmpty())
+			t.setOwners(new Vector<Propietario>());
+		else
+			t.setOwners(vPropCriterio);
+	}
+
 	public Propietario generarPropietario() {
-		String horarioFijo = String.valueOf(d.getHoraFijoInicioComboBox())+":"+d.getHoraFijoFinCombobox();
-		String horarioMovil = String.valueOf(d.getHoraMovilInicioCombobox())+":"+d.getHoraMovilFinCombobox();
-		return new Propietario(d.getDniFormatedTextfield(), 
-				d.getNombreTextfield(), d.getApellido1Textfield(), 
-				d.getApellido2Textfield(), d.getDomicilioTextfield(), 
-				d.getCpTextfield(), d.getCiudadTextfield(),
-				d.getTelFijoTextfield(), d.getTelMovilTextfield(), horarioFijo, horarioMovil);
+		String horarioFijo = String.valueOf(d.getHoraFijoInicioComboBox())
+				+ ":" + d.getHoraFijoFinCombobox();
+		String horarioMovil = String.valueOf(d.getHoraMovilInicioCombobox())
+				+ ":" + d.getHoraMovilFinCombobox();
+		return new Propietario(d.getDniFormatedTextfield(), d
+				.getNombreTextfield(), d.getApellido1Textfield(), d
+				.getApellido2Textfield(), d.getDomicilioTextfield(), d
+				.getCpTextfield(), d.getCiudadTextfield(), d
+				.getTelFijoTextfield(), d.getTelMovilTextfield(), horarioFijo,
+				horarioMovil);
 	}
 
 	public static void main(String[] args) {

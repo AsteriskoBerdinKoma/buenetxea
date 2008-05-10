@@ -46,21 +46,19 @@ public class AreaTablaPropietariosPanel extends JPanel {
 		@Override
 		public int getColumnCount() {
 			// Emandako klaseak dituen atributu kopurua itzuli behar du
-			return 5; // num, DNI, nombre, apellido1, apellido2
+			return 4; // num, DNI, nombre, apellido1, apellido2
 		}
 
 		@Override
 		public Object getValueAt(int row, int column) {
 			switch (column) {
 			case 0:
-				return new Integer(row + 1);
-			case 1:
 				return new String(m_Propietarios.elementAt(row).getDni());
-			case 2:
+			case 1:
 				return new String(m_Propietarios.elementAt(row).getNombre());
-			case 3:
+			case 2:
 				return new String(m_Propietarios.elementAt(row).getApellido1());
-			case 4:
+			case 3:
 				return new String(m_Propietarios.elementAt(row).getApellido2());
 			default:
 				return null;
@@ -70,14 +68,12 @@ public class AreaTablaPropietariosPanel extends JPanel {
 		public String getColumnName(int column) {
 			switch (column) {
 			case 0:
-				return new String("Nº");
-			case 1:
 				return new String("DNI");
-			case 2:
+			case 1:
 				return new String("Nombre");
-			case 3:
+			case 2:
 				return new String("1er Apellido");
-			case 4:
+			case 3:
 				return new String("2º Apellido");
 			default:
 				return null;
@@ -118,9 +114,10 @@ public class AreaTablaPropietariosPanel extends JPanel {
 			eredua = new OwnerTableModel(newOwners);
 			taula.setModel(eredua);
 			TableColumnModel tcm = taula.getColumnModel();
-			tcm.getColumn(0).setMaxWidth(tcm.getColumn(0).getMinWidth());
+			tcm.getColumn(0).setMaxWidth(80);
 			tcm.getColumn(1).setMaxWidth(80);
 			tcm.getColumn(2).setMinWidth(100);
+			tcm.getColumn(3).setMinWidth(100);
 		} else {
 			eredua.setPropietarios(newOwners);
 			taula.clearSelection();
