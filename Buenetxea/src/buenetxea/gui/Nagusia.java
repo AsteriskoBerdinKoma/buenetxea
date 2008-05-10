@@ -31,6 +31,7 @@ import buenetxea.gui.panelak.LocalizarClientePanel;
 import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
+import buenetxea.gui.panelak.VerFichaPanel2;
 
 import com.swtdesigner.SwingResourceManager;
 
@@ -85,6 +86,10 @@ public class Nagusia extends JFrame {
 		CrearPropietarioPanel crearPropietarioPanel = null;
 		try {
 
+			final VerFichaPanel2 verFichaPanel2 = new VerFichaPanel2();
+			verFichaPanel2.setName("verFichaPanel2");
+			panel.add(verFichaPanel2, verFichaPanel2.getName());
+
 			final BuenetxeaPanel buenetxeaPanel = new BuenetxeaPanel();
 			buenetxeaPanel.setName("presentacion");
 			panel.add(buenetxeaPanel, buenetxeaPanel.getName());
@@ -109,7 +114,7 @@ public class Nagusia extends JFrame {
 					.getName());
 
 			final CrearClientePanel crearClientePanel = new CrearClientePanel();
-			crearClientePanel.setName("crearClientePanel");
+			crearClientePanel.setName("nuevoCliente");
 			panel.add(crearClientePanel, crearClientePanel.getName());
 			crearPropietarioPanel = new CrearPropietarioPanel();
 		} catch (ParseException e) {
@@ -254,6 +259,19 @@ public class Nagusia extends JFrame {
 		});
 		newItemMenuItem.setText("Presentación");
 		verMenu.add(newItemMenuItem);
+
+		final JMenu clientesMenu = new JMenu();
+		clientesMenu.setText("Clientes");
+		menuBar.add(clientesMenu);
+
+		final JMenuItem newItemMenuItem_2 = new JMenuItem();
+		newItemMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel, "nuevoCliente");
+			}
+		});
+		newItemMenuItem_2.setText("Nuevo Cliente");
+		clientesMenu.add(newItemMenuItem_2);
 		pack();
 		//
 	}
