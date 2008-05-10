@@ -19,13 +19,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
 
 import buenetxea.gui.panelak.azpipanelak.DatosInmueblePanel;
-import buenetxea.gui.panelak.azpipanelak.DatosPropietario;
+import buenetxea.gui.panelak.azpipanelak.DatosPropietarioPanel;
 import buenetxea.gui.panelak.azpipanelak.DatosTasacionPanel;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Descripcion;
 import buenetxea.objektuak.Inmueble;
 import buenetxea.objektuak.Peritaje;
 import buenetxea.objektuak.Propietario;
+import buenetxea.objektuak.RelInmueblePropietario;
 import buenetxea.objektuak.Tasacion;
 
 public class IntroducirInmueblePanel extends JPanel {
@@ -38,12 +39,12 @@ public class IntroducirInmueblePanel extends JPanel {
 	JScrollPane datosInmScroll;
 	DatosInmueblePanel datosInm = new DatosInmueblePanel();
 	DatosTasacionPanel datosTas;
-	DatosPropietario datosProp1 = new DatosPropietario(this);
-	DatosPropietario datosProp2 = new DatosPropietario(null);
+	DatosPropietarioPanel datosProp1 = new DatosPropietarioPanel();
+	DatosPropietarioPanel datosProp2;
 	Vector<Propietario> vAllPropietarios = new Vector<Propietario>();
+	boolean segundoPropietario = false;
 
 	JTabbedPane tabbedPane;
-	boolean segundoPropietario = false;
 
 	/**
 	 * Create the panel
@@ -60,12 +61,37 @@ public class IntroducirInmueblePanel extends JPanel {
 			datosTas = new DatosTasacionPanel();
 
 			vAllPropietarios = Kudeatzailea.getInstance().getPropietarios();
+			datosProp1.setPropietarios(vAllPropietarios);
 
 			datosInmScroll = new JScrollPane(datosInm);
 
 			tabbedPane.addTab("Datos Peritaje", datosInmScroll);
 			tabbedPane.addTab("Datos Tasación", datosTas);
 			tabbedPane.addTab("Datos 1er Propietario", datosProp1);
+
+			datosProp1.getSegPropButton().addActionListener(
+					new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							if (!segundoPropietario) {
+								datosProp2 = new DatosPropietarioPanel();
+								datosProp2.setPropietarios(vAllPropietarios);
+								datosProp2.getSegPropButton().setVisible(false);
+								tabbedPane.addTab("Datos 2º Propietario",
+										datosProp2);
+								segundoPropietario = true;
+								datosProp1.getSegPropButton().setText(
+										"Deshabilitar 2º Propietario");
+							} else {
+								tabbedPane.remove(datosProp2);
+								datosProp1.getSegPropButton().setText(
+										"Habilitar 2º Propietario");
+								segundoPropietario = false;
+							}
+
+						}
+
+					});
 
 			JButton guardarButton;
 			guardarButton = new JButton();
@@ -74,49 +100,148 @@ public class IntroducirInmueblePanel extends JPanel {
 
 					int id = 1;
 					try {
-						id = Kudeatzailea.getInstance().getLastPeritajeId() + 1;
-						System.out.println("ID del último peritaje: " + (id-1));
-						if (datosInm.comprobarDatos() /*&& datosTas.comprobarDatos() && datosProp1.comprobarDatos() && datosProp2.comprobarDatos()*/) {
+						boolean compInm = datosInm.comprobarDatos();
+						boolean compTas = datosTas.comprobarDatos();
+						boolean compProp1 = datosProp1.comprobarDatos();
+						boolean compProp2 = true;
+						if (segundoPropietario) {
+							compProp2 = datosProp2.comprobarDatos();
+						}
+						if (compInm && compTas && compProp1 && compProp2) {
 							Peritaje p = datosInm.generarPeritaje(id);
 							Inmueble i = datosInm.generarInmueble();
-							Vector<Descripcion> vd = datosInm.generarDescripciones(id);
-							Tasacion t = datosTas.generarTasacion(id, i.getReferencia());
-							// Propietario p1 = datosProp1.generarPropietario();
-							// if (segundoPropietario)
-							// 		Propietario p2 = datosProp2.generarPropietario();
-							boolean peritajeOk = Kudeatzailea.getInstance().crearPeritaje(p);
-							boolean inmuebleOk = Kudeatzailea.getInstance().crearInmueble(i);
-							boolean tasacionOk = Kudeatzailea.getInstance().crearTasacion(t);
+							Propietario p1 = datosProp1.generarPropietario();
+							Propietario p2 = null;
+							if (segundoPropietario) {
+								p2 = datosProp2.generarPropietario();
+							}
+							boolean peritajeOk = Kudeatzailea.getInstance()
+									.crearPeritaje(p);
+							id = (Kudeatzailea.getInstance()
+									.getLastPeritajeId());
+							Tasacion t = datosTas.generarTasacion(id, i
+									.getReferencia());
+							Vector<Descripcion> vd = datosInm
+									.generarDescripciones(id);
+							boolean inmuebleOk = Kudeatzailea.getInstance()
+									.crearInmueble(i);
+							boolean tasacionOk = Kudeatzailea.getInstance()
+									.crearTasacion(t);
 							boolean descripcionesOk = true;
+							boolean propietario1Ok = true;
+							boolean propietario2Ok = true;
 							for (Descripcion d : vd) {
-								if (!Kudeatzailea.getInstance().crearDescripcion(d))
+								if (!Kudeatzailea.getInstance()
+										.crearDescripcion(d))
 									descripcionesOk = false;
 							}
-							// if(!segundoPropietario){
-							// 		if(datosProp.getIsUpdate())
-							// 			boolean propietario1Ok = Kudeatzailea.getInstance().actualizarPropietario(p1);
-							// 		else
-							// 			boolean propietario1Ok = Kudeatzailea.getInstance().crearPropietario(p1);
-							// } else {
-							// 		if(datosProp.getIsUpdate()){
-							// 			boolean propietario1Ok = Kudeatzailea.getInstance().modificarPropietario(p1);
-							// 			boolean propietario2Ok = Kudeatzailea.getInstance().modificarPropietario(p2);
-							// 		} else {
-							//			boolean propietario1Ok = Kudeatzailea.getInstance().crearPropietario(p1);
-							// 			boolean propietario2Ok = Kudeatzailea.getInstance().crearPropietario(p2);
-							// 		}
-							// }
-							//
+							if (!segundoPropietario) {
+								boolean update = false;
+								for (Propietario pr: vAllPropietarios){
+									if (pr.compareTo(p1)==0){
+										update = true;
+									}
+								}
+								if (update) {
+									propietario1Ok = Kudeatzailea.getInstance()
+											.actualizarPropietario(p1);
+									Kudeatzailea
+											.getInstance()
+											.crearRelPropInmueble(
+													new RelInmueblePropietario(
+															i.getReferencia(),
+															p1.getDni(),
+															t.getPrecio_venta(),
+															p.getFecha(), ""));
+								} else {
+									propietario1Ok = Kudeatzailea.getInstance()
+											.crearPropietario(p1);
+									Kudeatzailea
+											.getInstance()
+											.crearRelPropInmueble(
+													new RelInmueblePropietario(
+															i.getReferencia(),
+															p1.getDni(),
+															t.getPrecio_venta(),
+															p.getFecha(), ""));
+								}
+							} else {
+								boolean update1 = false;
+								boolean update2 = false;
+								for (Propietario pr: vAllPropietarios){
+									if (pr.compareTo(p1)==0){
+										update1 = true;
+									}
+									if (pr.compareTo(p2)==0){
+										update2 = true;
+									}
+								}
+								if (update1) {
+									propietario1Ok = Kudeatzailea.getInstance()
+											.actualizarPropietario(p1);
+									Kudeatzailea
+											.getInstance()
+											.crearRelPropInmueble(
+													new RelInmueblePropietario(
+															i.getReferencia(),
+															p1.getDni(),
+															t.getPrecio_venta(),
+															p.getFecha(), ""));
+								} else {
+									propietario1Ok = Kudeatzailea.getInstance()
+											.crearPropietario(p1);
+									Kudeatzailea
+											.getInstance()
+											.crearRelPropInmueble(
+													new RelInmueblePropietario(
+															i.getReferencia(),
+															p1.getDni(),
+															t.getPrecio_venta(),
+															p.getFecha(), ""));
+								}
+								if (update2) {
+									propietario2Ok = Kudeatzailea.getInstance()
+											.actualizarPropietario(p2);
+									Kudeatzailea
+											.getInstance()
+											.crearRelPropInmueble(
+													new RelInmueblePropietario(
+															i.getReferencia(),
+															p2.getDni(),
+															t.getPrecio_venta(),
+															p.getFecha(), ""));
+								} else {
+									propietario2Ok = Kudeatzailea.getInstance()
+											.crearPropietario(p2);
+									Kudeatzailea
+											.getInstance()
+											.crearRelPropInmueble(
+													new RelInmueblePropietario(
+															i.getReferencia(),
+															p2.getDni(),
+															t.getPrecio_venta(),
+															p.getFecha(), ""));
+								}
+							}
+
 							if (peritajeOk && inmuebleOk && tasacionOk
-									&& descripcionesOk) {
+									&& descripcionesOk && propietario1Ok
+									&& propietario2Ok) {
 								JOptionPane jop = new JOptionPane(
 										"La operación se ha realizado correctamente.",
 										JOptionPane.INFORMATION_MESSAGE);
 								jop.createDialog("Inmueble introducido")
 										.setVisible(true);
+								/*
+								 * Debería llamar al método
+								 * buscarClientesInteresados(). Si ese método no
+								 * existe, debería destruirse el objeto y
+								 * volverse a asignar desde el panel principal.
+								 */
+
 							} else {
 								JOptionPane jop = new JOptionPane(
-										"No se ha podido introducir el inmueble.",
+										"No se ha podido introducir el inmueble.\nResive sus datos.",
 										JOptionPane.ERROR_MESSAGE);
 								jop.createDialog(
 										"Error al introducir el inmueble")
@@ -171,9 +296,8 @@ public class IntroducirInmueblePanel extends JPanel {
 		}
 	}
 
-	public void segundoPropietario() {
-		tabbedPane.addTab("Datos 2º Propietario", datosProp2);
-		segundoPropietario = true;
+	public boolean isSegundoPropietario() {
+		return segundoPropietario;
 	}
 
 	public static void main(String[] args) {
