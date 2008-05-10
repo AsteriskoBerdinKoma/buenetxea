@@ -105,7 +105,7 @@ public class AreaTablaPropietariosPanel extends JPanel {
 		
 		setLayout(new BorderLayout());
 		add(new JScrollPane(taula), BorderLayout.NORTH);
-		setBorder(new TitledBorder(null, "Taula", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+		setBorder(new TitledBorder(null, "Propietarios existentes", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
 	}
 	
 	public void setOwners(Vector<Propietario> newOwners) {

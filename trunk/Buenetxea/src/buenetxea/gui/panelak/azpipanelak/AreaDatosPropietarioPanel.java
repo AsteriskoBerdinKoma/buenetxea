@@ -494,15 +494,15 @@ public class AreaDatosPropietarioPanel extends JPanel {
 		return (dniPattern.charAt(pos) == DNI.charAt(8));
 	}
 
-	public String getDniFormatedTextfield() {
+	public String getDniTextfield() {
 		return dniTextfield.getText().trim();
 	}
 
-	public Document getDniFormatedTextfieldModel() {
+	public Document getDniTextfieldModel() {
 		return dniTextfield.getDocument();
 	}
 
-	public void setDniFormatedTextfield(String dni) {
+	public void setDniTextfield(String dni) {
 		dniTextfield.setText(dni);
 	}
 

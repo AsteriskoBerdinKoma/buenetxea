@@ -9,15 +9,14 @@ import java.text.ParseException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
-import javax.swing.JTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.MaskFormatter;
 
 import buenetxea.objektuak.Tasacion;
 
@@ -80,9 +79,9 @@ public class DatosTasacionPanel extends JPanel {
 
         llavesLabel = new JLabel();
         cartelPublicidadLabel = new JLabel();
-        cartelSi = new JRadioButton();
+        cartelSi = new JRadioButton("Sí",true);
         cartelNo = new JRadioButton();
-        llavesSi = new JRadioButton();
+        llavesSi = new JRadioButton("Sí",true);
         llavesNo = new JRadioButton();
         cartelGroup = new ButtonGroup();
         llavesGroup = new ButtonGroup();
@@ -301,7 +300,7 @@ public class DatosTasacionPanel extends JPanel {
         this.setLayout(layout);
     }	
 	public boolean comprobarDatos(){
-		boolean correcto = false;
+		boolean correcto = true;
 		return correcto;
 	}
 	
