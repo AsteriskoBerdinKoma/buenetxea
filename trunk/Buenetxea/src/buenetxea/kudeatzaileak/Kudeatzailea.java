@@ -1,8 +1,12 @@
 package buenetxea.kudeatzaileak;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Vector;
 
 import buenetxea.objektuak.Cliente;
@@ -24,7 +28,11 @@ public class Kudeatzailea {
 	private final TasacionKud tasaKud;
 	private final DescripcionKud descriKud;
 
-	private Kudeatzailea() throws SQLException, ClassNotFoundException {
+	private Vector<String> naciones;
+	private Vector<String> nacionalidades;
+
+	private Kudeatzailea() throws SQLException, ClassNotFoundException,
+			IOException {
 		this.inmKud = InmuebleKud.getInstance();
 		this.cliKud = ClienteKud.getInstance();
 		this.propikud = PropietarioKud.getInstance();
@@ -32,10 +40,12 @@ public class Kudeatzailea {
 		this.periKud = PeritajeKud.getInstance();
 		this.tasaKud = TasacionKud.getInstance();
 		this.descriKud = DescripcionKud.getInstance();
+
+		this.cargarNacionalidades();
 	}
 
 	public static Kudeatzailea getInstance() throws SQLException,
-			ClassNotFoundException {
+			ClassNotFoundException, IOException {
 		if (null == instance)
 			instance = new Kudeatzailea();
 		return instance;
@@ -79,21 +89,50 @@ public class Kudeatzailea {
 	public int getLastPeritajeId() throws SQLException {
 		return this.periKud.getLastPeritajeId();
 	}
-	
-	public Vector<Propietario> getPropietarios() throws SQLException{
+
+	public Vector<Propietario> getPropietarios() throws SQLException {
 		return this.propikud.getPropietarios();
 	}
-	public boolean crearInmueble(Inmueble i) throws SQLException{
+
+	public boolean crearInmueble(Inmueble i) throws SQLException {
 		return this.inmKud.insertInmueble(i);
 	}
-	
-	public Peritaje getUltimoPeritaje(int refInmueble)throws SQLException{
+
+	public Peritaje getUltimoPeritaje(int refInmueble) throws SQLException {
 		return this.periKud.getUltimoPeritaje(refInmueble);
 	}
+
 	public boolean crearTasacion(Tasacion t) throws SQLException {
 		return this.tasaKud.insertTasacion(t);
 	}
-	public boolean crearDescripcion (Descripcion d) throws SQLException {
+
+	public boolean crearDescripcion(Descripcion d) throws SQLException {
 		return this.descriKud.insertDescripcion(d);
+	}
+
+	private void cargarNacionalidades() throws IOException {
+		FileInputStream fi = new FileInputStream("ListaNacionalidades");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fi));
+		String lerroa;
+		naciones = new Vector<String>();
+		nacionalidades = new Vector<String>();
+		while ((lerroa = br.readLine()) != null) {
+			String[] s = lerroa.split(":");
+			nacionalidades.addElement(s[0]);
+			naciones.addElement(s[1]);
+		}
+		fi.close();
+		br.close();
+
+		Collections.sort(naciones);
+		Collections.sort(nacionalidades);
+	}
+
+	public String[] getNaciones() throws IOException {
+		return naciones.toArray(new String[naciones.size()]);
+	}
+
+	public String[] getNacionalidades() {
+		return nacionalidades.toArray(new String[nacionalidades.size()]);
 	}
 }
