@@ -14,6 +14,7 @@ import buenetxea.objektuak.Descripcion;
 import buenetxea.objektuak.Inmueble;
 import buenetxea.objektuak.Peritaje;
 import buenetxea.objektuak.Propietario;
+import buenetxea.objektuak.RelInmueblePropietario;
 import buenetxea.objektuak.Tasacion;
 
 public class Kudeatzailea {
@@ -27,6 +28,7 @@ public class Kudeatzailea {
 	private final VentasKud ventasKud;
 	private final TasacionKud tasaKud;
 	private final DescripcionKud descriKud;
+	private final RelInmueblePropietarioKud relInmPropKud;
 
 	private Vector<String> naciones;
 	private Vector<String> nacionalidades;
@@ -40,7 +42,7 @@ public class Kudeatzailea {
 		this.periKud = PeritajeKud.getInstance();
 		this.tasaKud = TasacionKud.getInstance();
 		this.descriKud = DescripcionKud.getInstance();
-
+		this.relInmPropKud = RelInmueblePropietarioKud.getInstance();
 		this.cargarNacionalidades();
 	}
 
@@ -108,6 +110,13 @@ public class Kudeatzailea {
 
 	public boolean crearDescripcion(Descripcion d) throws SQLException {
 		return this.descriKud.insertDescripcion(d);
+	}
+
+	public boolean actualizarPropietario(Propietario p) throws SQLException {
+		return this.propikud.updatePropietario(p);
+	}
+	public boolean crearRelPropInmueble(RelInmueblePropietario r) throws SQLException{
+		return this.relInmPropKud.insertRelInmProp(r);
 	}
 
 	private void cargarNacionalidades() throws IOException {
