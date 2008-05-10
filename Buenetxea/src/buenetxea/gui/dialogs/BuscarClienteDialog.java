@@ -6,6 +6,8 @@ import javax.swing.JTextField;
 
 import buenetxea.gui.panelak.dialogPanels.BucarClientePanel;
 
+import com.swtdesigner.SwingResourceManager;
+
 public class BuscarClienteDialog extends JDialog {
 
 	/**
@@ -19,6 +21,8 @@ public class BuscarClienteDialog extends JDialog {
 	 */
 	public BuscarClienteDialog() {
 		super();
+		setIconImage(SwingResourceManager.getImage(BuscarClienteDialog.class,
+				"/buenetxea/resources/logo_buenetxea.png"));
 		setTitle("Buscar clientes");
 		setModal(true);
 

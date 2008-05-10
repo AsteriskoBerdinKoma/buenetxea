@@ -36,13 +36,13 @@ public class BuenetxeaPanel extends JPanel {
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
 				groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 480,
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 383,
 								Short.MAX_VALUE).addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				GroupLayout.Alignment.TRAILING,
+				GroupLayout.Alignment.TRAILING).addGroup(
+				GroupLayout.Alignment.LEADING,
 				groupLayout.createSequentialGroup().addComponent(label,
-						GroupLayout.PREFERRED_SIZE, 364, Short.MAX_VALUE)
+						GroupLayout.PREFERRED_SIZE, 274, Short.MAX_VALUE)
 						.addContainerGap()));
 		setLayout(groupLayout);
 		//

@@ -3,8 +3,6 @@ package buenetxea.gui.dialogs;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -18,6 +16,8 @@ import buenetxea.gui.panelak.VenderInmueblePanel;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
 
+import com.swtdesigner.SwingResourceManager;
+
 public class SeleccionarInmuebleDialog extends JDialog {
 
 	/**
@@ -30,30 +30,13 @@ public class SeleccionarInmuebleDialog extends JDialog {
 	private VenderInmueblePanel jabea;
 
 	/**
-	 * Launch the application
-	 * 
-	 * @param args
-	 */
-	public static void main(String args[]) {
-		try {
-			SeleccionarInmuebleDialog dialog = new SeleccionarInmuebleDialog();
-			dialog.addWindowListener(new WindowAdapter() {
-				@Override
-				public void windowClosing(WindowEvent e) {
-					System.exit(0);
-				}
-			});
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog
 	 */
 	public SeleccionarInmuebleDialog() {
 		super();
+		setIconImage(SwingResourceManager.getImage(
+				SeleccionarInmuebleDialog.class,
+				"/buenetxea/resources/logo_buenetxea.png"));
 		setTitle("Seleccionar Inmueble");
 		setModal(true);
 

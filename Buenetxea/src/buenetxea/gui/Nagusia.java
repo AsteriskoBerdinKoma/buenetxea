@@ -25,6 +25,7 @@ import buenetxea.gui.dialogs.SeleccionarInmuebleDialog;
 import buenetxea.gui.panelak.BuenetxeaPanel;
 import buenetxea.gui.panelak.CrearClientePanel;
 import buenetxea.gui.panelak.CrearPropietarioPanel;
+import buenetxea.gui.panelak.IntroducirDatosVisitaPanel;
 import buenetxea.gui.panelak.IntroducirInmueblePanel;
 import buenetxea.gui.panelak.LocalizarClientePanel;
 import buenetxea.gui.panelak.LocalizarInmueblePanel;
@@ -51,6 +52,9 @@ public class Nagusia extends JFrame {
 	 */
 	public Nagusia() {
 		super();
+		setTitle("Buenetxea");
+		setIconImage(SwingResourceManager.getImage(Nagusia.class,
+				"/buenetxea/resources/logo_buenetxea.png"));
 
 		nagusia = this;
 
@@ -97,6 +101,11 @@ public class Nagusia extends JFrame {
 			final IntroducirInmueblePanel introducirInmueblePanel = new IntroducirInmueblePanel();
 			introducirInmueblePanel.setName("peritaje");
 			panel.add(introducirInmueblePanel, introducirInmueblePanel
+					.getName());
+
+			final IntroducirDatosVisitaPanel introducirDatosVisitaPanel = new IntroducirDatosVisitaPanel();
+			introducirDatosVisitaPanel.setName("visitas");
+			panel.add(introducirDatosVisitaPanel, introducirDatosVisitaPanel
 					.getName());
 
 			final CrearClientePanel crearClientePanel = new CrearClientePanel();
@@ -165,6 +174,7 @@ public class Nagusia extends JFrame {
 				"/buenetxea/resources/visitas 48x48.png"));
 		visitasButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
+				((CardLayout) panel.getLayout()).show(panel, "visitas");
 			}
 		});
 		toolBar.add(visitasButton);
@@ -182,14 +192,18 @@ public class Nagusia extends JFrame {
 		});
 		toolBar.add(localizarClienteButton);
 		final GroupLayout groupLayout = new GroupLayout(this.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addComponent(panel_1,
-				GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE).addGroup(
-				groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 472,
-								Short.MAX_VALUE).addContainerGap())
-				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 492,
-						Short.MAX_VALUE));
+		groupLayout
+				.setHorizontalGroup(groupLayout.createParallelGroup(
+						GroupLayout.Alignment.LEADING).addComponent(panel_1,
+						GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE)
+						.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 709,
+								Short.MAX_VALUE).addGroup(
+								GroupLayout.Alignment.TRAILING,
+								groupLayout.createSequentialGroup()
+										.addContainerGap().addComponent(panel,
+												GroupLayout.DEFAULT_SIZE, 689,
+												Short.MAX_VALUE)
+										.addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -199,7 +213,7 @@ public class Nagusia extends JFrame {
 								GroupLayout.PREFERRED_SIZE).addPreferredGap(
 								LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(panel, GroupLayout.DEFAULT_SIZE,
-										238, Short.MAX_VALUE).addPreferredGap(
+										489, Short.MAX_VALUE).addPreferredGap(
 										LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(panel_1,
 										GroupLayout.PREFERRED_SIZE,
