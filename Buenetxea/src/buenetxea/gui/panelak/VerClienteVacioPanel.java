@@ -20,11 +20,13 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JRViewer;
 import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
+import buenetxea.objektuak.fitxak.DatosVisita;
 
 public class VerClienteVacioPanel extends JPanel {
 
@@ -63,6 +65,29 @@ public class VerClienteVacioPanel extends JPanel {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		this.add(panel_1, BorderLayout.SOUTH);
 		try {
+			
+			JasperReport jr;
+			HashMap hutsa = new HashMap();
+			
+
+				//DATASOURCE  BETE
+				Collection lista = new ArrayList();
+				JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(lista);
+				
+				//JASPERREPORT BETE
+				JasperReport masterReport = (JasperReport) JRLoader.loadObject("ClienteVacio.jasper");
+				JasperPrint jp = JasperFillManager.fillReport(masterReport,hutsa, datasource);
+
+				JRViewer jrv = new JRViewer(jp);
+				VerClienteVacioPanel.this.add(jrv, BorderLayout.CENTER);
+				VerClienteVacioPanel.this.validate();
+				VerClienteVacioPanel.this.repaint();
+			
+			
+			
+			
+			
+			/*
 			JasperReport jr;
 			JasperPrint jp;
 			InprimagailuKudeatzailea inpr = InprimagailuKudeatzailea.getInstance();
@@ -81,14 +106,10 @@ public class VerClienteVacioPanel extends JPanel {
 				JRViewer jrv = new JRViewer(jp);
 				VerClienteVacioPanel.this.add(jrv, BorderLayout.CENTER);
 				VerClienteVacioPanel.this.validate();
-				VerClienteVacioPanel.this.repaint();
+				VerClienteVacioPanel.this.repaint();*/
+				
+				
 			} catch (JRException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

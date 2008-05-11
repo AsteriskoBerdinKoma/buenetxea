@@ -23,6 +23,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JRViewer;
 import buenetxea.db.Connector;
 import buenetxea.gui.Nagusia;
@@ -72,6 +73,25 @@ public class VerPeritajePanel extends JPanel {
 		this.add(panel_1, BorderLayout.SOUTH);
 		
 		try {
+			
+			JasperReport jr;
+			HashMap hutsa = new HashMap();
+			
+
+				//DATASOURCE  BETE
+				Collection lista = new ArrayList();
+				JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(lista);
+				
+				//JASPERREPORT BETE
+				JasperReport masterReport = (JasperReport) JRLoader.loadObject("Peritaje.jasper");
+				JasperPrint jp = JasperFillManager.fillReport(masterReport,hutsa, datasource);
+
+				JRViewer jrv = new JRViewer(jp);
+				VerPeritajePanel.this.add(jrv, BorderLayout.CENTER);
+				VerPeritajePanel.this.validate();
+				VerPeritajePanel.this.repaint();
+				
+			/*
 			JasperReport jr;
 			JasperPrint jp;
 			InprimagailuKudeatzailea inpr = InprimagailuKudeatzailea.getInstance();
@@ -91,14 +111,9 @@ public class VerPeritajePanel extends JPanel {
 				VerPeritajePanel.this.add(jrv, BorderLayout.CENTER);
 				VerPeritajePanel.this.validate();
 				VerPeritajePanel.this.repaint();
+				*/
 				
 			} catch (JRException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

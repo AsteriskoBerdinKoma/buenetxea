@@ -9,22 +9,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRPrintPage;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JRViewer;
 import buenetxea.db.Connector;
 import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
 import buenetxea.kudeatzaileak.Kudeatzailea;
+import buenetxea.objektuak.Descripcion;
 import buenetxea.objektuak.Inmueble;
+import buenetxea.objektuak.fitxak.DatosCliente;
+import buenetxea.objektuak.fitxak.DatosInmueble;
 
 public class VerClientePanel extends JPanel {
 
@@ -72,24 +78,34 @@ public class VerClientePanel extends JPanel {
 			public void actionPerformed(final ActionEvent arg0){
 				try {
 				JasperReport jr;
-				JasperPrint jp;
+				JasperPrint jp = null;
 				InprimagailuKudeatzailea inpr = InprimagailuKudeatzailea.getInstance();
+				DatosCliente dc = new DatosCliente();
 				
-					Collection<Inmueble> lista = new ArrayList<Inmueble>();
-				//	lista.add(Kudeatzailea.getInstance().getInmueble(1));
+					// Datasourceak betetzen dira.
+				    dc =inpr.InprimatuCliente(clientedniazkena);
+					Collection<DatosCliente> lista = new ArrayList<DatosCliente>();
+					lista.add(dc);
 					JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(
 							lista);
+					JRBeanCollectionDataSource datasourceSubreport = new JRBeanCollectionDataSource(
+							inpr.ClienteSubReport(clientedniazkena));
 
-					// HAU KONPILATZEKO DA, .jasper fitxategia pasata ez da
-					// behar lerro hau jartzea.
-					// jr =
-					// JasperCompileManager.compileReport("inmueble.jrxml");
-					jp = JasperFillManager.fillReport("Cliente.jasper",
-							inpr.InprimatuCliente(clientedniazkena),Connector.getConnection());
-					JRViewer jrv = new JRViewer(jp);
-					VerClientePanel.this.add(jrv, BorderLayout.CENTER);
-					VerClientePanel.this.validate();
-					VerClientePanel.this.repaint();
+					JasperReport masterReport = (JasperReport) JRLoader
+							.loadObject("Cliente.jasper");
+					JasperReport subReport = (JasperReport) JRLoader
+							.loadObject("cliente_subreport1.jasper");
+
+					Map masterParams = new HashMap();
+					masterParams.put("SUBREPORT", subReport);
+					masterParams.put("SUBREPORT_DATASOURCE", datasourceSubreport);
+
+					jp.removePage(0);
+					jp.addPage((JRPrintPage) JasperFillManager.fillReport(masterReport,
+							masterParams, datasource).getPages().get(0));
+
+					
+					
 				} catch (JRException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
