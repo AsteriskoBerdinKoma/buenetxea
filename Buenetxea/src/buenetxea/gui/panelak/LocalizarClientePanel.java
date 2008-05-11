@@ -25,7 +25,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
 import buenetxea.db.ResultSetTableModel;
-import buenetxea.gui.dialogs.BuscarClienteDialog;
+import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 
 public class LocalizarClientePanel extends JPanel {
@@ -43,9 +43,6 @@ public class LocalizarClientePanel extends JPanel {
 	private ResultSetTableModel tableModel;
 	private JComboBox comboBox;
 
-	private BuscarClienteDialog jabea;
-	private boolean closeAfterSave;
-
 	private Kudeatzailea kud;
 
 	/**
@@ -55,8 +52,6 @@ public class LocalizarClientePanel extends JPanel {
 		super();
 
 		try {
-			closeAfterSave = false;
-
 			kud = Kudeatzailea.getInstance();
 
 			setBorder(new TitledBorder(null, "Buscar Cliente",
@@ -96,19 +91,16 @@ public class LocalizarClientePanel extends JPanel {
 
 			dniTextField.setColumns(9);
 
-			JButton venderInmuebleAlButton;
-			venderInmuebleAlButton = new JButton();
-			venderInmuebleAlButton.addActionListener(new ActionListener() {
+			JButton verClienteButton;
+			verClienteButton = new JButton();
+			verClienteButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent arg0) {
 					String dni = (String) table.getValueAt(table
 							.getSelectedRow(), 0);
-					if (closeAfterSave) {
-						jabea.setSavedDNI(dni);
-						jabea.dispose();
-					}
+					Nagusia.getInstance().showVerCliente(dni);
 				}
 			});
-			venderInmuebleAlButton.setText("Seleccionar cliente");
+			verClienteButton.setText("Ver Cliente");
 
 			apellido2TextField = new JTextField();
 
@@ -137,10 +129,7 @@ public class LocalizarClientePanel extends JPanel {
 					if (e.getClickCount() == 2) {
 						String dni = (String) table.getValueAt(table
 								.getSelectedRow(), 0);
-						if (closeAfterSave) {
-							jabea.setSavedDNI(dni);
-							jabea.dispose();
-						}
+						Nagusia.getInstance().showVerCliente(dni);
 					}
 				}
 			});
@@ -325,7 +314,7 @@ public class LocalizarClientePanel extends JPanel {
 																	495,
 																	Short.MAX_VALUE)
 															.addComponent(
-																	venderInmuebleAlButton))
+																	verClienteButton))
 											.addContainerGap()));
 			groupLayout_1.setVerticalGroup(groupLayout_1.createParallelGroup(
 					GroupLayout.Alignment.TRAILING).addGroup(
@@ -338,8 +327,7 @@ public class LocalizarClientePanel extends JPanel {
 							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
 									146, Short.MAX_VALUE).addPreferredGap(
 									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(venderInmuebleAlButton)
-							.addContainerGap()));
+							.addComponent(verClienteButton).addContainerGap()));
 			setLayout(groupLayout_1);
 			//
 		} catch (ParseException e1) {
@@ -387,10 +375,5 @@ public class LocalizarClientePanel extends JPanel {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public void setCloseAfterSave(BuscarClienteDialog owner, boolean close) {
-		this.jabea = owner;
-		this.closeAfterSave = close;
 	}
 }
