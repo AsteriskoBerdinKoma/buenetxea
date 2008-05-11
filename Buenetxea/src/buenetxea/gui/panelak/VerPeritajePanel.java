@@ -30,6 +30,7 @@ import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
+import buenetxea.objektuak.fitxak.DatosVisita;
 
 public class VerPeritajePanel extends JPanel {
 
@@ -38,11 +39,13 @@ public class VerPeritajePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final Nagusia jabea;
-	private final Connection connection;
-	private final Statement statement;
+	//private final Nagusia jabea;
+	//private final Connection connection;
+	//private final Statement statement;
 	/**
 	 * Create the panel
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 * @throws SQLException 
 	 * @throws IOException 
@@ -51,12 +54,13 @@ public class VerPeritajePanel extends JPanel {
 	 * @throws FileNotFoundException
 	 */
 
-	public VerPeritajePanel(Nagusia jabea) throws SQLException, ClassNotFoundException, IOException {
+	//public VerPeritajePanel(Nagusia jabea) throws SQLException, ClassNotFoundException, IOException {
+		public VerPeritajePanel(){
 		super();
 
-		this.jabea = jabea;
-		this.connection = Connector.getConnection();
-		this.statement = Connector.getStatement();
+		//this.jabea = jabea;
+		//this.connection = Connector.getConnection();
+		//this.statement = Connector.getStatement();
 		this.setBorder(new TitledBorder(null, "Ver visita",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
@@ -75,16 +79,18 @@ public class VerPeritajePanel extends JPanel {
 		try {
 			
 			JasperReport jr;
+			DatosVisita dv = new DatosVisita();
 			HashMap hutsa = new HashMap();
-			
 
 				//DATASOURCE  BETE
-				Collection lista = new ArrayList();
+				Collection<DatosVisita> lista = new ArrayList<DatosVisita>();
+				lista.add(dv);
 				JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(lista);
 				
 				//JASPERREPORT BETE
 				JasperReport masterReport = (JasperReport) JRLoader.loadObject("Peritaje.jasper");
 				JasperPrint jp = JasperFillManager.fillReport(masterReport,hutsa, datasource);
+
 
 				JRViewer jrv = new JRViewer(jp);
 				VerPeritajePanel.this.add(jrv, BorderLayout.CENTER);

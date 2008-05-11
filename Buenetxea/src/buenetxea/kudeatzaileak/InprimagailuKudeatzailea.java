@@ -135,80 +135,7 @@ public class InprimagailuKudeatzailea {
 		}
 		return parameters;
 	}
-	/*
-	public HashMap InprimatuVisita(String clientedni,int inmuebleref, Date fecha, int hora, int minuto)throws SQLException{
-		String direccion;
-		String zona;
-		String nombre;
-		String apellido1;
-		String representante;
-		int telefono;
-		double nuevo_precio;
-		double preciopesetas;
-		boolean llaves;
-		HashMap parameters = new HashMap();
-		String query = "SELECT * FROM inmueble,cliente,rel_visita WHERE referencia = ? AND dni = ? AND fk_cliente_dni = ?";
-		PreparedStatement ps = this.connection.prepareStatement(query);
-		ps.setInt(1, inmuebleref);
-		ps.setString(2, clientedni);
-		ps.setString(3, clientedni);
-		ResultSet rs = ps.executeQuery();
-		if (rs.next()) {
-			zona = rs.getString("zona");
-			direccion = rs.getString("direccion");
-			representante = rs.getString("representante");
-			nombre = rs.getString("nombre");
-			apellido1 = rs.getString("apellido1");
-			telefono = rs.getInt("telefono");
-			llaves = rs.getBoolean("llaves");
-			parameters.put("dni", clientedni);
-			parameters.put("direccion",direccion);
-			parameters.put("zona",zona);
-			parameters.put("nombre",nombre);
-			parameters.put("apellido1",apellido1);
-			parameters.put("telefono",telefono);
-			parameters.put("fecha",fecha);
-			parameters.put("hora",hora);
-			parameters.put("minuto",minuto);
-			parameters.put("representante",representante);
-			
-		}
-		ps.close();
-		rs.close();
-		
-		String query2 = "SELECT nuevo_precio FROM rel_inmueble_propietario WHERE fk_inmueble_referencia = ? ORDER BY fk_inmueble_referencia DESC";
-		PreparedStatement ps2 = this.connection.prepareStatement(query2);
-		ps2.setInt(1, inmuebleref);
-		ResultSet rs2 = ps2.executeQuery();
-		if (rs2.next()) {
-			nuevo_precio = rs2.getDouble("nuevo_precio");
-			parameters.put("nuevo_precio",nuevo_precio);
-			preciopesetas = nuevo_precio*166.386;
-			parameters.put("preciopesetas",preciopesetas);
-		}
-		ps2.close();
-		rs2.close();
-		
-		String query3 = "SELECT llaves FROM rel_peritaje_inmueble WHERE fk_peritaje_referencia = ? ORDER BY fk_peritaje_fecha DESC";
-		PreparedStatement ps3 = this.connection.prepareStatement(query3);
-		ps3.setInt(1, inmuebleref);
-		ResultSet rs3 = ps3.executeQuery();
-		if (rs3.next()) {
-			llaves = rs3.getBoolean("llaves");
-		
-			if(llaves){
-				parameters.put("llaves","si");
-				}
-				else{
-				parameters.put("llaves","no");
-				}
-		}
-		ps3.close();
-		rs3.close();
-		return parameters;
-		
-	}
-	*/
+	
 	public DatosVisita InprimatuVisita(String clientedni,int inmuebleref, Date fecha, int hora, int minuto)throws SQLException{
 		
 
@@ -315,6 +242,81 @@ public class InprimagailuKudeatzailea {
 		}
 		return bektorea;
 	}
+	/*
+	public HashMap InprimatuVisita(String clientedni,int inmuebleref, Date fecha, int hora, int minuto)throws SQLException{
+		String direccion;
+		String zona;
+		String nombre;
+		String apellido1;
+		String representante;
+		int telefono;
+		double nuevo_precio;
+		double preciopesetas;
+		boolean llaves;
+		HashMap parameters = new HashMap();
+		String query = "SELECT * FROM inmueble,cliente,rel_visita WHERE referencia = ? AND dni = ? AND fk_cliente_dni = ?";
+		PreparedStatement ps = this.connection.prepareStatement(query);
+		ps.setInt(1, inmuebleref);
+		ps.setString(2, clientedni);
+		ps.setString(3, clientedni);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			zona = rs.getString("zona");
+			direccion = rs.getString("direccion");
+			representante = rs.getString("representante");
+			nombre = rs.getString("nombre");
+			apellido1 = rs.getString("apellido1");
+			telefono = rs.getInt("telefono");
+			llaves = rs.getBoolean("llaves");
+			parameters.put("dni", clientedni);
+			parameters.put("direccion",direccion);
+			parameters.put("zona",zona);
+			parameters.put("nombre",nombre);
+			parameters.put("apellido1",apellido1);
+			parameters.put("telefono",telefono);
+			parameters.put("fecha",fecha);
+			parameters.put("hora",hora);
+			parameters.put("minuto",minuto);
+			parameters.put("representante",representante);
+			
+		}
+		ps.close();
+		rs.close();
+		
+		String query2 = "SELECT nuevo_precio FROM rel_inmueble_propietario WHERE fk_inmueble_referencia = ? ORDER BY fk_inmueble_referencia DESC";
+		PreparedStatement ps2 = this.connection.prepareStatement(query2);
+		ps2.setInt(1, inmuebleref);
+		ResultSet rs2 = ps2.executeQuery();
+		if (rs2.next()) {
+			nuevo_precio = rs2.getDouble("nuevo_precio");
+			parameters.put("nuevo_precio",nuevo_precio);
+			preciopesetas = nuevo_precio*166.386;
+			parameters.put("preciopesetas",preciopesetas);
+		}
+		ps2.close();
+		rs2.close();
+		
+		String query3 = "SELECT llaves FROM rel_peritaje_inmueble WHERE fk_peritaje_referencia = ? ORDER BY fk_peritaje_fecha DESC";
+		PreparedStatement ps3 = this.connection.prepareStatement(query3);
+		ps3.setInt(1, inmuebleref);
+		ResultSet rs3 = ps3.executeQuery();
+		if (rs3.next()) {
+			llaves = rs3.getBoolean("llaves");
+		
+			if(llaves){
+				parameters.put("llaves","si");
+				}
+				else{
+				parameters.put("llaves","no");
+				}
+		}
+		ps3.close();
+		rs3.close();
+		return parameters;
+		
+	}
+	*/
+	
 	/*
 	
 	public HashMap InprimatuCliente(String clientedni) throws SQLException{
