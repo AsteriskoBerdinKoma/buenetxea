@@ -155,37 +155,23 @@ public class BucarClientePanel extends JPanel {
 							.addGroup(
 									groupLayout_3
 											.createSequentialGroup()
+											.addGap(15, 15, 15)
 											.addGroup(
 													groupLayout_3
 															.createParallelGroup(
-																	GroupLayout.Alignment.TRAILING,
-																	false)
-															.addGroup(
-																	groupLayout_3
-																			.createSequentialGroup()
-																			.addContainerGap(
-																					GroupLayout.DEFAULT_SIZE,
-																					Short.MAX_VALUE)
-																			.addComponent(
-																					nacionalidadLabel))
-															.addGroup(
-																	GroupLayout.Alignment.LEADING,
-																	groupLayout_3
-																			.createSequentialGroup()
-																			.addGap(
-																					15,
-																					15,
-																					15)
-																			.addGroup(
-																					groupLayout_3
-																							.createParallelGroup(
-																									GroupLayout.Alignment.TRAILING)
-																							.addComponent(
-																									apellidosLabel)
-																							.addComponent(
-																									dniLabel)
-																							.addComponent(
-																									segundoApellidoLabel))))
+																	GroupLayout.Alignment.LEADING)
+															.addComponent(
+																	nacionalidadLabel,
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	segundoApellidoLabel,
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	apellidosLabel,
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	dniLabel,
+																	GroupLayout.Alignment.TRAILING))
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
 											.addGroup(
@@ -195,10 +181,29 @@ public class BucarClientePanel extends JPanel {
 															.addGroup(
 																	groupLayout_3
 																			.createSequentialGroup()
+																			.addComponent(
+																					comboBox,
+																					GroupLayout.PREFERRED_SIZE,
+																					119,
+																					GroupLayout.PREFERRED_SIZE)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED,
+																					142,
+																					Short.MAX_VALUE)
+																			.addComponent(
+																					buscarClientesButton))
+															.addGroup(
+																	groupLayout_3
+																			.createSequentialGroup()
 																			.addGroup(
 																					groupLayout_3
 																							.createParallelGroup(
 																									GroupLayout.Alignment.LEADING)
+																							.addComponent(
+																									apellido2TextField,
+																									GroupLayout.DEFAULT_SIZE,
+																									247,
+																									Short.MAX_VALUE)
 																							.addGroup(
 																									groupLayout_3
 																											.createSequentialGroup()
@@ -216,38 +221,18 @@ public class BucarClientePanel extends JPanel {
 																											.addComponent(
 																													nombreTextField,
 																													GroupLayout.DEFAULT_SIZE,
-																													142,
+																													130,
 																													Short.MAX_VALUE))
-																							.addComponent(
-																									apellido2TextField,
-																									GroupLayout.DEFAULT_SIZE,
-																									259,
-																									Short.MAX_VALUE)
 																							.addComponent(
 																									apellido1TextField,
 																									GroupLayout.DEFAULT_SIZE,
-																									259,
+																									247,
 																									Short.MAX_VALUE))
 																			.addGap(
-																					119,
-																					119,
-																					119))
-															.addGroup(
-																	GroupLayout.Alignment.TRAILING,
-																	groupLayout_3
-																			.createSequentialGroup()
-																			.addComponent(
-																					comboBox,
-																					GroupLayout.PREFERRED_SIZE,
-																					119,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED,
-																					142,
-																					Short.MAX_VALUE)
-																			.addComponent(
-																					buscarClientesButton)
-																			.addContainerGap()))));
+																					117,
+																					117,
+																					117)))
+											.addContainerGap()));
 			groupLayout_3
 					.setVerticalGroup(groupLayout_3
 							.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -292,43 +277,28 @@ public class BucarClientePanel extends JPanel {
 															.createParallelGroup(
 																	GroupLayout.Alignment.BASELINE)
 															.addComponent(
+																	segundoApellidoLabel)
+															.addComponent(
 																	apellido2TextField,
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout_3
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	nacionalidadLabel)
+															.addComponent(
+																	comboBox,
 																	GroupLayout.PREFERRED_SIZE,
 																	GroupLayout.DEFAULT_SIZE,
 																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
-																	segundoApellidoLabel))
-											.addGroup(
-													groupLayout_3
-															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
-															.addGroup(
-																	groupLayout_3
-																			.createSequentialGroup()
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED,
-																					12,
-																					Short.MAX_VALUE)
-																			.addComponent(
-																					buscarClientesButton)
-																			.addContainerGap())
-															.addGroup(
-																	groupLayout_3
-																			.createSequentialGroup()
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addGroup(
-																					groupLayout_3
-																							.createParallelGroup(
-																									GroupLayout.Alignment.BASELINE)
-																							.addComponent(
-																									nacionalidadLabel)
-																							.addComponent(
-																									comboBox,
-																									GroupLayout.PREFERRED_SIZE,
-																									GroupLayout.DEFAULT_SIZE,
-																									GroupLayout.PREFERRED_SIZE))
-																			.addContainerGap()))));
+																	buscarClientesButton))
+											.addContainerGap()));
 			panel_2.setLayout(groupLayout_3);
 			final GroupLayout groupLayout_1 = new GroupLayout(this);
 			groupLayout_1
@@ -343,15 +313,15 @@ public class BucarClientePanel extends JPanel {
 															.createParallelGroup(
 																	GroupLayout.Alignment.TRAILING)
 															.addComponent(
-																	panel_2,
-																	GroupLayout.Alignment.LEADING,
-																	GroupLayout.PREFERRED_SIZE,
-																	495,
-																	Short.MAX_VALUE)
-															.addComponent(
 																	scrollPane,
 																	GroupLayout.Alignment.LEADING,
 																	GroupLayout.DEFAULT_SIZE,
+																	495,
+																	Short.MAX_VALUE)
+															.addComponent(
+																	panel_2,
+																	GroupLayout.Alignment.LEADING,
+																	GroupLayout.PREFERRED_SIZE,
 																	495,
 																	Short.MAX_VALUE)
 															.addComponent(
@@ -361,13 +331,12 @@ public class BucarClientePanel extends JPanel {
 					GroupLayout.Alignment.TRAILING).addGroup(
 					groupLayout_1.createSequentialGroup().addContainerGap()
 							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE,
-									148, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED, 26,
-									Short.MAX_VALUE).addComponent(scrollPane,
-									GroupLayout.PREFERRED_SIZE, 120,
+									GroupLayout.DEFAULT_SIZE,
 									GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
+									146, Short.MAX_VALUE).addPreferredGap(
 									LayoutStyle.ComponentPlacement.RELATED)
 							.addComponent(venderInmuebleAlButton)
 							.addContainerGap()));
