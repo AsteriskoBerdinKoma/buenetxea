@@ -406,8 +406,16 @@ public class LocalizarInmueblePanel extends JPanel {
 			    {"Philip", "Milne",
 			     "Pool", new Integer(10)}
 			};
-		table = new JTable(data, zutabeIzenak);
+		table = new JTable(data, zutabeIzena);
 		scrollPane.setViewportView(table);
+		
+		String[] zutabeIzena = { "Fecha", "Resultado de visitas" };
+		Object[][] data2 = { { new Integer(5), "Resultado bueno" },
+				{ new Integer(3), "Resultado fallido" }, };
+		table = new JTable(data2, zutabeIzena);
+		// scrollPane.setViewportView(table);
+
+		
 		final GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)

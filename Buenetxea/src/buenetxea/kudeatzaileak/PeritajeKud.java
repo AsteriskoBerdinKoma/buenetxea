@@ -59,7 +59,8 @@ public class PeritajeKud {
 		int altura_real_piso;
 		double gastos_comun;
 		String observaciones;
-
+		//int numero_habitacion;
+		
 		String query = "SELECT * "
 				+ "FROM peritaje P INNER JOIN rel_peritaje_inmueble R ON "
 				+ "P.id = R.fk_peritaje_id INNNER JOIN inmueble I ON "
