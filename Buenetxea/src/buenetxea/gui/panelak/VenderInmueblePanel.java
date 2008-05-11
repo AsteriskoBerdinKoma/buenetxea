@@ -158,8 +158,7 @@ public class VenderInmueblePanel extends JPanel {
 											JOptionPane.INFORMATION_MESSAGE);
 									jop.createDialog("Inmueble vendido")
 											.setVisible(true);
-									setInmueble(kud.getInmueble(inmueble
-											.getReferencia()));
+									setInmueble(inmueble.getReferencia());
 								} else {
 									JOptionPane jop = new JOptionPane(
 											"Ha ocurrido un error al vender el inmueble seleccionado",
@@ -691,33 +690,47 @@ public class VenderInmueblePanel extends JPanel {
 		}
 	}
 
-	public void setInmueble(Inmueble inmueble) {
-		this.inmueble = inmueble;
-		this.label_1.setText(Integer.toString(inmueble.getReferencia()));
-		this.label_2.setText(inmueble.getZona());
-		this.label_3.setText(inmueble.getDireccion());
-		if (inmueble.isVendido()) {
-			label_8.setText("Vendido");
-			List<Component> l1 = Arrays.asList(panel_2.getComponents());
-			for (Component c : l1)
-				c.setEnabled(false);
-			List<Component> l2 = Arrays.asList(panel.getComponents());
-			for (Component c : l2)
-				c.setEnabled(false);
-			venderInmuebleButton.setEnabled(false);
-			JOptionPane jop = new JOptionPane(
-					"El inmueble seleccionado no está en venta.",
-					JOptionPane.ERROR_MESSAGE);
-			jop.createDialog("El inmueble no está en venta").setVisible(true);
-		} else {
-			label_8.setText("En venta");
-			List<Component> l1 = Arrays.asList(panel_2.getComponents());
-			for (Component c : l1)
-				c.setEnabled(true);
-			List<Component> l2 = Arrays.asList(panel.getComponents());
-			for (Component c : l2)
-				c.setEnabled(true);
-			venderInmuebleButton.setEnabled(true);
+	public void setInmueble(int referencia) {
+		try {
+			this.inmueble = kud.getInmueble(referencia);
+			this.label_1.setText(Integer.toString(inmueble.getReferencia()));
+			this.label_2.setText(inmueble.getZona());
+			this.label_3.setText(inmueble.getDireccion());
+			if (inmueble.isVendido()) {
+				label_8.setText("Vendido");
+				List<Component> l1 = Arrays.asList(panel_2.getComponents());
+				for (Component c : l1)
+					c.setEnabled(false);
+				List<Component> l2 = Arrays.asList(panel.getComponents());
+				for (Component c : l2)
+					c.setEnabled(false);
+				venderInmuebleButton.setEnabled(false);
+				JOptionPane jop = new JOptionPane(
+						"El inmueble seleccionado no está en venta.",
+						JOptionPane.ERROR_MESSAGE);
+				jop.createDialog("El inmueble no está en venta").setVisible(
+						true);
+			} else {
+				label_8.setText("En venta");
+				List<Component> l1 = Arrays.asList(panel_2.getComponents());
+				for (Component c : l1)
+					c.setEnabled(true);
+				List<Component> l2 = Arrays.asList(panel.getComponents());
+				for (Component c : l2)
+					c.setEnabled(true);
+				venderInmuebleButton.setEnabled(true);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.inmueble = null;
+			this.label_1.setText("");
+			this.label_2.setText("");
+			this.label_3.setText("");
 		}
+	}
+
+	public void updateInmueble() {
+		setInmueble(inmueble.getReferencia());
 	}
 }
