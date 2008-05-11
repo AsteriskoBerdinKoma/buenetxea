@@ -85,7 +85,7 @@ public class VerClientePanel extends JPanel {
 					// jr =
 					// JasperCompileManager.compileReport("inmueble.jrxml");
 					jp = JasperFillManager.fillReport("Cliente.jasper",
-							inpr.InprimatuCliente(clientedniazkena), Connector.getConnection());
+							inpr.InprimatuCliente(clientedniazkena),Connector.getConnection());
 					JRViewer jrv = new JRViewer(jp);
 					VerClientePanel.this.add(jrv, BorderLayout.CENTER);
 					VerClientePanel.this.validate();

@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,12 +44,13 @@ public class VerPeritajePanel extends JPanel {
 	 * Create the panel
 	 * @throws ClassNotFoundException 
 	 * @throws SQLException 
+	 * @throws IOException 
 	 * 
 	 * @throws JRException
 	 * @throws FileNotFoundException
 	 */
 
-	public VerPeritajePanel(Nagusia jabea) throws SQLException, ClassNotFoundException {
+	public VerPeritajePanel(Nagusia jabea) throws SQLException, ClassNotFoundException, IOException {
 		super();
 
 		this.jabea = jabea;
