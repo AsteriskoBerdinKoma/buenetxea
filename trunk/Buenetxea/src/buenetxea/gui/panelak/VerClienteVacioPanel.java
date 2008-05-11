@@ -35,7 +35,7 @@ public class VerClienteVacioPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final Nagusia jabea;
+
 	
 	/**
 	 * Create the panel
@@ -45,10 +45,10 @@ public class VerClienteVacioPanel extends JPanel {
 	 * @throws FileNotFoundException
 	 */
 
-	public VerClienteVacioPanel(Nagusia jabea) throws IOException {
+	public VerClienteVacioPanel() {
 		super();
 
-		this.jabea = jabea;
+
 		
 		this.setBorder(new TitledBorder(null, "Ver cliente solicitado",
 				TitledBorder.DEFAULT_JUSTIFICATION,
@@ -66,17 +66,20 @@ public class VerClienteVacioPanel extends JPanel {
 		this.add(panel_1, BorderLayout.SOUTH);
 		try {
 			
-			JasperReport jr;
-			HashMap hutsa = new HashMap();
 			
+			JasperReport jr;
+			DatosVisita dv = new DatosVisita();
+			HashMap hutsa = new HashMap();
 
 				//DATASOURCE  BETE
-				Collection lista = new ArrayList();
+				Collection<DatosVisita> lista = new ArrayList<DatosVisita>();
+				lista.add(dv);
 				JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(lista);
 				
 				//JASPERREPORT BETE
 				JasperReport masterReport = (JasperReport) JRLoader.loadObject("ClienteVacio.jasper");
 				JasperPrint jp = JasperFillManager.fillReport(masterReport,hutsa, datasource);
+
 
 				JRViewer jrv = new JRViewer(jp);
 				VerClienteVacioPanel.this.add(jrv, BorderLayout.CENTER);
