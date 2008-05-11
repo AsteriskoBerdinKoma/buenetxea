@@ -2,6 +2,8 @@ package buenetxea.gui.panelak.dialogPanels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -106,6 +108,18 @@ public class BucarClientePanel extends JPanel {
 			scrollPane = new JScrollPane();
 
 			table = new JTable();
+			table.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(final MouseEvent e) {
+					if (e.getClickCount() == 2) {
+						String dni = (String) table.getValueAt(table
+								.getSelectedRow(), 0);
+						if (closeAfterSave) {
+							jabea.setSavedDNI(dni);
+							jabea.dispose();
+						}
+					}
+				}
+			});
 			table.setModel(tableModel);
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			scrollPane.setViewportView(table);
