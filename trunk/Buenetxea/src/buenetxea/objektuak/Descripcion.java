@@ -5,8 +5,13 @@ public class Descripcion {
 	private int id;
 	private int fk_peritaje_id;
 	private String tipo;
-	private double m2;
+	// m2 Double izan behar da eta ez double reporteetan balioa ondo erakusteko
+	private Double m2;
 	private String descripcion;
+
+	public Descripcion() {
+
+	}
 
 	public Descripcion(int id, int fk_peritaje_id, String tipo, double m2,
 			String descripcion) {
@@ -18,14 +23,14 @@ public class Descripcion {
 		this.descripcion = descripcion;
 	}
 
-	public int getId(){
+	public int getId() {
 		return id;
 	}
-	
-	public void setId(int id){
+
+	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public int getFk_peritaje_id() {
 		return fk_peritaje_id;
 	}
@@ -42,7 +47,7 @@ public class Descripcion {
 		this.tipo = tipo;
 	}
 
-	public double getM2() {
+	public Double getM2() {
 		return m2;
 	}
 

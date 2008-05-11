@@ -31,6 +31,7 @@ import buenetxea.gui.panelak.LocalizarClientePanel;
 import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
+import buenetxea.gui.panelak.VerInmueblePanel2;
 
 import com.swtdesigner.SwingResourceManager;
 
@@ -126,6 +127,10 @@ public class Nagusia extends JFrame {
 		venderInmueblePanel = new VenderInmueblePanel();
 		venderInmueblePanel.setName("venderInmueble");
 		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
+
+		final VerInmueblePanel2 verInmueblePanel2 = new VerInmueblePanel2();
+		verInmueblePanel2.setName("verInmueble2");
+		panel.add(verInmueblePanel2, verInmueblePanel2.getName());
 		final JButton peritajeButton = new JButton();
 		peritajeButton.setToolTipText("Peritaje");
 		peritajeButton.setIcon(SwingResourceManager.getIcon(Nagusia.class,
@@ -267,6 +272,19 @@ public class Nagusia extends JFrame {
 		});
 		newItemMenuItem_2.setText("Nuevo Cliente");
 		clientesMenu.add(newItemMenuItem_2);
+
+		final JMenu adibideakMenu = new JMenu();
+		adibideakMenu.setText("Adibideak");
+		menuBar.add(adibideakMenu);
+
+		final JMenuItem newItemMenuItem_3 = new JMenuItem();
+		newItemMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel, "verInmueble2");
+			}
+		});
+		newItemMenuItem_3.setText("Ver Inmueble");
+		adibideakMenu.add(newItemMenuItem_3);
 		pack();
 		//
 	}
