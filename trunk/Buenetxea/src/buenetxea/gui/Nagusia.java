@@ -48,6 +48,7 @@ public class Nagusia extends JFrame {
 	private static Nagusia nagusia;
 
 	private VenderInmueblePanel venderInmueblePanel;
+	private VerInmueblePanel2 verInmueblePanel2;
 
 	/**
 	 * Create the frame
@@ -129,7 +130,7 @@ public class Nagusia extends JFrame {
 		venderInmueblePanel.setName("venderInmueble");
 		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
 
-		final VerInmueblePanel2 verInmueblePanel2 = new VerInmueblePanel2();
+		verInmueblePanel2 = new VerInmueblePanel2();
 		verInmueblePanel2.setName("verInmueble2");
 		panel.add(verInmueblePanel2, verInmueblePanel2.getName());
 		final JButton peritajeButton = new JButton();
@@ -293,7 +294,12 @@ public class Nagusia extends JFrame {
 	}
 
 	public void showVenderInmueble(Inmueble inmueble) {
-		venderInmueblePanel.setInmueble(inmueble);
+		venderInmueblePanel.setInmueble(inmueble.getReferencia());
 		((CardLayout) panel.getLayout()).show(panel, "venderInmueble");
+	}
+
+	public void updateInmueble() {
+		verInmueblePanel2.updateInmueble();
+		venderInmueblePanel.updateInmueble();
 	}
 }

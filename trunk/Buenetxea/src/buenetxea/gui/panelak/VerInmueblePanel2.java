@@ -413,4 +413,8 @@ public class VerInmueblePanel2 extends JPanel {
 		}
 		return venderInmuebleButton;
 	}
+
+	public void updateInmueble() {
+		setInmueble(inmueble.getReferencia());
+	}
 }
