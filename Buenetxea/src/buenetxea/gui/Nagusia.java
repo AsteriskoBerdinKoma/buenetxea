@@ -31,7 +31,7 @@ import buenetxea.gui.panelak.LocalizarClientePanel;
 import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
-import buenetxea.gui.panelak.VerInmueblePanel2;
+import buenetxea.gui.panelak.VerInmueblePanel;
 import buenetxea.objektuak.Inmueble;
 
 import com.swtdesigner.SwingResourceManager;
@@ -48,7 +48,7 @@ public class Nagusia extends JFrame {
 	private static Nagusia nagusia;
 
 	private VenderInmueblePanel venderInmueblePanel;
-	private VerInmueblePanel2 verInmueblePanel2;
+	private VerInmueblePanel verInmueblePanel2;
 
 	/**
 	 * Create the frame
@@ -130,7 +130,7 @@ public class Nagusia extends JFrame {
 		venderInmueblePanel.setName("venderInmueble");
 		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
 
-		verInmueblePanel2 = new VerInmueblePanel2();
+		verInmueblePanel2 = new VerInmueblePanel();
 		verInmueblePanel2.setName("verInmueble2");
 		panel.add(verInmueblePanel2, verInmueblePanel2.getName());
 		final JButton peritajeButton = new JButton();
