@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import buenetxea.db.Connector;
+import buenetxea.objektuak.fitxak.DatosCliente;
+import buenetxea.objektuak.fitxak.DatosClienteSubReport;
 import buenetxea.objektuak.fitxak.DatosVisita;
 
 public class InprimagailuKudeatzailea {
@@ -265,6 +267,56 @@ public class InprimagailuKudeatzailea {
 		
 	}
 	
+
+	public DatosCliente InprimatuCliente(String clientedni) throws SQLException{
+		
+		DatosCliente parameters = new DatosCliente();
+		String query = "SELECT * FROM cliente WHERE dni = ?";
+		PreparedStatement ps = this.connection.prepareStatement(query);
+		ps.setString(1, clientedni);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			parameters.setNombre(rs.getString("nombre"));
+			parameters.setApellido1(rs.getString("apellido1"));
+			parameters.setTelefono(rs.getInt("telefono"));
+			parameters.setAsesor(rs.getString("asesor"));
+			parameters.setMedio(rs.getString("medio"));
+			parameters.setDni(clientedni);
+		}
+		ps.close();
+		rs.close();
+		return parameters;
+	}
+	
+	public HashMap InprimatuPeritaje() throws SQLException{
+		HashMap parameters = new HashMap();
+		return parameters;
+	}
+	
+	public Vector ClienteSubReport(String clientedni) throws SQLException{
+		
+		DatosClienteSubReport datuek = new DatosClienteSubReport();
+		Vector bektorea = new Vector();
+		String query = "SELECT peritajea.`observaciones` AS observaciones,inmueblea.`direccion` AS direccion " +
+				"FROM cliente c INNER JOIN rel_visita visita ON c.`dni` = visita.`fk_cliente_dni` " +
+				"INNER JOIN inmueble inmueblea ON visita.`fk_inmueble_referencia` = inmueblea.`referencia`" +
+				"INNER JOIN rel_peritaje_inmueble rel_p_i ON inmueblea.`referencia` = rel_p_i.`fk_inmueble_referencia`" +
+				"INNER JOIN peritaje peritajea ON rel_p_i.`fk_peritaje_id` = peritajea.`id`" +
+				"WHERE c.`dni` = ?" +
+				"GROUP BY c.`dni`";
+		
+		PreparedStatement ps = this.connection.prepareStatement(query);
+		ps.setString(1, clientedni);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			datuek.setDireccion(rs.getString("direccion"));
+			datuek.setObservaciones(rs.getString("observaciones"));
+			bektorea.add(datuek);
+		}
+		return bektorea;
+	}
+	/*
+	
 	public HashMap InprimatuCliente(String clientedni) throws SQLException{
 		
 		String nombre;
@@ -299,6 +351,6 @@ public class InprimagailuKudeatzailea {
 		HashMap parameters = new HashMap();
 		return parameters;
 	}
-		
+		*/
 }
 	
