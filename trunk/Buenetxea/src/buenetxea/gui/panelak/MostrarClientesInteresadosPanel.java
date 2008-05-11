@@ -46,7 +46,7 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 		
 		
 		table_1 = new JTable();
-		table_1.setSelectionModel(null);
+		//table_1.setSelectionModel(null);
 		table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table_1);
 		table_1.addMouseListener(new MouseAdapter(){
@@ -86,6 +86,7 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 			query += " zona ='" + zonaazkena + "%' AND";
 		query += " desde_habitacion <= '" + num_habazkena + "%' AND hasta_habitacion >= '"
 				+ num_habazkena + "%' AND presupuesto >= '" + precioazkena + "%'";
+		
 		return query;
 	}
 	
