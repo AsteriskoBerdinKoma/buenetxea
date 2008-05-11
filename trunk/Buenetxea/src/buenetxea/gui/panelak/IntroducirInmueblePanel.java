@@ -1,5 +1,6 @@
 package buenetxea.gui.panelak;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
@@ -138,8 +140,8 @@ public class IntroducirInmueblePanel extends JPanel {
 							}
 							if (!segundoPropietario) {
 								boolean update = false;
-								for (Propietario pr: vAllPropietarios){
-									if (pr.compareTo(p1)==0){
+								for (Propietario pr : vAllPropietarios) {
+									if (pr.compareTo(p1) == 0) {
 										update = true;
 									}
 								}
@@ -169,11 +171,11 @@ public class IntroducirInmueblePanel extends JPanel {
 							} else {
 								boolean update1 = false;
 								boolean update2 = false;
-								for (Propietario pr: vAllPropietarios){
-									if (pr.compareTo(p1)==0){
+								for (Propietario pr : vAllPropietarios) {
+									if (pr.compareTo(p1) == 0) {
 										update1 = true;
 									}
-									if (pr.compareTo(p2)==0){
+									if (pr.compareTo(p2) == 0) {
 										update2 = true;
 									}
 								}
@@ -239,6 +241,7 @@ public class IntroducirInmueblePanel extends JPanel {
 								 * existe, debería destruirse el objeto y
 								 * volverse a asignar desde el panel principal.
 								 */
+								limpiarDatos();
 
 							} else {
 								JOptionPane jop = new JOptionPane(
@@ -305,6 +308,46 @@ public class IntroducirInmueblePanel extends JPanel {
 
 	public boolean isSegundoPropietario() {
 		return segundoPropietario;
+	}
+
+	public void limpiarDatos() {
+		
+		try {
+			Vector<Propietario> vpR = Kudeatzailea.getInstance().getPropietarios();
+			datosProp1.setPropietarios(vpR);
+			if (segundoPropietario) {
+				datosProp2.setPropietarios(vpR);
+				Component[] compProp2 = this.datosProp2.getComponents();
+			}
+			Component[] compTas = this.datosTas.getComponents();
+			for (int i = 0; i < compTas.length; i++) {
+				if (compTas[i].getClass().equals(JPanel.class)) {
+					JPanel jp = (JPanel) compTas[i];
+					Component[] jpcomp = jp.getComponents();
+					for (int j = 0; j < jpcomp.length; j++) {
+						if (jpcomp[j].getClass().equals(JTextField.class)) {
+							JTextField x = (JTextField) jpcomp[j];
+							x.setText("0.0");
+						}
+					}
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public boolean isClientesInteresados(double precio, String zona, int numHabit, int numAseos){
+		//Kudeatzailea.getInstance.hayClientesInteresados(precio,zona,numHabit,numAseos);
+		return false;
 	}
 
 	public static void main(String[] args) {
