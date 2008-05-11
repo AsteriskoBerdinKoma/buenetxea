@@ -29,6 +29,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JRViewer;
+import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Descripcion;
 import buenetxea.objektuak.Inmueble;
@@ -38,6 +39,8 @@ import buenetxea.objektuak.fitxak.DatosInmueble;
 
 public class VerInmueblePanel2 extends JPanel {
 
+	private JButton venderInmuebleButton;
+	private JButton modificarInmuebleButton;
 	private JButton button;
 	private JLabel referenciaDelInmuebleLabel;
 	private JButton verFichaDelButton;
@@ -98,6 +101,7 @@ public class VerInmueblePanel2 extends JPanel {
 					datasource);
 
 			viewer = new JRViewer(jp);
+
 			final GroupLayout groupLayout = new GroupLayout((JComponent) this);
 			groupLayout
 					.setHorizontalGroup(groupLayout
@@ -110,49 +114,90 @@ public class VerInmueblePanel2 extends JPanel {
 													groupLayout
 															.createParallelGroup(
 																	GroupLayout.Alignment.LEADING)
+															.addComponent(
+																	viewer,
+																	GroupLayout.Alignment.TRAILING,
+																	GroupLayout.DEFAULT_SIZE,
+																	624,
+																	Short.MAX_VALUE)
 															.addGroup(
 																	groupLayout
 																			.createSequentialGroup()
+																			.addGroup(
+																					groupLayout
+																							.createParallelGroup(
+																									GroupLayout.Alignment.TRAILING)
+																							.addGroup(
+																									groupLayout
+																											.createSequentialGroup()
+																											.addComponent(
+																													getReferenciaDelInmuebleLabel())
+																											.addPreferredGap(
+																													LayoutStyle.ComponentPlacement.RELATED)
+																											.addComponent(
+																													getTextField(),
+																													GroupLayout.PREFERRED_SIZE,
+																													79,
+																													GroupLayout.PREFERRED_SIZE)
+																											.addPreferredGap(
+																													LayoutStyle.ComponentPlacement.RELATED)
+																											.addComponent(
+																													getVerFichaDelButton())
+																											.addPreferredGap(
+																													LayoutStyle.ComponentPlacement.RELATED)
+																											.addComponent(
+																													getButton())
+																											.addPreferredGap(
+																													LayoutStyle.ComponentPlacement.RELATED,
+																													40,
+																													Short.MAX_VALUE))
+																							.addGroup(
+																									groupLayout
+																											.createSequentialGroup()
+																											.addComponent(
+																													getVenderInmuebleButton())
+																											.addPreferredGap(
+																													LayoutStyle.ComponentPlacement.RELATED)))
 																			.addComponent(
-																					getReferenciaDelInmuebleLabel())
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addComponent(
-																					getTextField(),
-																					GroupLayout.PREFERRED_SIZE,
-																					79,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addComponent(
-																					getVerFichaDelButton())
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addComponent(
-																					getButton()))
-															.addComponent(
-																	viewer,
-																	GroupLayout.DEFAULT_SIZE,
-																	464,
-																	Short.MAX_VALUE))
+																					getModificarInmuebleButton())))
 											.addContainerGap()));
-			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-					GroupLayout.Alignment.LEADING).addGroup(
-					groupLayout.createSequentialGroup().addGroup(
-							groupLayout.createParallelGroup(
-									GroupLayout.Alignment.BASELINE)
-									.addComponent(
-											getReferenciaDelInmuebleLabel())
-									.addComponent(getTextField(),
-											GroupLayout.PREFERRED_SIZE,
-											GroupLayout.DEFAULT_SIZE,
-											GroupLayout.PREFERRED_SIZE)
-									.addComponent(getVerFichaDelButton())
-									.addComponent(getButton()))
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(viewer, GroupLayout.DEFAULT_SIZE,
-									305, Short.MAX_VALUE).addContainerGap()));
+			groupLayout
+					.setVerticalGroup(groupLayout
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout
+											.createSequentialGroup()
+											.addGroup(
+													groupLayout
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	getReferenciaDelInmuebleLabel())
+															.addComponent(
+																	getTextField(),
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	getVerFichaDelButton())
+															.addComponent(
+																	getButton()))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addComponent(viewer,
+													GroupLayout.DEFAULT_SIZE,
+													341, Short.MAX_VALUE)
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	getModificarInmuebleButton())
+															.addComponent(
+																	getVenderInmuebleButton()))
+											.addContainerGap()));
 			setLayout(groupLayout);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -260,10 +305,24 @@ public class VerInmueblePanel2 extends JPanel {
 
 			this.validate();
 			this.repaint();
+			enableDisableButtons();
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Errorea eguneratzerakoan");
+		}
+	}
+
+	private void enableDisableButtons() {
+		if (inmueble == null) {
+			modificarInmuebleButton.setEnabled(false);
+			venderInmuebleButton.setEnabled(false);
+		} else {
+			modificarInmuebleButton.setEnabled(true);
+			if (inmueble.isVendido())
+				venderInmuebleButton.setEnabled(false);
+			else
+				venderInmuebleButton.setEnabled(true);
 		}
 	}
 
@@ -318,5 +377,40 @@ public class VerInmueblePanel2 extends JPanel {
 			button.setText("Ver Ficha Vacía");
 		}
 		return button;
+	}
+
+	/**
+	 * @return
+	 */
+	protected JButton getModificarInmuebleButton() {
+		if (modificarInmuebleButton == null) {
+			modificarInmuebleButton = new JButton();
+			modificarInmuebleButton.setEnabled(false);
+			modificarInmuebleButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+				}
+			});
+			modificarInmuebleButton.setText("Modificar Inmueble");
+		}
+		return modificarInmuebleButton;
+	}
+
+	/**
+	 * @return
+	 */
+	protected JButton getVenderInmuebleButton() {
+		if (venderInmuebleButton == null) {
+			venderInmuebleButton = new JButton();
+			venderInmuebleButton.setEnabled(false);
+			venderInmuebleButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					if (inmueble != null) {
+						Nagusia.getInstance().showVenderInmueble(inmueble);
+					}
+				}
+			});
+			venderInmuebleButton.setText("Vender Inmueble");
+		}
+		return venderInmuebleButton;
 	}
 }

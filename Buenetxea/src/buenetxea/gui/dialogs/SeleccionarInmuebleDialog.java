@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 
-import buenetxea.gui.panelak.VenderInmueblePanel;
+import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
 
@@ -28,7 +28,6 @@ public class SeleccionarInmuebleDialog extends JDialog {
 
 	private JTextField textField;
 	private JLabel errorLabel;
-	private VenderInmueblePanel jabea;
 
 	/**
 	 * Create the dialog
@@ -60,24 +59,36 @@ public class SeleccionarInmuebleDialog extends JDialog {
 						errorLabel
 								.setText("El inmueble seleccionado no existe");
 					else {
-						errorLabel.setText("");
-						jabea.setInmueble(inmueble);
-						dispose();
+						if (inmueble.isVendido())
+							errorLabel
+									.setText("El inmueble seleccionado no está en venta");
+						else {
+							errorLabel.setText("");
+							Nagusia.getInstance().showVenderInmueble(inmueble);
+							dispose();
+						}
 					}
 				} catch (NumberFormatException ex) {
 					// TODO Auto-generated catch block
 					ex.printStackTrace();
+					errorLabel
+							.setText("La referencia introducida no es correcta");
 				} catch (SQLException ex) {
 					// TODO Auto-generated catch block
 					ex.printStackTrace();
+					errorLabel
+							.setText("La referencia introducida no es correcta");
 				} catch (ClassNotFoundException ex) {
 					// TODO Auto-generated catch block
 					ex.printStackTrace();
+					errorLabel
+							.setText("La referencia introducida no es correcta");
 				} catch (IOException ex) {
 					// TODO Auto-generated catch block
 					ex.printStackTrace();
+					errorLabel
+							.setText("La referencia introducida no es correcta");
 				}
-				errorLabel.setText("La referencia introducida no es correcta");
 			}
 		});
 		seleccionarButton.setText("Seleccionar");
@@ -131,9 +142,4 @@ public class SeleccionarInmuebleDialog extends JDialog {
 		pack();
 		//
 	}
-
-	public void setJabea(VenderInmueblePanel owner) {
-		this.jabea = owner;
-	}
-
 }
