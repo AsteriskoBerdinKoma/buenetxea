@@ -32,6 +32,7 @@ import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
 import buenetxea.gui.panelak.VerInmueblePanel2;
+import buenetxea.objektuak.Inmueble;
 
 import com.swtdesigner.SwingResourceManager;
 
@@ -239,9 +240,7 @@ public class Nagusia extends JFrame {
 				SeleccionarInmuebleDialog d = new SeleccionarInmuebleDialog();
 				d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				d.setLocationRelativeTo(null);
-				d.setJabea(venderInmueblePanel);
 				d.setVisible(true);
-				((CardLayout) panel.getLayout()).show(panel, "venderInmueble");
 			}
 		});
 		newItemMenuItem_1.setText("Vender Inmueble");
@@ -291,5 +290,10 @@ public class Nagusia extends JFrame {
 
 	public static Nagusia getInstance() {
 		return nagusia;
+	}
+
+	public void showVenderInmueble(Inmueble inmueble) {
+		venderInmueblePanel.setInmueble(inmueble);
+		((CardLayout) panel.getLayout()).show(panel, "venderInmueble");
 	}
 }
