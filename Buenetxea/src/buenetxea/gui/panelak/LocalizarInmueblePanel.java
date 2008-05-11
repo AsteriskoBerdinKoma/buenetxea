@@ -251,9 +251,21 @@ public class LocalizarInmueblePanel extends JPanel {
 		localizarButton_1 = new JButton();
 		localizarButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
-				
-			}
-		});
+				//int numReferencia;
+				//numReferencia = Integer.parseInt(textField.getText());
+				try {
+					//Inmueble inmueble = kud.getInmueble(numReferencia);
+
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+		 		e2.printStackTrace();
+					JOptionPane joptionpane = new JOptionPane(
+							"No se encuentra ningun inmueble de esas caracteristitas.",
+							JOptionPane.ERROR_MESSAGE);
+					joptionpane.createDialog("Inmueble no encontrado")
+							.setVisible(true);
+				}
+			}});
 		localizarButton_1.setText("Localizar");
 
 		JLabel label_1;
@@ -393,7 +405,7 @@ public class LocalizarInmueblePanel extends JPanel {
 		JScrollPane scrollPane;
 		scrollPane = new JScrollPane();
 
-		String[] zutabeIzenak = { "Referencia" , "Zona" , "Direccion", "Vendido"};
+		String[] zutabeIzena = { "Referencia" , "Zona" , "Direccion", "Vendido", "m2_constr", "gas", "luminoso", "techo", "exterior", "anos_finca", "portero", "ascensor", "m2_utilies", "calificacion", "pintura", "tipo_suelo", "orientacion", "desalojo", "m2_parcela", "puertas", "ventanas", "muebles", "altura_edif", "altura_real_piso", "gastos_comun", "observaciones"};
 		Object[][] data = {
 			    {"Mary", "Campione",
 			     "Snowboarding", new Integer(5)},
@@ -409,11 +421,7 @@ public class LocalizarInmueblePanel extends JPanel {
 		table = new JTable(data, zutabeIzena);
 		scrollPane.setViewportView(table);
 		
-		String[] zutabeIzena = { "Fecha", "Resultado de visitas" };
-		Object[][] data2 = { { new Integer(5), "Resultado bueno" },
-				{ new Integer(3), "Resultado fallido" }, };
-		table = new JTable(data2, zutabeIzena);
-		// scrollPane.setViewportView(table);
+
 
 		
 		final GroupLayout groupLayout = new GroupLayout(this);
