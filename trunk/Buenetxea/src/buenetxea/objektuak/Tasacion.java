@@ -3,7 +3,7 @@ package buenetxea.objektuak;
 public class Tasacion {
 	private int fk_peritaje_id;
 	private int fk_inmueble_referencia;
-	private boolean llaves;
+	private Boolean llaves;
 	private double precio_venta;
 	private double precio_comision;
 	private double iva;
@@ -13,8 +13,12 @@ public class Tasacion {
 	private double ideal_compra;
 	private boolean cartel;
 
+	public Tasacion() {
+
+	}
+
 	public Tasacion(int fk_peritaje_id, int fk_inmueble_referencia,
-			boolean llaves, double precio_venta, double precio_comision,
+			Boolean llaves, double precio_venta, double precio_comision,
 			double iva, double neto_propietario, double ideal_venta,
 			double ideal_opcion_compra, double ideal_compra, boolean cartel) {
 		super();
@@ -47,11 +51,11 @@ public class Tasacion {
 		this.fk_inmueble_referencia = fk_inmueble_referencia;
 	}
 
-	public boolean isLlaves() {
+	public Boolean isLlaves() {
 		return llaves;
 	}
 
-	public void setLlaves(boolean llaves) {
+	public void setLlaves(Boolean llaves) {
 		this.llaves = llaves;
 	}
 

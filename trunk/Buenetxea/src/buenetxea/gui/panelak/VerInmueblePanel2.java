@@ -1,6 +1,5 @@
 package buenetxea.gui.panelak;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,11 +12,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRPrintPage;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -33,12 +38,22 @@ import buenetxea.objektuak.fitxak.DatosInmueble;
 
 public class VerInmueblePanel2 extends JPanel {
 
+	private JButton button;
+	private JLabel referenciaDelInmuebleLabel;
+	private JButton verFichaDelButton;
+	private JTextField textField;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JRViewer viewer;
+
 	private Kudeatzailea kud;
+
+	private Inmueble inmueble;
+
+	private JasperPrint jp;
 
 	/**
 	 * Create the panel
@@ -54,61 +69,21 @@ public class VerInmueblePanel2 extends JPanel {
 			this.setBorder(new TitledBorder(null, "Ver Inmueble",
 					TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
-
-			this.setLayout(new BorderLayout());
-
-			final JPanel panel_1 = new JPanel();
-			final FlowLayout flowLayout_1 = new FlowLayout();
-			flowLayout_1.setAlignment(FlowLayout.RIGHT);
-			panel_1.setLayout(flowLayout_1);
-			panel_1.setSize(484, 34);
 			final FlowLayout flowLayout = new FlowLayout();
 			flowLayout.setAlignment(FlowLayout.RIGHT);
-			this.add(panel_1, BorderLayout.SOUTH);
 
-			// JASPER REPORTS
-			Inmueble i = kud.getInmueble(12987);
-			Peritaje p = kud.getLastPeritaje(i.getReferencia());
-			Vector<Descripcion> vDescripciones = kud
-					.getDescripciones(p.getId());
-			// Descripcion d = vDescripciones.firstElement();
-			Tasacion t = kud.getTasacion(p.getId(), i.getReferencia());
-			double nuevoPrecio = kud.getLastPrecio(i.getReferencia());
-			DatosInmueble di = new DatosInmueble(i.getDireccion(), p
-					.getTipo_inmueble(), new Boolean(i.isVendido()), i
-					.getZona(), p.getTipo_venta(), new Long(new Double(
-					nuevoPrecio).longValue()), new Long(new Integer(p
-					.getM2_utiles()).longValue()), new Long(new Integer(p
-					.getM2_constr()).longValue()), new Long(new Integer(p
-					.getM2_parcela()).longValue()), vDescripciones, p
-					.getObservaciones(), new Integer(i.getReferencia()), t
-					.isLlaves(), p.getAltura_real_piso(), p.getAltura_edif(),
-					new Long(new Integer(p.getAnos_finca()).longValue()), p
-							.getOrientacion(), p.getGastos_comun());
-
-			// Datasourceak betetzen dira.
+			// Erreportea hutsik erakusteko aurrekoa komentatu eta ondokoa
+			// erabili.
 			Collection<DatosInmueble> lista = new ArrayList<DatosInmueble>();
-			lista.add(di);
+			lista.add(new DatosInmueble());
+
+			Collection<Descripcion> lista2 = new ArrayList<Descripcion>();
+			lista2.add(new Descripcion());
 
 			JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(
 					lista);
 			JRBeanCollectionDataSource datasourceSubreport = new JRBeanCollectionDataSource(
-					di.getVDescripcion());
-
-			// Erreportea hutsik erakusteko aurrekoa komentatu eta ondokoa
-			// erabili.
-			// Collection<DatosInmueble> lista = new ArrayList<DatosInmueble>();
-			// lista.add(new DatosInmueble());
-			//
-			// Collection<Descripcion> lista2 = new ArrayList<Descripcion>();
-			// lista2.add(new Descripcion());
-			//
-			// JRBeanCollectionDataSource datasource = new
-			// JRBeanCollectionDataSource(
-			// lista);
-			// JRBeanCollectionDataSource datasourceSubreport = new
-			// JRBeanCollectionDataSource(
-			// lista2);
+					lista2);
 
 			JasperReport masterReport = (JasperReport) JRLoader
 					.loadObject("inmueble.jasper");
@@ -119,23 +94,66 @@ public class VerInmueblePanel2 extends JPanel {
 			masterParams.put("SUBREPORT", subReport);
 			masterParams.put("SUBREPORT_DATASOURCE", datasourceSubreport);
 
-			JasperPrint jp = JasperFillManager.fillReport(masterReport,
-					masterParams, datasource);
+			jp = JasperFillManager.fillReport(masterReport, masterParams,
+					datasource);
 
-			JRViewer jrv = new JRViewer(jp);
-			VerInmueblePanel2.this.add(jrv, BorderLayout.CENTER);
-			VerInmueblePanel2.this.validate();
-			VerInmueblePanel2.this.repaint();
-
-			JButton button;
-			button = new JButton();
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(final ActionEvent arg0) {
-				}
-			});
-			panel_1.add(button);
-			button.setText("New JButton");
-			//
+			viewer = new JRViewer(jp);
+			final GroupLayout groupLayout = new GroupLayout((JComponent) this);
+			groupLayout
+					.setHorizontalGroup(groupLayout
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout
+											.createSequentialGroup()
+											.addContainerGap()
+											.addGroup(
+													groupLayout
+															.createParallelGroup(
+																	GroupLayout.Alignment.LEADING)
+															.addGroup(
+																	groupLayout
+																			.createSequentialGroup()
+																			.addComponent(
+																					getReferenciaDelInmuebleLabel())
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					getTextField(),
+																					GroupLayout.PREFERRED_SIZE,
+																					79,
+																					GroupLayout.PREFERRED_SIZE)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					getVerFichaDelButton())
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					getButton()))
+															.addComponent(
+																	viewer,
+																	GroupLayout.DEFAULT_SIZE,
+																	464,
+																	Short.MAX_VALUE))
+											.addContainerGap()));
+			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
+					GroupLayout.Alignment.LEADING).addGroup(
+					groupLayout.createSequentialGroup().addGroup(
+							groupLayout.createParallelGroup(
+									GroupLayout.Alignment.BASELINE)
+									.addComponent(
+											getReferenciaDelInmuebleLabel())
+									.addComponent(getTextField(),
+											GroupLayout.PREFERRED_SIZE,
+											GroupLayout.DEFAULT_SIZE,
+											GroupLayout.PREFERRED_SIZE)
+									.addComponent(getVerFichaDelButton())
+									.addComponent(getButton()))
+							.addPreferredGap(
+									LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(viewer, GroupLayout.DEFAULT_SIZE,
+									305, Short.MAX_VALUE).addContainerGap()));
+			setLayout(groupLayout);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -149,5 +167,156 @@ public class VerInmueblePanel2 extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void setInmueble(int ref) {
+		DatosInmueble di;
+		try {
+			try {
+				if (ref < 0) {
+					di = new DatosInmueble();
+					Vector<Descripcion> vd = new Vector<Descripcion>();
+					vd.addElement(new Descripcion());
+					di.setVDescripcion(vd);
+					inmueble = null;
+				} else {
+					Inmueble i = kud.getInmueble(ref);
+					if (i != null) {
+						inmueble = i;
+						Peritaje p = kud.getLastPeritaje(i.getReferencia());
+						Vector<Descripcion> vDescripciones;
+						Tasacion t;
+						if (p != null) {
+							vDescripciones = kud.getDescripciones(p.getId());
+							if (vDescripciones.size() == 0) {
+								vDescripciones.addElement(new Descripcion());
+							}
+							t = kud.getTasacion(p.getId(), i.getReferencia());
+						} else {
+							p = new Peritaje();
+							vDescripciones = new Vector<Descripcion>();
+							vDescripciones.addElement(new Descripcion());
+							t = new Tasacion();
+						}
+						double nuevoPrecio = kud.getLastPrecio(i
+								.getReferencia());
+						di = new DatosInmueble(i.getDireccion(), p
+								.getTipo_inmueble(),
+								new Boolean(i.isVendido()), i.getZona(), p
+										.getTipo_venta(), new Long(new Double(
+										nuevoPrecio).longValue()), new Long(
+										new Integer(p.getM2_utiles())
+												.longValue()), new Long(
+										new Integer(p.getM2_constr())
+												.longValue()), new Long(
+										new Integer(p.getM2_parcela())
+												.longValue()), vDescripciones,
+								p.getObservaciones(), new Integer(i
+										.getReferencia()), t.isLlaves(), p
+										.getAltura_real_piso(), p
+										.getAltura_edif(), new Long(
+										new Integer(p.getAnos_finca())
+												.longValue()), p
+										.getOrientacion(), p.getGastos_comun());
+					} else {
+						di = new DatosInmueble();
+						Vector<Descripcion> vd = new Vector<Descripcion>();
+						vd.addElement(new Descripcion());
+						di.setVDescripcion(vd);
+						inmueble = null;
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				di = new DatosInmueble();
+				Vector<Descripcion> vd = new Vector<Descripcion>();
+				vd.addElement(new Descripcion());
+				di.setVDescripcion(vd);
+				inmueble = null;
+			}
+
+			// Datasourceak betetzen dira.
+			Collection<DatosInmueble> lista = new ArrayList<DatosInmueble>();
+			lista.add(di);
+
+			JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(
+					lista);
+			JRBeanCollectionDataSource datasourceSubreport = new JRBeanCollectionDataSource(
+					di.getVDescripcion());
+
+			JasperReport masterReport = (JasperReport) JRLoader
+					.loadObject("inmueble.jasper");
+			JasperReport subReport = (JasperReport) JRLoader
+					.loadObject("inmueble_subreport1.jasper");
+
+			Map masterParams = new HashMap();
+			masterParams.put("SUBREPORT", subReport);
+			masterParams.put("SUBREPORT_DATASOURCE", datasourceSubreport);
+
+			jp.removePage(0);
+			jp.addPage((JRPrintPage) JasperFillManager.fillReport(masterReport,
+					masterParams, datasource).getPages().get(0));
+
+			this.validate();
+			this.repaint();
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Errorea eguneratzerakoan");
+		}
+	}
+
+	/**
+	 * @return
+	 */
+	protected JTextField getTextField() {
+		if (textField == null) {
+			textField = new JTextField();
+		}
+		return textField;
+	}
+
+	/**
+	 * @return
+	 */
+	protected JButton getVerFichaDelButton() {
+		if (verFichaDelButton == null) {
+			verFichaDelButton = new JButton();
+			verFichaDelButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					setInmueble(Integer.parseInt(textField.getText()));
+				}
+			});
+			verFichaDelButton.setText("Ver Ficha del Inmueble");
+		}
+		return verFichaDelButton;
+	}
+
+	/**
+	 * @return
+	 */
+	protected JLabel getReferenciaDelInmuebleLabel() {
+		if (referenciaDelInmuebleLabel == null) {
+			referenciaDelInmuebleLabel = new JLabel();
+			referenciaDelInmuebleLabel.setText("Referencia del Inmueble:");
+		}
+		return referenciaDelInmuebleLabel;
+	}
+
+	/**
+	 * @return
+	 */
+	protected JButton getButton() {
+		if (button == null) {
+			button = new JButton();
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					setInmueble(-1);
+				}
+			});
+			button.setText("Ver Ficha Vacía");
+		}
+		return button;
 	}
 }

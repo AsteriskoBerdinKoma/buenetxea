@@ -31,14 +31,18 @@ public class Peritaje {
 	private double gastos_comun;
 	private String observaciones;
 
-	public Peritaje(int id, Calendar fecha, String nombre_perito, String tipo_inmueble,
-			String tipo_venta, int m2_constr, String gas, String luminoso,
-			String techos, String exterior, int anos_finca, String portero,
-			boolean ascensor, int m2_utiles, String calefaccion,
-			String pintura, String tipo_suelo, String orientacion,
-			boolean desalojo, int m2_parcela, String puertas, String ventanas,
-			String muebles, int altura_edif, int altura_real_piso,
-			double gastos_comun, String observaciones) {
+	public Peritaje() {
+
+	}
+
+	public Peritaje(int id, Calendar fecha, String nombre_perito,
+			String tipo_inmueble, String tipo_venta, int m2_constr, String gas,
+			String luminoso, String techos, String exterior, int anos_finca,
+			String portero, boolean ascensor, int m2_utiles,
+			String calefaccion, String pintura, String tipo_suelo,
+			String orientacion, boolean desalojo, int m2_parcela,
+			String puertas, String ventanas, String muebles, int altura_edif,
+			int altura_real_piso, double gastos_comun, String observaciones) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -72,11 +76,11 @@ public class Peritaje {
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public Calendar getFecha() {
 		return fecha;
 	}
