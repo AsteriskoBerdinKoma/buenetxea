@@ -320,4 +320,8 @@ public class Nagusia extends JFrame {
 		verInmueblePanel.setInmueble(referencia);
 		((CardLayout) panel.getLayout()).show(panel, "verInmueble");
 	}
+
+	public void showVerCliente(String dni) {
+
+	}
 }
