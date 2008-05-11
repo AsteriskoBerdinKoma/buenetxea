@@ -48,7 +48,7 @@ public class Nagusia extends JFrame {
 	private static Nagusia nagusia;
 
 	private VenderInmueblePanel venderInmueblePanel;
-	private VerInmueblePanel verInmueblePanel2;
+	private VerInmueblePanel verInmueblePanel;
 
 	/**
 	 * Create the frame
@@ -130,9 +130,9 @@ public class Nagusia extends JFrame {
 		venderInmueblePanel.setName("venderInmueble");
 		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
 
-		verInmueblePanel2 = new VerInmueblePanel();
-		verInmueblePanel2.setName("verInmueble2");
-		panel.add(verInmueblePanel2, verInmueblePanel2.getName());
+		verInmueblePanel = new VerInmueblePanel();
+		verInmueblePanel.setName("verInmueble");
+		panel.add(verInmueblePanel, verInmueblePanel.getName());
 		final JButton peritajeButton = new JButton();
 		peritajeButton.setToolTipText("Peritaje");
 		peritajeButton.setIcon(SwingResourceManager.getIcon(Nagusia.class,
@@ -280,7 +280,7 @@ public class Nagusia extends JFrame {
 		final JMenuItem newItemMenuItem_3 = new JMenuItem();
 		newItemMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				((CardLayout) panel.getLayout()).show(panel, "verInmueble2");
+				((CardLayout) panel.getLayout()).show(panel, "verInmueble");
 			}
 		});
 		newItemMenuItem_3.setText("Ver Inmueble");
@@ -299,7 +299,7 @@ public class Nagusia extends JFrame {
 	}
 
 	public void updateInmueble() {
-		verInmueblePanel2.updateInmueble();
+		verInmueblePanel.updateInmueble();
 		venderInmueblePanel.updateInmueble();
 	}
 }
