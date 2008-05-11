@@ -38,6 +38,8 @@ public class VerInmueblePanel2 extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private Kudeatzailea kud;
+
 	/**
 	 * Create the panel
 	 * 
@@ -46,32 +48,32 @@ public class VerInmueblePanel2 extends JPanel {
 	 */
 	public VerInmueblePanel2() {
 		super();
-
-		this.setBorder(new TitledBorder(null, "Ver Inmueble",
-				TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null));
-
-		this.setLayout(new BorderLayout());
-
-		final JPanel panel_1 = new JPanel();
-		final FlowLayout flowLayout_1 = new FlowLayout();
-		flowLayout_1.setAlignment(FlowLayout.RIGHT);
-		panel_1.setLayout(flowLayout_1);
-		panel_1.setSize(484, 34);
-		final FlowLayout flowLayout = new FlowLayout();
-		flowLayout.setAlignment(FlowLayout.RIGHT);
-		this.add(panel_1, BorderLayout.SOUTH);
 		try {
-			Inmueble i = Kudeatzailea.getInstance().getInmueble(12987);
-			Peritaje p = Kudeatzailea.getInstance().getLastPeritaje(
-					i.getReferencia());
-			Vector<Descripcion> vDescripciones = Kudeatzailea.getInstance()
+			kud = Kudeatzailea.getInstance();
+
+			this.setBorder(new TitledBorder(null, "Ver Inmueble",
+					TitledBorder.DEFAULT_JUSTIFICATION,
+					TitledBorder.DEFAULT_POSITION, null, null));
+
+			this.setLayout(new BorderLayout());
+
+			final JPanel panel_1 = new JPanel();
+			final FlowLayout flowLayout_1 = new FlowLayout();
+			flowLayout_1.setAlignment(FlowLayout.RIGHT);
+			panel_1.setLayout(flowLayout_1);
+			panel_1.setSize(484, 34);
+			final FlowLayout flowLayout = new FlowLayout();
+			flowLayout.setAlignment(FlowLayout.RIGHT);
+			this.add(panel_1, BorderLayout.SOUTH);
+
+			// JASPER REPORTS
+			Inmueble i = kud.getInmueble(12987);
+			Peritaje p = kud.getLastPeritaje(i.getReferencia());
+			Vector<Descripcion> vDescripciones = kud
 					.getDescripciones(p.getId());
 			// Descripcion d = vDescripciones.firstElement();
-			Tasacion t = Kudeatzailea.getInstance().getTasacion(p.getId(),
-					i.getReferencia());
-			double nuevoPrecio = Kudeatzailea.getInstance().getLastPrecio(
-					i.getReferencia());
+			Tasacion t = kud.getTasacion(p.getId(), i.getReferencia());
+			double nuevoPrecio = kud.getLastPrecio(i.getReferencia());
 			DatosInmueble di = new DatosInmueble(i.getDireccion(), p
 					.getTipo_inmueble(), new Boolean(i.isVendido()), i
 					.getZona(), p.getTipo_venta(), new Long(new Double(
@@ -124,28 +126,28 @@ public class VerInmueblePanel2 extends JPanel {
 			VerInmueblePanel2.this.add(jrv, BorderLayout.CENTER);
 			VerInmueblePanel2.this.validate();
 			VerInmueblePanel2.this.repaint();
+
+			JButton button;
+			button = new JButton();
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent arg0) {
+				}
+			});
+			panel_1.add(button);
+			button.setText("New JButton");
+			//
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
-		JButton button;
-		button = new JButton();
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent arg0) {
-			}
-		});
-		panel_1.add(button);
-		button.setText("New JButton");
-		//
 	}
 }
