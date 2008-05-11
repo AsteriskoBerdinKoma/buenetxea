@@ -25,6 +25,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import buenetxea.gui.Nagusia;
 import buenetxea.gui.dialogs.BuscarClienteDialog;
 import buenetxea.gui.dialogs.CrearClienteDialog;
 import buenetxea.kudeatzaileak.Kudeatzailea;
@@ -159,6 +160,8 @@ public class VenderInmueblePanel extends JPanel {
 									jop.createDialog("Inmueble vendido")
 											.setVisible(true);
 									setInmueble(inmueble.getReferencia());
+									Nagusia.getInstance().showVerInmueble(
+											inmueble.getReferencia());
 								} else {
 									JOptionPane jop = new JOptionPane(
 											"Ha ocurrido un error al vender el inmueble seleccionado",

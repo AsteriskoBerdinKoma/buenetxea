@@ -224,10 +224,12 @@ public class VerInmueblePanel extends JPanel {
 					vd.addElement(new Descripcion());
 					di.setVDescripcion(vd);
 					inmueble = null;
+					textField.setText("");
 				} else {
 					Inmueble i = kud.getInmueble(ref);
 					if (i != null) {
 						inmueble = i;
+						textField.setText(String.valueOf(i.getReferencia()));
 						Peritaje p = kud.getLastPeritaje(i.getReferencia());
 						Vector<Descripcion> vDescripciones;
 						Tasacion t;
@@ -269,6 +271,7 @@ public class VerInmueblePanel extends JPanel {
 						vd.addElement(new Descripcion());
 						di.setVDescripcion(vd);
 						inmueble = null;
+						textField.setText("");
 					}
 				}
 			} catch (SQLException e) {
@@ -279,6 +282,7 @@ public class VerInmueblePanel extends JPanel {
 				vd.addElement(new Descripcion());
 				di.setVDescripcion(vd);
 				inmueble = null;
+				textField.setText("");
 			}
 
 			// Datasourceak betetzen dira.
@@ -344,7 +348,7 @@ public class VerInmueblePanel extends JPanel {
 			verFichaDelButton = new JButton();
 			verFichaDelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					setInmueble(Integer.parseInt(textField.getText()));
+					setInmueble(Integer.parseInt(textField.getText().trim()));
 				}
 			});
 			verFichaDelButton.setText("Ver Ficha del Inmueble");

@@ -235,6 +235,15 @@ public class Nagusia extends JFrame {
 		inmuebleMenu.setText("Inmueble");
 		menuBar.add(inmuebleMenu);
 
+		final JMenuItem newItemMenuItem_4 = new JMenuItem();
+		newItemMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel, "verInmueble");
+			}
+		});
+		newItemMenuItem_4.setText("Ver Inmueble");
+		inmuebleMenu.add(newItemMenuItem_4);
+
 		final JMenuItem newItemMenuItem_1 = new JMenuItem();
 		newItemMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
@@ -301,5 +310,14 @@ public class Nagusia extends JFrame {
 	public void updateInmueble() {
 		verInmueblePanel.updateInmueble();
 		venderInmueblePanel.updateInmueble();
+	}
+
+	public void show(String panelName) {
+		((CardLayout) panel.getLayout()).show(panel, panelName);
+	}
+
+	public void showVerInmueble(int referencia) {
+		verInmueblePanel.setInmueble(referencia);
+		((CardLayout) panel.getLayout()).show(panel, "verInmueble");
 	}
 }
