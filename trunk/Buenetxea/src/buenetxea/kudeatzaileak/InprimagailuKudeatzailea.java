@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import buenetxea.db.Connector;
+import buenetxea.objektuak.fitxak.DatosVisita;
 
 public class InprimagailuKudeatzailea {
 	
@@ -132,7 +133,7 @@ public class InprimagailuKudeatzailea {
 		}
 		return parameters;
 	}
-	
+	/*
 	public HashMap InprimatuVisita(String clientedni,int inmuebleref, Date fecha, int hora, int minuto)throws SQLException{
 		String direccion;
 		String zona;
@@ -198,6 +199,64 @@ public class InprimagailuKudeatzailea {
 				}
 				else{
 				parameters.put("llaves","no");
+				}
+		}
+		ps3.close();
+		rs3.close();
+		return parameters;
+		
+	}
+	*/
+	public DatosVisita InprimatuVisita(String clientedni,int inmuebleref, Date fecha, int hora, int minuto)throws SQLException{
+		
+
+		boolean llavesb;
+		DatosVisita parameters = new DatosVisita();
+		
+		
+		
+		String query = "SELECT * FROM inmueble,cliente,rel_visita WHERE referencia = ? AND dni = ? AND fk_cliente_dni = ? AND fk_inmueble_referencia = ?";
+		PreparedStatement ps = this.connection.prepareStatement(query);
+		ps.setInt(1, inmuebleref);
+		ps.setString(2, clientedni);
+		ps.setString(3, clientedni);
+		ps.setInt(4,inmuebleref);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			parameters.setZona( rs.getString("zona"));
+			parameters.setDireccion(rs.getString("direccion"));
+			parameters.setRepresentante(rs.getString("representante"));
+			parameters.setNombre(rs.getString("nombre"));
+			parameters.setApellido1(rs.getString("apellido1"));
+			parameters.setTelefono(rs.getInt("telefono"));
+			
+		}
+		ps.close();
+		rs.close();
+		
+		String query2 = "SELECT nuevo_precio FROM rel_inmueble_propietario WHERE fk_inmueble_referencia = ? ORDER BY fk_inmueble_referencia DESC";
+		PreparedStatement ps2 = this.connection.prepareStatement(query2);
+		ps2.setInt(1, inmuebleref);
+		ResultSet rs2 = ps2.executeQuery();
+		if (rs2.next()) {
+			parameters.setNuevo_precio(rs2.getDouble("nuevo_precio"));
+			parameters.setPreciopesetas(parameters.getNuevo_precio()*166.386);
+		}
+		ps2.close();
+		rs2.close();
+		
+		String query3 = "SELECT llaves FROM rel_peritaje_inmueble WHERE fk_peritaje_referencia = ? ORDER BY fk_peritaje_fecha DESC";
+		PreparedStatement ps3 = this.connection.prepareStatement(query3);
+		ps3.setInt(1, inmuebleref);
+		ResultSet rs3 = ps3.executeQuery();
+		if (rs3.next()) {
+			llavesb = rs3.getBoolean("llaves");
+		
+			if(llavesb){
+				parameters.setLlaves("si");
+				}
+				else{
+					parameters.setLlaves("no");
 				}
 		}
 		ps3.close();

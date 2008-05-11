@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,12 +37,13 @@ public class VerClienteVacioPanel extends JPanel {
 	
 	/**
 	 * Create the panel
+	 * @throws IOException 
 	 * 
 	 * @throws JRException
 	 * @throws FileNotFoundException
 	 */
 
-	public VerClienteVacioPanel(Nagusia jabea) {
+	public VerClienteVacioPanel(Nagusia jabea) throws IOException {
 		super();
 
 		this.jabea = jabea;
