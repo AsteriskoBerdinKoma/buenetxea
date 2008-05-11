@@ -115,7 +115,9 @@ public class Kudeatzailea {
 	public boolean actualizarPropietario(Propietario p) throws SQLException {
 		return this.propikud.updatePropietario(p);
 	}
-	public boolean crearRelPropInmueble(RelInmueblePropietario r) throws SQLException{
+
+	public boolean crearRelPropInmueble(RelInmueblePropietario r)
+			throws SQLException {
 		return this.relInmPropKud.insertRelInmProp(r);
 	}
 
@@ -143,5 +145,22 @@ public class Kudeatzailea {
 
 	public String[] getNacionalidades() {
 		return nacionalidades.toArray(new String[nacionalidades.size()]);
+	}
+
+	public Tasacion getTasacion(int id, int referencia) throws SQLException {
+		return this.tasaKud.getTasacion(id, referencia);
+	}
+
+	public Peritaje getLastPeritaje(int referencia) throws SQLException {
+		return this.periKud.getPeritaje(this.periKud
+				.getLastPeritajeId(referencia));
+	}
+
+	public Vector<Descripcion> getDescripciones(int id) throws SQLException {
+		return this.descriKud.getDescripciones(id);
+	}
+
+	public double getLastPrecio(int referencia) throws SQLException {
+		return this.propikud.getLastNuevoPrecio(referencia);
 	}
 }

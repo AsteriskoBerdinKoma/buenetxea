@@ -23,12 +23,11 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-	<parameter name="m2estatikue" isForPrompting="false" class="java.lang.Object">
-		<parameterDescription><![CDATA[m²]]></parameterDescription>
-	</parameter>
 	<parameter name="SUBREPORT_DIR" isForPrompting="true" class="java.lang.String">
 		<defaultValueExpression ><![CDATA[".\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="SUBREPORT" isForPrompting="false" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUBREPORT_DATASOURCE" isForPrompting="false" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 
 	<field name="tipo_inmueble" class="java.lang.String"/>
 	<field name="direccion" class="java.lang.String"/>
@@ -47,9 +46,6 @@
 	<field name="altura_real_piso" class="java.lang.Integer"/>
 	<field name="vendido" class="java.lang.Boolean"/>
 	<field name="altura_edif" class="java.lang.Integer"/>
-	<field name="descripcion_tipo" class="java.lang.String"/>
-	<field name="descripcion_m2" class="java.lang.Integer"/>
-	<field name="descripcion_descripcion" class="java.lang.String"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -310,19 +306,6 @@
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="132"
-						y="28"
-						width="55"
-						height="18"
-						key="textField-7"/>
-					<box></box>
-					<textElement textAlignment="Center">
-						<font/>
-					</textElement>
-				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{descripcion_m2}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
 						x="93"
 						y="204"
 						width="439"
@@ -333,32 +316,6 @@
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{observaciones}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="15"
-						y="28"
-						width="97"
-						height="18"
-						key="textField-32"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{descripcion_tipo}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="201"
-						y="28"
-						width="153"
-						height="18"
-						key="textField-42"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{descripcion_descripcion}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -555,54 +512,15 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{altura_edif}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement
-						x="15"
-						y="6"
-						width="97"
-						height="15"
-						key="staticText-40"/>
-					<box></box>
-					<textElement textAlignment="Center">
-						<font/>
-					</textElement>
-				<text><![CDATA[TIPO_HABIT:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="132"
-						y="6"
-						width="55"
-						height="15"
-						key="staticText-41"/>
-					<box></box>
-					<textElement textAlignment="Center">
-						<font/>
-					</textElement>
-				<text><![CDATA[m²]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="201"
-						y="6"
-						width="125"
-						height="15"
-						key="staticText-42"/>
-					<box></box>
-					<textElement textAlignment="Center">
-						<font/>
-					</textElement>
-				<text><![CDATA[DESCRIPCION]]></text>
-				</staticText>
 				<subreport  isUsingCache="true">
 					<reportElement
-						x="22"
-						y="63"
-						width="477"
-						height="95"
+						x="10"
+						y="14"
+						width="517"
+						height="175"
 						key="subreport-1"/>
-					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "inmueble_subreport1.jasper"]]></subreportExpression>
+					<dataSourceExpression><![CDATA[$P{SUBREPORT_DATASOURCE}]]></dataSourceExpression>
+					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUBREPORT}]]></subreportExpression>
 				</subreport>
 			</band>
 		</columnHeader>
