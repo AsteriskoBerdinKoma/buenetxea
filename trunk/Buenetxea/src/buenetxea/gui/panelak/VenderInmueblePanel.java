@@ -159,9 +159,9 @@ public class VenderInmueblePanel extends JPanel {
 											JOptionPane.INFORMATION_MESSAGE);
 									jop.createDialog("Inmueble vendido")
 											.setVisible(true);
-									setInmueble(inmueble.getReferencia());
-									Nagusia.getInstance().showVerInmueble(
-											inmueble.getReferencia());
+									int ref = inmueble.getReferencia();
+									limpiar();
+									Nagusia.getInstance().showVerInmueble(ref);
 								} else {
 									JOptionPane jop = new JOptionPane(
 											"Ha ocurrido un error al vender el inmueble seleccionado",
@@ -179,13 +179,6 @@ public class VenderInmueblePanel extends JPanel {
 										"No es posible realizar la venta")
 										.setVisible(true);
 							}
-						else {
-							JOptionPane jop = new JOptionPane(
-									"El inmueble seleccionado no está en venta",
-									JOptionPane.ERROR_MESSAGE);
-							jop.createDialog("El inmueble no está en venta")
-									.setVisible(true);
-						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 						JOptionPane jop = new JOptionPane(
@@ -731,6 +724,21 @@ public class VenderInmueblePanel extends JPanel {
 			this.label_2.setText("");
 			this.label_3.setText("");
 		}
+	}
+
+	private void limpiar() {
+		this.inmueble = null;
+		this.label_1.setText("");
+		this.label_2.setText("");
+		this.label_3.setText("");
+		label_8.setText("");
+		List<Component> l1 = Arrays.asList(panel_2.getComponents());
+		for (Component c : l1)
+			c.setEnabled(false);
+		List<Component> l2 = Arrays.asList(panel.getComponents());
+		for (Component c : l2)
+			c.setEnabled(false);
+		venderInmuebleButton.setEnabled(false);
 	}
 
 	public void updateInmueble() {
