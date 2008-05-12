@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Vector;
+
 import javax.swing.ButtonGroup;
 
 import javax.swing.DefaultComboBoxModel;
@@ -42,9 +44,13 @@ public class LocalizarInmueblePanel extends JPanel {
 	private JTextField textField_6;
 	private JSpinner spinner_hastaHab;
 	private JSpinner spinner_desdeHab;
-	private  String zona, herrialdea, probintzia, exterior, estado = null;
+	private  String zona, herrialdea, probintzia, exterior, estado = "";
 	private int prezioa, habitacionesDesde, habitacionesHasta;
 	private boolean ascensor;
+	private Vector<String> herrialdeInteresatuak;
+	private Vector<String> zonaInteresatuak;
+	private int herrialdeInteresKop, zonaInteresKop = 0;
+	private String zeudenHerriak, zeudenZonak;
 	/**
 	 * 
 	 */
@@ -187,8 +193,17 @@ public class LocalizarInmueblePanel extends JPanel {
 		button_1_1 = new JButton();
 		button_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
+				herrialdeInteresKop ++;
 				herrialdea = comboBox_8.getSelectedItem().toString();
-				textField_6.setText(herrialdea);
+				herrialdeInteresatuak.add(herrialdea);
+				if (herrialdeInteresKop > 1){
+					zeudenHerriak = textField_6.getText();
+					textField_6.setText(herrialdea+","+zeudenHerriak);
+				}
+				else
+					textField_6.setText(herrialdea);
+					
+					
 			}
 		});
 		button_1_1.setText("Añadir población");
@@ -207,8 +222,16 @@ public class LocalizarInmueblePanel extends JPanel {
 		button_3 = new JButton();
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				 zona = comboBox_7.getSelectedItem().toString();
-				textField_8.setText(zona);
+				zonaInteresKop++;
+				zona = comboBox_7.getSelectedItem().toString();
+				zonaInteresatuak.add(zona);
+				if (zonaInteresKop>1){
+					zeudenZonak = textField_8.getText();
+					textField_8.setText(zeudenZonak+","+zona);
+				}
+				else
+					textField_8.setText(zona);
+				 
 			}
 		});
 		button_3.setText("Añadir zona");
@@ -231,7 +254,7 @@ public class LocalizarInmueblePanel extends JPanel {
 		asceensorLabel_1.setText("Ascensor:");
 
 		comboBox_ascensor = new JComboBox();
-		comboBox_ascensor.setSelectedIndex(0);
+		
 
 		JScrollPane scrollPane;
 		scrollPane = new JScrollPane();
@@ -418,7 +441,18 @@ public class LocalizarInmueblePanel extends JPanel {
 
 	private String getQuery() {
 		
-		return "SELECT * FROM peritaje WHERE false";
+		String query = "SELECT I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona' FROM Inmueble AS I" +
+				"INNER JOIN (rel_peritaje_inmueble AS RPI INNER JOIN (peritaje as P INNER JOIN descripcion AS D ON" +
+				"P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON " +
+				"I.referencia = RPI.fk_inmueble_referencia" +
+				" WHERE ";
+		if (probintzia!="")
+		{
+			query += "";
+		}
+		
+		
+		return null;
 	}
 	
 	public void refresh()
