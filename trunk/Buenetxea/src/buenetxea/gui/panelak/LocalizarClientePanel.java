@@ -23,7 +23,6 @@ import javax.swing.border.TitledBorder;
 
 import buenetxea.db.ResultSetTableModel;
 import buenetxea.gui.Nagusia;
-import buenetxea.gui.dialogs.BuscarClienteDialog;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 
 public class LocalizarClientePanel extends JPanel {
@@ -383,10 +382,5 @@ public class LocalizarClientePanel extends JPanel {
 
 	public void setResultSetTableModel() {
 		tableModel = new ResultSetTableModel(getBuscarClientesQuery());
-	}
-
-	public void setCloseAfterSave(BuscarClienteDialog owner, boolean close) {
-		this.jabea = owner;
-		this.closeAfterSave = close;
 	}
 }
