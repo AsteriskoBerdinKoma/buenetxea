@@ -1,5 +1,7 @@
 package buenetxea.gui.panelak;
 
+import java.sql.SQLException;
+
 import javax.swing.GroupLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -9,34 +11,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
 import buenetxea.db.ResultSetTableModel;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Vector;
-
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.TitledBorder;
-import javax.swing.text.MaskFormatter;
-
-import buenetxea.db.ResultSetTableModel;
-import buenetxea.gui.dialogs.BuscarClienteDialog;
-import buenetxea.kudeatzaileak.Kudeatzailea;
 
 
 public class MostrarClientesInteresadosPanel extends JPanel {
@@ -122,18 +96,26 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 	// }
 	// }
 	//	
-	// public void setDatos (String zona,int num_habitaciones,double precio){
-	// this.zonaazkena = zona;
-	// this.num_habazkena = num_habitaciones;
-	// this.precioazkena = precio;
-	// try {
-	// tableModel.setQuery(crearQuery());
-	// } catch (IllegalStateException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
+	 public void setDatos(String zona, int num_habitaciones, double precio) {
+		this.zonaazkena = zona;
+		this.num_habazkena = num_habitaciones;
+		this.precioazkena = precio;
+		try {
+			tableModel.setQuery(crearQuery());
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void refresh() {
+		try {
+			tableModel.refresh();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

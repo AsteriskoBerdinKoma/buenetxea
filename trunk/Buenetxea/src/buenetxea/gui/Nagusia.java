@@ -32,6 +32,7 @@ import buenetxea.gui.panelak.CrearPropietarioPanel;
 import buenetxea.gui.panelak.IntroducirDatosVisitaPanel;
 import buenetxea.gui.panelak.IntroducirInmueblePanel;
 import buenetxea.gui.panelak.LocalizarClientePanel;
+import buenetxea.gui.panelak.MostrarClientesInteresadosPanel;
 import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
@@ -54,6 +55,7 @@ public class Nagusia extends JFrame {
 	private VenderInmueblePanel venderInmueblePanel;
 	private VerInmueblePanel verInmueblePanel;
 	private LocalizarClientePanel localizarClientePanel;
+	private MostrarClientesInteresadosPanel mostrarClientesInteresadosPanel;
 	private LocalizarInmueblePanel localizarInmueblePanel;
 
 	/**
@@ -126,6 +128,11 @@ public class Nagusia extends JFrame {
 			crearClientePanel.setName("nuevoCliente");
 			panel.add(crearClientePanel, crearClientePanel.getName());
 			crearPropietarioPanel = new CrearPropietarioPanel();
+			
+			mostrarClientesInteresadosPanel = new MostrarClientesInteresadosPanel();
+			mostrarClientesInteresadosPanel.setName("mostrarClientesInteresados");
+			panel.add(mostrarClientesInteresadosPanel,mostrarClientesInteresadosPanel.getName());
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -332,6 +339,12 @@ public class Nagusia extends JFrame {
 
 	public void showVerCliente(String dni) {
 
+	}
+	
+	public void showMostrarClientesInterados(String zona, int habs, double precio){
+		mostrarClientesInteresadosPanel.setDatos(zona, habs, precio);
+		mostrarClientesInteresadosPanel.refresh();
+		((CardLayout) panel.getLayout()).show(panel, "mostrarClientesInteresados");
 	}
 
 	private final class NagusiaWindowListener implements WindowListener {

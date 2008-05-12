@@ -85,6 +85,10 @@ public class ResultSetTableModel extends AbstractTableModel {
 
 	// get class that represents column type
 
+	public ResultSetTableModel(){
+		//Do nothing
+	}
+	
 	/**
 	 * 
 	 * @param column
@@ -124,6 +128,7 @@ public class ResultSetTableModel extends AbstractTableModel {
 			return metaData.getColumnCount();
 		} // end try
 		catch (SQLException sqlException) {
+			System.out.println("columna kopurua gaizki");
 			sqlException.printStackTrace();
 		} // end catch
 		return 0; // if problems occur above, return 0 for number of columns
@@ -148,6 +153,7 @@ public class ResultSetTableModel extends AbstractTableModel {
 			// return metaData.getColumnName(column + 1);
 		} // end try
 		catch (SQLException sqlException) {
+			System.out.println("ezin da kolumna izena lortu");
 			sqlException.printStackTrace();
 		} // end catch
 		return ""; // if problems, return empty string for column name
@@ -186,6 +192,7 @@ public class ResultSetTableModel extends AbstractTableModel {
 			return resultSet.getObject(column + 1);
 		} // end try
 		catch (SQLException sqlException) {
+			System.out.println("ezin da lortu balioa");
 			sqlException.printStackTrace();
 		} // end catch
 		return ""; // if problems, return empty string object

@@ -24,6 +24,7 @@ import javax.swing.border.TitledBorder;
 import buenetxea.gui.panelak.azpipanelak.DatosInmueblePanel;
 import buenetxea.gui.panelak.azpipanelak.DatosPropietarioPanel;
 import buenetxea.gui.panelak.azpipanelak.DatosTasacionPanel;
+import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Descripcion;
 import buenetxea.objektuak.Inmueble;
@@ -242,6 +243,7 @@ public class IntroducirInmueblePanel extends JPanel {
 								 * volverse a asignar desde el panel principal.
 								 */
 								limpiarDatos();
+								clientesInteresados(i,vd,t);
 
 							} else {
 								JOptionPane jop = new JOptionPane(
@@ -343,6 +345,16 @@ public class IntroducirInmueblePanel extends JPanel {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void clientesInteresados(Inmueble i, Vector<Descripcion> vd, Tasacion t){
+		Nagusia n = Nagusia.getInstance();
+		int hab = 0;
+		for (Descripcion d: vd){
+			if(d.getTipo().startsWith("habit")|| d.getTipo().startsWith("Habit"))
+				hab++;
+		}
+		n.showMostrarClientesInterados(i.getZona(), hab, t.getPrecio_venta());
 	}
 	
 	public boolean isClientesInteresados(double precio, String zona, int numHabit, int numAseos){
