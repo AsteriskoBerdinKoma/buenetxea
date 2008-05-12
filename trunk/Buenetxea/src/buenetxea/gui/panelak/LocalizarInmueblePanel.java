@@ -2,31 +2,25 @@ package buenetxea.gui.panelak;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.ButtonGroup;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 
 import buenetxea.db.ResultSetTableModel;
-import buenetxea.kudeatzaileak.Kudeatzailea;
-import buenetxea.objektuak.Inmueble;
 
 public class LocalizarInmueblePanel extends JPanel {
 
@@ -441,18 +435,17 @@ public class LocalizarInmueblePanel extends JPanel {
 
 	private String getQuery() {
 		
-		String query = "SELECT I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona' FROM Inmueble AS I" +
-				"INNER JOIN (rel_peritaje_inmueble AS RPI INNER JOIN (peritaje as P INNER JOIN descripcion AS D ON" +
+		String query = "SELECT I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona' FROM Inmueble AS I " +
+				"INNER JOIN (rel_peritaje_inmueble AS RPI INNER JOIN (peritaje as P INNER JOIN descripcion AS D ON " +
 				"P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON " +
-				"I.referencia = RPI.fk_inmueble_referencia" +
-				" WHERE ";
+				"I.referencia = RPI.fk_inmueble_referencia";
 		if (probintzia!="")
 		{
-			query += "";
+			//query += "";
 		}
 		
 		
-		return null;
+		return query;
 	}
 	
 	public void refresh()
