@@ -42,6 +42,7 @@ import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
 import buenetxea.gui.panelak.VerClientePanel;
 import buenetxea.gui.panelak.VerInmueblePanel;
+import buenetxea.gui.panelak.VerPeritajePanel;
 import buenetxea.gui.panelak.VerVisitaPanel;
 import buenetxea.objektuak.Inmueble;
 
@@ -128,10 +129,6 @@ public class Nagusia extends JFrame {
 			panel.add(introducirInmueblePanel, introducirInmueblePanel
 					.getName());
 
-			final VerClientePanel verClientePanel = new VerClientePanel();
-			verClientePanel.setName("verCliente");
-			panel.add(verClientePanel, verClientePanel.getName());
-
 			final IntroducirDatosVisitaPanel introducirDatosVisitaPanel = new IntroducirDatosVisitaPanel();
 			introducirDatosVisitaPanel.setName("visitas");
 			panel.add(introducirDatosVisitaPanel, introducirDatosVisitaPanel
@@ -161,6 +158,14 @@ public class Nagusia extends JFrame {
 		venderInmueblePanel = new VenderInmueblePanel();
 		venderInmueblePanel.setName("venderInmueble");
 		panel.add(venderInmueblePanel, venderInmueblePanel.getName());
+
+		final VerPeritajePanel verPeritajePanel = new VerPeritajePanel();
+		verPeritajePanel.setName("verPeritaje");
+		panel.add(verPeritajePanel, verPeritajePanel.getName());
+
+		final VerClientePanel verClientePanel = new VerClientePanel();
+		verClientePanel.setName("verCliente");
+		panel.add(verClientePanel, verClientePanel.getName());
 
 		verInmueblePanel = new VerInmueblePanel();
 		verInmueblePanel.setName("verInmueble");
@@ -316,6 +321,15 @@ public class Nagusia extends JFrame {
 		newItemMenuItem_2.setText("Nuevo Cliente");
 		clientesMenu.add(newItemMenuItem_2);
 
+		final JMenuItem newItemMenuItem_6 = new JMenuItem();
+		newItemMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel, "verCliente");
+			}
+		});
+		newItemMenuItem_6.setText("Ver Cliente");
+		clientesMenu.add(newItemMenuItem_6);
+
 		final JMenu adibideakMenu = new JMenu();
 		adibideakMenu.setText("Adibideak");
 		menuBar.add(adibideakMenu);
@@ -337,6 +351,15 @@ public class Nagusia extends JFrame {
 		});
 		newItemMenuItem_5.setText("Ver Cliente");
 		adibideakMenu.add(newItemMenuItem_5);
+
+		final JMenuItem newItemMenuItem_7 = new JMenuItem();
+		newItemMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel, "verPeritaje");
+			}
+		});
+		newItemMenuItem_7.setText("Ver Peritaje");
+		adibideakMenu.add(newItemMenuItem_7);
 		pack();
 		//
 	}
@@ -388,17 +411,16 @@ public class Nagusia extends JFrame {
 
 		@Override
 		public void windowClosed(WindowEvent e) {
-			try {
-				Connector.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			} finally {
-				dispose();
-			}
 		}
 
 		@Override
 		public void windowClosing(WindowEvent e) {
+			try {
+				Connector.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			dispose();
 		}
 
 		@Override
