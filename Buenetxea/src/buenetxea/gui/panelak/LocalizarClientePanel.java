@@ -379,8 +379,4 @@ public class LocalizarClientePanel extends JPanel {
 			}
 		}
 	}
-
-	public void setResultSetTableModel() {
-		tableModel = new ResultSetTableModel(getBuscarClientesQuery());
-	}
 }
