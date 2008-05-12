@@ -22,15 +22,9 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JRViewer;
-import buenetxea.db.Connector;
 import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
-import buenetxea.kudeatzaileak.Kudeatzailea;
-import buenetxea.objektuak.Descripcion;
-import buenetxea.objektuak.Inmueble;
 import buenetxea.objektuak.fitxak.DatosCliente;
-import buenetxea.objektuak.fitxak.DatosInmueble;
 
 public class VerClientePanel extends JPanel {
 
@@ -39,10 +33,8 @@ public class VerClientePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final Nagusia jabea;
-
 	private String clientedniazkena;
-	
+
 	/**
 	 * Create the panel
 	 * 
@@ -53,10 +45,8 @@ public class VerClientePanel extends JPanel {
 	public VerClientePanel(Nagusia jabea, String clientedni) {
 		super();
 
-		this.jabea = jabea;
-
 		this.clientedniazkena = clientedni;
-		
+
 		this.setBorder(new TitledBorder(null, "Ver cliente solicitado",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
@@ -75,15 +65,16 @@ public class VerClientePanel extends JPanel {
 		JButton button;
 		button = new JButton();
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent arg0){
+			public void actionPerformed(final ActionEvent arg0) {
 				try {
-				JasperReport jr;
-				JasperPrint jp = null;
-				InprimagailuKudeatzailea inpr = InprimagailuKudeatzailea.getInstance();
-				DatosCliente dc = new DatosCliente();
-				
+					JasperReport jr;
+					JasperPrint jp = null;
+					InprimagailuKudeatzailea inpr = InprimagailuKudeatzailea
+							.getInstance();
+					DatosCliente dc = new DatosCliente();
+
 					// Datasourceak betetzen dira.
-				    dc =inpr.InprimatuCliente(clientedniazkena);
+					dc = inpr.InprimatuCliente(clientedniazkena);
 					Collection<DatosCliente> lista = new ArrayList<DatosCliente>();
 					lista.add(dc);
 					JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(
@@ -98,14 +89,14 @@ public class VerClientePanel extends JPanel {
 
 					Map masterParams = new HashMap();
 					masterParams.put("SUBREPORT", subReport);
-					masterParams.put("SUBREPORT_DATASOURCE", datasourceSubreport);
+					masterParams.put("SUBREPORT_DATASOURCE",
+							datasourceSubreport);
 
 					jp.removePage(0);
-					jp.addPage((JRPrintPage) JasperFillManager.fillReport(masterReport,
-							masterParams, datasource).getPages().get(0));
+					jp.addPage((JRPrintPage) JasperFillManager.fillReport(
+							masterReport, masterParams, datasource).getPages()
+							.get(0));
 
-					
-					
 				} catch (JRException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -121,7 +112,7 @@ public class VerClientePanel extends JPanel {
 		panel_1.add(button);
 		button.setText("New JButton");
 		//
-		
+
 	}
 
 }

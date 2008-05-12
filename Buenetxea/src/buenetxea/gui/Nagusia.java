@@ -347,6 +347,11 @@ public class Nagusia extends JFrame {
 		((CardLayout) panel.getLayout()).show(panel, "mostrarClientesInteresados");
 	}
 
+	public void showClientesInteresados(String zona, int num_habitaciones,
+			double precio) {
+
+	}
+
 	private final class NagusiaWindowListener implements WindowListener {
 		@Override
 		public void windowActivated(WindowEvent e) {
