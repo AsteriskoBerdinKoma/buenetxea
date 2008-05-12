@@ -32,6 +32,7 @@
 	<field name="telefono" class="java.lang.Integer"/>
 	<field name="asesor" class="java.lang.String"/>
 	<field name="dni" class="java.lang.String"/>
+	<field name="apellido2" class="java.lang.String"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -505,7 +506,7 @@
 					<textElement textAlignment="Left">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{nombre}.length() > 0 ? $F{nombre} : "" ) + " " + ( $F{apellido1}.length() > 0 ? $F{apellido1} : "" )]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{nombre}.length() > 0 ? $F{nombre} : "" ) + " " + ( $F{apellido1}.length() > 0 ? $F{apellido1} : "" ) + " " + ( $F{apellido2}.length() > 0 ? $F{apellido2} : "" )]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
