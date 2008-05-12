@@ -35,30 +35,23 @@ public class Cliente {
 	 * @param asesor
 	 */
 
-	
 	public Cliente(String dni, String nombre, String apellido1,
-			String apellido2, String direccion,
-
-			String nacionalidad, Calendar fecha, int telefono, String medio,
-			String asesor)
-
-	{
+			String apellido2, String direccion, String nacionalidad,
+			Calendar fecha, int telefono, String medio, String asesor) {
 
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
-		this.direccion=direccion;
+		this.direccion = direccion;
 		this.apellido2 = apellido2;
 		this.nacionalidad = nacionalidad;
 		this.fecha = fecha;
 		this.telefono = telefono;
 		this.medio = medio;
 		this.asesor = asesor;
-
 	}
 
 	public String getNombre() {
-
 		return nombre;
 	}
 

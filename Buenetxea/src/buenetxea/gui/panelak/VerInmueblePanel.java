@@ -172,16 +172,16 @@ public class VerInmueblePanel extends JPanel {
 															.createParallelGroup(
 																	GroupLayout.Alignment.BASELINE)
 															.addComponent(
-																	getTextField(),
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
 																	getVerFichaDelButton())
 															.addComponent(
 																	getButton())
 															.addComponent(
-																	getReferenciaDelInmuebleLabel()))
+																	getReferenciaDelInmuebleLabel())
+															.addComponent(
+																	getTextField(),
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE))
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
 											.addComponent(viewer,

@@ -170,4 +170,8 @@ public class Kudeatzailea {
 	public boolean crearVisita(Visita v) throws SQLException {
 		return this.visiKud.insertarVisita(v);
 	}
+
+	public Cliente getCliente(String dni) throws IOException, SQLException {
+		return this.cliKud.getCliente(dni);
+	}
 }
