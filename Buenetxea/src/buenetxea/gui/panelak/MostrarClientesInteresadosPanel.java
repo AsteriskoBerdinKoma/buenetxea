@@ -1,17 +1,26 @@
 package buenetxea.gui.panelak;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.LayoutStyle;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
 import buenetxea.db.ResultSetTableModel;
-
+import buenetxea.gui.Nagusia;
 
 public class MostrarClientesInteresadosPanel extends JPanel {
 
@@ -24,6 +33,7 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 	private String zonaazkena;
 	private int num_habazkena;
 	private Double precioazkena;
+	private JButton verClienteButton;
 
 	private ResultSetTableModel tableModel;
 
@@ -32,6 +42,19 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 	 */
 	public MostrarClientesInteresadosPanel() {
 		super();
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(final ComponentEvent arg0) {
+				if (table_2.getRowCount() == 0) {
+					verClienteButton.setEnabled(false);
+					JOptionPane jop = new JOptionPane(
+							"Por el momento, no hay clientes interesados en este inmueble.",
+							JOptionPane.INFORMATION_MESSAGE);
+					jop.createDialog("Información")
+							.setVisible(true);
+				}
+			}
+		});
+	
 
 		setBorder(new TitledBorder(null, "Clientes interesados",
 				TitledBorder.DEFAULT_JUSTIFICATION,
@@ -45,29 +68,52 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 		table_2 = new JTable();
 		table_2.setModel(tableModel);
 		table_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table_2.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(final MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					String dni = (String) table_2.getValueAt(table_2
+							.getSelectedRow(), 0);
+					Nagusia.getInstance().showVerCliente(dni);
+				}
+			}
+		});
 		scrollPane_1.setViewportView(table_2);
+
+		verClienteButton = new JButton();
+		verClienteButton.setText("Ver cliente");
+		verClienteButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(final MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					String dni = (String) table_2.getValueAt(table_2
+							.getSelectedRow(), 0);
+					Nagusia.getInstance().showVerCliente(dni);
+				}
+			}
+		});
 
 		final GroupLayout groupLayout = new GroupLayout((JComponent) this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-				.addGroup(GroupLayout.Alignment.LEADING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+						.addComponent(verClienteButton, GroupLayout.Alignment.TRAILING))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-				.addGroup(GroupLayout.Alignment.LEADING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-					.addContainerGap())
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+					.addComponent(verClienteButton))
 		);
 		setLayout(groupLayout);
-		//	
 	}
 
 	private String crearQuery() {
-	//String query = "SELECT * FROM inmueble WHERE referencia = 1";
+		// String query = "SELECT * FROM inmueble WHERE referencia = 1";
 		if (zonaazkena != "") {
 			String query = "SELECT dni AS 'D.N.I.',nombre AS 'Nombre',apellido1 AS 'Primer apellido',apellido2 AS 'Segundo apellido',telefono AS 'Telefono' FROM cliente INNER JOIN preferencia ON fk_cliente_dni = dni "
 					+ "WHERE zona ='"
@@ -77,7 +123,7 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 					+ " AND hasta_habitacion >= "
 					+ num_habazkena
 					+ " AND presupuesto >= " + precioazkena;
-		return query;
+			return query;
 		} else
 			return "SELECT dni AS 'D.N.I.',nombre AS 'Nombre',apellido1 AS 'Primer apellido',apellido2 AS 'Segundo apellido',telefono AS 'Telefono' FROM cliente";
 	}
@@ -96,7 +142,7 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 	// }
 	// }
 	//	
-	 public void setDatos(String zona, int num_habitaciones, double precio) {
+	public void setDatos(String zona, int num_habitaciones, double precio) {
 		this.zonaazkena = zona;
 		this.num_habazkena = num_habitaciones;
 		this.precioazkena = precio;
@@ -110,7 +156,7 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void refresh() {
 		try {
 			tableModel.refresh();
