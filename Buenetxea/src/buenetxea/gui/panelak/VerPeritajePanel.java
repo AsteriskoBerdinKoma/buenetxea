@@ -1,20 +1,15 @@
 package buenetxea.gui.panelak;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 
-import javax.swing.JButton;
+import javax.swing.GroupLayout;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
@@ -25,12 +20,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JRViewer;
-import buenetxea.db.Connector;
-import buenetxea.gui.Nagusia;
-import buenetxea.kudeatzaileak.InprimagailuKudeatzailea;
-import buenetxea.kudeatzaileak.Kudeatzailea;
-import buenetxea.objektuak.Inmueble;
-import buenetxea.objektuak.fitxak.DatosVisita;
+import buenetxea.objektuak.Peritaje;
 
 public class VerPeritajePanel extends JPanel {
 
@@ -39,102 +29,63 @@ public class VerPeritajePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	//private final Nagusia jabea;
-	//private final Connection connection;
-	//private final Statement statement;
+	private JRViewer viewer;
+
 	/**
 	 * Create the panel
-	 * @throws ClassNotFoundException 
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 * @throws SQLException 
-	 * @throws IOException 
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @throws IOException
 	 * 
 	 * @throws JRException
 	 * @throws FileNotFoundException
 	 */
 
-	//public VerPeritajePanel(Nagusia jabea) throws SQLException, ClassNotFoundException, IOException {
-		public VerPeritajePanel(){
+	public VerPeritajePanel() {
 		super();
 
-		//this.jabea = jabea;
-		//this.connection = Connector.getConnection();
-		//this.statement = Connector.getStatement();
-		this.setBorder(new TitledBorder(null, "Ver visita",
-				TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null));
-
-		this.setLayout(new BorderLayout());
-
-		final JPanel panel_1 = new JPanel();
-		final FlowLayout flowLayout_1 = new FlowLayout();
-		flowLayout_1.setAlignment(FlowLayout.RIGHT);
-		panel_1.setLayout(flowLayout_1);
-		panel_1.setSize(484, 34);
-		final FlowLayout flowLayout = new FlowLayout();
-		flowLayout.setAlignment(FlowLayout.RIGHT);
-		this.add(panel_1, BorderLayout.SOUTH);
-		
 		try {
-			
-			JasperReport jr;
-			DatosVisita dv = new DatosVisita();
-			HashMap hutsa = new HashMap();
+			this.setBorder(new TitledBorder(null, "Ver Ficha de Peritaje",
+					TitledBorder.DEFAULT_JUSTIFICATION,
+					TitledBorder.DEFAULT_POSITION, null, null));
+			final FlowLayout flowLayout = new FlowLayout();
+			flowLayout.setAlignment(FlowLayout.RIGHT);
 
-				//DATASOURCE  BETE
-				Collection<DatosVisita> lista = new ArrayList<DatosVisita>();
-				lista.add(dv);
-				JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(lista);
-				
-				//JASPERREPORT BETE
-				JasperReport masterReport = (JasperReport) JRLoader.loadObject("Peritaje.jasper");
-				JasperPrint jp = JasperFillManager.fillReport(masterReport,hutsa, datasource);
+			Collection<Peritaje> lista = new ArrayList<Peritaje>();
+			lista.add(new Peritaje());
 
+			JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(
+					lista);
 
-				JRViewer jrv = new JRViewer(jp);
-				VerPeritajePanel.this.add(jrv, BorderLayout.CENTER);
-				VerPeritajePanel.this.validate();
-				VerPeritajePanel.this.repaint();
-				
-			/*
-			JasperReport jr;
-			JasperPrint jp;
-			InprimagailuKudeatzailea inpr = InprimagailuKudeatzailea.getInstance();
-			
-				Collection<Inmueble> lista = new ArrayList<Inmueble>();
-				lista.add(Kudeatzailea.getInstance().getInmueble(1));
-				JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(
-						lista);
+			JasperReport jr = (JasperReport) JRLoader
+					.loadObject("Peritaje.jasper");
 
-				// HAU KONPILATZEKO DA, .jasper fitxategia pasata ez da
-				// behar lerro hau jartzea.
-				// jr =
-				// JasperCompileManager.compileReport("inmueble.jrxml");
-				jp = JasperFillManager.fillReport("Peritaje.jasper",
-						inpr.InprimatuPeritaje(),datasource);
-				JRViewer jrv = new JRViewer(jp);
-				VerPeritajePanel.this.add(jrv, BorderLayout.CENTER);
-				VerPeritajePanel.this.validate();
-				VerPeritajePanel.this.repaint();
-				*/
-				
-			} catch (JRException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-		JButton button;
-		button = new JButton();
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent arg0){
-				
-			}
-		});
-		panel_1.add(button);
-		button.setText("New JButton");
-		//
-		
+			JasperPrint jp = JasperFillManager.fillReport(jr, new HashMap(),
+					datasource);
+
+			viewer = new JRViewer(jp);
+			final GroupLayout groupLayout = new GroupLayout((JComponent) this);
+			groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
+					GroupLayout.Alignment.LEADING).addGroup(
+					groupLayout.createSequentialGroup().addContainerGap()
+							.addComponent(viewer, GroupLayout.DEFAULT_SIZE,
+									464, Short.MAX_VALUE).addContainerGap()));
+			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
+					GroupLayout.Alignment.LEADING).addGroup(
+					groupLayout.createSequentialGroup().addContainerGap()
+							.addComponent(viewer, GroupLayout.DEFAULT_SIZE,
+									323, Short.MAX_VALUE).addContainerGap()));
+			setLayout(groupLayout);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
+	public void jasper() {
+
+	}
 }
