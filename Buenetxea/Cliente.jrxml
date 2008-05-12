@@ -23,27 +23,15 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-	<parameter name="nombre" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="apellido1" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="telefono" isForPrompting="false" class="java.lang.Long"/>
-	<parameter name="dni" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="informadora" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="medio" isForPrompting="false" class="java.lang.String"/>
-	<queryString><![CDATA[SELECT
-     peritajea.`observaciones` AS peritaje_observaciones,
-     inmueblea.`direccion` AS inmueble_direccion
-FROM
-     `cliente` c INNER JOIN `rel_visita` visita ON c.`dni` = visita.`fk_cliente_dni`
-     INNER JOIN `inmueble` inmueblea ON visita.`fk_inmueble_referencia` = inmueblea.`referencia`
-     INNER JOIN `rel_peritaje_inmueble` rel_p_i ON inmueblea.`referencia` = rel_p_i.`fk_inmueble_referencia`
-     INNER JOIN `peritaje` peritajea ON rel_p_i.`fk_peritaje_id` = peritajea.`id`
-WHERE
-     c.`dni` = $P{dni}
-GROUP BY
-     c.`dni`]]></queryString>
 
 	<field name="peritaje_observaciones" class="java.lang.String"/>
 	<field name="inmueble_direccion" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="apellido1" class="java.lang.String"/>
+	<field name="medio" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.Integer"/>
+	<field name="asesor" class="java.lang.String"/>
+	<field name="dni" class="java.lang.String"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -66,7 +54,7 @@ GROUP BY
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
-						x="1"
+						x="0"
 						y="23"
 						width="535"
 						height="0"
@@ -114,7 +102,7 @@ GROUP BY
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{informadora}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{asesor}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -127,7 +115,7 @@ GROUP BY
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{medio}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{medio}]]></textFieldExpression>
 				</textField>
 			</band>
 		</pageHeader>
@@ -137,7 +125,7 @@ GROUP BY
 					<reportElement
 						x="1"
 						y="0"
-						width="49"
+						width="42"
 						height="15"
 						key="staticText-5"/>
 					<box></box>
@@ -150,7 +138,7 @@ GROUP BY
 					<reportElement
 						x="1"
 						y="15"
-						width="55"
+						width="49"
 						height="15"
 						key="staticText-6"/>
 					<box></box>
@@ -163,7 +151,7 @@ GROUP BY
 					<reportElement
 						x="1"
 						y="42"
-						width="63"
+						width="55"
 						height="15"
 						key="staticText-7"/>
 					<box></box>
@@ -174,7 +162,7 @@ GROUP BY
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
-						x="1"
+						x="0"
 						y="57"
 						width="535"
 						height="0"
@@ -473,7 +461,7 @@ GROUP BY
 				</rectangle>
 				<line direction="TopDown">
 					<reportElement
-						x="1"
+						x="0"
 						y="209"
 						width="535"
 						height="0"
@@ -508,33 +496,20 @@ GROUP BY
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="50"
+						x="56"
 						y="0"
-						width="98"
+						width="221"
 						height="15"
 						key="textField-1"/>
 					<box></box>
-					<textElement textAlignment="Right">
+					<textElement textAlignment="Left">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{nombre}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{nombre} + " " + $F{apellido1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="152"
-						y="0"
-						width="134"
-						height="15"
-						key="textField-2"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{apellido1}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="286"
+						x="284"
 						y="0"
 						width="136"
 						height="15"
@@ -543,20 +518,20 @@ GROUP BY
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{dni}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{dni}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="58"
+						x="56"
 						y="15"
-						width="94"
+						width="221"
 						height="15"
 						key="textField-4"/>
 					<box></box>
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Long"><![CDATA[$P{telefono}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{telefono}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

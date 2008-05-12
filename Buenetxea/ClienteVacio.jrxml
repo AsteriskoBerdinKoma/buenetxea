@@ -23,6 +23,7 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
+	<parameter name="IMAGE" isForPrompting="false" class="java.net.URL"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -30,7 +31,7 @@
 		</background>
 		<title>
 			<band height="88"  isSplitAllowed="true" >
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="5"
 						y="5"
@@ -39,7 +40,7 @@
 						key="image-1"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["C:\\Documents and Settings\\ibon\\Escritorio\\eclipse\\lan eremua\\prueba\\src\\buenetxea\\resources\\logo_buenetxea.png"]]></imageExpression>
+					<imageExpression class="java.net.URL"><![CDATA[$P{IMAGE}]]></imageExpression>
 				</image>
 			</band>
 		</title>
