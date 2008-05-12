@@ -130,7 +130,7 @@ public class InprimagailuKudeatzailea {
 	}
 
 	public DatosVisita InprimatuVisita(String clientedni, int inmuebleref,
-			Date fecha, int hora, int minuto) throws SQLException {
+			Date fecha, String representante) throws SQLException {
 
 		boolean llavesb;
 		DatosVisita parameters = new DatosVisita();
