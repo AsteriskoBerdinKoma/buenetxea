@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
@@ -130,11 +131,14 @@ public class InprimagailuKudeatzailea {
 	}
 
 	public DatosVisita InprimatuVisita(String clientedni, int inmuebleref,
-			Date fecha, String representante) throws SQLException {
+			Calendar fecha, String representante) throws SQLException {
 
 		boolean llavesb;
 		DatosVisita parameters = new DatosVisita();
-
+		String data = fecha.get(Calendar.YEAR) + "/"
+		+ (fecha.get(Calendar.MONTH) + 1) + "/"
+		+ fecha.get(Calendar.DAY_OF_MONTH);
+		
 		String query = "SELECT * FROM inmueble,cliente WHERE referencia = ? AND dni = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setInt(1, inmuebleref);
@@ -149,7 +153,7 @@ public class InprimagailuKudeatzailea {
 			parameters.setNombre(rs.getString("nombre"));
 			parameters.setApellido1(rs.getString("apellido1"));
 			parameters.setTelefono(rs.getInt("telefono"));
-
+			parameters.setFecha(data);
 		}
 		ps.close();
 		rs.close();

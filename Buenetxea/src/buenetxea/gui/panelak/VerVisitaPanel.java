@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,7 +47,7 @@ public class VerVisitaPanel extends JPanel {
 
 	private String clientedniazkena;
 	private int inmueblerefazkena;
-	private Date fechaazkena;
+	private Calendar fechaazkena;
 	private String representanteazkena;
 	
 	/**
@@ -57,7 +58,7 @@ public class VerVisitaPanel extends JPanel {
 	 * @throws FileNotFoundException
 	 */
 
-	public VerVisitaPanel(Nagusia jabea, String clientedni,int inmuebleref,Date fecha, String representante) throws IOException {
+	public VerVisitaPanel(Nagusia jabea, String clientedni,int inmuebleref,Calendar fecha, String representante) throws IOException {
 		super();
 
 		this.jabea = jabea;

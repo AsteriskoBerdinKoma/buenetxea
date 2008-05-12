@@ -7,8 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -37,6 +41,7 @@ import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
 import buenetxea.gui.panelak.VerInmueblePanel;
+import buenetxea.gui.panelak.VerVisitaPanel;
 import buenetxea.objektuak.Inmueble;
 
 import com.swtdesigner.SwingResourceManager;
@@ -96,7 +101,9 @@ public class Nagusia extends JFrame {
 
 		CrearPropietarioPanel crearPropietarioPanel = null;
 		try {
-
+			Calendar data = new GregorianCalendar();
+			data.setTime(new Date());
+			final VerVisitaPanel panela = new VerVisitaPanel(nagusia,"72665453j",1,data,"yolanda");
 			final BuenetxeaPanel buenetxeaPanel = new BuenetxeaPanel();
 			buenetxeaPanel.setName("presentacion");
 			panel.add(buenetxeaPanel, buenetxeaPanel.getName());
@@ -134,6 +141,9 @@ public class Nagusia extends JFrame {
 			panel.add(mostrarClientesInteresadosPanel,mostrarClientesInteresadosPanel.getName());
 			
 		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
