@@ -165,7 +165,8 @@ public class LocalizarInmueblePanel extends JPanel {
 		button = new JButton();
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				
+				String zona= ( (JButton)e.getSource() ).getText();
+	  			textField.setText(zona);
 			}
 		});
 		button.setText("Añadir zona");
@@ -180,14 +181,16 @@ public class LocalizarInmueblePanel extends JPanel {
 		button_1 = new JButton();
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				
+				String poblacion= ( (JButton)e.getSource() ).getText();
+	  			textField_2.setText(poblacion);
 			}
 		});
 		button_1.setText("Añadir población");
 		button_2 = new JButton();
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				
+				String provincia= ( (JButton)e.getSource() ).getText();
+	  			textField_3.setText(provincia);
 			}
 		});
 		button_2.setText("Añadir provincia");
@@ -206,11 +209,11 @@ public class LocalizarInmueblePanel extends JPanel {
 		precioLabel.setText("Precio:");
 		checkBox = new JCheckBox();
 		checkBox.setText("Nº Habitaciones:");
-		//if checkBox.isSelected(){
+		//if checkBox.setSelectedIcon(Nº Habitaciones:){
 			//selekzionau zenbat abitaziokin nahi dan
 			deLabel = new JLabel();
 			deLabel.setText("De");
-			//spinner_1 = new JSpinner();//
+			//spinner_1 = new JSpinner();
 			hastaLabel = new JLabel();
 			hastaLabel.setText("hasta");
 		//}
