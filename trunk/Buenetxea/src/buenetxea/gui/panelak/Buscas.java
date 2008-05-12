@@ -3,6 +3,8 @@ package buenetxea.gui.panelak;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -17,6 +19,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 
 import buenetxea.db.ResultSetTableModel;
+import buenetxea.gui.Nagusia;
 import buenetxea.gui.dialogs.CrearClienteDialog;
 
 public class Buscas extends JPanel {
@@ -93,6 +96,15 @@ public class Buscas extends JPanel {
 
 		JButton verInmuebleButton;
 		verInmuebleButton = new JButton();
+		verInmuebleButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(final MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					int ref = Integer.parseInt((String) table.getValueAt(table
+							.getSelectedRow(), 0));
+					Nagusia.getInstance().showVerInmueble(ref);
+				}
+			}
+		});
 		verInmuebleButton.setText("Ver ficha del inmueble");
 		final GroupLayout groupLayout_1 = new GroupLayout((JComponent) panel);
 		groupLayout_1
@@ -128,7 +140,7 @@ public class Buscas extends JPanel {
 																				crearClienteNuevoButton))
 														.addComponent(
 																errorLabel))
-										.addContainerGap(104, Short.MAX_VALUE)));
+										.addContainerGap(54, Short.MAX_VALUE)));
 		groupLayout_1
 				.setVerticalGroup(groupLayout_1
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
