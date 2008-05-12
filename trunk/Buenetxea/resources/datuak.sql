@@ -64,3 +64,30 @@ INSERT INTO preferencia VALUES ('75785666b','casa',75,95,0,1,3,'estacion',1,1,36
 INSERT INTO preferencia VALUES ('72365667j','casa',75,150,1,1,2,'afueras',1,1,360000,'mierda de ciudad',3);
 INSERT INTO preferencia VALUES ('74365668o','casa',75,250,0,1,2,'centro',1,1,450000,'mierda de ciudad',2);
 INSERT INTO preferencia VALUES ('76576669p','casa',75,250,1,1,5,'centro',1,1,360000,'mierda de ciudad',1);
+
+insert into rel_cliente_inmueble values ('72665453j',1,'2007-06-25',250000.0,10.0,5.0,265000.0);
+
+insert into descripcion values (1,1,"habitacion doble",15,"exterior");
+insert into descripcion values (2,1,"habitacion individual",10,"exterior");
+insert into descripcion values (3,1,"habitacion doble",15,"exterior");
+insert into descripcion values (4,1,"baño",10,"exterior");
+insert into descripcion values (5,1,"habitacion doble",15,"sin ventana");
+insert into descripcion values (6,1,"cocina",15,"patio luz");
+insert into descripcion values (7,1,"comedor",20,"exterior,chimenea");
+insert into descripcion values (8,1,"aseo",15,"junto al dormitorio");
+insert into descripcion values (9,1,"habitacion doble",15,"exterior");
+insert into descripcion values (10,2,"cocina+comedor+dormitorio",35,"atico con terraza");
+insert into descripcion values (11,2,"terraza",15,"soleado");
+insert into descripcion values (12,2,"trastero",15,"interior");
+insert into descripcion values (13,2,"baño",8,"interior");
+insert into descripcion values (14,3,"salon-cocina-dormitorio",25,"exterior");
+insert into descripcion values (15,3,"baño",8,"interior");
+
+insert into rel_inmueble_propietario values (1,'71665662u',150000.0,'2007-08-16','precio demasiado alto');
+insert into rel_inmueble_propietario values (1,'72665663j',160000.0,'2007-09-01','mi cuñado me lo dijo');
+insert into rel_inmueble_propietario values (1,'73665664f',150005.0,'2007-10-16','precio demasiado bajo');
+insert into rel_inmueble_propietario values (2,'74665665v',150000.0,'2008-04-18','precio desorbitado');
+insert into rel_inmueble_propietario values (4,'76665667j',150000.0,'2007-05-16','precio justo');
+insert into rel_inmueble_propietario values (5,'77665661e',150000.0,'2008-04-15','precio bonito barato');
+insert into rel_inmueble_propietario values (6,'77665669p',150000.0,'2007-03-22','precio justooo');
+insert into rel_inmueble_propietario values (6,'79665668o',150000.0,'2008-03-17','precio de risa');
