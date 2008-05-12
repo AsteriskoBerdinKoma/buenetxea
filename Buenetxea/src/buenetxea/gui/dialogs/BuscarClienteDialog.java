@@ -4,6 +4,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
+import buenetxea.gui.Nagusia;
 import buenetxea.gui.panelak.dialogPanels.BucarClientePanel;
 
 import com.swtdesigner.SwingResourceManager;
@@ -20,11 +21,10 @@ public class BuscarClienteDialog extends JDialog {
 	 * Create the dialog
 	 */
 	public BuscarClienteDialog() {
-		super();
+		super(Nagusia.getInstance(), true);
 		setIconImage(SwingResourceManager.getImage(BuscarClienteDialog.class,
 				"/buenetxea/resources/logo_buenetxea.png"));
 		setTitle("Buscar clientes");
-		setModal(true);
 
 		BucarClientePanel bucarClientePanel;
 		bucarClientePanel = new BucarClientePanel();

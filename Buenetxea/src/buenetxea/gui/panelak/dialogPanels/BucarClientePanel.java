@@ -100,12 +100,7 @@ public class BucarClientePanel extends JPanel {
 			venderInmuebleAlButton = new JButton();
 			venderInmuebleAlButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent arg0) {
-					String dni = (String) table.getValueAt(table
-							.getSelectedRow(), 0);
-					if (closeAfterSave) {
-						jabea.setSavedDNI(dni);
-						jabea.dispose();
-					}
+					getDataAndClose();
 				}
 			});
 			venderInmuebleAlButton.setText("Seleccionar cliente");
@@ -135,12 +130,7 @@ public class BucarClientePanel extends JPanel {
 			table.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(final MouseEvent e) {
 					if (e.getClickCount() == 2) {
-						String dni = (String) table.getValueAt(table
-								.getSelectedRow(), 0);
-						if (closeAfterSave) {
-							jabea.setSavedDNI(dni);
-							jabea.dispose();
-						}
+						getDataAndClose();
 					}
 				}
 			});
@@ -392,5 +382,13 @@ public class BucarClientePanel extends JPanel {
 	public void setCloseAfterSave(BuscarClienteDialog owner, boolean close) {
 		this.jabea = owner;
 		this.closeAfterSave = close;
+	}
+
+	private void getDataAndClose() {
+		String dni = (String) table.getValueAt(table.getSelectedRow(), 0);
+		if (closeAfterSave) {
+			jabea.setSavedDNI(dni);
+			jabea.dispose();
+		}
 	}
 }

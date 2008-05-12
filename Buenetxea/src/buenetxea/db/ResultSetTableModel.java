@@ -38,10 +38,6 @@ public class ResultSetTableModel extends AbstractTableModel {
 	 * constructor initializes resultSet and obtains its meta data object
 	 * determines number of rows
 	 * 
-	 * @param driver
-	 * @param url
-	 * @param username
-	 * @param password
 	 * @param query
 	 */
 	public ResultSetTableModel(String query) {
@@ -226,7 +222,7 @@ public class ResultSetTableModel extends AbstractTableModel {
 	 * 
 	 * @throws java.sql.SQLException
 	 */
-	public void refress() throws SQLException {
+	public void refresh() throws SQLException {
 		this.setQuery(this.lastQuery);
 	}
 } // end class ResultSetTableModel
