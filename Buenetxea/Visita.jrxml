@@ -851,7 +851,7 @@
 						height="17"
 						key="textField-7"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{nuevo_precio}]]></textFieldExpression>
@@ -877,7 +877,7 @@
 						height="17"
 						key="textField-10"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Double"><![CDATA[(new Double(  ($F{nuevo_precio}.doubleValue()) * 166.356 ))]]></textFieldExpression>
