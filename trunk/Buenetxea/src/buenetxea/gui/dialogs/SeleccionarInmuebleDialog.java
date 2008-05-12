@@ -33,12 +33,11 @@ public class SeleccionarInmuebleDialog extends JDialog {
 	 * Create the dialog
 	 */
 	public SeleccionarInmuebleDialog() {
-		super();
+		super(Nagusia.getInstance(), true);
 		setIconImage(SwingResourceManager.getImage(
 				SeleccionarInmuebleDialog.class,
 				"/buenetxea/resources/logo_buenetxea.png"));
 		setTitle("Seleccionar Inmueble");
-		setModal(true);
 
 		JLabel referenciaDelInmuebleLabel;
 		referenciaDelInmuebleLabel = new JLabel();

@@ -160,8 +160,9 @@ class VisitaKud {
 		ps.setString(25, fk_cliente_dni);
 
 		int rs = this.statement.executeUpdate(query);
+		boolean b = rs > 0;
 
-		return rs > 0;
+		return b;
 	}
 
 }

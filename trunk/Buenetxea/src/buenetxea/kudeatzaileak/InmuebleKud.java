@@ -5,12 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Inmueble;
-import buenetxea.objektuak.Peritaje;
 
 class InmuebleKud {
 
@@ -80,6 +77,7 @@ class InmuebleKud {
 		ps.setBoolean(3, vendido);
 		ps.setInt(4, refInmueble);
 		int i = ps.executeUpdate();
+		ps.close();
 		return i > 0;
 	}
 
@@ -90,16 +88,12 @@ class InmuebleKud {
 		ps.setBoolean(1, vendido);
 		ps.setInt(2, refInmueble);
 		int i = ps.executeUpdate();
+		ps.close();
 		return i > 0;
 	}
 
 	public void deleteInmueble(int refInmueble) {
 		// TODO
 	}
-	
-	
-				
-			
-		
-	}
 
+}

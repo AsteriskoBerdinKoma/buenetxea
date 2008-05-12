@@ -363,6 +363,14 @@ public class LocalizarClientePanel extends JPanel {
 		return query;
 	}
 
+	public void refresh() {
+		try {
+			tableModel.refresh();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private final class BuscarClientes implements ActionListener {
 		public void actionPerformed(final ActionEvent arg0) {
 			try {

@@ -4,6 +4,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
+import buenetxea.gui.Nagusia;
 import buenetxea.gui.panelak.CrearClientePanel;
 
 import com.swtdesigner.SwingResourceManager;
@@ -21,11 +22,10 @@ public class CrearClienteDialog extends JDialog {
 	 * Create the dialog
 	 */
 	public CrearClienteDialog() {
-		super();
+		super(Nagusia.getInstance(), true);
 		setIconImage(SwingResourceManager.getImage(CrearClienteDialog.class,
 				"/buenetxea/resources/logo_buenetxea.png"));
 		setTitle("Crear un cliente nuevo");
-		setModal(true);
 
 		CrearClientePanel crearClientePanel;
 		crearClientePanel = new CrearClientePanel();

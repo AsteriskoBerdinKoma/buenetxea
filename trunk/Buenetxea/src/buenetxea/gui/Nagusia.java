@@ -5,6 +5,9 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.swing.GroupLayout;
@@ -21,6 +24,7 @@ import javax.swing.JToolBar;
 import javax.swing.LayoutStyle;
 import javax.swing.border.MatteBorder;
 
+import buenetxea.db.Connector;
 import buenetxea.gui.dialogs.SeleccionarInmuebleDialog;
 import buenetxea.gui.panelak.BuenetxeaPanel;
 import buenetxea.gui.panelak.CrearClientePanel;
@@ -28,7 +32,6 @@ import buenetxea.gui.panelak.CrearPropietarioPanel;
 import buenetxea.gui.panelak.IntroducirDatosVisitaPanel;
 import buenetxea.gui.panelak.IntroducirInmueblePanel;
 import buenetxea.gui.panelak.LocalizarClientePanel;
-import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
 import buenetxea.gui.panelak.VerInmueblePanel;
@@ -49,6 +52,7 @@ public class Nagusia extends JFrame {
 
 	private VenderInmueblePanel venderInmueblePanel;
 	private VerInmueblePanel verInmueblePanel;
+	private LocalizarClientePanel localizarClientePanel;
 
 	/**
 	 * Create the frame
@@ -62,7 +66,8 @@ public class Nagusia extends JFrame {
 		nagusia = this;
 
 		this.setJMenuBar(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.addWindowListener(new NagusiaWindowListener());
 
 		JToolBar toolBar;
 		toolBar = new JToolBar();
@@ -92,7 +97,7 @@ public class Nagusia extends JFrame {
 			buenetxeaPanel.setName("presentacion");
 			panel.add(buenetxeaPanel, buenetxeaPanel.getName());
 
-			final LocalizarClientePanel localizarClientePanel = new LocalizarClientePanel();
+			localizarClientePanel = new LocalizarClientePanel();
 			localizarClientePanel.setName("localizarCliente");
 			panel.add(localizarClientePanel, localizarClientePanel.getName());
 
@@ -121,10 +126,6 @@ public class Nagusia extends JFrame {
 		}
 		crearPropietarioPanel.setName("crearPropietario");
 		panel.add(crearPropietarioPanel, crearPropietarioPanel.getName());
-
-		final LocalizarInmueblePanel localizadorPanel = new LocalizarInmueblePanel();
-		localizadorPanel.setName("localizador");
-		panel.add(localizadorPanel, localizadorPanel.getName());
 
 		venderInmueblePanel = new VenderInmueblePanel();
 		venderInmueblePanel.setName("venderInmueble");
@@ -193,6 +194,7 @@ public class Nagusia extends JFrame {
 		localizarClienteButton.setToolTipText("Localizar cliente");
 		localizarClienteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
+				localizarClientePanel.refresh();
 				((CardLayout) panel.getLayout())
 						.show(panel, "localizarCliente");
 			}
@@ -323,5 +325,51 @@ public class Nagusia extends JFrame {
 
 	public void showVerCliente(String dni) {
 
+	}
+
+	private final class NagusiaWindowListener implements WindowListener {
+		@Override
+		public void windowActivated(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowClosed(WindowEvent e) {
+			try {
+				Connector.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+
+		@Override
+		public void windowClosing(WindowEvent e) {
+			dispose();
+		}
+
+		@Override
+		public void windowDeactivated(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowDeiconified(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowIconified(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowOpened(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
 	}
 }
