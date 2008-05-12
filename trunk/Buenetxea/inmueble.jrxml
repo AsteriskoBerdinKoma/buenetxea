@@ -131,50 +131,11 @@
 					</textElement>
 				<text><![CDATA[Superficie:]]></text>
 				</staticText>
-				<staticText>
-					<reportElement
-						x="98"
-						y="83"
-						width="54"
-						height="18"
-						key="staticText-9"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<text><![CDATA[m²(útiles)]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="201"
-						y="83"
-						width="84"
-						height="18"
-						key="staticText-10"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<text><![CDATA[m²(construidos)]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="312"
-						y="83"
-						width="66"
-						height="18"
-						key="staticText-11"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<text><![CDATA[m²(parcela)]]></text>
-				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="70"
 						y="44"
-						width="121"
+						width="122"
 						height="17"
 						key="textField-2"/>
 					<box></box>
@@ -183,11 +144,11 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{zona}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="###0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="70"
 						y="83"
-						width="23"
+						width="70"
 						height="18"
 						key="textField-4"/>
 					<box></box>
@@ -196,11 +157,11 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{m2_utiles}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="###0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="173"
+						x="192"
 						y="83"
-						width="23"
+						width="82"
 						height="18"
 						key="textField-21"/>
 					<box></box>
@@ -209,11 +170,11 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{m2_constr}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="###0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="279"
+						x="364"
 						y="83"
-						width="28"
+						width="97"
 						height="18"
 						key="textField-22"/>
 					<box></box>
@@ -224,39 +185,39 @@
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="435"
+						x="456"
 						y="0"
-						width="86"
+						width="68"
 						height="18"
 						key="textField-55"/>
 					<box></box>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{tipo_inmueble}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="420"
+						x="456"
 						y="44"
-						width="102"
+						width="68"
 						height="17"
 						key="textField-56"/>
 					<box></box>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{tipo_venta}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="462"
+						x="456"
 						y="24"
-						width="59"
+						width="68"
 						height="16"
 						key="textField-57"/>
 					<box></box>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{vendido}.booleanValue() ? "Sí" : "No" )]]></textFieldExpression>
@@ -274,11 +235,11 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="#,##0.00€" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="69"
+						x="70"
 						y="60"
-						width="120"
+						width="122"
 						height="14"
 						key="textField-59"/>
 					<box></box>
@@ -289,9 +250,9 @@
 				</textField>
 				<staticText>
 					<reportElement
-						x="321"
+						x="359"
 						y="0"
-						width="114"
+						width="92"
 						height="18"
 						key="staticText-40"/>
 					<box></box>
@@ -302,9 +263,9 @@
 				</staticText>
 				<staticText>
 					<reportElement
-						x="384"
+						x="359"
 						y="24"
-						width="78"
+						width="92"
 						height="16"
 						key="staticText-41"/>
 					<box></box>
@@ -315,9 +276,9 @@
 				</staticText>
 				<staticText>
 					<reportElement
-						x="321"
+						x="359"
 						y="44"
-						width="99"
+						width="92"
 						height="17"
 						key="staticText-42"/>
 					<box></box>
@@ -325,6 +286,45 @@
 						<font/>
 					</textElement>
 				<text><![CDATA[Tipo de venta:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="140"
+						y="83"
+						width="47"
+						height="18"
+						key="staticText-43"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[ m²(útiles)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="274"
+						y="83"
+						width="85"
+						height="18"
+						key="staticText-44"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[m²(construidos)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="461"
+						y="83"
+						width="63"
+						height="18"
+						key="staticText-45"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[m²(parcela)]]></text>
 				</staticText>
 			</band>
 		</pageHeader>
@@ -348,7 +348,7 @@
 						x="93"
 						y="204"
 						width="439"
-						height="39"
+						height="53"
 						key="textField-17"/>
 					<box></box>
 					<textElement>
@@ -436,9 +436,9 @@
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="92"
+						x="93"
 						y="268"
-						width="142"
+						width="129"
 						height="18"
 						key="textField-18"/>
 					<box></box>
@@ -447,50 +447,44 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{referencia}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="###0 años" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="69"
+						x="93"
 						y="322"
-						width="38"
+						width="129"
 						height="18"
 						key="textField-19"/>
 					<box></box>
-					<textElement textAlignment="Right">
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{anos_finca}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement
-						x="112"
-						y="322"
-						width="39"
-						height="18"
-						key="staticText-29"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<text><![CDATA[años]]></text>
-				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="80"
+						x="93"
 						y="340"
-						width="27"
+						width="129"
 						height="18"
 						key="textField-20"/>
 					<box></box>
-					<textElement textAlignment="Right">
+					<textElement textAlignment="Left">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{orientacion}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{orientacion}.equalsIgnoreCase("S") ? "Sur" : 
+( $F{orientacion}.equalsIgnoreCase("N") ? "Norte" : 
+( $F{orientacion}.equalsIgnoreCase("O") ? "Oeste" : 
+( $F{orientacion}.equalsIgnoreCase("E") ? "Este" : 
+( $F{orientacion}.equalsIgnoreCase("SO") ? "Suroeste" : 
+( $F{orientacion}.equalsIgnoreCase("SE") ? "Sureste" : 
+( $F{orientacion}.equalsIgnoreCase("NO") ? "Noroeste" : 
+( $F{orientacion}.equalsIgnoreCase("NE") ? "Nordeste" : ""))))))))]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="92"
+						x="93"
 						y="286"
-						width="192"
+						width="129"
 						height="18"
 						key="textField-52"/>
 					<box></box>
@@ -501,48 +495,48 @@
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="92"
+						x="93"
 						y="304"
-						width="30"
+						width="24"
 						height="18"
 						key="textField-53"/>
 					<box></box>
-					<textElement textAlignment="Left">
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{altura_real_piso}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="#,##0.00€" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="92"
+						x="93"
 						y="358"
-						width="137"
+						width="129"
 						height="18"
 						key="textField-54"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Left">
 						<font/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{gastos_comun}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
-						x="112"
+						x="109"
 						y="304"
-						width="20"
+						width="28"
 						height="18"
 						key="staticText-39"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Left">
 						<font/>
 					</textElement>
 				<text><![CDATA[ de ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="132"
+						x="130"
 						y="304"
-						width="232"
+						width="92"
 						height="18"
 						key="textField-60"/>
 					<box></box>

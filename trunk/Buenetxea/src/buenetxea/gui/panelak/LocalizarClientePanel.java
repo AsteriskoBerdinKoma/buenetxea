@@ -348,7 +348,7 @@ public class LocalizarClientePanel extends JPanel {
 		String nacionalidad = (String) comboBox.getSelectedItem();
 
 		String query = "SELECT dni AS 'DNI', nombre AS 'Nombre', apellido1 AS 'Primer apellido', apellido2 AS 'Segundo apellido', nacionalidad AS 'Nacionalidad', telefono AS 'Teléfono', direccion AS 'Dirección', medio AS 'Medio', asesor AS 'Asesor', fecha AS 'Fecha' FROM cliente WHERE";
-		if (dni != "")
+		if (!dni.equals(""))
 			query += " dni LIKE '" + dni + "%' AND";
 		query += " nombre LIKE '" + nombre + "%' AND apellido1 LIKE '"
 				+ apellido1 + "%' AND apellido2 LIKE '" + apellido2 + "%'";

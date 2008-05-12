@@ -44,42 +44,23 @@ public class ResultSetTableModel extends AbstractTableModel {
 		try {
 			connection = Connector.getConnection();
 			statement = Connector.getStatement();
-			try {
-				// set query and execute it
-				setQuery(query);
-			} catch (IllegalStateException ex) {
-				ex.printStackTrace();
-				JOptionPane jop = new JOptionPane(
-						"Error al acceder a la base de datos.",
-						JOptionPane.ERROR_MESSAGE);
-				jop.createDialog(null, "Error de base de datos").setVisible(
-						true);
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-				JOptionPane jop = new JOptionPane(
-						"Error al acceder a la base de datos.",
-						JOptionPane.ERROR_MESSAGE);
-				jop.createDialog(null, "Error de base de datos").setVisible(
-						true);
-			}
+			// set query and execute it
+			setQuery(query);
 		} catch (IllegalStateException ex) {
 			ex.printStackTrace();
 			JOptionPane jop = new JOptionPane(
-					"Error al establecer la conexión con la base de datos.",
+					"Error al acceder a la base de datos.",
 					JOptionPane.ERROR_MESSAGE);
-			jop.createDialog(null, "Conexión fallida").setVisible(true);
+			jop.createDialog(null, "Error de base de datos").setVisible(true);
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			JOptionPane jop = new JOptionPane(
-					"Error al establecer la conexión con la base de datos.",
+					"Error al acceder a la base de datos.",
 					JOptionPane.ERROR_MESSAGE);
-			jop.createDialog(null, "Conexión fallida").setVisible(true);
-		} catch (ClassNotFoundException ex) {
-			ex.printStackTrace();
-			JOptionPane jop = new JOptionPane(
-					"Error al establecer la conexión con la base de datos.",
-					JOptionPane.ERROR_MESSAGE);
-			jop.createDialog(null, "Conexión fallida").setVisible(true);
+			jop.createDialog(null, "Error de base de datos").setVisible(true);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	} // end constructor ResultSetTableModel
 
