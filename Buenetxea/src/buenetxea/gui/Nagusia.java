@@ -331,7 +331,7 @@ public class Nagusia extends JFrame {
 		clientesMenu.add(newItemMenuItem_6);
 
 		final JMenu adibideakMenu = new JMenu();
-		adibideakMenu.setText("Adibideak");
+		adibideakMenu.setText("Fichas");
 		menuBar.add(adibideakMenu);
 
 		final JMenuItem newItemMenuItem_3 = new JMenuItem();
@@ -340,7 +340,7 @@ public class Nagusia extends JFrame {
 				((CardLayout) panel.getLayout()).show(panel, "verInmueble");
 			}
 		});
-		newItemMenuItem_3.setText("Ver Inmueble");
+		newItemMenuItem_3.setText("Ficha Inmueble");
 		adibideakMenu.add(newItemMenuItem_3);
 
 		final JMenuItem newItemMenuItem_5 = new JMenuItem();
@@ -349,7 +349,7 @@ public class Nagusia extends JFrame {
 				((CardLayout) panel.getLayout()).show(panel, "verCliente");
 			}
 		});
-		newItemMenuItem_5.setText("Ver Cliente");
+		newItemMenuItem_5.setText("Ficha Cliente");
 		adibideakMenu.add(newItemMenuItem_5);
 
 		final JMenuItem newItemMenuItem_7 = new JMenuItem();
@@ -358,7 +358,7 @@ public class Nagusia extends JFrame {
 				((CardLayout) panel.getLayout()).show(panel, "verPeritaje");
 			}
 		});
-		newItemMenuItem_7.setText("Ver Peritaje");
+		newItemMenuItem_7.setText("Ficha Peritaje");
 		adibideakMenu.add(newItemMenuItem_7);
 		pack();
 		//
