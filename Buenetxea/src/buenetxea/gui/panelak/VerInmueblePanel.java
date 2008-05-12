@@ -172,8 +172,6 @@ public class VerInmueblePanel extends JPanel {
 															.createParallelGroup(
 																	GroupLayout.Alignment.BASELINE)
 															.addComponent(
-																	getReferenciaDelInmuebleLabel())
-															.addComponent(
 																	getTextField(),
 																	GroupLayout.PREFERRED_SIZE,
 																	GroupLayout.DEFAULT_SIZE,
@@ -181,7 +179,9 @@ public class VerInmueblePanel extends JPanel {
 															.addComponent(
 																	getVerFichaDelButton())
 															.addComponent(
-																	getButton()))
+																	getButton())
+															.addComponent(
+																	getReferenciaDelInmuebleLabel()))
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
 											.addComponent(viewer,
@@ -330,6 +330,10 @@ public class VerInmueblePanel extends JPanel {
 		}
 	}
 
+	public void updateInmueble() {
+		setInmueble(inmueble.getReferencia());
+	}
+
 	/**
 	 * @return
 	 */
@@ -418,7 +422,4 @@ public class VerInmueblePanel extends JPanel {
 		return venderInmuebleButton;
 	}
 
-	public void updateInmueble() {
-		setInmueble(inmueble.getReferencia());
-	}
 }
