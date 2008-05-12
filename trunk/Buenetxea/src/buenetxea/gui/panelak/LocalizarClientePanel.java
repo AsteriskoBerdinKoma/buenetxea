@@ -6,14 +6,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Vector;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,10 +20,10 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.MaskFormatter;
 
 import buenetxea.db.ResultSetTableModel;
 import buenetxea.gui.Nagusia;
+import buenetxea.gui.dialogs.BuscarClienteDialog;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 
 public class LocalizarClientePanel extends JPanel {
@@ -35,7 +33,7 @@ public class LocalizarClientePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JFormattedTextField dniTextField;
+	private JTextField dniTextField;
 	private JTable table;
 	private JTextField apellido1TextField;
 	private JTextField apellido2TextField;
@@ -44,6 +42,10 @@ public class LocalizarClientePanel extends JPanel {
 	private JComboBox comboBox;
 
 	private Kudeatzailea kud;
+
+	private BuscarClienteDialog jabea;
+
+	private boolean closeAfterSave;
 
 	/**
 	 * Create the panel
@@ -86,8 +88,7 @@ public class LocalizarClientePanel extends JPanel {
 			buscarClientesButton.addActionListener(new BuscarClientes());
 			buscarClientesButton.setText("Buscar clientes");
 
-			dniTextField = new JFormattedTextField(new MaskFormatter(
-					"########*"));
+			dniTextField = new JTextField();
 
 			dniTextField.setColumns(9);
 
@@ -118,7 +119,7 @@ public class LocalizarClientePanel extends JPanel {
 			comboBox = new JComboBox(v.toArray());
 			comboBox.setSelectedIndex(0);
 
-			tableModel = new ResultSetTableModel(getBuscarClientesQuery());
+			tableModel = new ResultSetTableModel();
 
 			JScrollPane scrollPane;
 			scrollPane = new JScrollPane();
@@ -330,11 +331,9 @@ public class LocalizarClientePanel extends JPanel {
 							.addComponent(verClienteButton).addContainerGap()));
 			setLayout(groupLayout_1);
 			//
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println("errorea p1");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -379,9 +378,18 @@ public class LocalizarClientePanel extends JPanel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) {
+				System.out.println("errore2");
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	}
+	public void setResultSetTableModel(){
+		tableModel = new ResultSetTableModel(getBuscarClientesQuery());
+	}
+
+	public void setCloseAfterSave(BuscarClienteDialog owner, boolean close) {
+		this.jabea = owner;
+		this.closeAfterSave = close;
 	}
 }
