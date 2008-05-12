@@ -154,7 +154,7 @@ public class InprimagailuKudeatzailea {
 		ps.close();
 		rs.close();
 
-		String query2 = "SELECT nuevo_precio FROM rel_inmueble_propietario WHERE fk_inmueble_referencia = ? ORDER BY fk_inmueble_referencia DESC";
+		String query2 = "SELECT nuevo_precio FROM rel_inmueble_propietario WHERE fk_inmueble_referencia = ? ORDER BY fecha DESC LIMIT 1";
 		PreparedStatement ps2 = this.connection.prepareStatement(query2);
 		ps2.setInt(1, inmuebleref);
 		ResultSet rs2 = ps2.executeQuery();
