@@ -103,7 +103,7 @@ public class InprimagailuKudeatzailea {
 
 		if (vendido) {
 
-			String query3 = "SELECT precio_venta FROM rel_cliente_inmueble WHERE fk_inmueble_referencia = ? ORDER BY fk_inmueble_referencia DESC";
+			String query3 = "SELECT precio_venta FROM rel_cliente_inmueble WHERE fk_inmueble_referencia = ? ORDER BY fecha DESC LIMIT 1";
 			PreparedStatement ps3 = this.connection.prepareStatement(query3);
 			ps3.setInt(1, inmuebleref);
 			ResultSet rs3 = ps3.executeQuery();
@@ -115,7 +115,7 @@ public class InprimagailuKudeatzailea {
 			rs3.close();
 
 		} else {
-			String query2 = "SELECT nuevo_precio FROM rel_inmueble_propietario WHERE fk_inmueble_referencia = ? ORDER BY fk_inmueble_referencia DESC";
+			String query2 = "SELECT nuevo_precio FROM rel_inmueble_propietario WHERE fk_inmueble_referencia = ? ORDER BY fecha DESC LIMIT 1C";
 			PreparedStatement ps2 = this.connection.prepareStatement(query2);
 			ps2.setInt(1, inmuebleref);
 			ResultSet rs2 = ps2.executeQuery();
@@ -135,7 +135,7 @@ public class InprimagailuKudeatzailea {
 		boolean llavesb;
 		DatosVisita parameters = new DatosVisita();
 
-		String query = "SELECT * FROM inmueble,cliente,rel_visita WHERE referencia = ? AND dni = ? AND fk_cliente_dni = ? AND fk_inmueble_referencia = ?";
+		String query = "SELECT * FROM inmueble,cliente WHERE referencia = ? AND dni = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setInt(1, inmuebleref);
 		ps.setString(2, clientedni);
@@ -145,7 +145,7 @@ public class InprimagailuKudeatzailea {
 		if (rs.next()) {
 			parameters.setZona(rs.getString("zona"));
 			parameters.setDireccion(rs.getString("direccion"));
-			parameters.setRepresentante(rs.getString("representante"));
+			parameters.setRepresentante(representante);
 			parameters.setNombre(rs.getString("nombre"));
 			parameters.setApellido1(rs.getString("apellido1"));
 			parameters.setTelefono(rs.getInt("telefono"));
@@ -165,7 +165,7 @@ public class InprimagailuKudeatzailea {
 		ps2.close();
 		rs2.close();
 
-		String query3 = "SELECT llaves FROM rel_peritaje_inmueble WHERE fk_peritaje_referencia = ? ORDER BY fk_peritaje_fecha DESC";
+		String query3 = "SELECT llaves FROM rel_peritaje_inmueble WHERE fk_peritaje_referencia = ? ORDER BY fk_peritaje_id DESC";
 		PreparedStatement ps3 = this.connection.prepareStatement(query3);
 		ps3.setInt(1, inmuebleref);
 		ResultSet rs3 = ps3.executeQuery();
