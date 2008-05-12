@@ -61,6 +61,7 @@ public class Nagusia extends JFrame {
 
 	private VenderInmueblePanel venderInmueblePanel;
 	private VerInmueblePanel verInmueblePanel;
+	private VerVisitaPanel verVisitaPanel;
 	private LocalizarClientePanel localizarClientePanel;
 	private MostrarClientesInteresadosPanel mostrarClientesInteresadosPanel;
 	private LocalizarInmueblePanel localizarInmueblePanel;
@@ -103,10 +104,6 @@ public class Nagusia extends JFrame {
 
 		CrearPropietarioPanel crearPropietarioPanel = null;
 		try {
-			Calendar data = new GregorianCalendar();
-			data.setTime(new Date());
-			final VerVisitaPanel panela = new VerVisitaPanel(nagusia,
-					"72665453j", 1, data, "yolanda");
 			final BuenetxeaPanel buenetxeaPanel = new BuenetxeaPanel();
 			buenetxeaPanel.setName("presentacion");
 			panel.add(buenetxeaPanel, buenetxeaPanel.getName());
@@ -145,13 +142,16 @@ public class Nagusia extends JFrame {
 			panel.add(mostrarClientesInteresadosPanel,
 					mostrarClientesInteresadosPanel.getName());
 
+			verVisitaPanel = new VerVisitaPanel();
+			verVisitaPanel.setName("verVisita");
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			e.printStackTrace();}
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		crearPropietarioPanel.setName("crearPropietario");
 		panel.add(crearPropietarioPanel, crearPropietarioPanel.getName());
 
@@ -170,6 +170,8 @@ public class Nagusia extends JFrame {
 		verInmueblePanel = new VerInmueblePanel();
 		verInmueblePanel.setName("verInmueble");
 		panel.add(verInmueblePanel, verInmueblePanel.getName());
+		
+		panel.add(verVisitaPanel, verVisitaPanel.getName());
 		final JButton peritajeButton = new JButton();
 		peritajeButton.setToolTipText("Peritaje");
 		peritajeButton.setIcon(SwingResourceManager.getIcon(Nagusia.class,
@@ -343,6 +345,15 @@ public class Nagusia extends JFrame {
 		newItemMenuItem_3.setText("Ficha Inmueble");
 		adibideakMenu.add(newItemMenuItem_3);
 
+		final JMenuItem menuItem = new JMenuItem();
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				((CardLayout) panel.getLayout()).show(panel, "verVisita");
+			}
+		});
+		menuItem.setText("Menu Item");
+		adibideakMenu.add(menuItem);
+
 		final JMenuItem newItemMenuItem_5 = new JMenuItem();
 		newItemMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
@@ -360,6 +371,7 @@ public class Nagusia extends JFrame {
 		});
 		newItemMenuItem_7.setText("Ficha Peritaje");
 		adibideakMenu.add(newItemMenuItem_7);
+
 		pack();
 		//
 	}
@@ -402,6 +414,11 @@ public class Nagusia extends JFrame {
 	public void showClientesInteresados(String zona, int num_habitaciones,
 			double precio) {
 
+	}
+	
+	public void showVerVisita(int refInm, Calendar fecha, String dni, String representante){
+		verVisitaPanel.setDatos(dni, refInm, fecha, representante);
+		((CardLayout) panel.getLayout()).show(panel, "verVisita");
 	}
 
 	private final class NagusiaWindowListener implements WindowListener {
