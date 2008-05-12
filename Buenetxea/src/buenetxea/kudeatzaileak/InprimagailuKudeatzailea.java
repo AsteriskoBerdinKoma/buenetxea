@@ -166,8 +166,12 @@ public class InprimagailuKudeatzailea {
 		if (rs2.next()) {
 			parameters.setNuevo_precio(rs2.getDouble("nuevo_precio"));
 			preciopesetas = parameters.getNuevo_precio() * 166.386;
-			BigDecimal bd = new BigDecimal(preciopesetas);
-			bd = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
+			Double bd = new Double(
+					java.lang.Math.round(preciopesetas * 100000000.0) / 100000000.0);
+			System.out.println(preciopesetas);
+			System.out.println(bd.doubleValue());
+//			BigDecimal bd = new BigDecimal(preciopesetas);
+//			bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
 			// parameters.setPreciopesetas(parameters.getNuevo_precio() *
 			// 166.386);
 			parameters.setPreciopesetas(bd.doubleValue());

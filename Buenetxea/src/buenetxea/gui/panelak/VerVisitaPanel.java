@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -43,90 +46,76 @@ public class VerVisitaPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final Nagusia jabea;
+	//private final Nagusia jabea;
 
-	private String clientedniazkena;
-	private int inmueblerefazkena;
-	private Calendar fechaazkena;
-	private String representanteazkena;
+	private String dniCliente;
+	private int refInmueble;
+	private Calendar fechaVisita;
+	private String representante;
 	
-	/**
-	 * Create the panel
-	 * @throws IOException 
-	 * 
-	 * @throws JRException
-	 * @throws FileNotFoundException
-	 */
 
-	public VerVisitaPanel(Nagusia jabea, String clientedni,int inmuebleref,Calendar fecha, String representante) throws IOException {
+	public VerVisitaPanel() {
 		super();
-
-		this.jabea = jabea;
-
-		this.clientedniazkena = clientedni;
-		this.inmueblerefazkena = inmuebleref;
-		this.fechaazkena = fecha;
-		this.representanteazkena = representante;
+		this.dniCliente = "00000000A";
+		this.refInmueble = 0;
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(new Date());
+		this.fechaVisita = cal;
+		this.representante = "Ninguno";
 		
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(final ComponentEvent arg0) {
+				try {
+					JasperReport jr;
+					DatosVisita dv = new DatosVisita();
+					HashMap hutsa = new HashMap();
+					
+						//DATUEK BETE
+						InprimagailuKudeatzailea inpr = InprimagailuKudeatzailea.getInstance();
+						dv = inpr.InprimatuVisita(dniCliente, refInmueble,fechaVisita, representante);
+
+						//DATASOURCE  BETE
+						Collection<DatosVisita> lista = new ArrayList<DatosVisita>();
+						lista.add(dv);
+						JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(lista);
+						
+						//JASPERREPORT BETE
+						JasperReport masterReport = (JasperReport) JRLoader.loadObject("Visita.jasper");
+						JasperPrint jp = JasperFillManager.fillReport(masterReport,hutsa, datasource);
+
+						JRViewer jrv = new JRViewer(jp);
+						VerVisitaPanel.this.add(jrv, BorderLayout.CENTER);
+						VerVisitaPanel.this.validate();
+						VerVisitaPanel.this.repaint();
+					} catch (JRException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		});
+
 		this.setBorder(new TitledBorder(null, "Ver visita",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 
 		this.setLayout(new BorderLayout());
-
-		final JPanel panel_1 = new JPanel();
-		final FlowLayout flowLayout_1 = new FlowLayout();
-		flowLayout_1.setAlignment(FlowLayout.RIGHT);
-		panel_1.setLayout(flowLayout_1);
-		panel_1.setSize(484, 34);
 		final FlowLayout flowLayout = new FlowLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
-		this.add(panel_1, BorderLayout.SOUTH);
 		
-		
-		try {
-			JasperReport jr;
-			DatosVisita dv = new DatosVisita();
-			HashMap hutsa = new HashMap();
-			
-				//DATUEK BETE
-				InprimagailuKudeatzailea inpr = InprimagailuKudeatzailea.getInstance();
-				dv = inpr.InprimatuVisita(clientedniazkena, inmueblerefazkena,fechaazkena, representante);
-
-				//DATASOURCE  BETE
-				Collection<DatosVisita> lista = new ArrayList<DatosVisita>();
-				lista.add(dv);
-				JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(lista);
-				
-				//JASPERREPORT BETE
-				JasperReport masterReport = (JasperReport) JRLoader.loadObject("Visita.jasper");
-				JasperPrint jp = JasperFillManager.fillReport(masterReport,hutsa, datasource);
-
-				JRViewer jrv = new JRViewer(jp);
-				VerVisitaPanel.this.add(jrv, BorderLayout.CENTER);
-				VerVisitaPanel.this.validate();
-				VerVisitaPanel.this.repaint();
-			} catch (JRException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		JButton button;
-		button = new JButton();
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent arg0){
-				
-			}
-		});
-		panel_1.add(button);
-		button.setText("New JButton");
 		//
 		
+	}
+	public void setDatos(String dniCl, int refInm, Calendar fecha, String repr){
+		this.dniCliente = dniCl;
+		this.refInmueble = refInm;
+		this.fechaVisita = fecha;
+		this.representante = repr;
 	}
 
 }

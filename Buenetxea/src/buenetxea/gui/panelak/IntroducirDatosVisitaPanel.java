@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 
+import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
 import buenetxea.objektuak.Visita;
@@ -105,11 +106,49 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 
-		tabbedPane.addTab("Introducir datos", null, introducirDatosPanel, null);
-		tabbedPane.addTab("Crear visita", null, crearVisitaPanel, null);
+		tabbedPane.addTab("Introducir resultados de visita", null,
+				introducirDatosPanel, null);
+		tabbedPane
+				.addTab("Crear ficha de visita", null, crearVisitaPanel, null);
 
 		crearimprimirButton = new JButton();
-		crearimprimirButton.setText("Crear/Imprimir");
+		crearimprimirButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				try {
+					int refInm = Integer.valueOf(textField_3.getText().trim());
+					Calendar fecha = dateChooser_1.getCalendar();
+					fecha.set(Calendar.HOUR_OF_DAY, Integer.parseInt(spinner
+							.getValue().toString().trim()));
+					fecha.set(Calendar.MINUTE, Integer.parseInt(spinner_1
+							.getValue().toString().trim()));
+					String dni = textField_4.getText();
+					String representante = textField.getText();
+					boolean clienteExiste = Kudeatzailea.getInstance()
+							.existeCliente(dni);
+					Inmueble i = Kudeatzailea.getInstance().getInmueble(refInm);
+					if (i != null && clienteExiste) {
+						Nagusia.getInstance().showVerVisita(refInm, fecha, dni,
+								representante);
+					} else {
+						JOptionPane jop = new JOptionPane(
+								"El cliente o el inmueble introducidos no existen.",
+								JOptionPane.ERROR_MESSAGE);
+						jop.createDialog("Error en los datos").setVisible(true);
+					}
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+		crearimprimirButton.setText("Ver ficha visita");
 
 		JLabel referenciaInmuebleLabel_1;
 		referenciaInmuebleLabel_1 = new JLabel();
@@ -136,8 +175,12 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 		Calendar cal = new GregorianCalendar();
 		cal.setTime(new Date());
 		dataDatos.setCalendar(cal);
-		
+
 		dateChooser_1 = new JDateChooser();
+		dateChooser_1.setDateFormatString("d/M/yyyy");
+		Calendar cal2 = new GregorianCalendar();
+		cal2.setTime(new Date());
+		dateChooser_1.setCalendar(cal2);
 
 		spinner = new JSpinner();
 
@@ -149,7 +192,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 
 		JLabel representanteLabel;
 		representanteLabel = new JLabel();
-		representanteLabel.setText("Representante");
+		representanteLabel.setText("Representante:");
 
 		introducirDatosButton = new JButton();
 		introducirDatosButton.addActionListener(new ActionListener() {
@@ -311,111 +354,100 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																GroupLayout.Alignment.LEADING)
 														.addGroup(
 																groupLayout_1
-																		.createSequentialGroup()
+																		.createParallelGroup(
+																				GroupLayout.Alignment.LEADING)
 																		.addGroup(
 																				groupLayout_1
-																						.createParallelGroup(
-																								GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								dniClienteLabel_1)
+																						.createSequentialGroup()
 																						.addGroup(
 																								groupLayout_1
-																										.createSequentialGroup()
+																										.createParallelGroup(
+																												GroupLayout.Alignment.LEADING)
+																										.addComponent(
+																												dniClienteLabel_1)
 																										.addGroup(
 																												groupLayout_1
-																														.createParallelGroup(
-																																GroupLayout.Alignment.LEADING)
+																														.createSequentialGroup()
 																														.addGroup(
 																																groupLayout_1
-																																		.createSequentialGroup()
+																																		.createParallelGroup(
+																																				GroupLayout.Alignment.LEADING)
 																																		.addGroup(
 																																				groupLayout_1
-																																						.createParallelGroup(
-																																								GroupLayout.Alignment.LEADING)
-																																						.addComponent(
-																																								fechaLabel_1)
-																																						.addComponent(
-																																								horaLabel_1))
-																																		.addGroup(
-																																				groupLayout_1
-																																						.createParallelGroup(
-																																								GroupLayout.Alignment.LEADING)
+																																						.createSequentialGroup()
 																																						.addGroup(
 																																								groupLayout_1
-																																										.createSequentialGroup()
-																																										.addPreferredGap(
-																																												LayoutStyle.ComponentPlacement.RELATED)
+																																										.createParallelGroup(
+																																												GroupLayout.Alignment.LEADING)
 																																										.addComponent(
-																																												spinner,
-																																												GroupLayout.PREFERRED_SIZE,
-																																												40,
-																																												GroupLayout.PREFERRED_SIZE)
-																																										.addPreferredGap(
-																																												LayoutStyle.ComponentPlacement.RELATED)
+																																												fechaLabel_1)
 																																										.addComponent(
-																																												label)
-																																										.addPreferredGap(
-																																												LayoutStyle.ComponentPlacement.RELATED)
-																																										.addComponent(
-																																												spinner_1,
-																																												GroupLayout.PREFERRED_SIZE,
-																																												GroupLayout.DEFAULT_SIZE,
-																																												GroupLayout.PREFERRED_SIZE))
+																																												horaLabel_1))
+																																						.addGap(
+																																								83,
+																																								83,
+																																								83)
 																																						.addGroup(
 																																								groupLayout_1
-																																										.createSequentialGroup()
-																																										.addGap(
-																																												83,
-																																												83,
-																																												83)
+																																										.createParallelGroup(
+																																												GroupLayout.Alignment.LEADING)
 																																										.addGroup(
 																																												groupLayout_1
-																																														.createParallelGroup(
-																																																GroupLayout.Alignment.LEADING)
+																																														.createSequentialGroup()
 																																														.addComponent(
-																																																textField_3,
+																																																spinner,
 																																																GroupLayout.PREFERRED_SIZE,
-																																																GroupLayout.DEFAULT_SIZE,
+																																																40,
 																																																GroupLayout.PREFERRED_SIZE)
+																																														.addPreferredGap(
+																																																LayoutStyle.ComponentPlacement.RELATED)
 																																														.addComponent(
-																																																dateChooser_1,
-																																																GroupLayout.DEFAULT_SIZE,
-																																																GroupLayout.DEFAULT_SIZE,
-																																																Short.MAX_VALUE)))))
-																														.addGroup(
-																																groupLayout_1
-																																		.createSequentialGroup()
-																																		.addComponent(
-																																				representanteLabel)
-																																		.addPreferredGap(
-																																				LayoutStyle.ComponentPlacement.RELATED)
+																																																label)
+																																														.addPreferredGap(
+																																																LayoutStyle.ComponentPlacement.RELATED)
+																																														.addComponent(
+																																																spinner_1,
+																																																GroupLayout.PREFERRED_SIZE,
+																																																39,
+																																																GroupLayout.PREFERRED_SIZE))
+																																										.addComponent(
+																																												dateChooser_1,
+																																												GroupLayout.DEFAULT_SIZE,
+																																												91,
+																																												Short.MAX_VALUE)
+																																										.addComponent(
+																																												textField_3,
+																																												GroupLayout.DEFAULT_SIZE,
+																																												91,
+																																												Short.MAX_VALUE)
+																																										.addComponent(
+																																												textField_4,
+																																												GroupLayout.DEFAULT_SIZE,
+																																												91,
+																																												Short.MAX_VALUE)))
 																																		.addGroup(
 																																				groupLayout_1
-																																						.createParallelGroup(
-																																								GroupLayout.Alignment.LEADING)
+																																						.createSequentialGroup()
 																																						.addComponent(
-																																								textField_4,
-																																								GroupLayout.PREFERRED_SIZE,
-																																								135,
-																																								GroupLayout.PREFERRED_SIZE)
+																																								representanteLabel)
+																																						.addPreferredGap(
+																																								LayoutStyle.ComponentPlacement.RELATED)
 																																						.addComponent(
 																																								textField,
-																																								GroupLayout.PREFERRED_SIZE,
 																																								GroupLayout.DEFAULT_SIZE,
-																																								GroupLayout.PREFERRED_SIZE))))
-																										.addGap(
-																												12,
-																												12,
-																												12)))
-																		.addPreferredGap(
-																				LayoutStyle.ComponentPlacement.RELATED,
-																				GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)
+																																								127,
+																																								Short.MAX_VALUE)))
+																														.addPreferredGap(
+																																LayoutStyle.ComponentPlacement.RELATED)))
+																						.addGap(
+																								167,
+																								167,
+																								167))
 																		.addComponent(
-																				crearimprimirButton)
-																		.addContainerGap())
+																				referenciaInmuebleLabel_1))
 														.addComponent(
-																referenciaInmuebleLabel_1))));
+																crearimprimirButton,
+																GroupLayout.Alignment.TRAILING))));
 		groupLayout_1
 				.setVerticalGroup(groupLayout_1
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -458,55 +490,70 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 										.addGroup(
 												groupLayout_1
 														.createParallelGroup(
-																GroupLayout.Alignment.BASELINE)
+																GroupLayout.Alignment.LEADING)
 														.addComponent(
 																horaLabel_1,
 																GroupLayout.PREFERRED_SIZE,
 																16,
 																GroupLayout.PREFERRED_SIZE)
-														.addComponent(label)
-														.addComponent(
-																spinner_1,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																spinner,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																groupLayout_1
+																		.createSequentialGroup()
+																		.addPreferredGap(
+																				LayoutStyle.ComponentPlacement.RELATED)
+																		.addGroup(
+																				groupLayout_1
+																						.createParallelGroup(
+																								GroupLayout.Alignment.BASELINE)
+																						.addComponent(
+																								spinner,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								label)
+																						.addComponent(
+																								spinner_1,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE))))
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(
 												groupLayout_1
 														.createParallelGroup(
-																GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																dniClienteLabel_1,
-																GroupLayout.PREFERRED_SIZE,
-																16,
-																GroupLayout.PREFERRED_SIZE)
+																GroupLayout.Alignment.LEADING)
+														.addGroup(
+																groupLayout_1
+																		.createSequentialGroup()
+																		.addComponent(
+																				dniClienteLabel_1,
+																				GroupLayout.PREFERRED_SIZE,
+																				16,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addGap(
+																				10,
+																				10,
+																				10)
+																		.addGroup(
+																				groupLayout_1
+																						.createParallelGroup(
+																								GroupLayout.Alignment.BASELINE)
+																						.addComponent(
+																								representanteLabel)
+																						.addComponent(
+																								textField,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)))
 														.addComponent(
 																textField_4,
 																GroupLayout.PREFERRED_SIZE,
 																20,
 																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												groupLayout_1
-														.createParallelGroup(
-																GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																crearimprimirButton)
-														.addComponent(
-																representanteLabel)
-														.addComponent(
-																textField,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addGap(433, 433, 433)));
+										.addGap(18, 18, 18).addComponent(
+												crearimprimirButton).addGap(
+												312, 312, 312)));
 		crearVisitaPanel.setLayout(groupLayout_1);
 
 		final GroupLayout groupLayout_3 = new GroupLayout((JComponent) panel_2);
@@ -548,11 +595,11 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																						.addComponent(
 																								refTextfield,
 																								GroupLayout.DEFAULT_SIZE,
-																								96,
+																								128,
 																								Short.MAX_VALUE))
 																		.addPreferredGap(
 																				LayoutStyle.ComponentPlacement.RELATED,
-																				43,
+																				GroupLayout.DEFAULT_SIZE,
 																				Short.MAX_VALUE)
 																		.addGroup(
 																				groupLayout_3
@@ -596,7 +643,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 														.addComponent(
 																textField_5,
 																GroupLayout.DEFAULT_SIZE,
-																288,
+																322,
 																Short.MAX_VALUE))));
 		groupLayout_3
 				.setVerticalGroup(groupLayout_3
@@ -693,7 +740,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 										.addContainerGap(
 												GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
-		groupLayout_3.linkSize(javax.swing.SwingConstants.VERTICAL,
+		groupLayout_3.linkSize(javax.swing.SwingConstants.HORIZONTAL,
 				new java.awt.Component[] { refTextfield, textField_2 });
 		panel_2.setLayout(groupLayout_3);
 		final GroupLayout groupLayout_4 = new GroupLayout((JComponent) panel_3);
@@ -718,12 +765,12 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																						.addComponent(
 																								precioCheckBox_1_17,
 																								GroupLayout.DEFAULT_SIZE,
-																								149,
+																								155,
 																								Short.MAX_VALUE)
 																						.addComponent(
 																								precioCheckBox_1_5,
 																								GroupLayout.DEFAULT_SIZE,
-																								149,
+																								155,
 																								Short.MAX_VALUE)
 																						.addComponent(
 																								precioCheckBox_1,
@@ -743,7 +790,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																						.addComponent(
 																								precioCheckBox_1_4,
 																								GroupLayout.DEFAULT_SIZE,
-																								149,
+																								155,
 																								Short.MAX_VALUE)
 																						.addComponent(
 																								precioCheckBox_1_6,
@@ -753,12 +800,12 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																						.addComponent(
 																								precioCheckBox_1_7,
 																								GroupLayout.DEFAULT_SIZE,
-																								149,
+																								155,
 																								Short.MAX_VALUE)
 																						.addComponent(
 																								precioCheckBox_1_3,
 																								GroupLayout.DEFAULT_SIZE,
-																								GroupLayout.DEFAULT_SIZE,
+																								155,
 																								Short.MAX_VALUE)
 																						.addComponent(
 																								precioCheckBox))
@@ -826,7 +873,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																				271,
 																				GroupLayout.PREFERRED_SIZE)
 																		.addContainerGap(
-																				130,
+																				136,
 																				Short.MAX_VALUE))
 														.addGroup(
 																groupLayout_4
@@ -837,7 +884,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																				177,
 																				GroupLayout.PREFERRED_SIZE)
 																		.addContainerGap(
-																				224,
+																				230,
 																				Short.MAX_VALUE)))));
 		groupLayout_4
 				.setVerticalGroup(groupLayout_4
@@ -942,14 +989,14 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 				(JComponent) introducirDatosPanel);
 		groupLayout_2.setHorizontalGroup(groupLayout_2.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout_2.createSequentialGroup().addContainerGap(332,
+				groupLayout_2.createSequentialGroup().addContainerGap(338,
 						Short.MAX_VALUE).addComponent(introducirDatosButton)
 						.addContainerGap()).addGroup(
 				groupLayout_2.createSequentialGroup().addContainerGap()
-						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 431,
+						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 437,
 								Short.MAX_VALUE).addGap(12, 12, 12)).addGroup(
 				groupLayout_2.createSequentialGroup().addGap(12, 12, 12)
-						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 429,
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 435,
 								Short.MAX_VALUE).addGap(12, 12, 12)));
 		groupLayout_2
 				.setVerticalGroup(groupLayout_2.createParallelGroup(
