@@ -35,6 +35,7 @@ public class VerClientePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private String clientedniazkena;
+	private JRViewer viewer;
 
 	private Cliente cliente;
 
@@ -54,7 +55,11 @@ public class VerClientePanel extends JPanel {
 		final FlowLayout flowLayout = new FlowLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 
-		JRViewer viewer;
+		// Erreportea hutsik erakusteko aurrekoa komentatu eta ondokoa
+		// erabili.
+		Collection<DatosCliente> lista = new ArrayList<DatosCliente>();
+		lista.add(new DatosCliente());
+
 		viewer = new JRViewer();
 
 		JButton button_1;
