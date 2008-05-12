@@ -262,7 +262,7 @@ public class VerClientePanel extends JPanel {
 
 			JasperReport masterReport;
 			Map map;
-			if (dc == null) {
+			if (cliente == null) {
 				masterReport = (JasperReport) JRLoader
 						.loadObject("ClienteVacio.jasper");
 				map = new HashMap();
