@@ -65,6 +65,7 @@ public class Nagusia extends JFrame {
 	private LocalizarClientePanel localizarClientePanel;
 	private MostrarClientesInteresadosPanel mostrarClientesInteresadosPanel;
 	private LocalizarInmueblePanel localizarInmueblePanel;
+	private VerClientePanel verClientePanel;
 
 	/**
 	 * Create the frame
@@ -163,7 +164,7 @@ public class Nagusia extends JFrame {
 		verPeritajePanel.setName("verPeritaje");
 		panel.add(verPeritajePanel, verPeritajePanel.getName());
 
-		final VerClientePanel verClientePanel = new VerClientePanel();
+		verClientePanel = new VerClientePanel();
 		verClientePanel.setName("verCliente");
 		panel.add(verClientePanel, verClientePanel.getName());
 
@@ -400,7 +401,8 @@ public class Nagusia extends JFrame {
 	}
 
 	public void showVerCliente(String dni) {
-
+		verClientePanel.setCliente(dni);
+		((CardLayout) panel.getLayout()).show(panel, "verCliente");
 	}
 
 	public void showMostrarClientesInterados(String zona, int habs,
