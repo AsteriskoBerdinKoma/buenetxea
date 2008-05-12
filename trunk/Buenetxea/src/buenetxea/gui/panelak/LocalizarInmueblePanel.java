@@ -2,6 +2,7 @@ package buenetxea.gui.panelak;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Vector;
 
@@ -21,6 +22,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
 
 import buenetxea.db.ResultSetTableModel;
+import buenetxea.kudeatzaileak.Kudeatzailea;
 
 public class LocalizarInmueblePanel extends JPanel {
 
@@ -38,24 +40,31 @@ public class LocalizarInmueblePanel extends JPanel {
 	private JTextField textField_6;
 	private JSpinner spinner_hastaHab;
 	private JSpinner spinner_desdeHab;
-	private  String zona, herrialdea, probintzia, exterior, estado = "";
-	private int prezioa, habitacionesDesde, habitacionesHasta;
-	private boolean ascensor;
-	private Vector<String> herrialdeInteresatuak;
-	private Vector<String> zonaInteresatuak;
+	private  String zona="", herrialdea="", probintzia="", exterior="", estado = "";
+	private int prezioa=-1, habitacionesDesde=-1, habitacionesHasta=-1;
+	private String ascensor="";
+	private Vector<String> herrialdeInteresatuak = new Vector();
+	private Vector<String> zonaInteresatuak = new Vector();
 	private int herrialdeInteresKop, zonaInteresKop = 0;
 	private String zeudenHerriak, zeudenZonak;
+	private String s = "No";
+	private  int vendido =0;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	Kudeatzailea kud;
 
 	/**
 	 * Create the panel
 	 */
 	public LocalizarInmueblePanel() {
 		super();
+		
+		try {
+			kud = Kudeatzailea.getInstance();
+		
 		setBorder(new TitledBorder(null, "Localizador",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
@@ -107,7 +116,7 @@ public class LocalizarInmueblePanel extends JPanel {
 		buttonGroup.add(bajaCheckBox_1);
 		bajaCheckBox_1.setText("Baja");
 
-		JCheckBox vendidoCheckBox_1;
+		final JCheckBox vendidoCheckBox_1;
 		vendidoCheckBox_1 = new JCheckBox();
 		vendidoCheckBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
@@ -124,12 +133,23 @@ public class LocalizarInmueblePanel extends JPanel {
 		
 		localizarButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				prezioa = Integer.parseInt(textField_prezioa.getText());
-				exterior = comboBox_exterior.getSelectedItem().toString();
-				ascensor = Boolean.getBoolean(comboBox_ascensor.getSelectedItem().toString());
+				try {
+					prezioa = Integer.parseInt(textField_prezioa.getText());
+				} catch (NumberFormatException e2) {
+					prezioa=-1;
+				}
+				exterior = comboBox_exterior.getSelectedItem().toString().trim();
+				ascensor = comboBox_ascensor.getSelectedItem().toString().trim();				
 				if (checkBox_1.isSelected()){
 					habitacionesDesde = Integer.parseInt(spinner_desdeHab.getValue().toString());
 					habitacionesHasta = Integer.parseInt(spinner_hastaHab.getValue().toString());
+				}
+				try {
+					if (vendidoCheckBox_1.isSelected())
+						vendido=1;
+				} catch (RuntimeException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
 				}
 				try {
 					tableModel.setQuery(getQuery());
@@ -175,7 +195,7 @@ public class LocalizarInmueblePanel extends JPanel {
 		textField_8 = new JTextField();
 
 		comboBox_7 = new JComboBox();
-		comboBox_7.setModel(new DefaultComboBoxModel (new String[] {"Parte vieja", "Centro", "Afueras"}));
+		comboBox_7.setModel(new DefaultComboBoxModel (new String[] {"Parte vieja", "Centro", "Afueras","Kontxa"}));
 
 		comboBox_8 = new JComboBox();
 		comboBox_8.setModel(new DefaultComboBoxModel (new String[] {"Donostia", "Irun", "Bilbao","Gasteiz","Renteria" }));
@@ -206,7 +226,7 @@ public class LocalizarInmueblePanel extends JPanel {
 		button_2_1 = new JButton();
 		button_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
-				 probintzia = comboBox_9.getSelectedItem().toString();
+				 probintzia = comboBox_9.getSelectedItem().toString().trim();
 				textField_7.setText(probintzia);
 			}
 		});
@@ -217,7 +237,7 @@ public class LocalizarInmueblePanel extends JPanel {
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				zonaInteresKop++;
-				zona = comboBox_7.getSelectedItem().toString();
+				zona = comboBox_7.getSelectedItem().toString().trim();
 				zonaInteresatuak.add(zona);
 				if (zonaInteresKop>1){
 					zeudenZonak = textField_8.getText();
@@ -241,14 +261,14 @@ public class LocalizarInmueblePanel extends JPanel {
 		label_1_1.setText("€");
 
 		comboBox_exterior = new JComboBox();
-		
+		comboBox_exterior.setModel(new DefaultComboBoxModel (new String[] {"Todos","No",  "Si"}));
 
 		JLabel asceensorLabel_1;
 		asceensorLabel_1 = new JLabel();
 		asceensorLabel_1.setText("Ascensor:");
 
 		comboBox_ascensor = new JComboBox();
-		
+		comboBox_ascensor.setModel(new DefaultComboBoxModel (new String[] {"Todos","No", "Si"}));
 
 		JScrollPane scrollPane;
 		scrollPane = new JScrollPane();
@@ -267,121 +287,94 @@ public class LocalizarInmueblePanel extends JPanel {
 			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(36, 36, 36)
-							.addComponent(provinciaLabel_1, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-							.addGap(12, 12, 12)
-							.addComponent(textField_7, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(comboBox_9, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(button_2_1, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(33, 33, 33)
-							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-							.addGap(12, 12, 12)
-							.addComponent(textField_6, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(comboBox_8, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(button_1_1, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(68, 68, 68)
-									.addComponent(estadoLabel_1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(8, 8, 8)
-									.addComponent(altaCheckBox_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+									.addGap(13, 13, 13)
+									.addComponent(exteriorLabel_1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+									.addGap(12, 12, 12)
+									.addComponent(comboBox_exterior, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
+											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 											.addComponent(checkBox_1, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-											.addComponent(deLabel_1, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
+											.addComponent(deLabel_1, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
 										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(13, 13, 13)
-											.addComponent(exteriorLabel_1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-											.addGap(12, 12, 12)
-											.addComponent(comboBox_exterior, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-											.addGap(12, 12, 12)
-											.addComponent(asceensorLabel_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
+											.addGap(68, 68, 68)
+											.addComponent(estadoLabel_1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+											.addGap(8, 8, 8)
+											.addComponent(altaCheckBox_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)))
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-										.addComponent(comboBox_ascensor, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-												.addComponent(bajaCheckBox_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-												.addComponent(spinner_desdeHab, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-											.addComponent(hastaLabel_2, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)))))
+									.addComponent(spinner_desdeHab, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)))
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(asceensorLabel_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+									.addComponent(bajaCheckBox_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+									.addComponent(hastaLabel_2, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(spinner_hastaHab, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-								.addComponent(vendidoCheckBox_1, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+								.addComponent(comboBox_ascensor, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
+							.addGap(23, 23, 23)
+							.addComponent(vendidoCheckBox_1, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+							.addGap(37, 37, 37)
 							.addComponent(localizarButton_1_1, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(52, 52, 52)
 							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addComponent(precioLabel_1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addComponent(zonaLabel_1, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-							.addGap(12, 12, 12)
-							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(textField_8, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(comboBox_7, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
+								.addComponent(zonaLabel_1, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+								.addComponent(provinciaLabel_1, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
+							.addGap(20, 20, 20)
+							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(hastaLabel_1_1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 									.addComponent(textField_prezioa, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(label_1_1, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)))))
+									.addComponent(label_1_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+								.addComponent(textField_8, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+								.addComponent(textField_6, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+								.addComponent(textField_7, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(comboBox_7, 0, 170, Short.MAX_VALUE)
+								.addComponent(comboBox_8, 0, 170, Short.MAX_VALUE)
+								.addComponent(comboBox_9, 0, 170, Short.MAX_VALUE))
+							.addGap(12, 12, 12)
+							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(button_1_1, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+								.addComponent(button_2_1, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+								.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+					.addGap(5, 5, 5)
+					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(provinciaLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBox_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(button_2_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(3, 3, 3)
-							.addComponent(textField_7, 0, 0, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(5, 5, 5)
-							.addComponent(provinciaLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(11, 11, 11)
-							.addComponent(comboBox_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(5, 5, 5)
-							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 						.addComponent(button_1_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(1, 1, 1)
-							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(comboBox_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField_6, 0, 0, Short.MAX_VALUE))))
+						.addComponent(comboBox_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(6, 6, 6)
-					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(5, 5, 5)
-							.addComponent(zonaLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(3, 3, 3)
-								.addComponent(textField_8, 0, 0, Short.MAX_VALUE))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(1, 1, 1)
-								.addComponent(comboBox_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addGap(8, 8, 8)
+					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(zonaLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_8, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBox_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(precioLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 						.addComponent(hastaLabel_1_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
@@ -390,29 +383,26 @@ public class LocalizarInmueblePanel extends JPanel {
 					.addGap(8, 8, 8)
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(4, 4, 4)
-							.addComponent(exteriorLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-						.addComponent(comboBox_exterior, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(comboBox_exterior, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(comboBox_ascensor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(asceensorLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(4, 4, 4)
-							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(asceensorLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comboBox_ascensor, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))))
+							.addComponent(exteriorLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)))
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(4, 4, 4)
-							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(checkBox_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(4, 4, 4)
-									.addComponent(localizarButton_1_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))))
+							.addGap(8, 8, 8)
+							.addComponent(localizarButton_1_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(8, 8, 8)
 							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(deLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 								.addComponent(spinner_desdeHab, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 								.addComponent(hastaLabel_2, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-								.addComponent(spinner_hastaHab, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))))
+								.addComponent(spinner_hastaHab, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+								.addComponent(checkBox_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))))
 					.addGap(4, 4, 4)
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -422,30 +412,62 @@ public class LocalizarInmueblePanel extends JPanel {
 							.addGap(1, 1, 1)
 							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(altaCheckBox_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-								.addComponent(bajaCheckBox_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-								.addComponent(vendidoCheckBox_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))))
+								.addComponent(vendidoCheckBox_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+								.addComponent(bajaCheckBox_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))))
 					.addGap(7, 7, 7)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {textField_6, textField_7, textField_8});
 		setLayout(groupLayout);
 		//
+		} catch (SQLException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (ClassNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
 	}
 
 
 	private String getQuery() {
 		
-		String query = "SELECT I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona' FROM Inmueble AS I " +
-				"INNER JOIN (rel_peritaje_inmueble AS RPI INNER JOIN (peritaje as P INNER JOIN descripcion AS D ON " +
+		String query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona' FROM Inmueble  I " +
+				"INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON " +
 				"P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON " +
-				"I.referencia = RPI.fk_inmueble_referencia";
-		if (probintzia!="")
-		{
-			//query += "";
-		}
+				"I.referencia = RPI.fk_inmueble_referencia WHERE";
 		
+
+
+			query += " I.direccion LIKE '%" + probintzia + "%' AND " ;
+
+			query += " I.direccion LIKE '%" + herrialdea + "%' AND ";
+
+			query += " I.direccion LIKE '%" + zona + "%'";
 		
-		return query;
+			if (prezioa!=-1)
+				query +=" AND RPI.precio_venta<=" + prezioa;
+			
+			query += " AND P.exterior='"+ exterior+"'";
+			
+			if (!ascensor.equalsIgnoreCase("Todos"))
+				query +=" AND P.ascensor=" + ascensor.equalsIgnoreCase("Si");
+			
+			if (habitacionesDesde!=-1 && habitacionesHasta!=-1)
+	
+				query += " AND I.referencia IN ( SELECT COUNT(*)  FROM" +
+						" peritaje P INNER JOIN descripcion D ON P.id = D.fk_peritaje_id" +
+						" WHERE D.tipo LIKE '%habit%'" +
+						" GROUP BY p.id" +
+						" HAVING COUNT (*) BETWEEN" + habitacionesDesde+ "AND" + habitacionesHasta+ ")";
+			
+			query +=" AND I.vendido = vendido";
+			
+			return query;
 	}
 	
 	public void refresh()
