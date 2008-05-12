@@ -36,10 +36,11 @@ import buenetxea.gui.panelak.CrearPropietarioPanel;
 import buenetxea.gui.panelak.IntroducirDatosVisitaPanel;
 import buenetxea.gui.panelak.IntroducirInmueblePanel;
 import buenetxea.gui.panelak.LocalizarClientePanel;
-import buenetxea.gui.panelak.MostrarClientesInteresadosPanel;
 import buenetxea.gui.panelak.LocalizarInmueblePanel;
+import buenetxea.gui.panelak.MostrarClientesInteresadosPanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
+import buenetxea.gui.panelak.VerClientePanel;
 import buenetxea.gui.panelak.VerInmueblePanel;
 import buenetxea.gui.panelak.VerVisitaPanel;
 import buenetxea.objektuak.Inmueble;
@@ -103,7 +104,8 @@ public class Nagusia extends JFrame {
 		try {
 			Calendar data = new GregorianCalendar();
 			data.setTime(new Date());
-			final VerVisitaPanel panela = new VerVisitaPanel(nagusia,"72665453j",1,data,"yolanda");
+			final VerVisitaPanel panela = new VerVisitaPanel(nagusia,
+					"72665453j", 1, data, "yolanda");
 			final BuenetxeaPanel buenetxeaPanel = new BuenetxeaPanel();
 			buenetxeaPanel.setName("presentacion");
 			panel.add(buenetxeaPanel, buenetxeaPanel.getName());
@@ -126,6 +128,10 @@ public class Nagusia extends JFrame {
 			panel.add(introducirInmueblePanel, introducirInmueblePanel
 					.getName());
 
+			final VerClientePanel verClientePanel = new VerClientePanel();
+			verClientePanel.setName("verCliente");
+			panel.add(verClientePanel, verClientePanel.getName());
+
 			final IntroducirDatosVisitaPanel introducirDatosVisitaPanel = new IntroducirDatosVisitaPanel();
 			introducirDatosVisitaPanel.setName("visitas");
 			panel.add(introducirDatosVisitaPanel, introducirDatosVisitaPanel
@@ -135,11 +141,13 @@ public class Nagusia extends JFrame {
 			crearClientePanel.setName("nuevoCliente");
 			panel.add(crearClientePanel, crearClientePanel.getName());
 			crearPropietarioPanel = new CrearPropietarioPanel();
-			
+
 			mostrarClientesInteresadosPanel = new MostrarClientesInteresadosPanel();
-			mostrarClientesInteresadosPanel.setName("mostrarClientesInteresados");
-			panel.add(mostrarClientesInteresadosPanel,mostrarClientesInteresadosPanel.getName());
-			
+			mostrarClientesInteresadosPanel
+					.setName("mostrarClientesInteresados");
+			panel.add(mostrarClientesInteresadosPanel,
+					mostrarClientesInteresadosPanel.getName());
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -320,6 +328,15 @@ public class Nagusia extends JFrame {
 		});
 		newItemMenuItem_3.setText("Ver Inmueble");
 		adibideakMenu.add(newItemMenuItem_3);
+
+		final JMenuItem newItemMenuItem_5 = new JMenuItem();
+		newItemMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel, "verCliente");
+			}
+		});
+		newItemMenuItem_5.setText("Ver Cliente");
+		adibideakMenu.add(newItemMenuItem_5);
 		pack();
 		//
 	}
@@ -350,11 +367,13 @@ public class Nagusia extends JFrame {
 	public void showVerCliente(String dni) {
 
 	}
-	
-	public void showMostrarClientesInterados(String zona, int habs, double precio){
+
+	public void showMostrarClientesInterados(String zona, int habs,
+			double precio) {
 		mostrarClientesInteresadosPanel.setDatos(zona, habs, precio);
 		mostrarClientesInteresadosPanel.refresh();
-		((CardLayout) panel.getLayout()).show(panel, "mostrarClientesInteresados");
+		((CardLayout) panel.getLayout()).show(panel,
+				"mostrarClientesInteresados");
 	}
 
 	public void showClientesInteresados(String zona, int num_habitaciones,
@@ -365,8 +384,6 @@ public class Nagusia extends JFrame {
 	private final class NagusiaWindowListener implements WindowListener {
 		@Override
 		public void windowActivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
@@ -375,36 +392,29 @@ public class Nagusia extends JFrame {
 				Connector.close();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+			} finally {
+				dispose();
 			}
 		}
 
 		@Override
 		public void windowClosing(WindowEvent e) {
-			dispose();
 		}
 
 		@Override
 		public void windowDeactivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void windowDeiconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void windowIconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void windowOpened(WindowEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 	}
 }
