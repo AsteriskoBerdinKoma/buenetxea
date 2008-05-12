@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Inmueble;
+import buenetxea.objektuak.Peritaje;
 
 class InmuebleKud {
 
@@ -94,4 +96,10 @@ class InmuebleKud {
 	public void deleteInmueble(int refInmueble) {
 		// TODO
 	}
-}
+	
+	
+				
+			
+		
+	}
+
