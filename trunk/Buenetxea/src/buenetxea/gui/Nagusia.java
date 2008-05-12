@@ -190,7 +190,7 @@ public class Nagusia extends JFrame {
 		localizadorButton.setToolTipText("Localizador");
 		localizadorButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
-				localizarInmueblePanel.refresh();
+				//localizarInmueblePanel.refresh();
 				((CardLayout) panel.getLayout()).show(panel, "localizador");
 			}
 		});
@@ -234,7 +234,7 @@ public class Nagusia extends JFrame {
 		localizarClienteButton.setToolTipText("Localizar cliente");
 		localizarClienteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				localizarClientePanel.refresh();
+				//localizarClientePanel.refresh();
 				((CardLayout) panel.getLayout())
 						.show(panel, "localizarCliente");
 			}
@@ -408,7 +408,7 @@ public class Nagusia extends JFrame {
 	public void showMostrarClientesInterados(String zona, int habs,
 			double precio) {
 		mostrarClientesInteresadosPanel.setDatos(zona, habs, precio);
-		mostrarClientesInteresadosPanel.refresh();
+		//mostrarClientesInteresadosPanel.refresh();
 		((CardLayout) panel.getLayout()).show(panel,
 				"mostrarClientesInteresados");
 	}
