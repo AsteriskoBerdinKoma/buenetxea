@@ -2,18 +2,28 @@ package buenetxea.gui.panelak;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
+
+import buenetxea.kudeatzaileak.Kudeatzailea;
+import buenetxea.objektuak.Inmueble;
+import buenetxea.objektuak.Visita;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -24,15 +34,42 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JSpinner spinner_3;
+	private JSpinner spinner_2;
+	private JTextField textField_5;
+	private JTextField textField;
+	private JSpinner spinner_1;
+	private JSpinner spinner;
 	private JTextField textField_4;
-	private JComboBox comboBox_8;
-	private JComboBox comboBox_7;
-	private JComboBox comboBox_6;
-	private JComboBox comboBox_5;
 	private JTextField textField_3;
 	private JTextField textField_2;
-	private JComboBox comboBox_4;
-	private JTextField textField_1;
+	private JTextField refTextfield;
+	private JDateChooser dataDatos;
+	private JDateChooser dateChooser_1;
+	private JCheckBox precioCheckBox;
+	private JCheckBox precioCheckBox_1;
+	private JCheckBox precioCheckBox_1_1;
+	private JCheckBox precioCheckBox_1_2;
+	private JCheckBox precioCheckBox_1_3;
+	private JCheckBox precioCheckBox_1_4;
+	private JCheckBox precioCheckBox_1_5;
+	private JCheckBox precioCheckBox_1_6;
+	private JCheckBox precioCheckBox_1_7;
+	private JCheckBox precioCheckBox_1_8;
+	private JCheckBox precioCheckBox_1_9;
+	private JCheckBox precioCheckBox_1_10;
+	private JCheckBox precioCheckBox_1_11;
+	private JCheckBox precioCheckBox_1_12;
+	private JCheckBox precioCheckBox_1_13;
+	private JCheckBox precioCheckBox_1_14;
+	private JCheckBox precioCheckBox_1_15;
+	private JCheckBox precioCheckBox_1_16;
+	private JCheckBox precioCheckBox_1_17;
+	private JCheckBox precioCheckBox_1_18;
+	private JCheckBox precioCheckBox_1_19;
+	private JTabbedPane tabbedPane;
+	private JButton crearimprimirButton;
+	private JButton introducirDatosButton;
 
 	/**
 	 * Create the panel
@@ -43,18 +80,34 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 
-		JTabbedPane tabbedPane;
 		tabbedPane = new JTabbedPane();
 
-		final JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new TitledBorder(null, "",
+		JPanel crearVisitaPanel = new JPanel();
+		crearVisitaPanel.setBorder(new TitledBorder(new TitledBorder(null, "",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null), "Introducir datos",
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
-		tabbedPane.addTab("Crear visita", null, panel, null);
 
-		JButton crearimprimirButton;
+		JPanel introducirDatosPanel = new JPanel();
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new TitledBorder(new TitledBorder(null, "",
+				TitledBorder.DEFAULT_JUSTIFICATION,
+				TitledBorder.DEFAULT_POSITION, null, null), "Datos",
+				TitledBorder.DEFAULT_JUSTIFICATION,
+				TitledBorder.DEFAULT_POSITION, null, null));
+
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(new TitledBorder(null, "",
+				TitledBorder.DEFAULT_JUSTIFICATION,
+				TitledBorder.DEFAULT_POSITION, null, null), "Datos Visita",
+				TitledBorder.DEFAULT_JUSTIFICATION,
+				TitledBorder.DEFAULT_POSITION, null, null));
+
+		tabbedPane.addTab("Introducir datos", null, introducirDatosPanel, null);
+		tabbedPane.addTab("Crear visita", null, crearVisitaPanel, null);
+
 		crearimprimirButton = new JButton();
 		crearimprimirButton.setText("Crear/Imprimir");
 
@@ -68,71 +121,301 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 		fechaLabel_1 = new JLabel();
 		fechaLabel_1.setText("Fecha:");
 
-		comboBox_5 = new JComboBox();
-
-		comboBox_6 = new JComboBox();
-
-		comboBox_7 = new JComboBox();
-
 		JLabel horaLabel_1;
 		horaLabel_1 = new JLabel();
 		horaLabel_1.setText("Hora:");
-
-		comboBox_8 = new JComboBox();
 
 		JLabel dniClienteLabel_1;
 		dniClienteLabel_1 = new JLabel();
 		dniClienteLabel_1.setText("DNI Cliente:");
 
 		textField_4 = new JTextField();
-		final GroupLayout groupLayout_1 = new GroupLayout((JComponent) panel);
-		groupLayout_1.setHorizontalGroup(groupLayout_1.createParallelGroup(
-				GroupLayout.Alignment.LEADING)
-				.addGroup(
-						groupLayout_1.createSequentialGroup().addContainerGap()
-								.addComponent(referenciaInmuebleLabel_1)
-								.addPreferredGap(
-										LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(textField_3,
-										GroupLayout.PREFERRED_SIZE, 87,
-										GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)).addGroup(
-						groupLayout_1.createSequentialGroup().addContainerGap()
-								.addComponent(fechaLabel_1).addGap(4, 4, 4)
-								.addComponent(comboBox_5,
-										GroupLayout.PREFERRED_SIZE, 41,
-										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(
-										LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(comboBox_6,
-										GroupLayout.PREFERRED_SIZE, 41,
-										GroupLayout.PREFERRED_SIZE).addGap(6,
-										6, 6).addComponent(comboBox_7,
-										GroupLayout.PREFERRED_SIZE, 41,
-										GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)).addGroup(
-						groupLayout_1.createSequentialGroup().addContainerGap()
-								.addComponent(horaLabel_1).addPreferredGap(
-										LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(comboBox_8,
-										GroupLayout.PREFERRED_SIZE, 41,
-										GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)).addGroup(
-						groupLayout_1.createSequentialGroup().addContainerGap()
-								.addComponent(dniClienteLabel_1)
-								.addPreferredGap(
-										LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(textField_4,
-										GroupLayout.PREFERRED_SIZE, 87,
-										GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)).addGroup(
-						groupLayout_1.createSequentialGroup().addContainerGap(
-								103, Short.MAX_VALUE).addComponent(
-								crearimprimirButton).addContainerGap()));
+
+		dataDatos = new JDateChooser();
+		dataDatos.setDateFormatString("d/M/yyyy");
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(new Date());
+		dataDatos.setCalendar(cal);
+		
+		dateChooser_1 = new JDateChooser();
+
+		spinner = new JSpinner();
+
+		JLabel label;
+		label = new JLabel();
+		label.setText(":");
+
+		spinner_1 = new JSpinner();
+
+		JLabel representanteLabel;
+		representanteLabel = new JLabel();
+		representanteLabel.setText("Representante");
+
+		introducirDatosButton = new JButton();
+		introducirDatosButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				Visita v = generarDatosVisita();
+				try {
+					boolean clienteExiste = Kudeatzailea.getInstance()
+							.existeCliente(textField_2.getText());
+					Inmueble i = Kudeatzailea.getInstance().getInmueble(
+							Integer.valueOf(refTextfield.getText().trim()));
+					if (i != null && clienteExiste) {
+						boolean visitaOk = Kudeatzailea.getInstance()
+								.crearVisita(v);
+						if (visitaOk) {
+							JOptionPane jop = new JOptionPane(
+									"Visita introducida correctamente.",
+									JOptionPane.INFORMATION_MESSAGE);
+							jop.createDialog("Visita introducida").setVisible(
+									true);
+						} else {
+							JOptionPane jop = new JOptionPane(
+									"No se ha podido introducir la visita.",
+									JOptionPane.ERROR_MESSAGE);
+							jop.createDialog("Error al introducir la visita")
+									.setVisible(true);
+						}
+					} else {
+						JOptionPane jop = new JOptionPane(
+								"El cliente o el inmueble introducidos no existen.",
+								JOptionPane.ERROR_MESSAGE);
+						jop.createDialog("Error en los datos").setVisible(true);
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+
+		introducirDatosButton.setText("Introducir Datos");
+
+		JLabel representanteLabel_1;
+		representanteLabel_1 = new JLabel();
+		representanteLabel_1.setText("Representante");
+
+		textField_5 = new JTextField();
+
+		spinner_2 = new JSpinner();
+
+		JLabel label_1;
+		label_1 = new JLabel();
+		label_1.setText(":");
+
+		spinner_3 = new JSpinner();
+
+		textField = new JTextField();
+
+		JLabel referenciaInmuebleLabel;
+		referenciaInmuebleLabel = new JLabel();
+		referenciaInmuebleLabel.setText("Referencia Inmueble:");
+
+		refTextfield = new JTextField();
+
+		JLabel fechaLabel;
+		fechaLabel = new JLabel();
+		fechaLabel.setText("Fecha:");
+
+		JLabel horaLabel;
+		horaLabel = new JLabel();
+		horaLabel.setText("Hora:");
+
+		JLabel dniClienteLabel;
+		dniClienteLabel = new JLabel();
+		dniClienteLabel.setText("DNI Cliente:");
+
+		textField_2 = new JTextField();
+
+		precioCheckBox = new JCheckBox();
+		precioCheckBox.setText("Precio");
+
+		precioCheckBox_1 = new JCheckBox();
+		precioCheckBox_1.setText("No le gusta la zona");
+
+		precioCheckBox_1_1 = new JCheckBox();
+		precioCheckBox_1_1.setText("Lo quieren más alto");
+
+		precioCheckBox_1_2 = new JCheckBox();
+		precioCheckBox_1_2.setText("Muchas reformas");
+
+		precioCheckBox_1_3 = new JCheckBox();
+		precioCheckBox_1_3.setText("Quieren más habitaciones");
+
+		precioCheckBox_1_4 = new JCheckBox();
+		precioCheckBox_1_4.setText("Visita anulada comprador");
+
+		precioCheckBox_1_5 = new JCheckBox();
+		precioCheckBox_1_5.setText("Visita anulada propietario");
+
+		precioCheckBox_1_6 = new JCheckBox();
+		precioCheckBox_1_6.setText("Oscuro");
+
+		precioCheckBox_1_7 = new JCheckBox();
+		precioCheckBox_1_7.setText("Lo quieren más grande");
+
+		precioCheckBox_1_8 = new JCheckBox();
+		precioCheckBox_1_8.setText("No tiene asecensor");
+
+		precioCheckBox_1_9 = new JCheckBox();
+		precioCheckBox_1_9.setText("Quieren más baños");
+
+		precioCheckBox_1_10 = new JCheckBox();
+		precioCheckBox_1_10.setText("Concertada 2ª visita");
+
+		precioCheckBox_1_11 = new JCheckBox();
+		precioCheckBox_1_11.setText("¡Vendido en esta visita!");
+
+		precioCheckBox_1_12 = new JCheckBox();
+		precioCheckBox_1_12.setText("Plantón");
+
+		precioCheckBox_1_13 = new JCheckBox();
+		precioCheckBox_1_13.setText("Le gusta");
+
+		precioCheckBox_1_14 = new JCheckBox();
+		precioCheckBox_1_14.setText("Todo exterior");
+
+		precioCheckBox_1_15 = new JCheckBox();
+		precioCheckBox_1_15.setText("Quieren balcón/terraza");
+
+		precioCheckBox_1_16 = new JCheckBox();
+		precioCheckBox_1_16.setText("No gusta distribución");
+
+		precioCheckBox_1_17 = new JCheckBox();
+		precioCheckBox_1_17.setText("¡Alquilado en esta visita!");
+
+		precioCheckBox_1_18 = new JCheckBox();
+		precioCheckBox_1_18.setText("La gestión de venta la hace otra agencia");
+
+		precioCheckBox_1_19 = new JCheckBox();
+		precioCheckBox_1_19.setText("Podriamos peritar su piso");
+
+		final GroupLayout groupLayout_1 = new GroupLayout(
+				(JComponent) crearVisitaPanel);
+		groupLayout_1
+				.setHorizontalGroup(groupLayout_1
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								groupLayout_1
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												groupLayout_1
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addGroup(
+																groupLayout_1
+																		.createSequentialGroup()
+																		.addGroup(
+																				groupLayout_1
+																						.createParallelGroup(
+																								GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								dniClienteLabel_1)
+																						.addGroup(
+																								groupLayout_1
+																										.createSequentialGroup()
+																										.addGroup(
+																												groupLayout_1
+																														.createParallelGroup(
+																																GroupLayout.Alignment.LEADING)
+																														.addGroup(
+																																groupLayout_1
+																																		.createSequentialGroup()
+																																		.addGroup(
+																																				groupLayout_1
+																																						.createParallelGroup(
+																																								GroupLayout.Alignment.LEADING)
+																																						.addComponent(
+																																								fechaLabel_1)
+																																						.addComponent(
+																																								horaLabel_1))
+																																		.addGroup(
+																																				groupLayout_1
+																																						.createParallelGroup(
+																																								GroupLayout.Alignment.LEADING)
+																																						.addGroup(
+																																								groupLayout_1
+																																										.createSequentialGroup()
+																																										.addPreferredGap(
+																																												LayoutStyle.ComponentPlacement.RELATED)
+																																										.addComponent(
+																																												spinner,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												40,
+																																												GroupLayout.PREFERRED_SIZE)
+																																										.addPreferredGap(
+																																												LayoutStyle.ComponentPlacement.RELATED)
+																																										.addComponent(
+																																												label)
+																																										.addPreferredGap(
+																																												LayoutStyle.ComponentPlacement.RELATED)
+																																										.addComponent(
+																																												spinner_1,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												GroupLayout.DEFAULT_SIZE,
+																																												GroupLayout.PREFERRED_SIZE))
+																																						.addGroup(
+																																								groupLayout_1
+																																										.createSequentialGroup()
+																																										.addGap(
+																																												83,
+																																												83,
+																																												83)
+																																										.addGroup(
+																																												groupLayout_1
+																																														.createParallelGroup(
+																																																GroupLayout.Alignment.LEADING)
+																																														.addComponent(
+																																																textField_3,
+																																																GroupLayout.PREFERRED_SIZE,
+																																																GroupLayout.DEFAULT_SIZE,
+																																																GroupLayout.PREFERRED_SIZE)
+																																														.addComponent(
+																																																dateChooser_1,
+																																																GroupLayout.DEFAULT_SIZE,
+																																																GroupLayout.DEFAULT_SIZE,
+																																																Short.MAX_VALUE)))))
+																														.addGroup(
+																																groupLayout_1
+																																		.createSequentialGroup()
+																																		.addComponent(
+																																				representanteLabel)
+																																		.addPreferredGap(
+																																				LayoutStyle.ComponentPlacement.RELATED)
+																																		.addGroup(
+																																				groupLayout_1
+																																						.createParallelGroup(
+																																								GroupLayout.Alignment.LEADING)
+																																						.addComponent(
+																																								textField_4,
+																																								GroupLayout.PREFERRED_SIZE,
+																																								135,
+																																								GroupLayout.PREFERRED_SIZE)
+																																						.addComponent(
+																																								textField,
+																																								GroupLayout.PREFERRED_SIZE,
+																																								GroupLayout.DEFAULT_SIZE,
+																																								GroupLayout.PREFERRED_SIZE))))
+																										.addGap(
+																												12,
+																												12,
+																												12)))
+																		.addPreferredGap(
+																				LayoutStyle.ComponentPlacement.RELATED,
+																				GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE)
+																		.addComponent(
+																				crearimprimirButton)
+																		.addContainerGap())
+														.addComponent(
+																referenciaInmuebleLabel_1))));
 		groupLayout_1
 				.setVerticalGroup(groupLayout_1
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -159,24 +442,14 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 										.addGroup(
 												groupLayout_1
 														.createParallelGroup(
-																GroupLayout.Alignment.BASELINE)
+																GroupLayout.Alignment.LEADING)
 														.addComponent(
 																fechaLabel_1,
 																GroupLayout.PREFERRED_SIZE,
 																16,
 																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																comboBox_5,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																comboBox_6,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																comboBox_7,
+																dateChooser_1,
 																GroupLayout.PREFERRED_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE))
@@ -191,8 +464,14 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																GroupLayout.PREFERRED_SIZE,
 																16,
 																GroupLayout.PREFERRED_SIZE)
+														.addComponent(label)
 														.addComponent(
-																comboBox_8,
+																spinner_1,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																spinner,
 																GroupLayout.PREFERRED_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE))
@@ -214,145 +493,209 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																GroupLayout.PREFERRED_SIZE))
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(crearimprimirButton)
-										.addGap(431, 431, 431)));
-		panel.setLayout(groupLayout_1);
+										.addGroup(
+												groupLayout_1
+														.createParallelGroup(
+																GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																crearimprimirButton)
+														.addComponent(
+																representanteLabel)
+														.addComponent(
+																textField,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addGap(433, 433, 433)));
+		crearVisitaPanel.setLayout(groupLayout_1);
 
-		final JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Introducir datos", null, panel_1, null);
-
-		JPanel panel_2;
-		panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(new TitledBorder(null, "",
-				TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null), "Datos",
-				TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null));
-
-		JLabel referenciaInmuebleLabel;
-		referenciaInmuebleLabel = new JLabel();
-		referenciaInmuebleLabel.setText("Referencia Inmueble:");
-
-		textField_1 = new JTextField();
-
-		JLabel fechaLabel;
-		fechaLabel = new JLabel();
-		fechaLabel.setText("Fecha:");
-
-		JLabel horaLabel;
-		horaLabel = new JLabel();
-		horaLabel.setText("Hora:");
-
-		comboBox_4 = new JComboBox();
-
-		JLabel dniClienteLabel;
-		dniClienteLabel = new JLabel();
-		dniClienteLabel.setText("DNI Cliente:");
-
-		textField_2 = new JTextField();
-
-		JPanel panel_3;
-		panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(new TitledBorder(null, "",
-				TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null), "Datos Visita",
-				TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null));
-
-		JCheckBox precioCheckBox;
-		precioCheckBox = new JCheckBox();
-		precioCheckBox.setText("Precio");
-
-		JCheckBox precioCheckBox_1;
-		precioCheckBox_1 = new JCheckBox();
-		precioCheckBox_1.setText("No le gusta la zona");
-
-		JCheckBox precioCheckBox_1_1;
-		precioCheckBox_1_1 = new JCheckBox();
-		precioCheckBox_1_1.setText("Lo quieren más alto");
-
-		JCheckBox precioCheckBox_1_2;
-		precioCheckBox_1_2 = new JCheckBox();
-		precioCheckBox_1_2.setText("Muchas reformas");
-
-		JCheckBox precioCheckBox_1_3;
-		precioCheckBox_1_3 = new JCheckBox();
-		precioCheckBox_1_3.setText("Quieren más habitaciones");
-
-		JCheckBox precioCheckBox_1_4;
-		precioCheckBox_1_4 = new JCheckBox();
-		precioCheckBox_1_4.setText("Visita anulada comprador");
-
-		JCheckBox precioCheckBox_1_5;
-		precioCheckBox_1_5 = new JCheckBox();
-		precioCheckBox_1_5.setText("Visita anulada propietario");
-
-		JCheckBox precioCheckBox_1_6;
-		precioCheckBox_1_6 = new JCheckBox();
-		precioCheckBox_1_6.setText("Oscuro");
-
-		JCheckBox precioCheckBox_1_7;
-		precioCheckBox_1_7 = new JCheckBox();
-		precioCheckBox_1_7.setText("Lo quieren más grande");
-
-		JCheckBox precioCheckBox_1_8;
-		precioCheckBox_1_8 = new JCheckBox();
-		precioCheckBox_1_8.setText("No tiene asecensor");
-
-		JCheckBox precioCheckBox_1_9;
-		precioCheckBox_1_9 = new JCheckBox();
-		precioCheckBox_1_9.setText("Quieren más baños");
-
-		JCheckBox precioCheckBox_1_10;
-		precioCheckBox_1_10 = new JCheckBox();
-		precioCheckBox_1_10.setText("Concertada 2ª visita");
-
-		JCheckBox precioCheckBox_1_11;
-		precioCheckBox_1_11 = new JCheckBox();
-		precioCheckBox_1_11.setText("¡Vendido en esta visita!");
-
-		JCheckBox precioCheckBox_1_12;
-		precioCheckBox_1_12 = new JCheckBox();
-		precioCheckBox_1_12.setText("Plantón");
-
-		JCheckBox precioCheckBox_1_13;
-		precioCheckBox_1_13 = new JCheckBox();
-		precioCheckBox_1_13.setText("Le gusta");
-
-		JCheckBox precioCheckBox_1_14;
-		precioCheckBox_1_14 = new JCheckBox();
-		precioCheckBox_1_14.setText("Todo exterior");
-
-		JCheckBox precioCheckBox_1_15;
-		precioCheckBox_1_15 = new JCheckBox();
-		precioCheckBox_1_15.setText("Quieren balcón/terraza");
-
-		JCheckBox precioCheckBox_1_16;
-		precioCheckBox_1_16 = new JCheckBox();
-		precioCheckBox_1_16.setText("No gusta distribución");
-
-		JCheckBox precioCheckBox_1_17;
-		precioCheckBox_1_17 = new JCheckBox();
-		precioCheckBox_1_17.setText("¡Alquilado en esta visita!");
-
-		JCheckBox precioCheckBox_1_18;
-		precioCheckBox_1_18 = new JCheckBox();
-		precioCheckBox_1_18.setText("La gestión de venta la hace otra agencia");
-
-		JCheckBox precioCheckBox_1_19;
-		precioCheckBox_1_19 = new JCheckBox();
-		precioCheckBox_1_19.setText("Podriamos peritar su piso");
-
-		JButton introducirDatosButton;
-		introducirDatosButton = new JButton();
-		introducirDatosButton.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent arg0) {
-			}
-		});
-		introducirDatosButton.setText("Introducir Datos");
-
-		JDateChooser dateChooser;
-		dateChooser = new JDateChooser();
+		final GroupLayout groupLayout_3 = new GroupLayout((JComponent) panel_2);
+		groupLayout_3
+				.setHorizontalGroup(groupLayout_3
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								groupLayout_3
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												groupLayout_3
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addComponent(
+																referenciaInmuebleLabel)
+														.addComponent(
+																fechaLabel)
+														.addComponent(
+																representanteLabel_1))
+										.addPreferredGap(
+												LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout_3
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addGroup(
+																groupLayout_3
+																		.createSequentialGroup()
+																		.addGroup(
+																				groupLayout_3
+																						.createParallelGroup(
+																								GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								dataDatos,
+																								0,
+																								0,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								refTextfield,
+																								GroupLayout.DEFAULT_SIZE,
+																								96,
+																								Short.MAX_VALUE))
+																		.addPreferredGap(
+																				LayoutStyle.ComponentPlacement.RELATED,
+																				43,
+																				Short.MAX_VALUE)
+																		.addGroup(
+																				groupLayout_3
+																						.createParallelGroup(
+																								GroupLayout.Alignment.TRAILING)
+																						.addGroup(
+																								groupLayout_3
+																										.createSequentialGroup()
+																										.addComponent(
+																												dniClienteLabel)
+																										.addPreferredGap(
+																												LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												textField_2,
+																												GroupLayout.PREFERRED_SIZE,
+																												87,
+																												GroupLayout.PREFERRED_SIZE))
+																						.addGroup(
+																								groupLayout_3
+																										.createSequentialGroup()
+																										.addComponent(
+																												horaLabel)
+																										.addPreferredGap(
+																												LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												spinner_2,
+																												GroupLayout.PREFERRED_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addPreferredGap(
+																												LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												label_1)
+																										.addPreferredGap(
+																												LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												spinner_3,
+																												GroupLayout.PREFERRED_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.PREFERRED_SIZE))))
+														.addComponent(
+																textField_5,
+																GroupLayout.DEFAULT_SIZE,
+																288,
+																Short.MAX_VALUE))));
+		groupLayout_3
+				.setVerticalGroup(groupLayout_3
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								groupLayout_3
+										.createSequentialGroup()
+										.addGap(2, 2, 2)
+										.addGroup(
+												groupLayout_3
+														.createParallelGroup(
+																GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																referenciaInmuebleLabel,
+																GroupLayout.PREFERRED_SIZE,
+																16,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																textField_2,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																dniClienteLabel,
+																GroupLayout.PREFERRED_SIZE,
+																16,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																refTextfield,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout_3
+														.createParallelGroup(
+																GroupLayout.Alignment.TRAILING)
+														.addGroup(
+																groupLayout_3
+																		.createParallelGroup(
+																				GroupLayout.Alignment.LEADING)
+																		.addGroup(
+																				groupLayout_3
+																						.createParallelGroup(
+																								GroupLayout.Alignment.BASELINE)
+																						.addComponent(
+																								spinner_3,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								label_1)
+																						.addComponent(
+																								spinner_2,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								horaLabel,
+																								GroupLayout.PREFERRED_SIZE,
+																								16,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGroup(
+																				groupLayout_3
+																						.createSequentialGroup()
+																						.addGap(
+																								4,
+																								4,
+																								4)
+																						.addComponent(
+																								fechaLabel,
+																								GroupLayout.PREFERRED_SIZE,
+																								16,
+																								GroupLayout.PREFERRED_SIZE)))
+														.addComponent(
+																dataDatos,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout_3
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addComponent(
+																representanteLabel_1)
+														.addComponent(
+																textField_5,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap(
+												GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
+		groupLayout_3.linkSize(javax.swing.SwingConstants.VERTICAL,
+				new java.awt.Component[] { refTextfield, textField_2 });
+		panel_2.setLayout(groupLayout_3);
 		final GroupLayout groupLayout_4 = new GroupLayout((JComponent) panel_3);
 		groupLayout_4
 				.setHorizontalGroup(groupLayout_4
@@ -593,145 +936,81 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(precioCheckBox_1_19)
-										.addContainerGap(
-												GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
+										.addContainerGap(17, Short.MAX_VALUE)));
 		panel_3.setLayout(groupLayout_4);
-		final GroupLayout groupLayout_3 = new GroupLayout((JComponent) panel_2);
-		groupLayout_3
-				.setHorizontalGroup(groupLayout_3
-						.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(
-								groupLayout_3
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												groupLayout_3
-														.createParallelGroup(
-																GroupLayout.Alignment.LEADING)
-														.addGroup(
-																groupLayout_3
-																		.createSequentialGroup()
-																		.addComponent(
-																				referenciaInmuebleLabel)
-																		.addPreferredGap(
-																				LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				textField_1,
-																				GroupLayout.PREFERRED_SIZE,
-																				97,
-																				GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																groupLayout_3
-																		.createSequentialGroup()
-																		.addComponent(
-																				fechaLabel)
-																		.addPreferredGap(
-																				LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				dateChooser,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				horaLabel)
-																		.addPreferredGap(
-																				LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				comboBox_4,
-																				GroupLayout.PREFERRED_SIZE,
-																				41,
-																				GroupLayout.PREFERRED_SIZE)))
-										.addPreferredGap(
-												LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(dniClienteLabel)
-										.addPreferredGap(
-												LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(textField_2,
-												GroupLayout.PREFERRED_SIZE, 87,
-												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(28, Short.MAX_VALUE)));
-		groupLayout_3.setVerticalGroup(groupLayout_3.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout_3.createSequentialGroup().addGap(2, 2, 2).addGroup(
-						groupLayout_3.createParallelGroup(
-								GroupLayout.Alignment.BASELINE).addComponent(
-								referenciaInmuebleLabel,
-								GroupLayout.PREFERRED_SIZE, 16,
-								GroupLayout.PREFERRED_SIZE).addComponent(
-								dniClienteLabel, GroupLayout.PREFERRED_SIZE,
-								16, GroupLayout.PREFERRED_SIZE).addComponent(
-								textField_2, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE).addComponent(
-								textField_1, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-						LayoutStyle.ComponentPlacement.RELATED).addGroup(
-						groupLayout_3.createParallelGroup(
-								GroupLayout.Alignment.LEADING).addComponent(
-								dateChooser, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE).addGroup(
-								groupLayout_3.createSequentialGroup().addGap(2,
-										2, 2).addComponent(fechaLabel,
-										GroupLayout.PREFERRED_SIZE, 16,
-										GroupLayout.PREFERRED_SIZE)).addGroup(
-								groupLayout_3.createParallelGroup(
-										GroupLayout.Alignment.BASELINE)
-										.addComponent(horaLabel,
-												GroupLayout.PREFERRED_SIZE, 16,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(comboBox_4,
-												GroupLayout.PREFERRED_SIZE, 20,
-												GroupLayout.PREFERRED_SIZE)))
-						.addGap(41, 41, 41)));
-		groupLayout_3.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-				new java.awt.Component[] { textField_1, textField_2 });
-		panel_2.setLayout(groupLayout_3);
-		final GroupLayout groupLayout_2 = new GroupLayout((JComponent) panel_1);
+		final GroupLayout groupLayout_2 = new GroupLayout(
+				(JComponent) introducirDatosPanel);
 		groupLayout_2.setHorizontalGroup(groupLayout_2.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
 				groupLayout_2.createSequentialGroup().addContainerGap(332,
 						Short.MAX_VALUE).addComponent(introducirDatosButton)
 						.addContainerGap()).addGroup(
-				groupLayout_2.createSequentialGroup().addGap(12, 12, 12)
-						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 429,
-								Short.MAX_VALUE).addGap(12, 12, 12)).addGroup(
 				groupLayout_2.createSequentialGroup().addContainerGap()
 						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 431,
+								Short.MAX_VALUE).addGap(12, 12, 12)).addGroup(
+				groupLayout_2.createSequentialGroup().addGap(12, 12, 12)
+						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 429,
 								Short.MAX_VALUE).addGap(12, 12, 12)));
 		groupLayout_2
 				.setVerticalGroup(groupLayout_2.createParallelGroup(
 						GroupLayout.Alignment.LEADING).addGroup(
 						groupLayout_2.createSequentialGroup()
 								.addGap(12, 12, 12).addComponent(panel_2,
-										GroupLayout.PREFERRED_SIZE, 95,
+										GroupLayout.PREFERRED_SIZE, 113,
 										GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(
 										LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(panel_3,
-										GroupLayout.PREFERRED_SIZE, 325,
+										GroupLayout.PREFERRED_SIZE, 338,
 										Short.MAX_VALUE).addPreferredGap(
 										LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(introducirDatosButton)
 								.addContainerGap()));
-		panel_1.setLayout(groupLayout_2);
+		introducirDatosPanel.setLayout(groupLayout_2);
 		final GroupLayout groupLayout = new GroupLayout((JComponent) this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
 				groupLayout.createSequentialGroup().addContainerGap()
 						.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE,
-								480, Short.MAX_VALUE).addContainerGap()));
+								464, Short.MAX_VALUE).addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout.createSequentialGroup().addComponent(tabbedPane,
-						GroupLayout.PREFERRED_SIZE, 506, Short.MAX_VALUE)
-						.addContainerGap()));
+				GroupLayout.Alignment.LEADING).addComponent(tabbedPane,
+				GroupLayout.PREFERRED_SIZE, 530, Short.MAX_VALUE));
 		setLayout(groupLayout);
 		//
+	}
+
+	public Visita generarDatosVisita() {
+		Visita v = null;
+		try {
+			int refInmueble = Integer.valueOf(refTextfield.getText().trim());
+			Calendar fecha = dataDatos.getCalendar();
+			fecha.set(Calendar.HOUR_OF_DAY, Integer.parseInt(spinner_2
+					.getValue().toString()));
+			fecha.set(Calendar.MINUTE, Integer.parseInt(spinner_3.getValue()
+					.toString()));
+			String dni = textField_2.getText();
+			String representante = textField_5.getText();
+			v = new Visita(fecha, representante, precioCheckBox.isSelected(),
+					precioCheckBox_1.isSelected(), precioCheckBox_1_1
+							.isSelected(), precioCheckBox_1_2.isSelected(),
+					precioCheckBox_1_3.isSelected(), precioCheckBox_1_4
+							.isSelected(), precioCheckBox_1_5.isSelected(),
+					precioCheckBox_1_6.isSelected(), precioCheckBox_1_7
+							.isSelected(), precioCheckBox_1_8.isSelected(),
+					precioCheckBox_1_9.isSelected(), precioCheckBox_1_10
+							.isSelected(), precioCheckBox_1_11.isSelected(),
+					precioCheckBox_1_12.isSelected(), precioCheckBox_1_13
+							.isSelected(), precioCheckBox_1_14.isSelected(),
+					precioCheckBox_1_15.isSelected(), precioCheckBox_1_16
+							.isSelected(), precioCheckBox_1_17.isSelected(),
+					precioCheckBox_1_18.isSelected(), precioCheckBox_1_19
+							.isSelected(), refInmueble, dni);
+			return v;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return v;
+		}
 	}
 
 }
