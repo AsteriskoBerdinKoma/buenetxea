@@ -2,6 +2,8 @@ package buenetxea.gui.panelak;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -20,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import buenetxea.db.ResultSetTableModel;
 import buenetxea.gui.Nagusia;
@@ -47,6 +50,16 @@ public class LocalizarClientePanel extends JPanel {
 	 */
 	public LocalizarClientePanel() {
 		super();
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(final ComponentEvent arg0) {
+				tableModel = new ResultSetTableModel(getBuscarClientesQuery());
+				table.setModel(tableModel);
+			}
+			public void componentHidden(final ComponentEvent arg0) {
+				tableModel = null;
+				table.setModel(new DefaultTableModel());
+			}
+		});
 
 		try {
 			kud = Kudeatzailea.getInstance();
@@ -114,7 +127,8 @@ public class LocalizarClientePanel extends JPanel {
 			comboBox = new JComboBox(v.toArray());
 			comboBox.setSelectedIndex(0);
 
-			tableModel = new ResultSetTableModel(getBuscarClientesQuery());
+//			tableModel = new ResultSetTableModel(getBuscarClientesQuery());
+//			table.setModel(tableModel);
 
 			JScrollPane scrollPane;
 			scrollPane = new JScrollPane();
@@ -129,201 +143,85 @@ public class LocalizarClientePanel extends JPanel {
 					}
 				}
 			});
-			table.setModel(tableModel);
+			table.setModel(new DefaultTableModel());
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			scrollPane.setViewportView(table);
 
 			final GroupLayout groupLayout_3 = new GroupLayout(panel_2);
-			groupLayout_3
-					.setHorizontalGroup(groupLayout_3
-							.createParallelGroup(GroupLayout.Alignment.LEADING)
-							.addGroup(
-									groupLayout_3
-											.createSequentialGroup()
-											.addGap(15, 15, 15)
-											.addGroup(
-													groupLayout_3
-															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
-															.addComponent(
-																	nacionalidadLabel,
-																	GroupLayout.Alignment.TRAILING)
-															.addComponent(
-																	segundoApellidoLabel,
-																	GroupLayout.Alignment.TRAILING)
-															.addComponent(
-																	apellidosLabel,
-																	GroupLayout.Alignment.TRAILING)
-															.addComponent(
-																	dniLabel,
-																	GroupLayout.Alignment.TRAILING))
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addGroup(
-													groupLayout_3
-															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
-															.addGroup(
-																	groupLayout_3
-																			.createSequentialGroup()
-																			.addComponent(
-																					comboBox,
-																					GroupLayout.PREFERRED_SIZE,
-																					119,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED,
-																					142,
-																					Short.MAX_VALUE)
-																			.addComponent(
-																					buscarClientesButton))
-															.addGroup(
-																	groupLayout_3
-																			.createSequentialGroup()
-																			.addGroup(
-																					groupLayout_3
-																							.createParallelGroup(
-																									GroupLayout.Alignment.LEADING)
-																							.addComponent(
-																									apellido2TextField,
-																									GroupLayout.DEFAULT_SIZE,
-																									247,
-																									Short.MAX_VALUE)
-																							.addGroup(
-																									groupLayout_3
-																											.createSequentialGroup()
-																											.addComponent(
-																													dniTextField,
-																													GroupLayout.PREFERRED_SIZE,
-																													68,
-																													GroupLayout.PREFERRED_SIZE)
-																											.addPreferredGap(
-																													LayoutStyle.ComponentPlacement.RELATED)
-																											.addComponent(
-																													nombreLabel)
-																											.addPreferredGap(
-																													LayoutStyle.ComponentPlacement.RELATED)
-																											.addComponent(
-																													nombreTextField,
-																													GroupLayout.DEFAULT_SIZE,
-																													130,
-																													Short.MAX_VALUE))
-																							.addComponent(
-																									apellido1TextField,
-																									GroupLayout.DEFAULT_SIZE,
-																									247,
-																									Short.MAX_VALUE))
-																			.addGap(
-																					117,
-																					117,
-																					117)))
-											.addContainerGap()));
-			groupLayout_3
-					.setVerticalGroup(groupLayout_3
-							.createParallelGroup(GroupLayout.Alignment.LEADING)
-							.addGroup(
-									groupLayout_3
-											.createSequentialGroup()
-											.addGroup(
-													groupLayout_3
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	dniLabel)
-															.addComponent(
-																	dniTextField,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	nombreLabel)
-															.addComponent(
-																	nombreTextField,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addGroup(
-													groupLayout_3
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	apellidosLabel)
-															.addComponent(
-																	apellido1TextField,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addGroup(
-													groupLayout_3
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	segundoApellidoLabel)
-															.addComponent(
-																	apellido2TextField,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(
-													LayoutStyle.ComponentPlacement.RELATED)
-											.addGroup(
-													groupLayout_3
-															.createParallelGroup(
-																	GroupLayout.Alignment.BASELINE)
-															.addComponent(
-																	nacionalidadLabel)
-															.addComponent(
-																	comboBox,
-																	GroupLayout.PREFERRED_SIZE,
-																	GroupLayout.DEFAULT_SIZE,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	buscarClientesButton))
-											.addContainerGap()));
+			groupLayout_3.setHorizontalGroup(
+				groupLayout_3.createParallelGroup(GroupLayout.Alignment.LEADING)
+					.addGroup(groupLayout_3.createSequentialGroup()
+						.addGap(15, 15, 15)
+						.addGroup(groupLayout_3.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addComponent(nacionalidadLabel, GroupLayout.Alignment.TRAILING)
+							.addComponent(segundoApellidoLabel, GroupLayout.Alignment.TRAILING)
+							.addComponent(apellidosLabel, GroupLayout.Alignment.TRAILING)
+							.addComponent(dniLabel, GroupLayout.Alignment.TRAILING))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(groupLayout_3.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(groupLayout_3.createSequentialGroup()
+								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+								.addComponent(buscarClientesButton))
+							.addGroup(groupLayout_3.createSequentialGroup()
+								.addGroup(groupLayout_3.createParallelGroup(GroupLayout.Alignment.LEADING)
+									.addComponent(apellido2TextField, GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+									.addGroup(groupLayout_3.createSequentialGroup()
+										.addComponent(dniTextField, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(nombreLabel)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(nombreTextField, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+									.addComponent(apellido1TextField, GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
+								.addGap(117, 117, 117)))
+						.addContainerGap())
+			);
+			groupLayout_3.setVerticalGroup(
+				groupLayout_3.createParallelGroup(GroupLayout.Alignment.LEADING)
+					.addGroup(groupLayout_3.createSequentialGroup()
+						.addGroup(groupLayout_3.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(dniLabel)
+							.addComponent(dniTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(nombreLabel)
+							.addComponent(nombreTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(groupLayout_3.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(apellidosLabel)
+							.addComponent(apellido1TextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(groupLayout_3.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(segundoApellidoLabel)
+							.addComponent(apellido2TextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(groupLayout_3.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(nacionalidadLabel)
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(buscarClientesButton))
+						.addContainerGap())
+			);
 			panel_2.setLayout(groupLayout_3);
 			final GroupLayout groupLayout_1 = new GroupLayout(this);
-			groupLayout_1
-					.setHorizontalGroup(groupLayout_1
-							.createParallelGroup(GroupLayout.Alignment.TRAILING)
-							.addGroup(
-									groupLayout_1
-											.createSequentialGroup()
-											.addContainerGap()
-											.addGroup(
-													groupLayout_1
-															.createParallelGroup(
-																	GroupLayout.Alignment.TRAILING)
-															.addComponent(
-																	scrollPane,
-																	GroupLayout.Alignment.LEADING,
-																	GroupLayout.DEFAULT_SIZE,
-																	495,
-																	Short.MAX_VALUE)
-															.addComponent(
-																	panel_2,
-																	GroupLayout.Alignment.LEADING,
-																	GroupLayout.PREFERRED_SIZE,
-																	495,
-																	Short.MAX_VALUE)
-															.addComponent(
-																	verClienteButton))
-											.addContainerGap()));
-			groupLayout_1.setVerticalGroup(groupLayout_1.createParallelGroup(
-					GroupLayout.Alignment.TRAILING).addGroup(
-					groupLayout_1.createSequentialGroup().addContainerGap()
-							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE,
-									GroupLayout.DEFAULT_SIZE,
-									GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
-									146, Short.MAX_VALUE).addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(verClienteButton).addContainerGap()));
+			groupLayout_1.setHorizontalGroup(
+				groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
+					.addGroup(groupLayout_1.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
+							.addComponent(scrollPane, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+							.addComponent(panel_2, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 495, Short.MAX_VALUE)
+							.addComponent(verClienteButton))
+						.addContainerGap())
+			);
+			groupLayout_1.setVerticalGroup(
+				groupLayout_1.createParallelGroup(GroupLayout.Alignment.TRAILING)
+					.addGroup(groupLayout_1.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(verClienteButton)
+						.addContainerGap())
+			);
 			setLayout(groupLayout_1);
 			//
 		} catch (SQLException e) {
