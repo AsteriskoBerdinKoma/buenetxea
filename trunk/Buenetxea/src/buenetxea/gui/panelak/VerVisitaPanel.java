@@ -47,8 +47,7 @@ public class VerVisitaPanel extends JPanel {
 	private String clientedniazkena;
 	private int inmueblerefazkena;
 	private Date fechaazkena;
-	private int horaazkena;
-	private int minutoazkena;
+	private String representanteazkena;
 	
 	/**
 	 * Create the panel
@@ -58,7 +57,7 @@ public class VerVisitaPanel extends JPanel {
 	 * @throws FileNotFoundException
 	 */
 
-	public VerVisitaPanel(Nagusia jabea, String clientedni,int inmuebleref,Date fecha, int hora, int minuto) throws IOException {
+	public VerVisitaPanel(Nagusia jabea, String clientedni,int inmuebleref,Date fecha, String representante) throws IOException {
 		super();
 
 		this.jabea = jabea;
@@ -66,8 +65,7 @@ public class VerVisitaPanel extends JPanel {
 		this.clientedniazkena = clientedni;
 		this.inmueblerefazkena = inmuebleref;
 		this.fechaazkena = fecha;
-		this.horaazkena = hora;
-		this.minutoazkena = minuto;
+		this.representanteazkena = representante;
 		
 		this.setBorder(new TitledBorder(null, "Ver visita",
 				TitledBorder.DEFAULT_JUSTIFICATION,
@@ -92,7 +90,7 @@ public class VerVisitaPanel extends JPanel {
 			
 				//DATUEK BETE
 				InprimagailuKudeatzailea inpr = InprimagailuKudeatzailea.getInstance();
-				dv = inpr.InprimatuVisita(clientedniazkena, inmueblerefazkena,fechaazkena,horaazkena,minutoazkena);
+				dv = inpr.InprimatuVisita(clientedniazkena, inmueblerefazkena,fechaazkena, representante);
 
 				//DATASOURCE  BETE
 				Collection<DatosVisita> lista = new ArrayList<DatosVisita>();
