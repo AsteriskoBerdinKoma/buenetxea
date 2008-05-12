@@ -26,7 +26,6 @@
 
 	<field name="llaves" class="java.lang.String"/>
 	<field name="telefono" class="java.lang.Long"/>
-	<field name="referencia" class="java.lang.Integer"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="apellido1" class="java.lang.String"/>
 	<field name="zona" class="java.lang.String"/>
@@ -818,19 +817,6 @@
 						key="rectangle-20"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="171"
-						y="17"
-						width="194"
-						height="17"
-						key="textField-3"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
-				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="50"
