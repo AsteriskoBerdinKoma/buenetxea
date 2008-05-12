@@ -14,6 +14,7 @@ import buenetxea.objektuak.Visita;
 class VisitaKud {
 
 	private static VisitaKud instance;
+
 	private final Connection connection;
 	private final Statement statement;
 
@@ -118,51 +119,56 @@ class VisitaKud {
 		}
 	}
 
-	public boolean InsertarVisita(String fecha, String representante,
-			Boolean precio, Boolean nolegustalazona, Boolean loquierenmasalto,
-			Boolean muchasreformas, Boolean quierenmashabitaciones,
-			Boolean visitaanuladacomprador, Boolean visitaanuladapropietario,
-			Boolean oscuro, Boolean loquierenmasgrande,
-			Boolean notieneascensor, Boolean quierenmasbaños,
-			Boolean concertada2visita, Boolean vendidoenestavisita,
-			Boolean planton, Boolean legusta, Boolean todoexterior,
-			Boolean quierenbalconterraza, Boolean nogustadistribucion,
-			Boolean alquiladoenestavisita, Boolean gestiondeventa,
-			Boolean peritarpiso, int fk_inmueble_referencia,
-			String fk_cliente_dni) throws SQLException {
+	public boolean insertarVisita(Visita v) throws SQLException {
 
-		String query = "INSERT INTO Visita  SET fecha = ?,representante = ?,precio = ?, nolegustalazona = ?,loquierenmasalto =  ?,muchasreformas = ?, quierenmashabitaciones = ?, visitaanuladacomprador = ?, visitaanuladapropietario = ?,oscuro = ?,loquierenmasgrande = ?,notieneascensor = ?,quierenmasbaños = ?,concertada2visita = ?,vendidoenestavisita = ?,planton = ?,legusta = ?,todoexterior = ?,quierenbalconterraza = ?,nogustadistribucion = ?,alquiladoenestavisita = ?,gestiondeventa = ?,peritarpiso = ?,fk_inmueble_referencia = ?,fk_cliente_dni = ?,hora = ?,minutos = ?";
+		String query = "INSERT INTO rel_visita  SET fecha = ?, representante = ?, precio = ?, " +
+				"no_le_gusta_zona = ?, quieren_mas_alto =  ?, muchas_reformas = ?, " +
+				"quieren_mas_habit = ?, visita_anulada_comprador = ?, " +
+				"visita_anulada_propietario = ?, oscuro = ?, lo_quieren_mas_grande = ?, " +
+				"no_tiene_ascensor = ?, quieren_mas_banos = ?, concertada_2a_visita = ?, " +
+				"vendido_en_esta_visita = ?, planton = ?, le_gusta = ?, todo_exterior = ?, " +
+				"quieren_balcon_terraza = ?, no_gusta_distribucion = ?, " +
+				"alquilado_en_esta_visita = ?, gestion_venta_otra_agencia = ?, " +
+				"podriamos_peritar = ?, fk_inmueble_referencia = ?, fk_cliente_dni = ?";
+		
 		PreparedStatement ps = this.connection.prepareStatement(query);
-		ps.setString(1, fecha);
-		ps.setString(2, representante);
-		ps.setBoolean(3, precio);
-		ps.setBoolean(4, nolegustalazona);
-		ps.setBoolean(5, loquierenmasalto);
-		ps.setBoolean(6, muchasreformas);
-		ps.setBoolean(7, quierenmashabitaciones);
-		ps.setBoolean(8, visitaanuladacomprador);
-		ps.setBoolean(9, visitaanuladapropietario);
-		ps.setBoolean(10, oscuro);
-		ps.setBoolean(11, loquierenmasgrande);
-		ps.setBoolean(12, notieneascensor);
-		ps.setBoolean(13, quierenmasbaños);
-		ps.setBoolean(14, concertada2visita);
-		ps.setBoolean(15, vendidoenestavisita);
-		ps.setBoolean(16, planton);
-		ps.setBoolean(17, legusta);
-		ps.setBoolean(18, todoexterior);
-		ps.setBoolean(19, quierenbalconterraza);
-		ps.setBoolean(20, nogustadistribucion);
-		ps.setBoolean(21, alquiladoenestavisita);
-		ps.setBoolean(22, gestiondeventa);
-		ps.setBoolean(23, peritarpiso);
-		ps.setInt(24, fk_inmueble_referencia);
-		ps.setString(25, fk_cliente_dni);
+		
+		Calendar cal = v.getFecha();
+		String data = cal.get(Calendar.YEAR) + "-"
+				+ (cal.get(Calendar.MONTH) + 1) + "-"
+				+ cal.get(Calendar.DAY_OF_MONTH) + " " + cal.get(Calendar.HOUR)
+				+ ":" + cal.get(Calendar.MINUTE) + ":" + "00.000";
+		
+		ps.setString(1, data);
+		ps.setString(2, v.getRepresentante());
+		ps.setBoolean(3, v.isPrecio());
+		ps.setBoolean(4, v.isNolegustalazona());
+		ps.setBoolean(5, v.isLoquierenmasalto());
+		ps.setBoolean(6, v.isMuchasreformas());
+		ps.setBoolean(7, v.isQuierenmashabitaciones());
+		ps.setBoolean(8, v.isVisitaanuladacomprador());
+		ps.setBoolean(9, v.isVisitaanuladapropietario());
+		ps.setBoolean(10, v.isOscuro());
+		ps.setBoolean(11, v.isLoquierenmasgrande());
+		ps.setBoolean(12, v.isNotieneascensor());
+		ps.setBoolean(13, v.isQuierenmasbaños());
+		ps.setBoolean(14, v.isConcertada2visita());
+		ps.setBoolean(15, v.isVendidoenestavisita());
+		ps.setBoolean(16, v.isPlanton());
+		ps.setBoolean(17, v.isLegusta());
+		ps.setBoolean(18, v.isTodoexterior());
+		ps.setBoolean(19, v.isQuierenbalconterraza());
+		ps.setBoolean(20, v.isNogustadistribucion());
+		ps.setBoolean(21, v.isAlquiladoenestavisita());
+		ps.setBoolean(22, v.isGestiondeventa());
+		ps.setBoolean(23, v.isPeritarpiso());
+		ps.setInt(24, v.getFk_inmueble_referencia());
+		ps.setString(25, v.getFk_cliente_dni());
 
-		int rs = this.statement.executeUpdate(query);
-		boolean b = rs > 0;
+		int result = ps.executeUpdate();
+		ps.close();
+		return result > 0;
 
-		return b;
 	}
 
 }

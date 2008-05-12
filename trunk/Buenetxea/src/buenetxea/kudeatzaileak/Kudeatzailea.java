@@ -16,6 +16,7 @@ import buenetxea.objektuak.Peritaje;
 import buenetxea.objektuak.Propietario;
 import buenetxea.objektuak.RelInmueblePropietario;
 import buenetxea.objektuak.Tasacion;
+import buenetxea.objektuak.Visita;
 
 public class Kudeatzailea {
 
@@ -29,6 +30,7 @@ public class Kudeatzailea {
 	private final TasacionKud tasaKud;
 	private final DescripcionKud descriKud;
 	private final RelInmueblePropietarioKud relInmPropKud;
+	private final VisitaKud visiKud;
 
 	private Vector<String> naciones;
 	private Vector<String> nacionalidades;
@@ -43,6 +45,7 @@ public class Kudeatzailea {
 		this.tasaKud = TasacionKud.getInstance();
 		this.descriKud = DescripcionKud.getInstance();
 		this.relInmPropKud = RelInmueblePropietarioKud.getInstance();
+		this.visiKud = VisitaKud.getInstance();
 		this.cargarNacionalidades();
 	}
 
@@ -162,5 +165,9 @@ public class Kudeatzailea {
 
 	public double getLastPrecio(int referencia) throws SQLException {
 		return this.propikud.getLastNuevoPrecio(referencia);
+	}
+
+	public boolean crearVisita(Visita v) throws SQLException {
+		return this.visiKud.insertarVisita(v);
 	}
 }
