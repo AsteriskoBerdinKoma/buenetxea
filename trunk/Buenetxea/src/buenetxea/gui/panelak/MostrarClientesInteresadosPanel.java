@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import buenetxea.db.ResultSetTableModel;
 import buenetxea.gui.Nagusia;
@@ -44,6 +45,8 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 		super();
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(final ComponentEvent arg0) {
+				tableModel = new ResultSetTableModel(crearQuery());
+				table_2.setModel(tableModel);
 				if (table_2.getRowCount() == 0) {
 					verClienteButton.setEnabled(false);
 					JOptionPane jop = new JOptionPane(
@@ -53,6 +56,10 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 							.setVisible(true);
 				}
 			}
+			public void componentHidden(final ComponentEvent arg0) {
+				tableModel = null;
+				table_2.setModel(new DefaultTableModel());
+			}
 		});
 	
 
@@ -60,13 +67,14 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 				TitledBorder.DEFAULT_JUSTIFICATION,
 				TitledBorder.DEFAULT_POSITION, null, null));
 
-		tableModel = new ResultSetTableModel(crearQuery());
+		//tableModel = new ResultSetTableModel(crearQuery());
 
 		JScrollPane scrollPane_1;
 		scrollPane_1 = new JScrollPane();
 
 		table_2 = new JTable();
-		table_2.setModel(tableModel);
+		//table_2.setModel(tableModel);
+		table_2.setModel(new DefaultTableModel());
 		table_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table_2.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(final MouseEvent e) {
@@ -146,15 +154,15 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 		this.zonaazkena = zona;
 		this.num_habazkena = num_habitaciones;
 		this.precioazkena = precio;
-		try {
-			tableModel.setQuery(crearQuery());
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			tableModel.setQuery(crearQuery());
+//		} catch (IllegalStateException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	public void refresh() {

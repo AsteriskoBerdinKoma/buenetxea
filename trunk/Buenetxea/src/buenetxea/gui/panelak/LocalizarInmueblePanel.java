@@ -2,6 +2,8 @@ package buenetxea.gui.panelak;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -20,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import buenetxea.db.ResultSetTableModel;
 import buenetxea.kudeatzaileak.Kudeatzailea;
@@ -61,6 +64,16 @@ public class LocalizarInmueblePanel extends JPanel {
 	 */
 	public LocalizarInmueblePanel() {
 		super();
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(final ComponentEvent arg0) {
+				tableModel = new ResultSetTableModel(getQuery());
+				table.setModel(tableModel);
+			}
+			public void componentHidden(final ComponentEvent arg0) {
+				tableModel = null;
+				table.setModel(new DefaultTableModel());
+			}
+		});
 		
 		try {
 			kud = Kudeatzailea.getInstance();
@@ -273,11 +286,12 @@ public class LocalizarInmueblePanel extends JPanel {
 		JScrollPane scrollPane;
 		scrollPane = new JScrollPane();
 
-		tableModel = new ResultSetTableModel(getQuery());
+		//tableModel = new ResultSetTableModel(getQuery());
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(tableModel);
+		//table.setModel(tableModel);
+		table.setModel(new DefaultTableModel());
 		
 
 
@@ -391,18 +405,15 @@ public class LocalizarInmueblePanel extends JPanel {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(4, 4, 4)
 							.addComponent(exteriorLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)))
+					.addGap(8, 8, 8)
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(8, 8, 8)
-							.addComponent(localizarButton_1_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(8, 8, 8)
-							.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(deLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-								.addComponent(spinner_desdeHab, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-								.addComponent(hastaLabel_2, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-								.addComponent(spinner_hastaHab, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-								.addComponent(checkBox_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))))
+						.addComponent(localizarButton_1_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(deLabel_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+							.addComponent(spinner_desdeHab, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+							.addComponent(hastaLabel_2, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+							.addComponent(spinner_hastaHab, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+							.addComponent(checkBox_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)))
 					.addGap(4, 4, 4)
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -418,7 +429,7 @@ public class LocalizarInmueblePanel extends JPanel {
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		groupLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {textField_6, textField_7, textField_8});
+		groupLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {textField_6, textField_7, textField_8});
 		setLayout(groupLayout);
 		//
 		} catch (SQLException e3) {
