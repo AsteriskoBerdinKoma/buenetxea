@@ -43,10 +43,6 @@ public class LocalizarClientePanel extends JPanel {
 
 	private Kudeatzailea kud;
 
-	private BuscarClienteDialog jabea;
-
-	private boolean closeAfterSave;
-
 	/**
 	 * Create the panel
 	 */
@@ -119,7 +115,7 @@ public class LocalizarClientePanel extends JPanel {
 			comboBox = new JComboBox(v.toArray());
 			comboBox.setSelectedIndex(0);
 
-			tableModel = new ResultSetTableModel();
+			tableModel = new ResultSetTableModel(getBuscarClientesQuery());
 
 			JScrollPane scrollPane;
 			scrollPane = new JScrollPane();
@@ -384,7 +380,8 @@ public class LocalizarClientePanel extends JPanel {
 			}
 		}
 	}
-	public void setResultSetTableModel(){
+
+	public void setResultSetTableModel() {
 		tableModel = new ResultSetTableModel(getBuscarClientesQuery());
 	}
 
