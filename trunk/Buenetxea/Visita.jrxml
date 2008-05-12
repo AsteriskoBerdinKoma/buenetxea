@@ -880,7 +880,7 @@
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Float"><![CDATA[(new Float(  ($F{nuevo_precio}.doubleValue()) * 166.356 ))]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{nuevo_precio}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
