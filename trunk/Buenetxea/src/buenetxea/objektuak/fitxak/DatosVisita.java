@@ -1,5 +1,6 @@
 package buenetxea.objektuak.fitxak;
 
+import java.util.Calendar;
 import java.util.Vector;
 
 public class DatosVisita {
@@ -14,6 +15,7 @@ public class DatosVisita {
 	private double nuevo_precio;
 	private double preciopesetas;
 	private String llaves;
+	private String fecha;
 	
 	
 	public DatosVisita(){
@@ -21,7 +23,7 @@ public class DatosVisita {
 	}
 
 	public DatosVisita(String dni,String direccion,String zona, String nombre,String apellido1
-			,String representante,int telefono,double nuevo_precio,double preciopesetas,String llaves){
+			,String representante,int telefono,double nuevo_precio,double preciopesetas,String llaves,String fecha){
 		this.dni = dni;
 		this.direccion = direccion;
 		this.zona = zona;
@@ -32,6 +34,7 @@ public class DatosVisita {
 		this.nuevo_precio = nuevo_precio;
 		this.preciopesetas = preciopesetas;
 		this.llaves = llaves;
+		this.fecha = fecha;
 		
 		
 	}
@@ -133,5 +136,26 @@ public class DatosVisita {
 
 	public final void setLlaves(String llaves) {
 		this.llaves = llaves;
+	}
+
+	public void setFecha(String fecha2) {
+		this.fecha = fecha2;
+		
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public String getLlaves() {
+		return llaves;
+	}
+
+	public String getFecha() {
+		return fecha;
 	}
 }

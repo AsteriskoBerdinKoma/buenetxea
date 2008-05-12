@@ -90,7 +90,7 @@ class ClienteKud {
 	/**getCliente2 funtzioak nazionalitatea,izena,abizena1 eta abizena2 aldagaiak emanda, cliente motako objektu bat itzuliko digu.
 	 * */
 	
-	public Vector getCliente2(String nan, String Nazionalitatea,String Izena,String Abizena1,String Abizena2) throws IOException, SQLException {
+	public Vector<Cliente> getCliente(String nan, String Nazionalitatea,String Izena,String Abizena1,String Abizena2) throws IOException, SQLException {
 		String dni;
 		String nombre;
 		String apellido1;
