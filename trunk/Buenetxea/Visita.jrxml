@@ -31,7 +31,7 @@
 	<field name="zona" class="java.lang.String"/>
 	<field name="direccion" class="java.lang.String"/>
 	<field name="nuevo_precio" class="java.lang.Double"/>
-	<field name="preciopesetas" class="java.lang.Long"/>
+	<field name="preciopesetas" class="java.lang.Double"/>
 	<field name="fecha" class="java.lang.String"/>
 	<field name="representante" class="java.lang.String"/>
 
@@ -880,7 +880,7 @@
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{preciopesetas}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{preciopesetas}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
