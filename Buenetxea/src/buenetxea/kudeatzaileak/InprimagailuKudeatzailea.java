@@ -1,5 +1,6 @@
 package buenetxea.kudeatzaileak;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -165,14 +166,11 @@ public class InprimagailuKudeatzailea {
 		if (rs2.next()) {
 			parameters.setNuevo_precio(rs2.getDouble("nuevo_precio"));
 			preciopesetas = parameters.getNuevo_precio() * 166.386;
-			long precio = Math.round(preciopesetas);
-			parameters.setPreciopesetas(precio);
-
-			// BigDecimal bd = new BigDecimal(preciopesetas);
-			// bd = bd.setScale(0,BigDecimal.ROUND_HALF_UP);
-			// //parameters.setPreciopesetas(parameters.getNuevo_precio() *
+			BigDecimal bd = new BigDecimal(preciopesetas);
+			bd = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
+			// parameters.setPreciopesetas(parameters.getNuevo_precio() *
 			// 166.386);
-			// parameters.setPreciopesetas(bd.doubleValue());
+			parameters.setPreciopesetas(bd.doubleValue());
 		}
 		ps2.close();
 		rs2.close();
@@ -264,24 +262,23 @@ public class InprimagailuKudeatzailea {
 	 * parameters.put("nombre",nombre); parameters.put("apellido1",apellido1);
 	 * parameters.put("telefono",telefono); parameters.put("fecha",fecha);
 	 * parameters.put("hora",hora); parameters.put("minuto",minuto);
-	 * parameters.put("representante",representante);
-	 *  } ps.close(); rs.close(); return bektorea; } /* public HashMap
-	 * InprimatuVisita(String clientedni,int inmuebleref, Date fecha, int hora,
-	 * int minuto)throws SQLException{ String direccion; String zona; String
-	 * nombre; String apellido1; String representante; int telefono; double
-	 * nuevo_precio; double preciopesetas; boolean llaves; HashMap parameters =
-	 * new HashMap(); String query = "SELECT * FROM inmueble,cliente,rel_visita
-	 * WHERE referencia = ? AND dni = ? AND fk_cliente_dni = ?";
-	 * PreparedStatement ps = this.connection.prepareStatement(query);
-	 * ps.setInt(1, inmuebleref); ps.setString(2, clientedni); ps.setString(3,
-	 * clientedni); ResultSet rs = ps.executeQuery(); if (rs.next()) { zona =
-	 * rs.getString("zona"); direccion = rs.getString("direccion");
-	 * representante = rs.getString("representante"); nombre =
-	 * rs.getString("nombre"); apellido1 = rs.getString("apellido1"); telefono =
-	 * rs.getInt("telefono"); llaves = rs.getBoolean("llaves");
-	 * parameters.put("dni", clientedni); parameters.put("direccion",direccion);
-	 * parameters.put("zona",zona); parameters.put("nombre",nombre);
-	 * parameters.put("apellido1",apellido1);
+	 * parameters.put("representante",representante); } ps.close(); rs.close();
+	 * return bektorea; } /* public HashMap InprimatuVisita(String
+	 * clientedni,int inmuebleref, Date fecha, int hora, int minuto)throws
+	 * SQLException{ String direccion; String zona; String nombre; String
+	 * apellido1; String representante; int telefono; double nuevo_precio;
+	 * double preciopesetas; boolean llaves; HashMap parameters = new HashMap();
+	 * String query = "SELECT * FROM inmueble,cliente,rel_visita WHERE
+	 * referencia = ? AND dni = ? AND fk_cliente_dni = ?"; PreparedStatement ps =
+	 * this.connection.prepareStatement(query); ps.setInt(1, inmuebleref);
+	 * ps.setString(2, clientedni); ps.setString(3, clientedni); ResultSet rs =
+	 * ps.executeQuery(); if (rs.next()) { zona = rs.getString("zona");
+	 * direccion = rs.getString("direccion"); representante =
+	 * rs.getString("representante"); nombre = rs.getString("nombre"); apellido1 =
+	 * rs.getString("apellido1"); telefono = rs.getInt("telefono"); llaves =
+	 * rs.getBoolean("llaves"); parameters.put("dni", clientedni);
+	 * parameters.put("direccion",direccion); parameters.put("zona",zona);
+	 * parameters.put("nombre",nombre); parameters.put("apellido1",apellido1);
 	 * parameters.put("telefono",telefono); parameters.put("fecha",fecha);
 	 * parameters.put("hora",hora); parameters.put("minuto",minuto);
 	 * parameters.put("representante",representante); } ps.close(); rs.close();
