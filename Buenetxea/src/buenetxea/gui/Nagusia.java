@@ -32,6 +32,7 @@ import buenetxea.gui.panelak.CrearPropietarioPanel;
 import buenetxea.gui.panelak.IntroducirDatosVisitaPanel;
 import buenetxea.gui.panelak.IntroducirInmueblePanel;
 import buenetxea.gui.panelak.LocalizarClientePanel;
+import buenetxea.gui.panelak.LocalizarInmueblePanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
 import buenetxea.gui.panelak.VerInmueblePanel;
@@ -53,6 +54,7 @@ public class Nagusia extends JFrame {
 	private VenderInmueblePanel venderInmueblePanel;
 	private VerInmueblePanel verInmueblePanel;
 	private LocalizarClientePanel localizarClientePanel;
+	private LocalizarInmueblePanel localizarInmueblePanel;
 
 	/**
 	 * Create the frame
@@ -100,6 +102,10 @@ public class Nagusia extends JFrame {
 			localizarClientePanel = new LocalizarClientePanel();
 			localizarClientePanel.setName("localizarCliente");
 			panel.add(localizarClientePanel, localizarClientePanel.getName());
+
+			localizarInmueblePanel = new LocalizarInmueblePanel();
+			localizarInmueblePanel.setName("localizador");
+			panel.add(localizarInmueblePanel, localizarInmueblePanel.getName());
 
 			final SeguimientoPropietarioPanel seguimientoPropietarioPanel = new SeguimientoPropietarioPanel();
 			seguimientoPropietarioPanel.setName("seguimientoPropietario");
@@ -151,6 +157,7 @@ public class Nagusia extends JFrame {
 		localizadorButton.setToolTipText("Localizador");
 		localizadorButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
+				localizarInmueblePanel.refresh();
 				((CardLayout) panel.getLayout()).show(panel, "localizador");
 			}
 		});
