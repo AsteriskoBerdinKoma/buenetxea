@@ -23,28 +23,18 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-	<parameter name="nombre" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="apellido1" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="dni" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="telefono" isForPrompting="false" class="java.lang.Long"/>
-	<parameter name="direccion" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="zona" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="llaves" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="nuevo_precio" isForPrompting="false" class="java.lang.Double"/>
-	<parameter name="preciopesetas" isForPrompting="false" class="java.lang.Double"/>
-	<parameter name="representante" isForPrompting="false" class="java.lang.String"/>
-	<parameter name="fecha" isForPrompting="false" class="java.util.Date"/>
-	<parameter name="hora" isForPrompting="false" class="java.lang.Integer"/>
-	<parameter name="minuto" isForPrompting="false" class="java.lang.Integer"/>
 
-	<field name="rel_peritaje_inmueble_llaves" class="java.lang.Boolean"/>
-	<field name="cliente_telefono" class="java.lang.Long"/>
-	<field name="inmueble_referencia" class="java.lang.Long"/>
-	<field name="cliente_nombre" class="java.lang.String"/>
-	<field name="cliente_apellido1" class="java.lang.String"/>
-	<field name="inmueble_zona" class="java.lang.String"/>
-	<field name="inmueble_direccion" class="java.lang.String"/>
-	<field name="rel_inmueble_propietario_nuevo_precio" class="java.lang.String"/>
+	<field name="llaves" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.Long"/>
+	<field name="referencia" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="apellido1" class="java.lang.String"/>
+	<field name="zona" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="nuevo_precio" class="java.lang.Double"/>
+	<field name="preciopesetas" class="java.lang.Double"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="representante" class="java.lang.String"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -115,7 +105,7 @@
 					<textElement textAlignment="Right">
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{nombre}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -128,7 +118,7 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{apellido1}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{apellido1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -141,7 +131,7 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Long"><![CDATA[$P{telefono}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{telefono}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -154,72 +144,20 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{representante}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{representante}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="349"
 						y="0"
-						width="62"
+						width="102"
 						height="17"
 						key="textField-12"/>
 					<box></box>
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$P{fecha}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement
-						x="411"
-						y="0"
-						width="32"
-						height="17"
-						key="staticText-43"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<text><![CDATA[a las ]]></text>
-				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="452"
-						y="0"
-						width="35"
-						height="17"
-						key="textField-13"/>
-					<box></box>
-					<textElement textAlignment="Right">
-						<font/>
-					</textElement>
-				<textFieldExpression   class="java.lang.Integer"><![CDATA[$P{hora}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement
-						x="487"
-						y="0"
-						width="0"
-						height="17"
-						key="staticText-44"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<text><![CDATA[:]]></text>
-				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="493"
-						y="0"
-						width="36"
-						height="17"
-						key="textField-14"/>
-					<box></box>
-					<textElement textAlignment="Left">
-						<font/>
-					</textElement>
-				<textFieldExpression   class="java.lang.Integer"><![CDATA[$P{minuto}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fecha}]]></textFieldExpression>
 				</textField>
 			</band>
 		</pageHeader>
@@ -891,7 +829,7 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{direccion}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -904,7 +842,7 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{zona}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -917,7 +855,7 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{llaves}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{llaves}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -930,7 +868,7 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Double"><![CDATA[$P{nuevo_precio}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{nuevo_precio}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -943,7 +881,7 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{direccion}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -956,7 +894,7 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Double"><![CDATA[$P{preciopesetas}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{preciopesetas}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
