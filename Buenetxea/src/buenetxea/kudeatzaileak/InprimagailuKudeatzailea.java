@@ -1,5 +1,6 @@
 package buenetxea.kudeatzaileak;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -134,17 +135,18 @@ public class InprimagailuKudeatzailea {
 			Calendar fecha, String representante) throws SQLException {
 
 		boolean llavesb;
+		double preciopesetas;
 		DatosVisita parameters = new DatosVisita();
 		String data = fecha.get(Calendar.YEAR) + "/"
 		+ (fecha.get(Calendar.MONTH) + 1) + "/"
-		+ fecha.get(Calendar.DAY_OF_MONTH);
+		+ fecha.get(Calendar.DAY_OF_MONTH) + " a las "
+		+ fecha.get(Calendar.HOUR_OF_DAY) + ":"
+		+ fecha.get(Calendar.MINUTE);
 		
 		String query = "SELECT * FROM inmueble,cliente WHERE referencia = ? AND dni = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setInt(1, inmuebleref);
 		ps.setString(2, clientedni);
-		ps.setString(3, clientedni);
-		ps.setInt(4, inmuebleref);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			parameters.setZona(rs.getString("zona"));
@@ -164,12 +166,16 @@ public class InprimagailuKudeatzailea {
 		ResultSet rs2 = ps2.executeQuery();
 		if (rs2.next()) {
 			parameters.setNuevo_precio(rs2.getDouble("nuevo_precio"));
-			parameters.setPreciopesetas(parameters.getNuevo_precio() * 166.386);
+			preciopesetas = (parameters.getNuevo_precio()*166.386);
+			BigDecimal bd = new BigDecimal(preciopesetas);
+			bd = bd.setScale(0,BigDecimal.ROUND_HALF_UP);
+			//parameters.setPreciopesetas(parameters.getNuevo_precio() * 166.386);
+			parameters.setPreciopesetas(bd.doubleValue());
 		}
 		ps2.close();
 		rs2.close();
 
-		String query3 = "SELECT llaves FROM rel_peritaje_inmueble WHERE fk_peritaje_referencia = ? ORDER BY fk_peritaje_id DESC";
+		String query3 = "SELECT llaves FROM rel_peritaje_inmueble WHERE fk_inmueble_referencia = ? ORDER BY fk_peritaje_id DESC";
 		PreparedStatement ps3 = this.connection.prepareStatement(query3);
 		ps3.setInt(1, inmuebleref);
 		ResultSet rs3 = ps3.executeQuery();
