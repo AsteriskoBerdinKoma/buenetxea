@@ -65,7 +65,17 @@ class DescripcionKud {
 		ps.setString(4, d.getDescripcion());
 
 		int result = ps.executeUpdate();
+		ps.close();
+		return result > 0;
+	}
 
+	public boolean deleteDescripcion(int i) throws SQLException {
+		String update = "DELETE FROM descripcion WHERE id=?";
+		PreparedStatement ps = this.connection.prepareStatement(update);
+		ps.setInt(1, i);
+
+		int result = ps.executeUpdate();
+		ps.close();
 		return result > 0;
 	}
 }

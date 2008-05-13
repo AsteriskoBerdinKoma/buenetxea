@@ -226,11 +226,12 @@ class InprimagailuKudeatzailea {
 		return parameters;
 	}
 
-	public Vector<DatosClienteSubReport> ClienteSubReport(String clientedni) throws SQLException {
+	public Vector<DatosClienteSubReport> ClienteSubReport(String clientedni)
+			throws SQLException {
 
 		DatosClienteSubReport datuek;
 		Vector<DatosClienteSubReport> bektorea = new Vector<DatosClienteSubReport>();
-		int numerue=1;
+		int numerue = 1;
 		String query = "SELECT inmueblea.`zona` AS zona,inmueblea.`direccion` AS direccion, rp.`nuevo_precio` AS precio "
 				+ "FROM cliente c INNER JOIN rel_visita visita ON c.`dni` = visita.`fk_cliente_dni` "
 				+ "INNER JOIN inmueble inmueblea ON visita.`fk_inmueble_referencia` = inmueblea.`referencia`"
@@ -250,12 +251,8 @@ class InprimagailuKudeatzailea {
 			bektorea.addElement(datuek);
 		}
 		ps.close();
-		rs.close();	
-		
-		
-		
-		
-		
+		rs.close();
+
 		return bektorea;
 	}
 
