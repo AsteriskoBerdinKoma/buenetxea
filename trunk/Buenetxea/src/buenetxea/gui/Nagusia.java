@@ -28,6 +28,7 @@ import javax.swing.border.MatteBorder;
 import buenetxea.db.Connector;
 import buenetxea.gui.dialogs.SeleccionarInmuebleDialog;
 import buenetxea.gui.panelak.BuenetxeaPanel;
+import buenetxea.gui.panelak.BuscasPanel;
 import buenetxea.gui.panelak.CrearClientePanel;
 import buenetxea.gui.panelak.CrearPropietarioPanel;
 import buenetxea.gui.panelak.IntroducirDatosVisitaPanel;
@@ -110,6 +111,10 @@ public class Nagusia extends JFrame {
 			localizarClientePanel.setName("localizarCliente");
 			panel.add(localizarClientePanel, localizarClientePanel.getName());
 
+			final BuscasPanel buscas = new BuscasPanel();
+			buscas.setName("buscas");
+			panel.add(buscas, buscas.getName());
+
 			localizarInmueblePanel = new LocalizarInmueblePanel();
 			localizarInmueblePanel.setName("localizador");
 			panel.add(localizarInmueblePanel, localizarInmueblePanel.getName());
@@ -188,13 +193,17 @@ public class Nagusia extends JFrame {
 		localizadorButton.setToolTipText("Localizador");
 		localizadorButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
-				//localizarInmueblePanel.refresh();
 				((CardLayout) panel.getLayout()).show(panel, "localizador");
 			}
 		});
 		toolBar.add(localizadorButton);
 
 		final JButton buscasButton = new JButton();
+		buscasButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel, "buscas");
+			}
+		});
 		buscasButton.setIcon(SwingResourceManager.getIcon(Nagusia.class,
 				"/buenetxea/resources/buscas 48x48.png"));
 		buscasButton.setToolTipText("Buscas");
@@ -232,7 +241,7 @@ public class Nagusia extends JFrame {
 		localizarClienteButton.setToolTipText("Localizar cliente");
 		localizarClienteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				//localizarClientePanel.refresh();
+				// localizarClientePanel.refresh();
 				((CardLayout) panel.getLayout())
 						.show(panel, "localizarCliente");
 			}
@@ -415,7 +424,7 @@ public class Nagusia extends JFrame {
 	public void showMostrarClientesInterados(String zona, int habs,
 			double precio) {
 		mostrarClientesInteresadosPanel.setDatos(zona, habs, precio);
-		//mostrarClientesInteresadosPanel.refresh();
+		// mostrarClientesInteresadosPanel.refresh();
 		((CardLayout) panel.getLayout()).show(panel,
 				"mostrarClientesInteresados");
 	}

@@ -46,6 +46,8 @@ public class VerClientePanel extends JPanel {
 
 	private final URL reportPath = VerInmueblePanel.class
 			.getResource("/buenetxea/reports/Cliente.jasper");
+	private final URL subreportPath = VerInmueblePanel.class
+			.getResource("/buenetxea/reports/cliente_subreport1.jasper");
 	private final URL reportVacioPath = VerInmueblePanel.class
 			.getResource("/buenetxea/reports/ClienteVacio.jasper");
 
@@ -265,6 +267,10 @@ public class VerClientePanel extends JPanel {
 			JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(
 					lista);
 
+			JRBeanCollectionDataSource datasourceSubreport;
+			datasourceSubreport = new JRBeanCollectionDataSource(kud
+					.getDatosClienteSubreport(dni));
+
 			JasperReport masterReport;
 			Map map;
 			if (cliente == null) {
@@ -278,7 +284,11 @@ public class VerClientePanel extends JPanel {
 										.getResource("/buenetxea/resources/logo_buenetxea.png"));
 			} else {
 				masterReport = (JasperReport) JRLoader.loadObject(reportPath);
+				JasperReport subReport = (JasperReport) JRLoader
+						.loadObject(subreportPath);
 				map = new HashMap();
+				map.put("SUBREPORT", subReport);
+				map.put("SUBREPORT_DATASOURCE", datasourceSubreport);
 			}
 
 			jp.removePage(0);
@@ -288,6 +298,9 @@ public class VerClientePanel extends JPanel {
 			this.validate();
 			this.repaint();
 		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -183,4 +183,8 @@ public class Kudeatzailea {
 		return this.inprKud.inprimatuVisita(dniCliente, refInmueble,
 				fechaVisita, representante);
 	}
+
+	public Vector<?> getDatosClienteSubreport(String dni) throws SQLException {
+		return this.inprKud.ClienteSubReport(dni);
+	}
 }

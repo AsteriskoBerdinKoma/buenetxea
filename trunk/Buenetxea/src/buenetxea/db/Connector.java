@@ -110,8 +110,8 @@ public class Connector {
 	 * @throws java.sql.SQLException
 	 */
 	public static void close() throws SQLException {
-		Connector.connection.close();
 		Connector.statement.close();
+		Connector.connection.close();
 		Connector.connectedToDatabase = false;
 	}
 }
