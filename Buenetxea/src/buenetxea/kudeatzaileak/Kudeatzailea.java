@@ -13,6 +13,7 @@ import buenetxea.objektuak.Cliente;
 import buenetxea.objektuak.Descripcion;
 import buenetxea.objektuak.Inmueble;
 import buenetxea.objektuak.Peritaje;
+import buenetxea.objektuak.Preferencias;
 import buenetxea.objektuak.Propietario;
 import buenetxea.objektuak.RelInmueblePropietario;
 import buenetxea.objektuak.Tasacion;
@@ -32,7 +33,9 @@ public class Kudeatzailea {
 	private final DescripcionKud descriKud;
 	private final RelInmueblePropietarioKud relInmPropKud;
 	private final VisitaKud visiKud;
+	private final PreferenciasKud prefKud;
 	private final InprimagailuKudeatzailea inprKud;
+
 
 	private Vector<String> naciones;
 	private Vector<String> nacionalidades;
@@ -48,6 +51,7 @@ public class Kudeatzailea {
 		this.descriKud = DescripcionKud.getInstance();
 		this.relInmPropKud = RelInmueblePropietarioKud.getInstance();
 		this.visiKud = VisitaKud.getInstance();
+		this.prefKud = PreferenciasKud.getInstance();
 		this.inprKud = InprimagailuKudeatzailea.getInstance();
 		this.cargarNacionalidades();
 	}
@@ -178,6 +182,13 @@ public class Kudeatzailea {
 		return this.cliKud.getCliente(dni);
 	}
 
+	
+	public Preferencias getPreferencias (String dni) throws SQLException
+	{
+		return this.prefKud.getPreferencias(dni);
+	}
+
+
 	public DatosVisita getDatosVisita(String dniCliente, int refInmueble,
 			Calendar fechaVisita, String representante) throws SQLException {
 		return this.inprKud.inprimatuVisita(dniCliente, refInmueble,
@@ -187,4 +198,5 @@ public class Kudeatzailea {
 	public Vector<?> getDatosClienteSubreport(String dni) throws SQLException {
 		return this.inprKud.ClienteSubReport(dni);
 	}
+
 }

@@ -7,12 +7,14 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -26,6 +28,8 @@ import buenetxea.db.ResultSetTableModel;
 import buenetxea.gui.Nagusia;
 import buenetxea.gui.dialogs.BuscarClienteDialog;
 import buenetxea.gui.dialogs.CrearClienteDialog;
+import buenetxea.kudeatzaileak.Kudeatzailea;
+import buenetxea.objektuak.Preferencias;
 
 public class BuscasPanel extends JPanel {
 
@@ -33,7 +37,8 @@ public class BuscasPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private Kudeatzailea kud;
+	
 	private JTable table;
 	private JTextField dniTextField;
 	private JLabel errorLabel;
@@ -45,6 +50,9 @@ public class BuscasPanel extends JPanel {
 	 */
 	public BuscasPanel() {
 		super();
+		try {
+			kud = Kudeatzailea.getInstance();
+		
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(final ComponentEvent e) {
 				if (tableModel == null)
@@ -252,12 +260,60 @@ public class BuscasPanel extends JPanel {
 								LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(verInmuebleButton).addContainerGap()));
 		setLayout(groupLayout);
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (ClassNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		//
 	}
 
 	private String getQuery() {
 		String dni = dniTextField.getText().trim();
-		String query = "";
+		Preferencias preferenciasCliente=null;
+		String query;
+		try {
+			 preferenciasCliente = kud.getPreferencias(dni);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			JOptionPane jop = new JOptionPane(
+					"El cliente  introducido no existen.",
+					JOptionPane.ERROR_MESSAGE);
+			jop.createDialog("Error en los datos").setVisible(true);
+			e.printStackTrace();
+		}
+		if (preferenciasCliente != null)
+			 {
+			
+			query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, p.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta  FROM Inmueble  I "
+				+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
+				+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
+				+ "I.referencia = RPI.fk_inmueble_referencia WHERE";
+			
+			query += " P.tipo_inmueble LIKE '%"+ preferenciasCliente.getTipo()+ "%'";
+			
+			query += " AND P.id IN (SELECT id FROM Peritaje WHERE " + preferenciasCliente.getDesde_metros()+ "<= m2_utiles AND" +
+					 "  " + preferenciasCliente.getHasta_metros() + "<= m2_utiles";
+			
+			query += " AND P.exterior="+ preferenciasCliente.getExterior();
+			
+			query += " AND I.referencia IN ( SELECT RPI.fk_inmueble_referencia, COUNT(*)  FROM"
+				+ " rel_peritaje_inmueble RPI INNER JOIN (peritaje P INNER JOIN descripcion D ON P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id=P.id"
+				+ " WHERE D.tipo LIKE '%habit%'"
+				+ " GROUP BY RPI.fk_inmueble_referencia"
+				+ " HAVING COUNT(*) BETWEEN "
+				+ preferenciasCliente.getd
+				+ " AND "
+				+ habitacionesHasta + ")";
+			
+			
+			 }
+		
 		return null;
 	}
 }

@@ -6,16 +6,35 @@ package buenetxea.objektuak;
  */
 public class Preferencias {
 	
-	private int id;
+	private String nan;
 	private String tipo;
+	private boolean exterior;
 	private int desde_metros;
 	private int hasta_metros;
 	private String zona;
 	private int banos;
 	private int aseos;
-	private int presupuesto;
+	private double presupuesto;
 	private String observaciones;
+	private int numHabitaciones;
 	
+	
+	public Preferencias(String nan, String tipo, boolean exterior, int desde_metros,
+			int hasta_metros, String zona, int banos, int aseos,
+			double presupuesto, String observaciones, int numHabitaciones) {
+		super();
+		this.nan = nan;
+		this.tipo = tipo;
+		this.exterior = exterior;
+		this.desde_metros = desde_metros;
+		this.hasta_metros = hasta_metros;
+		this.zona = zona;
+		this.banos = banos;
+		this.aseos = aseos;
+		this.presupuesto = presupuesto;
+		this.observaciones = observaciones;
+		this.numHabitaciones = numHabitaciones;
+	}
 	/**
 	 * 
 	 * 
@@ -29,26 +48,12 @@ public class Preferencias {
 	 * @param presupuesto
 	 * @param observaciones
 	 */
-	public Preferencias(int id, String tipo, int desde_metros,
-			int hasta_metros, String zona, int banos, int aseos,
-			int presupuesto, String observaciones) {
-		
-		super();
-		this.id = id;
-		this.tipo = tipo;
-		this.desde_metros = desde_metros;
-		this.hasta_metros = hasta_metros;
-		this.zona = zona;
-		this.banos = banos;
-		this.aseos = aseos;
-		this.presupuesto = presupuesto;
-		this.observaciones = observaciones;
+	
+	public String  getId() {
+		return nan;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(String nan) {
+		this.nan = nan;
 	}
 	public String getTipo() {
 		return tipo;
@@ -86,10 +91,10 @@ public class Preferencias {
 	public void setAseos(int aseos) {
 		this.aseos = aseos;
 	}
-	public int getPresupuesto() {
+	public double getPresupuesto() {
 		return presupuesto;
 	}
-	public void setPresupuesto(int presupuesto) {
+	public void setPresupuesto(double presupuesto) {
 		this.presupuesto = presupuesto;
 	}
 	public String getObservaciones() {
@@ -97,6 +102,18 @@ public class Preferencias {
 	}
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+	}
+	public boolean getExterior() {
+		return exterior;
+	}
+	public void setExterior(boolean exterior) {
+		this.exterior = exterior;
+	}
+	public int getHabitaciones() {
+		return numHabitaciones;
+	}
+	public void setHabitaciones(int habitaciones) {
+		this.numHabitaciones = habitaciones;
 	}
 	
 	
