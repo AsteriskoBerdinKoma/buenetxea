@@ -402,6 +402,7 @@ public class VerInmueblePanel extends JPanel {
 			modificarInmuebleButton.setEnabled(false);
 			modificarInmuebleButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
+					Nagusia.getInstance().showModificarInmueble(inmueble);
 				}
 			});
 			modificarInmuebleButton.setText("Modificar Inmueble");
