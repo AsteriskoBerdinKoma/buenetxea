@@ -7,12 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -145,14 +142,15 @@ public class Nagusia extends JFrame {
 
 			verVisitaPanel = new VerVisitaPanel();
 			verVisitaPanel.setName("verVisita");
-			
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();}
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+			e.printStackTrace();
+		}
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		crearPropietarioPanel.setName("crearPropietario");
 		panel.add(crearPropietarioPanel, crearPropietarioPanel.getName());
 
@@ -171,7 +169,7 @@ public class Nagusia extends JFrame {
 		verInmueblePanel = new VerInmueblePanel();
 		verInmueblePanel.setName("verInmueble");
 		panel.add(verInmueblePanel, verInmueblePanel.getName());
-		
+
 		panel.add(verVisitaPanel, verVisitaPanel.getName());
 		final JButton peritajeButton = new JButton();
 		peritajeButton.setToolTipText("Peritaje");
@@ -373,6 +371,15 @@ public class Nagusia extends JFrame {
 		newItemMenuItem_7.setText("Ficha Peritaje");
 		adibideakMenu.add(newItemMenuItem_7);
 
+		final JMenuItem newItemMenuItem_8 = new JMenuItem();
+		newItemMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel, "verVisita");
+			}
+		});
+		newItemMenuItem_8.setText("Ficha Visita");
+		adibideakMenu.add(newItemMenuItem_8);
+
 		pack();
 		//
 	}
@@ -417,8 +424,9 @@ public class Nagusia extends JFrame {
 			double precio) {
 
 	}
-	
-	public void showVerVisita(int refInm, Calendar fecha, String dni, String representante){
+
+	public void showVerVisita(int refInm, Calendar fecha, String dni,
+			String representante) {
 		verVisitaPanel.setDatos(dni, refInm, fecha, representante);
 		((CardLayout) panel.getLayout()).show(panel, "verVisita");
 	}

@@ -8,7 +8,7 @@ import java.util.Calendar;
 
 import buenetxea.db.Connector;
 
-public class VentasKud {
+class VentasKud {
 
 	private static VentasKud instance;
 

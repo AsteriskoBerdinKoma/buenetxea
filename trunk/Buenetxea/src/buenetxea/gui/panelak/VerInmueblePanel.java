@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,6 +51,11 @@ public class VerInmueblePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private final URL reportPath = VerInmueblePanel.class
+			.getResource("/buenetxea/reports/Inmueble.jasper");
+	private final URL subreportPath = VerInmueblePanel.class
+			.getResource("/buenetxea/reports/Inmueble_subreport.jasper");
+
 	private JRViewer viewer;
 
 	private Kudeatzailea kud;
@@ -89,9 +95,9 @@ public class VerInmueblePanel extends JPanel {
 					lista2);
 
 			JasperReport masterReport = (JasperReport) JRLoader
-					.loadObject("inmueble.jasper");
+					.loadObject(reportPath);
 			JasperReport subReport = (JasperReport) JRLoader
-					.loadObject("inmueble_subreport1.jasper");
+					.loadObject(subreportPath);
 
 			Map masterParams = new HashMap();
 			masterParams.put("SUBREPORT", subReport);
@@ -295,9 +301,9 @@ public class VerInmueblePanel extends JPanel {
 					di.getVDescripcion());
 
 			JasperReport masterReport = (JasperReport) JRLoader
-					.loadObject("inmueble.jasper");
+					.loadObject(reportPath);
 			JasperReport subReport = (JasperReport) JRLoader
-					.loadObject("inmueble_subreport1.jasper");
+					.loadObject(subreportPath);
 
 			Map masterParams = new HashMap();
 			masterParams.put("SUBREPORT", subReport);

@@ -1,6 +1,5 @@
 package buenetxea.kudeatzaileak;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +14,7 @@ import buenetxea.objektuak.fitxak.DatosCliente;
 import buenetxea.objektuak.fitxak.DatosClienteSubReport;
 import buenetxea.objektuak.fitxak.DatosVisita;
 
-public class InprimagailuKudeatzailea {
+class InprimagailuKudeatzailea {
 
 	private static InprimagailuKudeatzailea instance;
 
@@ -130,7 +129,7 @@ public class InprimagailuKudeatzailea {
 		return parameters;
 	}
 
-	public DatosVisita InprimatuVisita(String clientedni, int inmuebleref,
+	public DatosVisita inprimatuVisita(String clientedni, int inmuebleref,
 			Calendar fecha, String representante) throws SQLException {
 
 		boolean llavesb;
@@ -139,8 +138,12 @@ public class InprimagailuKudeatzailea {
 		String data = fecha.get(Calendar.YEAR) + "/"
 				+ (fecha.get(Calendar.MONTH) + 1) + "/"
 				+ fecha.get(Calendar.DAY_OF_MONTH) + " a las "
-				+ fecha.get(Calendar.HOUR_OF_DAY) + ":"
-				+ fecha.get(Calendar.MINUTE);
+				+ fecha.get(Calendar.HOUR_OF_DAY) + ":";
+		int minutos = fecha.get(Calendar.MINUTE);
+		if (minutos < 10)
+			data += "0" + minutos;
+		else
+			data += minutos;
 
 		String query = "SELECT * FROM inmueble,cliente WHERE referencia = ? AND dni = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
@@ -166,12 +169,12 @@ public class InprimagailuKudeatzailea {
 		if (rs2.next()) {
 			parameters.setNuevo_precio(rs2.getDouble("nuevo_precio"));
 			preciopesetas = parameters.getNuevo_precio() * 166.386;
-			Double bd = new Double(
-					java.lang.Math.round(preciopesetas * 100000000.0) / 100000000.0);
+			Double bd = new Double(java.lang.Math
+					.round(preciopesetas * 100000000.0) / 100000000.0);
 			System.out.println(preciopesetas);
 			System.out.println(bd.doubleValue());
-//			BigDecimal bd = new BigDecimal(preciopesetas);
-//			bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+			// BigDecimal bd = new BigDecimal(preciopesetas);
+			// bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
 			// parameters.setPreciopesetas(parameters.getNuevo_precio() *
 			// 166.386);
 			parameters.setPreciopesetas(bd.doubleValue());

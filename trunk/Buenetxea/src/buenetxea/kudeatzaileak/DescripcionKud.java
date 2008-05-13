@@ -10,7 +10,7 @@ import java.util.Vector;
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Descripcion;
 
-public class DescripcionKud {
+class DescripcionKud {
 
 	private static DescripcionKud instance;
 

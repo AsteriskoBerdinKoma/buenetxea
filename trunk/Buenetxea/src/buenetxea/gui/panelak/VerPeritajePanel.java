@@ -3,6 +3,7 @@ package buenetxea.gui.panelak;
 import java.awt.FlowLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +29,9 @@ public class VerPeritajePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private final URL reportPath = VerInmueblePanel.class
+			.getResource("/buenetxea/reports/Peritaje.jasper");
 
 	private JRViewer viewer;
 
@@ -60,8 +64,7 @@ public class VerPeritajePanel extends JPanel {
 			JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(
 					lista);
 
-			JasperReport jr = (JasperReport) JRLoader
-					.loadObject("Peritaje.jasper");
+			JasperReport jr = (JasperReport) JRLoader.loadObject(reportPath);
 
 			JasperPrint jp = JasperFillManager.fillReport(jr, new HashMap(),
 					datasource);
@@ -83,9 +86,5 @@ public class VerPeritajePanel extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public void jasper() {
-
 	}
 }

@@ -4,6 +4,7 @@ public class DatosCliente {
 
 	private String nombre;
 	private String apellido1;
+	private String apellido2;
 	private String medio;
 	private int telefono;
 	private String asesor;
@@ -15,10 +16,11 @@ public class DatosCliente {
 
 	}
 
-	public DatosCliente(String nombre, String apellido1, String medio,
-			int telefono, String asesor, String dni) {
+	public DatosCliente(String nombre, String apellido1, String apellido2,
+			String medio, int telefono, String asesor, String dni) {
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
 		this.medio = medio;
 		this.telefono = telefono;
 		this.asesor = asesor;
@@ -42,6 +44,14 @@ public class DatosCliente {
 
 	public final void setApellido1(String apellido1) {
 		this.apellido1 = apellido1;
+	}
+
+	public String getApellido2() {
+		return apellido2;
+	}
+
+	public void setApellido2(String apellido2) {
+		this.apellido2 = apellido2;
 	}
 
 	public final String getMedio() {

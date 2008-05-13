@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -42,6 +43,11 @@ public class VerClientePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private final URL reportPath = VerInmueblePanel.class
+			.getResource("/buenetxea/reports/Cliente.jasper");
+	private final URL reportVacioPath = VerInmueblePanel.class
+			.getResource("/buenetxea/reports/ClienteVacio.jasper");
 
 	private JRViewer viewer;
 
@@ -81,8 +87,7 @@ public class VerClientePanel extends JPanel {
 
 			JasperReport masterReport;
 
-			masterReport = (JasperReport) JRLoader
-					.loadObject("ClienteVacio.jasper");
+			masterReport = (JasperReport) JRLoader.loadObject(reportVacioPath);
 
 			Map map = new HashMap();
 			map.put("IMAGE", VerClientePanel.class
@@ -233,8 +238,8 @@ public class VerClientePanel extends JPanel {
 						cliente = c;
 						textField.setText(String.valueOf(c.getDni()));
 						dc = new DatosCliente(c.getNombre(), c.getApellido1(),
-								c.getMedio(), c.getTelefono(), c.getAsesor(), c
-										.getDni());
+								c.getApellido2(), c.getMedio(),
+								c.getTelefono(), c.getAsesor(), c.getDni());
 					} else {
 						dc = new DatosCliente();
 						cliente = null;
@@ -264,7 +269,7 @@ public class VerClientePanel extends JPanel {
 			Map map;
 			if (cliente == null) {
 				masterReport = (JasperReport) JRLoader
-						.loadObject("ClienteVacio.jasper");
+						.loadObject(reportVacioPath);
 				map = new HashMap();
 				map
 						.put(
@@ -272,8 +277,7 @@ public class VerClientePanel extends JPanel {
 								VerClientePanel.class
 										.getResource("/buenetxea/resources/logo_buenetxea.png"));
 			} else {
-				masterReport = (JasperReport) JRLoader
-						.loadObject("Cliente.jasper");
+				masterReport = (JasperReport) JRLoader.loadObject(reportPath);
 				map = new HashMap();
 			}
 
