@@ -2,6 +2,8 @@ package buenetxea.gui.panelak;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -62,6 +64,25 @@ public class LocalizarInmueblePanel extends JPanel {
 	 */
 	public LocalizarInmueblePanel() {
 		super();
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(final ComponentEvent arg0) {
+				if (tableModel == null)
+					tableModel = new ResultSetTableModel(
+							getQuery());
+				else {
+					try {
+						tableModel.refresh();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				table.setModel(tableModel);
+			}
+
+			public void componentHidden(final ComponentEvent arg0) {
+				table.setModel(new DefaultTableModel());
+			}
+		});
 		
 		try {
 			kud = Kudeatzailea.getInstance();
