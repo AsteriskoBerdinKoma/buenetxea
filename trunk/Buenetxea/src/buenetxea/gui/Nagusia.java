@@ -360,15 +360,6 @@ public class Nagusia extends JFrame {
 		newItemMenuItem_3.setText("Ficha Inmueble");
 		adibideakMenu.add(newItemMenuItem_3);
 
-		final JMenuItem menuItem = new JMenuItem();
-		menuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent arg0) {
-				((CardLayout) panel.getLayout()).show(panel, "verVisita");
-			}
-		});
-		menuItem.setText("Menu Item");
-		adibideakMenu.add(menuItem);
-
 		final JMenuItem newItemMenuItem_5 = new JMenuItem();
 		newItemMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
