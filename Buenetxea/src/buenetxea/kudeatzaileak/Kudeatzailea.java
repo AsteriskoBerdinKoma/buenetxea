@@ -33,9 +33,8 @@ public class Kudeatzailea {
 	private final DescripcionKud descriKud;
 	private final RelInmueblePropietarioKud relInmPropKud;
 	private final VisitaKud visiKud;
-//	private final PreferenciasKud prefKud;
+	private final PreferenciasKud prefKud;
 	private final InprimagailuKudeatzailea inprKud;
-
 
 	private Vector<String> naciones;
 	private Vector<String> nacionalidades;
@@ -51,7 +50,7 @@ public class Kudeatzailea {
 		this.descriKud = DescripcionKud.getInstance();
 		this.relInmPropKud = RelInmueblePropietarioKud.getInstance();
 		this.visiKud = VisitaKud.getInstance();
-//		this.prefKud = PreferenciasKud.getInstance();
+		this.prefKud = PreferenciasKud.getInstance();
 		this.inprKud = InprimagailuKudeatzailea.getInstance();
 		this.cargarNacionalidades();
 	}
@@ -166,8 +165,9 @@ public class Kudeatzailea {
 				.getLastPeritajeId(referencia));
 	}
 
-	public Vector<Descripcion> getDescripciones(int id) throws SQLException {
-		return this.descriKud.getDescripciones(id);
+	public Vector<Descripcion> getDescripciones(int peritajeId)
+			throws SQLException {
+		return this.descriKud.getDescripciones(peritajeId);
 	}
 
 	public double getLastPrecio(int referencia) throws SQLException {
@@ -182,17 +182,13 @@ public class Kudeatzailea {
 		return this.cliKud.getCliente(dni);
 	}
 
-	
-//	public Preferencias getPreferencias (String dni) throws SQLException
-//	{
-//		return this.prefKud.getPreferencias(dni);
-//	}
-	
-	public boolean insertPreferencias (Preferencias p) throws SQLException
-	{
-		return this.prefKud.insertPreferencias(p);
+	public Preferencias getPreferencias(String dni) throws SQLException {
+		return this.prefKud.getPreferencias(dni);
 	}
 
+	public boolean insertPreferencias(Preferencias p) throws SQLException {
+		return this.prefKud.insertPreferencias(p);
+	}
 
 	public DatosVisita getDatosVisita(String dniCliente, int refInmueble,
 			Calendar fechaVisita, String representante) throws SQLException {

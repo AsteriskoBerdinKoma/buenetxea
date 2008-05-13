@@ -35,6 +35,7 @@ import buenetxea.gui.panelak.IntroducirDatosVisitaPanel;
 import buenetxea.gui.panelak.IntroducirInmueblePanel;
 import buenetxea.gui.panelak.LocalizarClientePanel;
 import buenetxea.gui.panelak.LocalizarInmueblePanel;
+import buenetxea.gui.panelak.ModificarInmueblePanel;
 import buenetxea.gui.panelak.MostrarClientesInteresadosPanel;
 import buenetxea.gui.panelak.SeguimientoPropietarioPanel;
 import buenetxea.gui.panelak.VenderInmueblePanel;
@@ -64,6 +65,7 @@ public class Nagusia extends JFrame {
 	private MostrarClientesInteresadosPanel mostrarClientesInteresadosPanel;
 	private LocalizarInmueblePanel localizarInmueblePanel;
 	private VerClientePanel verClientePanel;
+	private ModificarInmueblePanel modificarInmueblePanel;
 
 	/**
 	 * Create the frame
@@ -129,6 +131,10 @@ public class Nagusia extends JFrame {
 			introducirInmueblePanel.setName("peritaje");
 			panel.add(introducirInmueblePanel, introducirInmueblePanel
 					.getName());
+
+			modificarInmueblePanel = new ModificarInmueblePanel();
+			modificarInmueblePanel.setName("modificarInmueble");
+			panel.add(modificarInmueblePanel, modificarInmueblePanel.getName());
 
 			final IntroducirDatosVisitaPanel introducirDatosVisitaPanel = new IntroducirDatosVisitaPanel();
 			introducirDatosVisitaPanel.setName("visitas");
@@ -430,15 +436,15 @@ public class Nagusia extends JFrame {
 				"mostrarClientesInteresados");
 	}
 
-	public void showClientesInteresados(String zona, int num_habitaciones,
-			double precio) {
-
-	}
-
 	public void showVerVisita(int refInm, Calendar fecha, String dni,
 			String representante) {
 		verVisitaPanel.setDatos(dni, refInm, fecha, representante);
 		((CardLayout) panel.getLayout()).show(panel, "verVisita");
+	}
+
+	public void showModificarInmueble(Inmueble inmueble) {
+		modificarInmueblePanel.setDatuak(inmueble);
+		((CardLayout) panel.getLayout()).show(panel, "modificarInmueble");
 	}
 
 	private final class NagusiaWindowListener implements WindowListener {
