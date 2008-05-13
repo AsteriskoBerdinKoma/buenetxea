@@ -103,6 +103,7 @@ public class Nagusia extends JFrame {
 
 		CrearPropietarioPanel crearPropietarioPanel = null;
 		try {
+			//panel.add(panela,"prueba");
 			final BuenetxeaPanel buenetxeaPanel = new BuenetxeaPanel();
 			buenetxeaPanel.setName("presentacion");
 			panel.add(buenetxeaPanel, buenetxeaPanel.getName());

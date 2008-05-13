@@ -226,27 +226,36 @@ class InprimagailuKudeatzailea {
 		return parameters;
 	}
 
-	public Vector ClienteSubReport(String clientedni) throws SQLException {
+	public Vector<DatosClienteSubReport> ClienteSubReport(String clientedni) throws SQLException {
 
-		DatosClienteSubReport datuek = new DatosClienteSubReport();
-		Vector bektorea = new Vector();
-		String query = "SELECT peritajea.`observaciones` AS observaciones,inmueblea.`direccion` AS direccion "
+		DatosClienteSubReport datuek;
+		Vector<DatosClienteSubReport> bektorea = new Vector<DatosClienteSubReport>();
+		int numerue=1;
+		String query = "SELECT inmueblea.`zona` AS zona,inmueblea.`direccion` AS direccion, rp.`nuevo_precio` AS precio "
 				+ "FROM cliente c INNER JOIN rel_visita visita ON c.`dni` = visita.`fk_cliente_dni` "
 				+ "INNER JOIN inmueble inmueblea ON visita.`fk_inmueble_referencia` = inmueblea.`referencia`"
-				+ "INNER JOIN rel_peritaje_inmueble rel_p_i ON inmueblea.`referencia` = rel_p_i.`fk_inmueble_referencia`"
-				+ "INNER JOIN peritaje peritajea ON rel_p_i.`fk_peritaje_id` = peritajea.`id`"
-				+ "WHERE c.`dni` = ?" + "GROUP BY c.`dni`";
+				+ "INNER JOIN rel_inmueble_propietario AS rp ON inmueblea.`referencia` = rp.`fk_inmueble_referencia`"
+				+ "WHERE c.`dni` = ? GROUP BY direccion,zona ORDER BY precio DESC";
 
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setString(1, clientedni);
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
+			datuek = new DatosClienteSubReport();
 			datuek.setDireccion(rs.getString("direccion"));
-			datuek.setObservaciones(rs.getString("observaciones"));
-			bektorea.add(datuek);
+			datuek.setZona(rs.getString("zona"));
+			datuek.setPrecio(rs.getDouble("precio"));
+			datuek.setNumero(numerue);
+			numerue++;
+			bektorea.addElement(datuek);
 		}
 		ps.close();
-		rs.close();
+		rs.close();	
+		
+		
+		
+		
+		
 		return bektorea;
 	}
 

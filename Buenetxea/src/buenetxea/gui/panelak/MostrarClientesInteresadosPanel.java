@@ -84,6 +84,9 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 							.getSelectedRow(), 0);
 					//Nagusia.getInstance().showVerCliente(dni);
 					MostrarClienteSeleccionadoDialog2 dialogoa = new MostrarClienteSeleccionadoDialog2(dni);
+					dialogoa.pack();
+					dialogoa.setLocationRelativeTo(null);
+					dialogoa.setVisible(true);
 				}
 			}
 		});

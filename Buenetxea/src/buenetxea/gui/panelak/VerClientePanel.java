@@ -47,7 +47,7 @@ public class VerClientePanel extends JPanel {
 	private final URL reportPath = VerInmueblePanel.class
 			.getResource("/buenetxea/reports/Cliente.jasper");
 	private final URL subreportPath = VerInmueblePanel.class
-			.getResource("/buenetxea/reports/cliente_subreport1.jasper");
+			.getResource("/buenetxea/reports/ClienteSubReport.jasper");
 	private final URL reportVacioPath = VerInmueblePanel.class
 			.getResource("/buenetxea/reports/ClienteVacio.jasper");
 
