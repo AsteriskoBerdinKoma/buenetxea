@@ -22,6 +22,9 @@ public class BuscarClienteDialog extends JDialog {
 	 */
 	public BuscarClienteDialog() {
 		super(Nagusia.getInstance(), true);
+
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
 		setIconImage(SwingResourceManager.getImage(BuscarClienteDialog.class,
 				"/buenetxea/resources/logo_buenetxea.png"));
 		setTitle("Buscar clientes");
