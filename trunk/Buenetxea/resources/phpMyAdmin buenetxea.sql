@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `descripcion` (
 
 -- 
 -- Estructura de tabla para la tabla `inmueble`
--- 
+--
 
 DROP TABLE IF EXISTS `inmueble`;
 CREATE TABLE IF NOT EXISTS `inmueble` (
@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `rel_cliente_inmueble` (
   `honorarios` double NOT NULL,
   `iva` double NOT NULL,
   `precio_propietario` double NOT NULL,
-  PRIMARY KEY  (`fk_cliente_dni`,`fk_inmueble_referencia`),
+  PRIMARY KEY  (`fk_cliente_dni`,`fk_inmueble_referencia`,`fecha`),
   KEY `FK_rel_cliente_inmueble_2` (`fk_inmueble_referencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla para las ventas' AUTO_INCREMENT=1 ;
 
@@ -216,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `rel_inmueble_propietario` (
   `nuevo_precio` double NOT NULL,
   `fecha` datetime NOT NULL,
   `observaciones` varchar(100) NOT NULL,
-  PRIMARY KEY  (`fk_inmueble_referencia`,`fk_propietario_dni`),
+  PRIMARY KEY  (`fk_inmueble_referencia`,`fk_propietario_dni`,`fecha`),
   KEY `FK_rel_inmueble_propietario_2` (`fk_propietario_dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -286,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `rel_visita` (
   `podriamos_peritar` tinyint(1) NOT NULL,
   `fk_inmueble_referencia` int(10) unsigned NOT NULL,
   `fk_cliente_dni` varchar(9) NOT NULL,
-  PRIMARY KEY  USING BTREE (`fk_inmueble_referencia`,`fk_cliente_dni`),
+  PRIMARY KEY  USING BTREE (`fk_inmueble_referencia`,`fk_cliente_dni`,`fecha`),
   KEY `FK_rel_visita_2` (`fk_cliente_dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
