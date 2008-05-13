@@ -21,12 +21,14 @@ public class MostrarClienteSeleccionadoDialog extends JFrame {
 	 */
 	public MostrarClienteSeleccionadoDialog(String dni) {
 		super();
+		setName("Cliente Interesado");
 		getContentPane().setName("Cliente Seleccionado");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-		VerClientePanel panela = new VerClientePanel(jabea,dni);
-		
+		Nagusia.getInstance().showVerCliente(dni);
+		VerClientePanel panela = new VerClientePanel();
+		panela.setCliente(dni);
+				
 		final GroupLayout groupLayout = new GroupLayout((JComponent) getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)

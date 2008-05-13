@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 import buenetxea.db.ResultSetTableModel;
 import buenetxea.gui.Nagusia;
+import buenetxea.gui.dialogs.MostrarClienteSeleccionadoDialog;
 
 public class MostrarClientesInteresadosPanel extends JPanel {
 
@@ -81,7 +82,8 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 				if (e.getClickCount() == 2) {
 					String dni = (String) table_2.getValueAt(table_2
 							.getSelectedRow(), 0);
-					Nagusia.getInstance().showVerCliente(dni);
+					//Nagusia.getInstance().showVerCliente(dni);
+					MostrarClienteSeleccionadoDialog dialogoa = new MostrarClienteSeleccionadoDialog(dni);
 				}
 			}
 		});
