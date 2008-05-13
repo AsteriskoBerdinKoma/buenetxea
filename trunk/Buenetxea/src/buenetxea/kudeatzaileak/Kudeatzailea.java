@@ -187,6 +187,11 @@ public class Kudeatzailea {
 	{
 		return this.prefKud.getPreferencias(dni);
 	}
+	
+	public boolean insertPreferencias (Preferencias p) throws SQLException
+	{
+		return this.prefKud.insertPreferencias(p);
+	}
 
 
 	public DatosVisita getDatosVisita(String dniCliente, int refInmueble,
