@@ -456,7 +456,7 @@ public class Nagusia extends JFrame {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			dispose();
+			System.exit(0);
 		}
 
 		@Override
