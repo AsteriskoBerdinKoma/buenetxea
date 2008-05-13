@@ -33,7 +33,7 @@ public class Kudeatzailea {
 	private final DescripcionKud descriKud;
 	private final RelInmueblePropietarioKud relInmPropKud;
 	private final VisitaKud visiKud;
-	private final PreferenciasKud prefKud;
+//	private final PreferenciasKud prefKud;
 	private final InprimagailuKudeatzailea inprKud;
 
 
@@ -51,7 +51,7 @@ public class Kudeatzailea {
 		this.descriKud = DescripcionKud.getInstance();
 		this.relInmPropKud = RelInmueblePropietarioKud.getInstance();
 		this.visiKud = VisitaKud.getInstance();
-		this.prefKud = PreferenciasKud.getInstance();
+//		this.prefKud = PreferenciasKud.getInstance();
 		this.inprKud = InprimagailuKudeatzailea.getInstance();
 		this.cargarNacionalidades();
 	}
@@ -183,10 +183,10 @@ public class Kudeatzailea {
 	}
 
 	
-	public Preferencias getPreferencias (String dni) throws SQLException
-	{
-		return this.prefKud.getPreferencias(dni);
-	}
+//	public Preferencias getPreferencias (String dni) throws SQLException
+//	{
+//		return this.prefKud.getPreferencias(dni);
+//	}
 	
 	public boolean insertPreferencias (Preferencias p) throws SQLException
 	{
