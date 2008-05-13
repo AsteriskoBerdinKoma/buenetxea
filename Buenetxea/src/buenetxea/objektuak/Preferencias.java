@@ -16,12 +16,16 @@ public class Preferencias {
 	private int aseos;
 	private double presupuesto;
 	private String observaciones;
-	private int numHabitaciones;
+	private int desdeHabitaciones;
+	private int hastaHabitaciones;
+	private int altura;
 	
 	
-	public Preferencias(String nan, String tipo, boolean exterior, int desde_metros,
-			int hasta_metros, String zona, int banos, int aseos,
-			double presupuesto, String observaciones, int numHabitaciones) {
+	
+	public Preferencias(String nan, String tipo, boolean exterior,
+			int desde_metros, int hasta_metros, String zona, int banos,
+			int aseos, double presupuesto, String observaciones,
+			int desdeHabitaciones, int hastaHabitaciones,int altura) {
 		super();
 		this.nan = nan;
 		this.tipo = tipo;
@@ -33,7 +37,9 @@ public class Preferencias {
 		this.aseos = aseos;
 		this.presupuesto = presupuesto;
 		this.observaciones = observaciones;
-		this.numHabitaciones = numHabitaciones;
+		this.desdeHabitaciones = desdeHabitaciones;
+		this.hastaHabitaciones = hastaHabitaciones;
+		this.altura = altura;
 	}
 	/**
 	 * 
@@ -49,10 +55,10 @@ public class Preferencias {
 	 * @param observaciones
 	 */
 	
-	public String  getId() {
+	public String  getNan() {
 		return nan;
 	}
-	public void setId(String nan) {
+	public void setNan(String nan) {
 		this.nan = nan;
 	}
 	public String getTipo() {
@@ -109,13 +115,25 @@ public class Preferencias {
 	public void setExterior(boolean exterior) {
 		this.exterior = exterior;
 	}
-	public int getHabitaciones() {
-		return numHabitaciones;
+
+	public int getDesdeHabitaciones() {
+		return desdeHabitaciones;
 	}
-	public void setHabitaciones(int habitaciones) {
-		this.numHabitaciones = habitaciones;
+	public void setDesdeHabitaciones(int desdeHabitaciones) {
+		this.desdeHabitaciones = desdeHabitaciones;
 	}
-	
+	public int getHastaHabitaciones() {
+		return hastaHabitaciones;
+	}
+	public void setHastaHabitaciones(int hastaHabitaciones) {
+		this.hastaHabitaciones = hastaHabitaciones;
+	}
+	public int getAltura() {
+		return altura;
+	}
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
 	
 	
 

@@ -307,12 +307,13 @@ public class BuscasPanel extends JPanel {
 				+ " WHERE D.tipo LIKE '%habit%'"
 				+ " GROUP BY RPI.fk_inmueble_referencia"
 				+ " HAVING COUNT(*) BETWEEN "
-				+ preferenciasCliente.getd
+				+ preferenciasCliente.getDesdeHabitaciones()
 				+ " AND "
-				+ habitacionesHasta + ")";
+				+ preferenciasCliente.getHastaHabitaciones()+ ")";
 			
 			
 			 }
+		
 		
 		return null;
 	}

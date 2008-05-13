@@ -67,12 +67,43 @@ public class PreferenciasKud {
 			presupuesto = rs.getDouble("presupuesto");
 			altura = Integer.parseInt(rs.getString("altura"));
 			observaciones = rs.getString("observaciones");
-			Preferencias preferencias = new Preferencias(nan, tipo,exterior,desdeMetros,hastaMetros,zona,banos,aseos,presupuesto,observaciones,altura);
+			Preferencias preferencias = new Preferencias(dni,tipo,exterior,desdeMetros,hastaMetros,
+					zona,banos,aseos,presupuesto,observaciones,desdeHabitaciones,hastaHabitaciones,altura);
 			return preferencias;
 			
 		}
 		return null;
 		
 	}
+
+	public boolean insertPreferencias (Preferencias p) throws SQLException
+	{
+		String query= "INSERT INTO preferencias SET fk_cliente_dni=?, " +
+				"tipo=?, desde_metros=?, hasta_metros=?, exterior=?, desde_habitacion=?," +
+				" hasta_habitacion=?, zona=?, banos=?, aseos=?, presupuesto=?, observaciones=?, altura=?";
+		
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setString(1, p.getNan());
+		ps.setString(2, p.getTipo());
+		ps.setInt(3, p.getDesde_metros());
+		ps.setInt(4, p.getHastaHabitaciones());
+		ps.setBoolean(5, p.getExterior());
+		ps.setInt(6, p.getDesdeHabitaciones());
+		ps.setInt(7, p.getHastaHabitaciones());
+		ps.setString(8, p.getZona());
+		ps.setInt(9, p.getBanos());
+		ps.setInt(10, p.getAseos());
+		ps.setDouble(11, p.getPresupuesto());
+		ps.setString(12, p.getObservaciones());
+		ps.setInt(13, p.getAltura());
+		
+		int result = ps.executeUpdate();
+
+		return result > 0;
+		
+		
+	}
+
 }
+
 
