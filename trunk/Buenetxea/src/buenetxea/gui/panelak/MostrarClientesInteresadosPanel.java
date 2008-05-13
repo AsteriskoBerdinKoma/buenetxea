@@ -1,9 +1,9 @@
 package buenetxea.gui.panelak;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -22,7 +22,6 @@ import javax.swing.table.DefaultTableModel;
 
 import buenetxea.db.ResultSetTableModel;
 import buenetxea.gui.Nagusia;
-import buenetxea.gui.dialogs.MostrarClienteSeleccionadoDialog2;
 
 public class MostrarClientesInteresadosPanel extends JPanel {
 
@@ -82,27 +81,25 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 				if (e.getClickCount() == 2) {
 					String dni = (String) table_2.getValueAt(table_2
 							.getSelectedRow(), 0);
-					//Nagusia.getInstance().showVerCliente(dni);
-					MostrarClienteSeleccionadoDialog2 dialogoa = new MostrarClienteSeleccionadoDialog2(dni);
-					dialogoa.pack();
-					dialogoa.setLocationRelativeTo(null);
-					dialogoa.setVisible(true);
+					Nagusia.getInstance().showVerCliente(dni);
+					//MostrarClienteSeleccionadoDialog2 dialogoa = new MostrarClienteSeleccionadoDialog2(dni);
+					//dialogoa.pack();
+					//dialogoa.setLocationRelativeTo(null);
+					//dialogoa.setVisible(true);
 				}
 			}
 		});
 		scrollPane_1.setViewportView(table_2);
 
 		verClienteButton = new JButton();
-		verClienteButton.setText("Ver cliente");
-		verClienteButton.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(final MouseEvent e) {
-				if (e.getClickCount() == 2) {
-					String dni = (String) table_2.getValueAt(table_2
-							.getSelectedRow(), 0);
-					Nagusia.getInstance().showVerCliente(dni);
-				}
+		verClienteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				String dni = (String) table_2.getValueAt(table_2
+						.getSelectedRow(), 0);
+				Nagusia.getInstance().showVerCliente(dni);
 			}
 		});
+		verClienteButton.setText("Ver cliente");
 
 		final GroupLayout groupLayout = new GroupLayout((JComponent) this);
 		groupLayout.setHorizontalGroup(
@@ -110,7 +107,7 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
 						.addComponent(verClienteButton, GroupLayout.Alignment.TRAILING))
 					.addContainerGap())
 		);
@@ -119,7 +116,7 @@ public class MostrarClientesInteresadosPanel extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(verClienteButton))
 		);
 		setLayout(groupLayout);
