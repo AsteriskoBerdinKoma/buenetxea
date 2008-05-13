@@ -3,6 +3,8 @@ package buenetxea.gui.panelak;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -16,13 +18,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import buenetxea.db.ResultSetTableModel;
 import buenetxea.gui.Nagusia;
+import buenetxea.gui.dialogs.BuscarClienteDialog;
 import buenetxea.gui.dialogs.CrearClienteDialog;
 
-public class Buscas extends JPanel {
+public class BuscasPanel extends JPanel {
 
 	/**
 	 * 
@@ -38,8 +43,26 @@ public class Buscas extends JPanel {
 	/**
 	 * Create the panel
 	 */
-	public Buscas() {
+	public BuscasPanel() {
 		super();
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(final ComponentEvent e) {
+				if (tableModel == null)
+					tableModel = new ResultSetTableModel(getQuery());
+				else {
+					try {
+						tableModel.refresh();
+					} catch (SQLException ex) {
+						ex.printStackTrace();
+					}
+				}
+				table.setModel(tableModel);
+			}
+
+			public void componentHidden(final ComponentEvent e) {
+				table.setModel(new DefaultTableModel());
+			}
+		});
 
 		JPanel panel;
 		panel = new JPanel();
@@ -89,13 +112,29 @@ public class Buscas extends JPanel {
 		JScrollPane scrollPane;
 		scrollPane = new JScrollPane();
 
-		tableModel = new ResultSetTableModel(getQuery());
-
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(final MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					int ref = Integer.parseInt((String) table.getValueAt(table
+							.getSelectedRow(), 0));
+					Nagusia.getInstance().showVerInmueble(ref);
+				}
+			}
+		});
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setModel(new DefaultTableModel());
 		scrollPane.setViewportView(table);
 
 		JButton verInmuebleButton;
 		verInmuebleButton = new JButton();
+		verInmuebleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				int ref = Integer.parseInt((String) table.getValueAt(table
+						.getSelectedRow(), 0));
+				Nagusia.getInstance().showVerInmueble(ref);
+			}
+		});
 		verInmuebleButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(final MouseEvent e) {
 				if (e.getClickCount() == 2) {
@@ -106,6 +145,19 @@ public class Buscas extends JPanel {
 			}
 		});
 		verInmuebleButton.setText("Ver ficha del inmueble");
+
+		JButton buscarClienteButton;
+		buscarClienteButton = new JButton();
+		buscarClienteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				BuscarClienteDialog bcd = new BuscarClienteDialog();
+				bcd.setResultField(dniTextField);
+				bcd.pack();
+				bcd.setLocationRelativeTo(null);
+				bcd.setVisible(true);
+			}
+		});
+		buscarClienteButton.setText("Buscar cliente");
 		final GroupLayout groupLayout_1 = new GroupLayout((JComponent) panel);
 		groupLayout_1
 				.setHorizontalGroup(groupLayout_1
@@ -133,14 +185,18 @@ public class Buscas extends JPanel {
 																		.addPreferredGap(
 																				LayoutStyle.ComponentPlacement.RELATED)
 																		.addComponent(
-																				verInmueblesButton)
+																				buscarClienteButton)
 																		.addPreferredGap(
 																				LayoutStyle.ComponentPlacement.RELATED)
 																		.addComponent(
-																				crearClienteNuevoButton))
+																				crearClienteNuevoButton)
+																		.addPreferredGap(
+																				LayoutStyle.ComponentPlacement.RELATED)
+																		.addComponent(
+																				verInmueblesButton))
 														.addComponent(
 																errorLabel))
-										.addContainerGap(54, Short.MAX_VALUE)));
+										.addContainerGap(62, Short.MAX_VALUE)));
 		groupLayout_1
 				.setVerticalGroup(groupLayout_1
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -159,9 +215,11 @@ public class Buscas extends JPanel {
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																verInmueblesButton)
+																buscarClienteButton)
 														.addComponent(
-																crearClienteNuevoButton))
+																crearClienteNuevoButton)
+														.addComponent(
+																verInmueblesButton))
 										.addPreferredGap(
 												LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(errorLabel)
@@ -176,10 +234,10 @@ public class Buscas extends JPanel {
 						groupLayout.createParallelGroup(
 								GroupLayout.Alignment.TRAILING).addComponent(
 								scrollPane, GroupLayout.Alignment.LEADING,
-								GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+								GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
 								.addComponent(panel,
 										GroupLayout.Alignment.LEADING,
-										GroupLayout.DEFAULT_SIZE, 480,
+										GroupLayout.DEFAULT_SIZE, 593,
 										Short.MAX_VALUE).addComponent(
 										verInmuebleButton)).addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
