@@ -293,7 +293,7 @@ public class BuscasPanel extends JPanel {
 			}
 			if (preferenciasCliente != null)
 			{	
-				query = "SELECT distinct I.referencia, I.zona,P.m2_constr,P.ascensor, P.tipo_inmueble, P.tipo_venta, I.direccion, RPI.precio_venta FROM (Inmueble I "
+				query = "SELECT (distinct I.referencia, I.zona, P.m2_constr, P.ascensor, P.tipo_inmueble, P.tipo_venta, I.direccion, RPI.precio_venta) FROM (Inmueble I "
 				+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
 				+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
 				+ "I.referencia = RPI.fk_inmueble_referencia) WHERE (";
@@ -309,8 +309,8 @@ public class BuscasPanel extends JPanel {
 				query += " AND P.exterior="+ preferenciasCliente.getExterior();
 				
 			
-				query += " AND I.referencia IN (SELECT RPI2.fk_inmueble_referencia, COUNT(*)  FROM"
-				+ " rel_peritaje_inmueble RPI2 INNER JOIN (peritaje P2 INNER JOIN descripcion D2 ON P2.id = D2.fk_peritaje_id) ON RPI2.fk_peritaje_id=P2.id"
+				query += " AND I.referencia IN (SELECT RPI2.fk_inmueble_referencia, COUNT(*)  FROM ("
+				+ " rel_peritaje_inmueble RPI2 INNER JOIN (peritaje P2 INNER JOIN descripcion D2 ON P2.id = D2.fk_peritaje_id) ON RPI2.fk_peritaje_id=P2.id)"
 				+ " WHERE D2.tipo LIKE 'habit%'"
 				+ " GROUP BY RPI2.fk_inmueble_referencia"
 				+ " HAVING COUNT(*) BETWEEN "
@@ -320,13 +320,13 @@ public class BuscasPanel extends JPanel {
 			
 				query += " AND I.zona LIKE '%" + preferenciasCliente.getZona()+ "%'";
 				query += " AND I.referencia IN (SELECT RPI3.fk_inmueble_referencia, COUNT(*)  FROM"
-				+ " rel_peritaje_inmueble RPI3 INNER JOIN (peritaje P3 INNER JOIN descripcion D3 ON P3.id = D3.fk_peritaje_id) ON RPI3.fk_peritaje_id=P3.id"
+				+ " (rel_peritaje_inmueble RPI3 INNER JOIN (peritaje P3 INNER JOIN descripcion D3 ON P3.id = D3.fk_peritaje_id) ON RPI3.fk_peritaje_id=P3.id)"
 				+ " WHERE D3.tipo LIKE 'baño%'"
 				+ " GROUP BY RPI3.fk_inmueble_referencia"
 				+ " HAVING COUNT(*)=" + preferenciasCliente.getBanos()+ ")";
 			
 				query += " AND I.referencia IN (SELECT RPI4.fk_inmueble_referencia, COUNT(*)  FROM"
-				+ " rel_peritaje_inmueble RPI4 INNER JOIN (peritaje P4 INNER JOIN descripcion D4 ON P4.id = D4.fk_peritaje_id) ON RPI4.fk_peritaje_id=P4.id"
+				+ " (rel_peritaje_inmueble RPI4 INNER JOIN (peritaje P4 INNER JOIN descripcion D4 ON P4.id = D4.fk_peritaje_id) ON RPI4.fk_peritaje_id=P4.id)"
 				+ " WHERE D.4tipo LIKE 'aseo%'"
 				+ " GROUP BY RPI4.fk_inmueble_referencia"
 				+ " HAVING COUNT(*)=" + preferenciasCliente.getAseos()+ ")";
@@ -335,7 +335,7 @@ public class BuscasPanel extends JPanel {
 			
 			}
 			else
-				query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, P.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta (FROM Inmueble  I "
+				query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, P.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta FROM (Inmueble  I "
 					+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
 					+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
 					+ "I.referencia = RPI.fk_inmueble_referencia) WHERE false";			
