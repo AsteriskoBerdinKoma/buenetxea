@@ -9,7 +9,7 @@ import java.sql.Statement;
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Tasacion;
 
-public class TasacionKud {
+class TasacionKud {
 
 	private static TasacionKud instance;
 

@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Peritaje;
 
-public class PeritajeKud {
+class PeritajeKud {
 
 	private static PeritajeKud instance;
 
@@ -59,8 +59,8 @@ public class PeritajeKud {
 		int altura_real_piso;
 		double gastos_comun;
 		String observaciones;
-		//int numero_habitacion;
-		
+		// int numero_habitacion;
+
 		String query = "SELECT * "
 				+ "FROM peritaje P INNER JOIN rel_peritaje_inmueble R ON "
 				+ "P.id = R.fk_peritaje_id INNNER JOIN inmueble I ON "
@@ -167,7 +167,7 @@ public class PeritajeKud {
 		int result = ps.executeUpdate();
 
 		ps.close();
-		
+
 		return result > 0;
 	}
 

@@ -115,7 +115,12 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 		crearimprimirButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
 				try {
-					int refInm = Integer.valueOf(textField_3.getText().trim());
+					int refInm;
+					try {
+						refInm = Integer.valueOf(textField_3.getText().trim());
+					} catch (NumberFormatException e) {
+						refInm = -1;
+					}
 					Calendar fecha = dateChooser_1.getCalendar();
 					fecha.set(Calendar.HOUR_OF_DAY, Integer.parseInt(spinner
 							.getValue().toString().trim()));
@@ -595,11 +600,11 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																						.addComponent(
 																								refTextfield,
 																								GroupLayout.DEFAULT_SIZE,
-																								128,
+																								149,
 																								Short.MAX_VALUE))
 																		.addPreferredGap(
 																				LayoutStyle.ComponentPlacement.RELATED,
-																				GroupLayout.DEFAULT_SIZE,
+																				12,
 																				Short.MAX_VALUE)
 																		.addGroup(
 																				groupLayout_3
@@ -643,7 +648,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 														.addComponent(
 																textField_5,
 																GroupLayout.DEFAULT_SIZE,
-																322,
+																310,
 																Short.MAX_VALUE))));
 		groupLayout_3
 				.setVerticalGroup(groupLayout_3
@@ -740,7 +745,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 										.addContainerGap(
 												GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
-		groupLayout_3.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+		groupLayout_3.linkSize(javax.swing.SwingConstants.VERTICAL,
 				new java.awt.Component[] { refTextfield, textField_2 });
 		panel_2.setLayout(groupLayout_3);
 		final GroupLayout groupLayout_4 = new GroupLayout((JComponent) panel_3);
@@ -765,12 +770,12 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																						.addComponent(
 																								precioCheckBox_1_17,
 																								GroupLayout.DEFAULT_SIZE,
-																								155,
+																								171,
 																								Short.MAX_VALUE)
 																						.addComponent(
 																								precioCheckBox_1_5,
 																								GroupLayout.DEFAULT_SIZE,
-																								155,
+																								171,
 																								Short.MAX_VALUE)
 																						.addComponent(
 																								precioCheckBox_1,
@@ -790,7 +795,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																						.addComponent(
 																								precioCheckBox_1_4,
 																								GroupLayout.DEFAULT_SIZE,
-																								155,
+																								171,
 																								Short.MAX_VALUE)
 																						.addComponent(
 																								precioCheckBox_1_6,
@@ -800,12 +805,12 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																						.addComponent(
 																								precioCheckBox_1_7,
 																								GroupLayout.DEFAULT_SIZE,
-																								155,
+																								171,
 																								Short.MAX_VALUE)
 																						.addComponent(
 																								precioCheckBox_1_3,
 																								GroupLayout.DEFAULT_SIZE,
-																								155,
+																								171,
 																								Short.MAX_VALUE)
 																						.addComponent(
 																								precioCheckBox))
@@ -873,7 +878,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																				271,
 																				GroupLayout.PREFERRED_SIZE)
 																		.addContainerGap(
-																				136,
+																				152,
 																				Short.MAX_VALUE))
 														.addGroup(
 																groupLayout_4
@@ -884,7 +889,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 																				177,
 																				GroupLayout.PREFERRED_SIZE)
 																		.addContainerGap(
-																				230,
+																				246,
 																				Short.MAX_VALUE)))));
 		groupLayout_4
 				.setVerticalGroup(groupLayout_4
@@ -989,14 +994,14 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 				(JComponent) introducirDatosPanel);
 		groupLayout_2.setHorizontalGroup(groupLayout_2.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout_2.createSequentialGroup().addContainerGap(338,
+				groupLayout_2.createSequentialGroup().addContainerGap(354,
 						Short.MAX_VALUE).addComponent(introducirDatosButton)
 						.addContainerGap()).addGroup(
 				groupLayout_2.createSequentialGroup().addContainerGap()
-						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 437,
+						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 453,
 								Short.MAX_VALUE).addGap(12, 12, 12)).addGroup(
 				groupLayout_2.createSequentialGroup().addGap(12, 12, 12)
-						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 435,
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 451,
 								Short.MAX_VALUE).addGap(12, 12, 12)));
 		groupLayout_2
 				.setVerticalGroup(groupLayout_2.createParallelGroup(
@@ -1019,7 +1024,7 @@ public class IntroducirDatosVisitaPanel extends JPanel {
 				GroupLayout.Alignment.LEADING).addGroup(
 				groupLayout.createSequentialGroup().addContainerGap()
 						.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE,
-								464, Short.MAX_VALUE).addContainerGap()));
+								480, Short.MAX_VALUE).addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addComponent(tabbedPane,
 				GroupLayout.PREFERRED_SIZE, 530, Short.MAX_VALUE));

@@ -17,6 +17,7 @@ import buenetxea.objektuak.Propietario;
 import buenetxea.objektuak.RelInmueblePropietario;
 import buenetxea.objektuak.Tasacion;
 import buenetxea.objektuak.Visita;
+import buenetxea.objektuak.fitxak.DatosVisita;
 
 public class Kudeatzailea {
 
@@ -31,6 +32,7 @@ public class Kudeatzailea {
 	private final DescripcionKud descriKud;
 	private final RelInmueblePropietarioKud relInmPropKud;
 	private final VisitaKud visiKud;
+	private final InprimagailuKudeatzailea inprKud;
 
 	private Vector<String> naciones;
 	private Vector<String> nacionalidades;
@@ -46,6 +48,7 @@ public class Kudeatzailea {
 		this.descriKud = DescripcionKud.getInstance();
 		this.relInmPropKud = RelInmueblePropietarioKud.getInstance();
 		this.visiKud = VisitaKud.getInstance();
+		this.inprKud = InprimagailuKudeatzailea.getInstance();
 		this.cargarNacionalidades();
 	}
 
@@ -173,5 +176,11 @@ public class Kudeatzailea {
 
 	public Cliente getCliente(String dni) throws IOException, SQLException {
 		return this.cliKud.getCliente(dni);
+	}
+
+	public DatosVisita getDatosVisita(String dniCliente, int refInmueble,
+			Calendar fechaVisita, String representante) throws SQLException {
+		return this.inprKud.inprimatuVisita(dniCliente, refInmueble,
+				fechaVisita, representante);
 	}
 }

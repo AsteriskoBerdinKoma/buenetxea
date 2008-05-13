@@ -10,7 +10,8 @@ import java.util.Vector;
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Propietario;
 
-public class PropietarioKud {
+class PropietarioKud {
+
 	private static PropietarioKud instance;
 	private final Connection connection;
 	private final Statement statement;
