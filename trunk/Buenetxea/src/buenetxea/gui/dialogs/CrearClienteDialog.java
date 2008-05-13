@@ -23,6 +23,9 @@ public class CrearClienteDialog extends JDialog {
 	 */
 	public CrearClienteDialog() {
 		super(Nagusia.getInstance(), true);
+
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
 		setIconImage(SwingResourceManager.getImage(CrearClienteDialog.class,
 				"/buenetxea/resources/logo_buenetxea.png"));
 		setTitle("Crear un cliente nuevo");

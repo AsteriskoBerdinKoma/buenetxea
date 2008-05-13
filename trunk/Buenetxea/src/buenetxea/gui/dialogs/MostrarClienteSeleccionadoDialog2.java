@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import buenetxea.gui.Nagusia;
 import buenetxea.gui.panelak.VerClientePanel;
 
-public class MostrarClienteSeleccionadoDialog extends JFrame {
+public class MostrarClienteSeleccionadoDialog2 extends JFrame {
 
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class MostrarClienteSeleccionadoDialog extends JFrame {
 	/**
 	 * Create the frame
 	 */
-	public MostrarClienteSeleccionadoDialog(String dni) {
+	public MostrarClienteSeleccionadoDialog2(String dni) {
 		super();
 		setName("Cliente Interesado");
 		getContentPane().setName("Cliente Seleccionado");

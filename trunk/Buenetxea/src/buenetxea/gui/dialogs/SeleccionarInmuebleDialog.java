@@ -34,6 +34,9 @@ public class SeleccionarInmuebleDialog extends JDialog {
 	 */
 	public SeleccionarInmuebleDialog() {
 		super(Nagusia.getInstance(), true);
+
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
 		setIconImage(SwingResourceManager.getImage(
 				SeleccionarInmuebleDialog.class,
 				"/buenetxea/resources/logo_buenetxea.png"));
