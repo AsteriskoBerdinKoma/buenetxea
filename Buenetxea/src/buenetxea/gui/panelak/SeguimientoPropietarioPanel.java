@@ -142,11 +142,11 @@ public class SeguimientoPropietarioPanel extends JPanel {
 							Inmueble inmueble = kud.getInmueble(numReferencia);
 							if (inmueble != null) {
 								tableModel = new ResultSetTableModel(getQuery());
-								tableModel2 = new ResultSetTableModel(getQuery2());
+								//tableModel2 = new ResultSetTableModel(getQuery2());
 								table_1.setModel(tableModel);
 								tableModel.refresh();
-								table.setModel(tableModel2);
-								tableModel2.refresh();
+								//table.setModel(tableModel2);
+								//tableModel2.refresh();
 							} else {
 								JOptionPane joptionpane = new JOptionPane(
 										"La referencia del inmueble introducida no se encuentra en la base de datos.",
