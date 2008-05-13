@@ -274,47 +274,75 @@ public class BuscasPanel extends JPanel {
 	}
 
 	private String getQuery() {
+		
 		String dni = dniTextField.getText().trim();
 		Preferencias preferenciasCliente=null;
 		String query;
-		try {
-			 preferenciasCliente = kud.getPreferencias(dni);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			JOptionPane jop = new JOptionPane(
+		
+		if (!dni.equals(""))
+		{	
+			try {
+				preferenciasCliente = kud.getPreferencias(dni);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				JOptionPane jop = new JOptionPane(
 					"El cliente  introducido no existen.",
 					JOptionPane.ERROR_MESSAGE);
-			jop.createDialog("Error en los datos").setVisible(true);
-			e.printStackTrace();
-		}
-		if (preferenciasCliente != null)
-			 {
-			
-			query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, p.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta  FROM Inmueble  I "
+				jop.createDialog("Error en los datos").setVisible(true);
+				e.printStackTrace();
+			}
+			if (preferenciasCliente != null)
+			{	
+				query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, p.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta  FROM Inmueble  I "
 				+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
 				+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
 				+ "I.referencia = RPI.fk_inmueble_referencia WHERE";
 			
-			query += " P.tipo_inmueble LIKE '%"+ preferenciasCliente.getTipo()+ "%'";
+				query += " P.tipo_inmueble LIKE '%"+ preferenciasCliente.getTipo()+ "%'";
 			
-			query += " AND P.id IN (SELECT id FROM Peritaje WHERE " + preferenciasCliente.getDesde_metros()+ "<= m2_utiles AND" +
-					 "  " + preferenciasCliente.getHasta_metros() + "<= m2_utiles";
+				query += " AND P.id IN (SELECT id FROM Peritaje WHERE " + preferenciasCliente.getDesde_metros()+ "<= m2_utiles AND " +
+					 + preferenciasCliente.getHasta_metros() + " <= m2_utiles";
 			
-			query += " AND P.exterior="+ preferenciasCliente.getExterior();
+				query += " AND P.exterior="+ preferenciasCliente.getExterior();
 			
-			query += " AND I.referencia IN ( SELECT RPI.fk_inmueble_referencia, COUNT(*)  FROM"
+				query += " AND I.referencia IN ( SELECT RPI.fk_inmueble_referencia, COUNT(*)  FROM"
 				+ " rel_peritaje_inmueble RPI INNER JOIN (peritaje P INNER JOIN descripcion D ON P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id=P.id"
-				+ " WHERE D.tipo LIKE '%habit%'"
+				+ " WHERE D.tipo LIKE 'habit%'"
 				+ " GROUP BY RPI.fk_inmueble_referencia"
 				+ " HAVING COUNT(*) BETWEEN "
 				+ preferenciasCliente.getDesdeHabitaciones()
 				+ " AND "
 				+ preferenciasCliente.getHastaHabitaciones()+ ")";
 			
+				query += " AND I.zona LIKE '%" + preferenciasCliente.getZona()+ "%'";
+				query += " AND I.referencia IN ( SELECT RPI.fk_inmueble_referencia, COUNT(*)  FROM"
+				+ " rel_peritaje_inmueble RPI INNER JOIN (peritaje P INNER JOIN descripcion D ON P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id=P.id"
+				+ " WHERE D.tipo LIKE 'baño%'"
+				+ " GROUP BY RPI.fk_inmueble_referencia"
+				+ " HAVING COUNT(*) =" + preferenciasCliente.getBanos()+ ")";
 			
+				query += " AND I.referencia IN ( SELECT RPI.fk_inmueble_referencia, COUNT(*)  FROM"
+				+ " rel_peritaje_inmueble RPI INNER JOIN (peritaje P INNER JOIN descripcion D ON P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id=P.id"
+				+ " WHERE D.tipo LIKE 'aseo%'"
+				+ " GROUP BY RPI.fk_inmueble_referencia"
+				+ " HAVING COUNT(*) =" + preferenciasCliente.getAseos()+ ")";
+			
+				query += " AND RPI.precio_venta <= " + preferenciasCliente.getPresupuesto();
+			
+			}
+			else
+				query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, p.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta  FROM Inmueble  I "
+					+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
+					+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
+					+ "I.referencia = RPI.fk_inmueble_referencia WHERE false";			
 			 }
+		else
+			
+			query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, p.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta  FROM Inmueble  I "
+				+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
+				+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
+				+ "I.referencia = RPI.fk_inmueble_referencia WHERE false";
 		
-		
-		return null;
+		return query;
 	}
 }

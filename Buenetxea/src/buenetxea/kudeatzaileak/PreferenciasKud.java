@@ -48,7 +48,7 @@ public class PreferenciasKud {
 		double presupuesto;
 		String observaciones;
 		int altura;
-		String query ="SELECT * FROM Preferencias WHERE fk_cliente_dni=? ";
+		String query ="SELECT * FROM preferencia WHERE fk_cliente_dni=? ";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setString(1, dni);
 		ResultSet rs = ps.executeQuery();
@@ -78,7 +78,7 @@ public class PreferenciasKud {
 
 	public boolean insertPreferencias (Preferencias p) throws SQLException
 	{
-		String query= "INSERT INTO preferencias SET fk_cliente_dni=?, " +
+		String query= "INSERT INTO preferencia SET fk_cliente_dni=?, " +
 				"tipo=?, desde_metros=?, hasta_metros=?, exterior=?, desde_habitacion=?," +
 				" hasta_habitacion=?, zona=?, banos=?, aseos=?, presupuesto=?, observaciones=?, altura=?";
 		
