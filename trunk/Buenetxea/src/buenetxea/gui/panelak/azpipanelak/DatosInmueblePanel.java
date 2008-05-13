@@ -1446,75 +1446,128 @@ public class DatosInmueblePanel extends javax.swing.JPanel {
 
 	public void setDatuak(Inmueble inmueble) {
 		try {
+			limpiarDatos();
 			referencia.setText(String.valueOf(inmueble.getReferencia()));
+			referencia.setEditable(false);
 			zona.setText(inmueble.getZona());
 			direccion.setText(inmueble.getDireccion());
 			Peritaje peritaje = kud.getLastPeritaje(inmueble.getReferencia());
-			perito.setText(peritaje.getNombre_perito());
-			Calendar cal = peritaje.getFecha();
-			fechaPeritaje.setCalendar(cal);
-			horasSpinner.setValue(cal.get(Calendar.HOUR_OF_DAY));
-			minSpinner.setValue(cal.get(Calendar.MINUTE));
-			String tipo = peritaje.getTipo_inmueble();
-			if (tipo.equalsIgnoreCase("Piso"))
-				jRadioButton1.setSelected(true);
-			else if (tipo.equalsIgnoreCase("Casa"))
-				jRadioButton2.setSelected(true);
-			else if (tipo.equalsIgnoreCase("Local"))
-				jRadioButton3.setSelected(true);
-			else if (tipo.equalsIgnoreCase("Prking"))
-				jRadioButton4.setSelected(true);
-			Vector<Descripcion> vDescripciones = kud.getDescripciones(peritaje
-					.getId());
-			tipoVenta.setSelectedItem(peritaje.getTipo_venta());
+			if (peritaje != null) {
+				perito.setText(peritaje.getNombre_perito());
+				Calendar cal = peritaje.getFecha();
+				fechaPeritaje.setCalendar(cal);
+				horasSpinner.setValue(cal.get(Calendar.HOUR_OF_DAY));
+				minSpinner.setValue(cal.get(Calendar.MINUTE));
+				String tipo = peritaje.getTipo_inmueble();
+				if (tipo.equalsIgnoreCase("Piso"))
+					jRadioButton1.setSelected(true);
+				else if (tipo.equalsIgnoreCase("Casa"))
+					jRadioButton2.setSelected(true);
+				else if (tipo.equalsIgnoreCase("Local"))
+					jRadioButton3.setSelected(true);
+				else if (tipo.equalsIgnoreCase("Parking"))
+					jRadioButton4.setSelected(true);
+				tipoVenta.setSelectedItem(peritaje.getTipo_venta());
 
-			int kont = 0;
-			String[] headers = new String[] { "Tipo", "m²", "Descripción" };
-			String[][] datuak1 = new String[10][3];
-			String[][] datuak2 = new String[10][3];
-			for (Descripcion d : vDescripciones) {
-				if (kont < 10) {
-					datuak1[kont][0] = d.getTipo();
-					datuak1[kont][1] = String.valueOf(d.getM2());
-					datuak1[kont][2] = d.getDescripcion();
+				Vector<Descripcion> vDescripciones = kud
+						.getDescripciones(peritaje.getId());
+				int kont = 0;
+				String[] headers = new String[] { "Tipo", "m²", "Descripción" };
+				String[][] datuak1 = new String[10][3];
+				String[][] datuak2 = new String[10][3];
+				for (Descripcion d : vDescripciones) {
+					if (kont < 10) {
+						datuak1[kont][0] = d.getTipo();
+						datuak1[kont][1] = String.valueOf(new Double(d.getM2())
+								.intValue());
+						datuak1[kont][2] = d.getDescripcion();
+					}
+					if (kont >= 10 && kont < 20) {
+						datuak2[kont - 10][0] = d.getTipo();
+						datuak2[kont - 10][1] = String.valueOf(new Double(d
+								.getM2()).intValue());
+						datuak2[kont - 10][2] = d.getDescripcion();
+					}
+					kont++;
 				}
-				if (kont >= 10 && kont < 20) {
-					datuak2[kont - 10][0] = d.getTipo();
-					datuak2[kont - 10][1] = String.valueOf(d.getM2());
-					datuak2[kont - 10][2] = d.getDescripcion();
-				}
-				kont++;
+				jTable1.setModel(new javax.swing.table.DefaultTableModel(
+						datuak1, headers));
+				jTable2.setModel(new javax.swing.table.DefaultTableModel(
+						datuak2, headers));
+
+				m2constr.setText(String.valueOf(peritaje.getM2_constr()));
+				m2parcela.setText(String.valueOf(peritaje.getM2_parcela()));
+				m2utiles.setText(String.valueOf(peritaje.getM2_utiles()));
+				gas.setText(peritaje.getGas());
+				calefaccion.setText(peritaje.getCalefaccion());
+				puertas.setText(peritaje.getPuertas());
+				luminoso.setText(peritaje.getLuminoso());
+				pintura.setText(peritaje.getPintura());
+				ventanas.setText(peritaje.getVentanas());
+				techos.setText(peritaje.getTechos());
+				tipoSuelo.setText(peritaje.getTipo_suelo());
+				muebles.setText(peritaje.getMuebles());
+				exterior.setText(peritaje.getExterior());
+				orientacion.setSelectedItem(peritaje.getOrientacion());
+				alturaEdif.setValue(peritaje.getAltura_edif());
+				anosFinca.setValue(peritaje.getAnos_finca());
+				desalojo.setSelected(peritaje.isDesalojo());
+				alturaPiso.setValue(peritaje.getAltura_real_piso());
+				portero.setText(peritaje.getPortero());
+				gastosComun.setText(String.valueOf(peritaje.getGastos_comun()));
+				ascensor.setSelected(peritaje.isAscensor());
+				observaciones.setText(peritaje.getObservaciones());
 			}
-			jTable1.setModel(new javax.swing.table.DefaultTableModel(datuak1,
-					headers));
-			jTable2.setModel(new javax.swing.table.DefaultTableModel(datuak2,
-					headers));
-			m2constr.setText(String.valueOf(peritaje.getM2_constr()));
-			m2parcela.setText(String.valueOf(peritaje.getM2_parcela()));
-			m2utiles.setText(String.valueOf(peritaje.getM2_utiles()));
-			gas.setText(peritaje.getGas());
-			calefaccion.setText(peritaje.getCalefaccion());
-			puertas.setText(peritaje.getPuertas());
-			luminoso.setText(peritaje.getLuminoso());
-			pintura.setText(peritaje.getPintura());
-			ventanas.setText(peritaje.getVentanas());
-			techos.setText(peritaje.getTechos());
-			tipoSuelo.setText(peritaje.getTipo_suelo());
-			muebles.setText(peritaje.getMuebles());
-			exterior.setText(peritaje.getExterior());
-			orientacion.setSelectedItem(peritaje.getOrientacion());
-			alturaEdif.setValue(peritaje.getAltura_edif());
-			anosFinca.setValue(peritaje.getAnos_finca());
-			desalojo.setSelected(peritaje.isDesalojo());
-			alturaPiso.setValue(peritaje.getAltura_real_piso());
-			portero.setText(peritaje.getPortero());
-			gastosComun.setText(String.valueOf(peritaje.getGastos_comun()));
-			ascensor.setSelected(peritaje.isAscensor());
-			observaciones.setText(peritaje.getObservaciones());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+
+	private void limpiarDatos() {
+		referencia.setText("");
+		zona.setText("");
+		direccion.setText("");
+		perito.setText("");
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(new Date());
+		fechaPeritaje.setCalendar(cal);
+		horasSpinner.setValue(0);
+		minSpinner.setValue(0);
+		jRadioButton1.setSelected(true);
+		tipoVenta.setSelectedIndex(0);
+
+		String[] headers = new String[] { "Tipo", "m²", "Descripción" };
+		String[][] datuak1 = new String[10][3];
+		String[][] datuak2 = new String[10][3];
+
+		jTable1.setModel(new javax.swing.table.DefaultTableModel(datuak1,
+				headers));
+		jTable2.setModel(new javax.swing.table.DefaultTableModel(datuak2,
+				headers));
+
+		m2constr.setText("");
+		m2parcela.setText("");
+		m2utiles.setText("");
+		gas.setText("");
+		calefaccion.setText("");
+		puertas.setText("");
+		luminoso.setText("");
+		pintura.setText("");
+		ventanas.setText("");
+		techos.setText("");
+		tipoSuelo.setText("");
+		muebles.setText("");
+		exterior.setText("");
+		orientacion.setSelectedIndex(0);
+		alturaEdif.setValue(0);
+		anosFinca.setValue(0);
+		desalojo.setSelected(false);
+		alturaPiso.setValue(0);
+		portero.setText("");
+		gastosComun.setText("");
+		ascensor.setSelected(false);
+		observaciones.setText("");
 	}
 }

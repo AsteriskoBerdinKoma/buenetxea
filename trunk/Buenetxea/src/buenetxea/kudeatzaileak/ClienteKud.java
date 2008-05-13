@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.*;
+import java.util.Vector;
 
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Cliente;
@@ -77,7 +77,7 @@ class ClienteKud {
 			String[] data = s[0].split("-");
 			String[] ordua = s[1].split(":");
 			Calendar cal = new GregorianCalendar(Integer.parseInt(data[0]),
-					Integer.parseInt(data[1]), Integer.parseInt(data[2]),
+					(Integer.parseInt(data[1]) - 1), Integer.parseInt(data[2]),
 					Integer.parseInt(ordua[0]), Integer.parseInt(ordua[1]),
 					Integer.parseInt(ordua[2]));
 
@@ -86,11 +86,15 @@ class ClienteKud {
 		} else
 			return null;
 	}
-	
-	/**getCliente2 funtzioak nazionalitatea,izena,abizena1 eta abizena2 aldagaiak emanda, cliente motako objektu bat itzuliko digu.
-	 * */
-	
-	public Vector<Cliente> getCliente(String nan, String Nazionalitatea,String Izena,String Abizena1,String Abizena2) throws IOException, SQLException {
+
+	/**
+	 * getCliente2 funtzioak nazionalitatea,izena,abizena1 eta abizena2
+	 * aldagaiak emanda, cliente motako objektu bat itzuliko digu.
+	 */
+
+	public Vector<Cliente> getCliente(String nan, String Nazionalitatea,
+			String Izena, String Abizena1, String Abizena2) throws IOException,
+			SQLException {
 		String dni;
 		String nombre;
 		String apellido1;
@@ -105,18 +109,18 @@ class ClienteKud {
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setString(1, nan);
 		ps.setString(2, Nazionalitatea);
-		ps.setString(3,Izena);
-		ps.setString(4,Abizena1);
-		ps.setString(5,Abizena2);
+		ps.setString(3, Izena);
+		ps.setString(4, Abizena1);
+		ps.setString(5, Abizena2);
 		ResultSet rs = this.statement.executeQuery(query);
-		Vector v=new Vector();
-		
+		Vector v = new Vector();
+
 		while (rs.next()) {
 			dni = rs.getString("dni");
 			nombre = rs.getString("nombre");
 			apellido1 = rs.getString("apellido1");
 			apellido2 = rs.getString("apellido2");
-			direccion=rs.getString("direccion");
+			direccion = rs.getString("direccion");
 			nacionalidad = rs.getString("nacionalidad");
 			fecha = rs.getString("fecha");
 			telefono = rs.getInt("telefono");
@@ -125,19 +129,17 @@ class ClienteKud {
 
 			Calendar cal = new GregorianCalendar();
 			String[] data = fecha.split("-");
-			cal.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]),
+			cal.set(Integer.parseInt(data[0]), (Integer.parseInt(data[1]) - 1),
 					Integer.parseInt(data[2]));
 
-			
-			Cliente Clientea = new Cliente(dni, nombre, apellido1, apellido2, direccion,nacionalidad,
-					cal, telefono, medio, asesor);
+			Cliente Clientea = new Cliente(dni, nombre, apellido1, apellido2,
+					direccion, nacionalidad, cal, telefono, medio, asesor);
 			v.addElement(Clientea);
-			
-		} 
+
+		}
 		return v;
-		
+
 	}
-	
 
 	/**
 	 * Bezero berri baten datuak datu basean sartzen ditu
@@ -181,51 +183,33 @@ class ClienteKud {
 
 		return result > 0;
 	}
-/*
-	public Vector BuscarClientePorPreferencias(String zona,int numerohab,Double precio)throws IOException, SQLException {
-		Vector ClienteVector = new Vector();
-		Cliente cliente;
-		String dni;
-		String nombre;
-		String apellido1;
-		String apellido2;
-		String fecha;
-		String nacionalidad;
-		int telefono;
-		String medio;
-		String asesor;
-		String direccion;
-		String query = "SELECT * FROM Cliente INNER JOIN preferencia ON fk_cliente_dni = dni WHERE zona = ? AND desde_habitacion < ? AND hasta_habitacion > ? AND presupuesto >= ?";
-		PreparedStatement ps = this.connection.prepareStatement(query);
-		ps.setString(1, zona);
-		ps.setInt(2,numerohab);
-		ps.setInt(3,numerohab);
-		ps.setDouble(4,precio);
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
-			dni = rs.getString("dni");
-			nombre = rs.getString("nombre");
-			apellido1 = rs.getString("apellido1");
-			apellido2 = rs.getString("apellido2");
-			direccion=rs.getString("direccion");
-			nacionalidad = rs.getString("nacionalidad");
-			fecha = rs.getString("fecha");
-			telefono = rs.getInt("telefono");
-			medio = rs.getString("medio");
-			asesor = rs.getString("asesor");
-
-			Calendar cal = new GregorianCalendar();
-			String[] data = fecha.split("-");
-			cal.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]),
-					Integer.parseInt(data[2]));
-
-			
-			cliente = new Cliente(dni, nombre, apellido1, apellido2, direccion,nacionalidad,
-					cal, telefono, medio, asesor);
-			ClienteVector.addElement(cliente);
-			
-		} 
-		return ClienteVector;
-	}
-	*/
+	/*
+	 * public Vector BuscarClientePorPreferencias(String zona,int
+	 * numerohab,Double precio)throws IOException, SQLException { Vector
+	 * ClienteVector = new Vector(); Cliente cliente; String dni; String nombre;
+	 * String apellido1; String apellido2; String fecha; String nacionalidad;
+	 * int telefono; String medio; String asesor; String direccion; String query =
+	 * "SELECT * FROM Cliente INNER JOIN preferencia ON fk_cliente_dni = dni
+	 * WHERE zona = ? AND desde_habitacion < ? AND hasta_habitacion > ? AND
+	 * presupuesto >= ?"; PreparedStatement ps =
+	 * this.connection.prepareStatement(query); ps.setString(1, zona);
+	 * ps.setInt(2,numerohab); ps.setInt(3,numerohab); ps.setDouble(4,precio);
+	 * ResultSet rs = ps.executeQuery(); while (rs.next()) { dni =
+	 * rs.getString("dni"); nombre = rs.getString("nombre"); apellido1 =
+	 * rs.getString("apellido1"); apellido2 = rs.getString("apellido2");
+	 * direccion=rs.getString("direccion"); nacionalidad =
+	 * rs.getString("nacionalidad"); fecha = rs.getString("fecha"); telefono =
+	 * rs.getInt("telefono"); medio = rs.getString("medio"); asesor =
+	 * rs.getString("asesor");
+	 * 
+	 * Calendar cal = new GregorianCalendar(); String[] data = fecha.split("-");
+	 * cal.set(Integer.parseInt(data[0]), Integer.parseInt(data[1]),
+	 * Integer.parseInt(data[2]));
+	 * 
+	 * 
+	 * cliente = new Cliente(dni, nombre, apellido1, apellido2,
+	 * direccion,nacionalidad, cal, telefono, medio, asesor);
+	 * ClienteVector.addElement(cliente);
+	 *  } return ClienteVector; }
+	 */
 }

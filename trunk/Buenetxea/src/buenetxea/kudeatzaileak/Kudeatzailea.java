@@ -200,4 +200,28 @@ public class Kudeatzailea {
 		return this.inprKud.ClienteSubReport(dni);
 	}
 
+	public boolean updateDescripciones(int peritajeId,
+			Vector<Descripcion> vDescr) throws SQLException {
+		Vector<Descripcion> oldVD = this.descriKud.getDescripciones(peritajeId);
+		boolean descripcionesOk = true;
+		for (Descripcion d : vDescr) {
+			d.setFk_peritaje_id(peritajeId);
+			descripcionesOk = this.descriKud.insertDescripcion(d)
+					&& descripcionesOk;
+		}
+		if (descripcionesOk) {
+			for (Descripcion d : oldVD)
+				this.descriKud.deleteDescripcion(d.getId());
+		}
+		return descripcionesOk;
+	}
+
+	public boolean updatePeritaje(Peritaje p) throws SQLException {
+		return this.periKud.updatePeritaje(p);
+	}
+
+	public boolean updateInmueble(Inmueble i) throws SQLException {
+		return this.inmKud.updateInmueble(i);
+	}
+
 }

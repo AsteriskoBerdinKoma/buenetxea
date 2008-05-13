@@ -92,8 +92,15 @@ class InmuebleKud {
 		return i > 0;
 	}
 
-	public void deleteInmueble(int refInmueble) {
-		// TODO
+	public boolean updateInmueble(Inmueble i) throws SQLException {
+		String update = "UPDATE inmueble SET zona=?, direccion=? WHERE referencia=?";
+		PreparedStatement ps = this.connection.prepareStatement(update);
+		ps.setString(1, i.getZona());
+		ps.setString(2, i.getDireccion());
+		ps.setInt(3, i.getReferencia());
+		int result = ps.executeUpdate();
+		ps.close();
+		return result > 0;
 	}
 
 }
