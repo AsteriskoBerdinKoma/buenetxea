@@ -34,100 +34,107 @@ class InprimagailuKudeatzailea {
 		return instance;
 	}
 
-	public HashMap InprimatuInmueble(int inmuebleref, int peritajeid,
-			String representante) throws SQLException {
-
-		String direccion;
-		String zona;
-		Double precio;
-		int m2_utiles, m2_constr, m2_parcela;
-		String observaciones;
-		boolean llaves;
-		int altura_real_piso, altura_edif;
-		String orientacion, tipo_inmueble, tipo_venta;
-		double gastos_comun;
-		int anos_finca;
-		boolean vendido = false;
-
-		HashMap parameters = new HashMap();
-
-		String query = "SELECT * FROM Inmueble INNER JOIN rel_peritaje_inmueble ON fk_inmueble_referencia = referencia INNER JOIN peritaje ON id = rel_peritaje_inmueble.fk_peritaje_id INNER JOIN descripcion ON descripcion.fk_peritaje_id = id WHERE referencia = ? AND rel_peritaje_inmueble.fk_peritaje_id = ? AND descripcion.fk_peritaje_id = ? AND id = ?";
-		PreparedStatement ps = this.connection.prepareStatement(query);
-		ps.setInt(1, inmuebleref);
-		ps.setInt(2, peritajeid);
-		ps.setInt(3, peritajeid);
-		ps.setInt(4, peritajeid);
-		ResultSet rs = ps.executeQuery();
-		if (rs.next()) {
-
-			zona = rs.getString("zona");
-			direccion = rs.getString("direccion");
-			m2_utiles = rs.getInt("m2_utiles");
-			m2_constr = rs.getInt("m2_constr");
-			m2_parcela = rs.getInt("m2_parcela");
-			observaciones = rs.getString("observaciones");
-			llaves = rs.getBoolean("llaves");
-			altura_real_piso = rs.getInt("altura_real_piso");
-			altura_edif = rs.getInt("altura_edif");
-			orientacion = rs.getString("orientacion");
-			gastos_comun = rs.getDouble("gastos_comun");
-			anos_finca = rs.getInt("anos_finca");
-			vendido = rs.getBoolean("vendido");
-			tipo_inmueble = rs.getString("tipo_inmueble");
-			tipo_venta = rs.getString("tipo_Venta");
-			parameters.put("tipo_venta", tipo_venta);
-			parameters.put("tipo_inmueble", tipo_inmueble);
-			parameters.put("direccion", direccion);
-			parameters.put("zona", zona);
-			parameters.put("referencia", inmuebleref);
-			parameters.put("fk_peritaje_id", peritajeid);
-			parameters.put("m2_utiles", m2_utiles);
-			parameters.put("m2_constr", m2_constr);
-			parameters.put("m2_parcela", m2_parcela);
-			parameters.put("observaciones", observaciones);
-			parameters.put("llaves", llaves);
-			parameters.put("altura_real_piso", altura_real_piso);
-			parameters.put("altura_edif", altura_edif);
-			parameters.put("orientacion", orientacion);
-			parameters.put("gastos_comun", gastos_comun);
-			parameters.put("anos_finca", anos_finca);
-			parameters.put("representante", representante);
-			if (vendido) {
-				parameters.put("vendido", "vendido");
-			} else {
-				parameters.put("vendido", "en venta");
-			}
-		}
-		ps.close();
-		rs.close();
-
-		if (vendido) {
-
-			String query3 = "SELECT precio_venta FROM rel_cliente_inmueble WHERE fk_inmueble_referencia = ? ORDER BY fecha DESC LIMIT 1";
-			PreparedStatement ps3 = this.connection.prepareStatement(query3);
-			ps3.setInt(1, inmuebleref);
-			ResultSet rs3 = ps3.executeQuery();
-			if (rs3.next()) {
-				precio = rs3.getDouble("precio_venta");
-				parameters.put("nuevo_precio", precio);
-			}
-			ps3.close();
-			rs3.close();
-
-		} else {
-			String query2 = "SELECT nuevo_precio FROM rel_inmueble_propietario WHERE fk_inmueble_referencia = ? ORDER BY fecha DESC LIMIT 1C";
-			PreparedStatement ps2 = this.connection.prepareStatement(query2);
-			ps2.setInt(1, inmuebleref);
-			ResultSet rs2 = ps2.executeQuery();
-			if (rs2.next()) {
-				precio = rs2.getDouble("nuevo_precio");
-				parameters.put("nuevo_precio", precio);
-			}
-			ps2.close();
-			rs2.close();
-		}
-		return parameters;
-	}
+	// public HashMap InprimatuInmueble(int inmuebleref, int peritajeid,
+	// String representante) throws SQLException {
+	//
+	// String direccion;
+	// String zona;
+	// Double precio;
+	// int m2_utiles, m2_constr, m2_parcela;
+	// String observaciones;
+	// boolean llaves;
+	// int altura_real_piso, altura_edif;
+	// String orientacion, tipo_inmueble, tipo_venta;
+	// double gastos_comun;
+	// int anos_finca;
+	// boolean vendido = false;
+	//
+	// HashMap parameters = new HashMap();
+	//
+	// String query = "SELECT * FROM Inmueble INNER JOIN rel_peritaje_inmueble
+	// ON fk_inmueble_referencia = referencia INNER JOIN peritaje ON id =
+	// rel_peritaje_inmueble.fk_peritaje_id INNER JOIN descripcion ON
+	// descripcion.fk_peritaje_id = id WHERE referencia = ? AND
+	// rel_peritaje_inmueble.fk_peritaje_id = ? AND descripcion.fk_peritaje_id =
+	// ? AND id = ?";
+	// PreparedStatement ps = this.connection.prepareStatement(query);
+	// ps.setInt(1, inmuebleref);
+	// ps.setInt(2, peritajeid);
+	// ps.setInt(3, peritajeid);
+	// ps.setInt(4, peritajeid);
+	// ResultSet rs = ps.executeQuery();
+	// if (rs.next()) {
+	//
+	// zona = rs.getString("zona");
+	// direccion = rs.getString("direccion");
+	// m2_utiles = rs.getInt("m2_utiles");
+	// m2_constr = rs.getInt("m2_constr");
+	// m2_parcela = rs.getInt("m2_parcela");
+	// observaciones = rs.getString("observaciones");
+	// llaves = rs.getBoolean("llaves");
+	// altura_real_piso = rs.getInt("altura_real_piso");
+	// altura_edif = rs.getInt("altura_edif");
+	// orientacion = rs.getString("orientacion");
+	// gastos_comun = rs.getDouble("gastos_comun");
+	// anos_finca = rs.getInt("anos_finca");
+	// vendido = rs.getBoolean("vendido");
+	// tipo_inmueble = rs.getString("tipo_inmueble");
+	// tipo_venta = rs.getString("tipo_Venta");
+	// parameters.put("tipo_venta", tipo_venta);
+	// parameters.put("tipo_inmueble", tipo_inmueble);
+	// parameters.put("direccion", direccion);
+	// parameters.put("zona", zona);
+	// parameters.put("referencia", inmuebleref);
+	// parameters.put("fk_peritaje_id", peritajeid);
+	// parameters.put("m2_utiles", m2_utiles);
+	// parameters.put("m2_constr", m2_constr);
+	// parameters.put("m2_parcela", m2_parcela);
+	// parameters.put("observaciones", observaciones);
+	// parameters.put("llaves", llaves);
+	// parameters.put("altura_real_piso", altura_real_piso);
+	// parameters.put("altura_edif", altura_edif);
+	// parameters.put("orientacion", orientacion);
+	// parameters.put("gastos_comun", gastos_comun);
+	// parameters.put("anos_finca", anos_finca);
+	// parameters.put("representante", representante);
+	// if (vendido) {
+	// parameters.put("vendido", "vendido");
+	// } else {
+	// parameters.put("vendido", "en venta");
+	// }
+	// }
+	// ps.close();
+	// rs.close();
+	//
+	// if (vendido) {
+	//
+	// String query3 = "SELECT precio_venta FROM rel_cliente_inmueble WHERE
+	// fk_inmueble_referencia = ? ORDER BY fecha DESC LIMIT 1";
+	// PreparedStatement ps3 = this.connection.prepareStatement(query3);
+	// ps3.setInt(1, inmuebleref);
+	// ResultSet rs3 = ps3.executeQuery();
+	// if (rs3.next()) {
+	// precio = rs3.getDouble("precio_venta");
+	// parameters.put("nuevo_precio", precio);
+	// }
+	// ps3.close();
+	// rs3.close();
+	//
+	// } else {
+	// String query2 = "SELECT nuevo_precio FROM rel_inmueble_propietario WHERE
+	// fk_inmueble_referencia = ? ORDER BY fecha DESC LIMIT 1C";
+	// PreparedStatement ps2 = this.connection.prepareStatement(query2);
+	// ps2.setInt(1, inmuebleref);
+	// ResultSet rs2 = ps2.executeQuery();
+	// if (rs2.next()) {
+	// precio = rs2.getDouble("nuevo_precio");
+	// parameters.put("nuevo_precio", precio);
+	// }
+	// ps2.close();
+	// rs2.close();
+	// }
+	// return parameters;
+	// }
 
 	public DatosVisita inprimatuVisita(String clientedni, int inmuebleref,
 			Calendar fecha, String representante) throws SQLException {

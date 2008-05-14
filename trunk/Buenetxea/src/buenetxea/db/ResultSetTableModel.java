@@ -66,10 +66,10 @@ public class ResultSetTableModel extends AbstractTableModel {
 
 	// get class that represents column type
 
-	public ResultSetTableModel(){
-		//Do nothing
+	public ResultSetTableModel() {
+		// Do nothing
 	}
-	
+
 	/**
 	 * 
 	 * @param column
