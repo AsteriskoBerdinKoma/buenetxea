@@ -11,20 +11,17 @@ import java.util.Vector;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
 
+import buenetxea.gui.Nagusia;
 import buenetxea.gui.panelak.azpipanelak.DatosInmueblePanel;
 import buenetxea.gui.panelak.azpipanelak.DatosPropietarioPanel;
 import buenetxea.gui.panelak.azpipanelak.DatosTasacionPanel;
-import buenetxea.gui.Nagusia;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Descripcion;
 import buenetxea.objektuak.Inmueble;
@@ -243,7 +240,7 @@ public class IntroducirInmueblePanel extends JPanel {
 								 * volverse a asignar desde el panel principal.
 								 */
 								limpiarDatos();
-								clientesInteresados(i,vd,t);
+								clientesInteresados(i, vd, t);
 
 							} else {
 								JOptionPane jop = new JOptionPane(
@@ -313,9 +310,10 @@ public class IntroducirInmueblePanel extends JPanel {
 	}
 
 	public void limpiarDatos() {
-		
+
 		try {
-			Vector<Propietario> vpR = Kudeatzailea.getInstance().getPropietarios();
+			Vector<Propietario> vpR = Kudeatzailea.getInstance()
+					.getPropietarios();
 			datosProp1.setPropietarios(vpR);
 			if (segundoPropietario) {
 				datosProp2.setPropietarios(vpR);
@@ -346,41 +344,44 @@ public class IntroducirInmueblePanel extends JPanel {
 		}
 
 	}
-	
-	public void clientesInteresados(Inmueble i, Vector<Descripcion> vd, Tasacion t){
+
+	public void clientesInteresados(Inmueble i, Vector<Descripcion> vd,
+			Tasacion t) {
 		Nagusia n = Nagusia.getInstance();
 		int hab = 0;
-		for (Descripcion d: vd){
-			if(d.getTipo().startsWith("habit")|| d.getTipo().startsWith("Habit"))
+		for (Descripcion d : vd) {
+			if (d.getTipo().startsWith("habit")
+					|| d.getTipo().startsWith("Habit"))
 				hab++;
 		}
 		n.showMostrarClientesInterados(i.getZona(), hab, t.getPrecio_venta());
 	}
-	
-	public boolean isClientesInteresados(double precio, String zona, int numHabit, int numAseos){
-		//Kudeatzailea.getInstance.hayClientesInteresados(precio,zona,numHabit,numAseos);
+
+	public boolean isClientesInteresados(double precio, String zona,
+			int numHabit, int numAseos) {
+		// Kudeatzailea.getInstance.hayClientesInteresados(precio,zona,numHabit,numAseos);
 		return false;
 	}
 
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
-		IntroducirInmueblePanel iip = new IntroducirInmueblePanel();
-		JFrame frame = new JFrame();
-		frame.setSize((iip.getPreferredSize()));
-		frame.add(iip);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-	}
+	// public static void main(String[] args) {
+	// try {
+	// UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	// } catch (ClassNotFoundException e) {
+	// e.printStackTrace();
+	// } catch (InstantiationException e) {
+	// e.printStackTrace();
+	// } catch (IllegalAccessException e) {
+	// e.printStackTrace();
+	// } catch (UnsupportedLookAndFeelException e) {
+	// e.printStackTrace();
+	// }
+	// IntroducirInmueblePanel iip = new IntroducirInmueblePanel();
+	// JFrame frame = new JFrame();
+	// frame.setSize((iip.getPreferredSize()));
+	// frame.add(iip);
+	// frame.setLocationRelativeTo(null);
+	// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	// frame.setVisible(true);
+	// }
 
 }
