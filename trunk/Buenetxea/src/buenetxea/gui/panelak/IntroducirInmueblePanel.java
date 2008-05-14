@@ -3,7 +3,6 @@ package buenetxea.gui.panelak;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Vector;
@@ -268,9 +267,6 @@ public class IntroducirInmueblePanel extends JPanel {
 								JOptionPane.ERROR_MESSAGE);
 						jop.createDialog("Error al introducir el inmueble")
 								.setVisible(true);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					}
 				}
 
@@ -297,9 +293,6 @@ public class IntroducirInmueblePanel extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -338,11 +331,7 @@ public class IntroducirInmueblePanel extends JPanel {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
 	}
 
 	public void clientesInteresados(Inmueble i, Vector<Descripcion> vd,

@@ -7,7 +7,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -38,7 +37,7 @@ public class BuscasPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Kudeatzailea kud;
-	
+
 	private JTable table;
 	private JTextField dniTextField;
 	private JLabel errorLabel;
@@ -52,221 +51,244 @@ public class BuscasPanel extends JPanel {
 		super();
 		try {
 			kud = Kudeatzailea.getInstance();
-		
-		addComponentListener(new ComponentAdapter() {
-			public void componentShown(final ComponentEvent e) {
-				if (tableModel == null)
-					tableModel = new ResultSetTableModel(getQuery());
-				else {
+
+			addComponentListener(new ComponentAdapter() {
+				public void componentShown(final ComponentEvent e) {
+					if (tableModel == null)
+						tableModel = new ResultSetTableModel(getQuery());
+					else {
+						try {
+							tableModel.refresh();
+						} catch (SQLException ex) {
+							ex.printStackTrace();
+						}
+					}
+					table.setModel(tableModel);
+				}
+
+				public void componentHidden(final ComponentEvent e) {
+					table.setModel(new DefaultTableModel());
+				}
+			});
+
+			JPanel panel;
+			panel = new JPanel();
+			panel.setBorder(new TitledBorder(null, "Seleccionar Cliente",
+					TitledBorder.DEFAULT_JUSTIFICATION,
+					TitledBorder.DEFAULT_POSITION, null, null));
+
+			JLabel dniLabel;
+			dniLabel = new JLabel();
+			dniLabel.setText("DNI:");
+
+			dniTextField = new JTextField();
+
+			JButton verInmueblesButton;
+			verInmueblesButton = new JButton();
+			verInmueblesButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
 					try {
-						tableModel.refresh();
-					} catch (SQLException ex) {
-						ex.printStackTrace();
+						tableModel.setQuery(getQuery());
+					} catch (IllegalStateException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				}
-				table.setModel(tableModel);
-			}
+			});
+			verInmueblesButton.setText("Ver inmuebles de interes");
 
-			public void componentHidden(final ComponentEvent e) {
-				table.setModel(new DefaultTableModel());
-			}
-		});
+			errorLabel = new JLabel();
+			errorLabel.setForeground(new Color(255, 0, 0));
 
-		JPanel panel;
-		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Seleccionar Cliente",
-				TitledBorder.DEFAULT_JUSTIFICATION,
-				TitledBorder.DEFAULT_POSITION, null, null));
-
-		JLabel dniLabel;
-		dniLabel = new JLabel();
-		dniLabel.setText("DNI:");
-
-		dniTextField = new JTextField();
-
-		JButton verInmueblesButton;
-		verInmueblesButton = new JButton();
-		verInmueblesButton.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {
-				try {
-					tableModel.setQuery(getQuery());
-				} catch (IllegalStateException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			JButton crearClienteNuevoButton;
+			crearClienteNuevoButton = new JButton();
+			crearClienteNuevoButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					CrearClienteDialog ccd = new CrearClienteDialog();
+					ccd.setResultField(dniTextField);
+					ccd.pack();
+					ccd.setLocationRelativeTo(null);
+					ccd.setVisible(true);
 				}
-			}
-		});
-		verInmueblesButton.setText("Ver inmuebles de interes");
+			});
+			crearClienteNuevoButton.setText("Crear cliente nuevo");
 
-		errorLabel = new JLabel();
-		errorLabel.setForeground(new Color(255, 0, 0));
+			JScrollPane scrollPane;
+			scrollPane = new JScrollPane();
 
-		JButton crearClienteNuevoButton;
-		crearClienteNuevoButton = new JButton();
-		crearClienteNuevoButton.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {
-				CrearClienteDialog ccd = new CrearClienteDialog();
-				ccd.setResultField(dniTextField);
-				ccd.pack();
-				ccd.setLocationRelativeTo(null);
-				ccd.setVisible(true);
-			}
-		});
-		crearClienteNuevoButton.setText("Crear cliente nuevo");
+			table = new JTable();
+			table.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(final MouseEvent e) {
+					if (e.getClickCount() == 2) {
+						int ref = Integer.parseInt((String) table.getValueAt(
+								table.getSelectedRow(), 0));
+						Nagusia.getInstance().showVerInmueble(ref);
+					}
+				}
+			});
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			table.setModel(new DefaultTableModel());
+			scrollPane.setViewportView(table);
 
-		JScrollPane scrollPane;
-		scrollPane = new JScrollPane();
-
-		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(final MouseEvent e) {
-				if (e.getClickCount() == 2) {
+			JButton verInmuebleButton;
+			verInmuebleButton = new JButton();
+			verInmuebleButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
 					int ref = Integer.parseInt((String) table.getValueAt(table
 							.getSelectedRow(), 0));
 					Nagusia.getInstance().showVerInmueble(ref);
 				}
-			}
-		});
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(new DefaultTableModel());
-		scrollPane.setViewportView(table);
-
-		JButton verInmuebleButton;
-		verInmuebleButton = new JButton();
-		verInmuebleButton.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {
-				int ref = Integer.parseInt((String) table.getValueAt(table
-						.getSelectedRow(), 0));
-				Nagusia.getInstance().showVerInmueble(ref);
-			}
-		});
-		verInmuebleButton.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(final MouseEvent e) {
-				if (e.getClickCount() == 2) {
-					int ref = Integer.parseInt((String) table.getValueAt(table
-							.getSelectedRow(), 0));
-					Nagusia.getInstance().showVerInmueble(ref);
+			});
+			verInmuebleButton.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(final MouseEvent e) {
+					if (e.getClickCount() == 2) {
+						int ref = Integer.parseInt((String) table.getValueAt(
+								table.getSelectedRow(), 0));
+						Nagusia.getInstance().showVerInmueble(ref);
+					}
 				}
-			}
-		});
-		verInmuebleButton.setText("Ver ficha del inmueble");
+			});
+			verInmuebleButton.setText("Ver ficha del inmueble");
 
-		JButton buscarClienteButton;
-		buscarClienteButton = new JButton();
-		buscarClienteButton.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {
-				BuscarClienteDialog bcd = new BuscarClienteDialog();
-				bcd.setResultField(dniTextField);
-				bcd.pack();
-				bcd.setLocationRelativeTo(null);
-				bcd.setVisible(true);
-			}
-		});
-		buscarClienteButton.setText("Buscar cliente");
-		final GroupLayout groupLayout_1 = new GroupLayout((JComponent) panel);
-		groupLayout_1
-				.setHorizontalGroup(groupLayout_1
-						.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(
-								groupLayout_1
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												groupLayout_1
-														.createParallelGroup(
-																GroupLayout.Alignment.LEADING)
-														.addGroup(
-																groupLayout_1
-																		.createSequentialGroup()
-																		.addComponent(
-																				dniLabel)
-																		.addPreferredGap(
-																				LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				dniTextField,
-																				GroupLayout.PREFERRED_SIZE,
-																				86,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				buscarClienteButton)
-																		.addPreferredGap(
-																				LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				crearClienteNuevoButton)
-																		.addPreferredGap(
-																				LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				verInmueblesButton))
-														.addComponent(
-																errorLabel))
-										.addContainerGap(62, Short.MAX_VALUE)));
-		groupLayout_1
-				.setVerticalGroup(groupLayout_1
-						.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(
-								groupLayout_1
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												groupLayout_1
-														.createParallelGroup(
-																GroupLayout.Alignment.BASELINE)
-														.addComponent(dniLabel)
-														.addComponent(
-																dniTextField,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																buscarClienteButton)
-														.addComponent(
-																crearClienteNuevoButton)
-														.addComponent(
-																verInmueblesButton))
-										.addPreferredGap(
-												LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(errorLabel)
-										.addContainerGap(
-												GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
-		panel.setLayout(groupLayout_1);
-		final GroupLayout groupLayout = new GroupLayout((JComponent) this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
-				GroupLayout.Alignment.TRAILING).addGroup(
-				groupLayout.createSequentialGroup().addContainerGap().addGroup(
-						groupLayout.createParallelGroup(
-								GroupLayout.Alignment.TRAILING).addComponent(
-								scrollPane, GroupLayout.Alignment.LEADING,
-								GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
-								.addComponent(panel,
-										GroupLayout.Alignment.LEADING,
-										GroupLayout.DEFAULT_SIZE, 593,
-										Short.MAX_VALUE).addComponent(
-										verInmuebleButton)).addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE).addPreferredGap(
-								LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
-								223, Short.MAX_VALUE).addPreferredGap(
-								LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(verInmuebleButton).addContainerGap()));
-		setLayout(groupLayout);
+			JButton buscarClienteButton;
+			buscarClienteButton = new JButton();
+			buscarClienteButton.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					BuscarClienteDialog bcd = new BuscarClienteDialog();
+					bcd.setResultField(dniTextField);
+					bcd.pack();
+					bcd.setLocationRelativeTo(null);
+					bcd.setVisible(true);
+				}
+			});
+			buscarClienteButton.setText("Buscar cliente");
+			final GroupLayout groupLayout_1 = new GroupLayout(
+					(JComponent) panel);
+			groupLayout_1
+					.setHorizontalGroup(groupLayout_1
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout_1
+											.createSequentialGroup()
+											.addContainerGap()
+											.addGroup(
+													groupLayout_1
+															.createParallelGroup(
+																	GroupLayout.Alignment.LEADING)
+															.addGroup(
+																	groupLayout_1
+																			.createSequentialGroup()
+																			.addComponent(
+																					dniLabel)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					dniTextField,
+																					GroupLayout.PREFERRED_SIZE,
+																					86,
+																					GroupLayout.PREFERRED_SIZE)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					buscarClienteButton)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					crearClienteNuevoButton)
+																			.addPreferredGap(
+																					LayoutStyle.ComponentPlacement.RELATED)
+																			.addComponent(
+																					verInmueblesButton))
+															.addComponent(
+																	errorLabel))
+											.addContainerGap(62,
+													Short.MAX_VALUE)));
+			groupLayout_1
+					.setVerticalGroup(groupLayout_1
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout_1
+											.createSequentialGroup()
+											.addContainerGap()
+											.addGroup(
+													groupLayout_1
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	dniLabel)
+															.addComponent(
+																	dniTextField,
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	buscarClienteButton)
+															.addComponent(
+																	crearClienteNuevoButton)
+															.addComponent(
+																	verInmueblesButton))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addComponent(errorLabel)
+											.addContainerGap(
+													GroupLayout.DEFAULT_SIZE,
+													Short.MAX_VALUE)));
+			panel.setLayout(groupLayout_1);
+			final GroupLayout groupLayout = new GroupLayout((JComponent) this);
+			groupLayout
+					.setHorizontalGroup(groupLayout
+							.createParallelGroup(GroupLayout.Alignment.TRAILING)
+							.addGroup(
+									groupLayout
+											.createSequentialGroup()
+											.addContainerGap()
+											.addGroup(
+													groupLayout
+															.createParallelGroup(
+																	GroupLayout.Alignment.TRAILING)
+															.addComponent(
+																	scrollPane,
+																	GroupLayout.Alignment.LEADING,
+																	GroupLayout.DEFAULT_SIZE,
+																	593,
+																	Short.MAX_VALUE)
+															.addComponent(
+																	panel,
+																	GroupLayout.Alignment.LEADING,
+																	GroupLayout.DEFAULT_SIZE,
+																	593,
+																	Short.MAX_VALUE)
+															.addComponent(
+																	verInmuebleButton))
+											.addContainerGap()));
+			groupLayout
+					.setVerticalGroup(groupLayout
+							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addGroup(
+									groupLayout
+											.createSequentialGroup()
+											.addContainerGap()
+											.addComponent(panel,
+													GroupLayout.PREFERRED_SIZE,
+													GroupLayout.DEFAULT_SIZE,
+													GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addComponent(scrollPane,
+													GroupLayout.DEFAULT_SIZE,
+													223, Short.MAX_VALUE)
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addComponent(verInmuebleButton)
+											.addContainerGap()));
+			setLayout(groupLayout);
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		} catch (ClassNotFoundException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
@@ -274,78 +296,80 @@ public class BuscasPanel extends JPanel {
 	}
 
 	private String getQuery() {
-		
+
 		String dni = dniTextField.getText().trim();
-		Preferencias preferenciasCliente=null;
+		Preferencias preferenciasCliente = null;
 		String query;
-		
-		if (!dni.equals(""))
-		{	
+
+		if (!dni.equals("")) {
 			try {
 				preferenciasCliente = kud.getPreferencias(dni);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				JOptionPane jop = new JOptionPane(
-					"El cliente  introducido no existen.",
-					JOptionPane.ERROR_MESSAGE);
+						"El cliente  introducido no existen.",
+						JOptionPane.ERROR_MESSAGE);
 				jop.createDialog("Error en los datos").setVisible(true);
 				e.printStackTrace();
 			}
-			if (preferenciasCliente != null)
-			{	
+			if (preferenciasCliente != null) {
 				query = "SELECT (distinct I.referencia, I.zona, P.m2_constr, P.ascensor, P.tipo_inmueble, P.tipo_venta, I.direccion, RPI.precio_venta) FROM (Inmueble I "
-				+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
-				+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
-				+ "I.referencia = RPI.fk_inmueble_referencia) WHERE (";
-			
-				query += " P.tipo_inmueble LIKE '%"+ preferenciasCliente.getTipo()+ "%'";
-				
-			
-				query += " AND P.id IN (SELECT id FROM Peritaje WHERE " + preferenciasCliente.getDesde_metros()+ "<= m2_utiles AND " +
-					 + preferenciasCliente.getHasta_metros() + " >= m2_utiles)";
-				
-				
-				
-				query += " AND P.exterior="+ preferenciasCliente.getExterior();
-				
-			
+						+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
+						+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
+						+ "I.referencia = RPI.fk_inmueble_referencia) WHERE (";
+
+				query += " P.tipo_inmueble LIKE '%"
+						+ preferenciasCliente.getTipo() + "%'";
+
+				query += " AND P.id IN (SELECT id FROM Peritaje WHERE "
+						+ preferenciasCliente.getDesde_metros()
+						+ "<= m2_utiles AND "
+						+ +preferenciasCliente.getHasta_metros()
+						+ " >= m2_utiles)";
+
+				query += " AND P.exterior=" + preferenciasCliente.getExterior();
+
 				query += " AND I.referencia IN (SELECT RPI2.fk_inmueble_referencia, COUNT(*)  FROM ("
-				+ " rel_peritaje_inmueble RPI2 INNER JOIN (peritaje P2 INNER JOIN descripcion D2 ON P2.id = D2.fk_peritaje_id) ON RPI2.fk_peritaje_id=P2.id)"
-				+ " WHERE D2.tipo LIKE 'habit%'"
-				+ " GROUP BY RPI2.fk_inmueble_referencia"
-				+ " HAVING COUNT(*) BETWEEN "
-				+ preferenciasCliente.getDesdeHabitaciones()
-				+ " AND "
-				+ preferenciasCliente.getHastaHabitaciones()+ ")";
-			
-				query += " AND I.zona LIKE '%" + preferenciasCliente.getZona()+ "%'";
+						+ " rel_peritaje_inmueble RPI2 INNER JOIN (peritaje P2 INNER JOIN descripcion D2 ON P2.id = D2.fk_peritaje_id) ON RPI2.fk_peritaje_id=P2.id)"
+						+ " WHERE D2.tipo LIKE 'habit%'"
+						+ " GROUP BY RPI2.fk_inmueble_referencia"
+						+ " HAVING COUNT(*) BETWEEN "
+						+ preferenciasCliente.getDesdeHabitaciones()
+						+ " AND "
+						+ preferenciasCliente.getHastaHabitaciones() + ")";
+
+				query += " AND I.zona LIKE '%" + preferenciasCliente.getZona()
+						+ "%'";
 				query += " AND I.referencia IN (SELECT RPI3.fk_inmueble_referencia, COUNT(*)  FROM"
-				+ " (rel_peritaje_inmueble RPI3 INNER JOIN (peritaje P3 INNER JOIN descripcion D3 ON P3.id = D3.fk_peritaje_id) ON RPI3.fk_peritaje_id=P3.id)"
-				+ " WHERE D3.tipo LIKE 'baño%'"
-				+ " GROUP BY RPI3.fk_inmueble_referencia"
-				+ " HAVING COUNT(*)=" + preferenciasCliente.getBanos()+ ")";
-			
+						+ " (rel_peritaje_inmueble RPI3 INNER JOIN (peritaje P3 INNER JOIN descripcion D3 ON P3.id = D3.fk_peritaje_id) ON RPI3.fk_peritaje_id=P3.id)"
+						+ " WHERE D3.tipo LIKE 'baño%'"
+						+ " GROUP BY RPI3.fk_inmueble_referencia"
+						+ " HAVING COUNT(*)="
+						+ preferenciasCliente.getBanos()
+						+ ")";
+
 				query += " AND I.referencia IN (SELECT RPI4.fk_inmueble_referencia, COUNT(*)  FROM"
-				+ " (rel_peritaje_inmueble RPI4 INNER JOIN (peritaje P4 INNER JOIN descripcion D4 ON P4.id = D4.fk_peritaje_id) ON RPI4.fk_peritaje_id=P4.id)"
-				+ " WHERE D.4tipo LIKE 'aseo%'"
-				+ " GROUP BY RPI4.fk_inmueble_referencia"
-				+ " HAVING COUNT(*)=" + preferenciasCliente.getAseos()+ ")";
-			
-				query += " AND RPI.precio_venta <= " + preferenciasCliente.getPresupuesto()+ ")";
-			
-			}
-			else
+						+ " (rel_peritaje_inmueble RPI4 INNER JOIN (peritaje P4 INNER JOIN descripcion D4 ON P4.id = D4.fk_peritaje_id) ON RPI4.fk_peritaje_id=P4.id)"
+						+ " WHERE D.4tipo LIKE 'aseo%'"
+						+ " GROUP BY RPI4.fk_inmueble_referencia"
+						+ " HAVING COUNT(*)="
+						+ preferenciasCliente.getAseos()
+						+ ")";
+
+				query += " AND RPI.precio_venta <= "
+						+ preferenciasCliente.getPresupuesto() + ")";
+
+			} else
 				query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, P.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta FROM (Inmueble  I "
+						+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
+						+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
+						+ "I.referencia = RPI.fk_inmueble_referencia) WHERE false";
+		} else
+
+			query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, P.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta FROM (Inmueble  I "
 					+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
 					+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
-					+ "I.referencia = RPI.fk_inmueble_referencia) WHERE false";			
-			 }
-		else
-			
-			query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, P.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta FROM (Inmueble  I "
-				+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
-				+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
-				+ "I.referencia = RPI.fk_inmueble_referencia) WHERE false";
+					+ "I.referencia = RPI.fk_inmueble_referencia) WHERE false";
 		System.out.println(query);
 		return query;
 	}

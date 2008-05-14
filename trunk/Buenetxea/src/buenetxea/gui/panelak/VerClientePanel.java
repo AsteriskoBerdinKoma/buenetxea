@@ -137,7 +137,13 @@ public class VerClientePanel extends JPanel {
 			});
 			buscarClienteButton.setText("Buscar Cliente");
 
-			textField = new JFormattedTextField(new MaskFormatter("########U"));
+			try {
+				textField = new JFormattedTextField(new MaskFormatter(
+						"########U"));
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			final GroupLayout groupLayout = new GroupLayout((JComponent) this);
 			groupLayout
 					.setHorizontalGroup(groupLayout
@@ -207,12 +213,6 @@ public class VerClientePanel extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

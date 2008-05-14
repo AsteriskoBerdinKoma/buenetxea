@@ -39,8 +39,7 @@ public class Kudeatzailea {
 	private Vector<String> naciones;
 	private Vector<String> nacionalidades;
 
-	private Kudeatzailea() throws SQLException, ClassNotFoundException,
-			IOException {
+	private Kudeatzailea() throws SQLException, ClassNotFoundException {
 		this.inmKud = InmuebleKud.getInstance();
 		this.cliKud = ClienteKud.getInstance();
 		this.propikud = PropietarioKud.getInstance();
@@ -52,11 +51,10 @@ public class Kudeatzailea {
 		this.visiKud = VisitaKud.getInstance();
 		this.prefKud = PreferenciasKud.getInstance();
 		this.inprKud = InprimagailuKudeatzailea.getInstance();
-		this.cargarNacionalidades();
 	}
 
 	public static Kudeatzailea getInstance() throws SQLException,
-			ClassNotFoundException, IOException {
+			ClassNotFoundException {
 		if (null == instance)
 			instance = new Kudeatzailea();
 		return instance;
@@ -131,11 +129,11 @@ public class Kudeatzailea {
 	}
 
 	private void cargarNacionalidades() throws IOException {
+		naciones = new Vector<String>();
+		nacionalidades = new Vector<String>();
 		FileInputStream fi = new FileInputStream("ListaNacionalidades");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fi));
 		String lerroa;
-		naciones = new Vector<String>();
-		nacionalidades = new Vector<String>();
 		while ((lerroa = br.readLine()) != null) {
 			String[] s = lerroa.split(":");
 			nacionalidades.addElement(s[0]);
@@ -149,6 +147,8 @@ public class Kudeatzailea {
 	}
 
 	public String[] getNaciones() throws IOException {
+		if (naciones == null)
+			cargarNacionalidades();
 		return naciones.toArray(new String[naciones.size()]);
 	}
 
@@ -157,7 +157,9 @@ public class Kudeatzailea {
 		return vZonas.toArray(new String[vZonas.size()]);
 	}
 
-	public String[] getNacionalidades() {
+	public String[] getNacionalidades() throws IOException {
+		if (nacionalidades == null)
+			cargarNacionalidades();
 		return nacionalidades.toArray(new String[nacionalidades.size()]);
 	}
 
