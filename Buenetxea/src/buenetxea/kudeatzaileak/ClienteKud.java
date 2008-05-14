@@ -113,7 +113,7 @@ class ClienteKud {
 		ps.setString(4, Abizena1);
 		ps.setString(5, Abizena2);
 		ResultSet rs = this.statement.executeQuery(query);
-		Vector v = new Vector();
+		Vector<Cliente> v = new Vector<Cliente>();
 
 		while (rs.next()) {
 			dni = rs.getString("dni");
@@ -209,7 +209,6 @@ class ClienteKud {
 	 * 
 	 * cliente = new Cliente(dni, nombre, apellido1, apellido2,
 	 * direccion,nacionalidad, cal, telefono, medio, asesor);
-	 * ClienteVector.addElement(cliente);
-	 *  } return ClienteVector; }
+	 * ClienteVector.addElement(cliente); } return ClienteVector; }
 	 */
 }
