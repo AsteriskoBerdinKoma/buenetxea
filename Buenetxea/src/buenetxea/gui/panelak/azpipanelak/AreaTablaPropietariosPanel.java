@@ -81,7 +81,8 @@ public class AreaTablaPropietariosPanel extends JPanel {
 		}
 
 		public void setValueAt(Object value, int row, int col) {
-			//Our table is made for selection purposes only, no editing allowed.
+			// Our table is made for selection purposes only, no editing
+			// allowed.
 		}
 
 		@SuppressWarnings("unchecked")
@@ -97,17 +98,19 @@ public class AreaTablaPropietariosPanel extends JPanel {
 
 	protected JTable taula = new JTable();
 	protected OwnerTableModel eredua;
-	
-	public AreaTablaPropietariosPanel(){
+
+	public AreaTablaPropietariosPanel() {
 		taula.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		taula.setColumnSelectionAllowed(false);
 		taula.setPreferredScrollableViewportSize(new Dimension(250, 150));
-		
+
 		setLayout(new BorderLayout());
 		add(new JScrollPane(taula), BorderLayout.NORTH);
-		setBorder(new TitledBorder(null, "Propietarios existentes", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+		setBorder(new TitledBorder(null, "Propietarios existentes",
+				TitledBorder.DEFAULT_JUSTIFICATION,
+				TitledBorder.DEFAULT_POSITION, null, null));
 	}
-	
+
 	public void setOwners(Vector<Propietario> newOwners) {
 
 		if (eredua == null) {
@@ -131,25 +134,28 @@ public class AreaTablaPropietariosPanel extends JPanel {
 
 		return taula.getSelectionModel();
 	}
-	
-	public static void main(String[] args){
-		Vector<Propietario> vp = new Vector<Propietario>();
-		vp.add(new Propietario("7249","joaquin","perez","perez","",0,"",1,1,"",""));
-		vp.add(new Propietario("7245","txomin","pitu","perez","",0,"",1,1,"",""));
-		vp.add(new Propietario("7247","anabel","garcia","iñarritu","",0,"",1,1,"",""));
-		
-		AreaTablaPropietariosPanel t = new AreaTablaPropietariosPanel();
-		final javax.swing.JFrame jf = new javax.swing.JFrame("Taula");
-		jf.getContentPane().setLayout(new BorderLayout());
-		jf.getContentPane().add(t, BorderLayout.CENTER);
-		jf.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
-				jf.dispose();
-				System.exit(0);
-			}
-		});
-		jf.pack();
-		jf.setVisible(true);
-		t.setOwners(vp);
-	}
+
+	// public static void main(String[] args){
+	// Vector<Propietario> vp = new Vector<Propietario>();
+	// vp.add(new
+	// Propietario("7249","joaquin","perez","perez","",0,"",1,1,"",""));
+	// vp.add(new
+	// Propietario("7245","txomin","pitu","perez","",0,"",1,1,"",""));
+	// vp.add(new
+	// Propietario("7247","anabel","garcia","iñarritu","",0,"",1,1,"",""));
+	//		
+	// AreaTablaPropietariosPanel t = new AreaTablaPropietariosPanel();
+	// final javax.swing.JFrame jf = new javax.swing.JFrame("Taula");
+	// jf.getContentPane().setLayout(new BorderLayout());
+	// jf.getContentPane().add(t, BorderLayout.CENTER);
+	// jf.addWindowListener(new java.awt.event.WindowAdapter() {
+	// public void windowClosing(java.awt.event.WindowEvent e) {
+	// jf.dispose();
+	// System.exit(0);
+	// }
+	// });
+	// jf.pack();
+	// jf.setVisible(true);
+	// t.setOwners(vp);
+	// }
 }

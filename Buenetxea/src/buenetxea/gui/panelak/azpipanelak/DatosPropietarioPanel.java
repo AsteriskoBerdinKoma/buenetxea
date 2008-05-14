@@ -5,13 +5,10 @@ import java.util.Vector;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 import javax.swing.ListSelectionModel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -41,28 +38,33 @@ public class DatosPropietarioPanel extends JPanel {
 		t = new AreaTablaPropietariosPanel();
 		vPropietarios = new Vector<Propietario>();
 		vPropCriterio = new Vector<Propietario>();
-		t.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				if (!e.getValueIsAdjusting()) {
-					ListSelectionModel lm = (ListSelectionModel) e.getSource();
-					for (int i = e.getFirstIndex(); i <= e.getLastIndex(); i++) {
-						if (lm.isSelectedIndex(i)) {
-							rellenarCampos(i);
-							break;
+		t.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+					public void valueChanged(ListSelectionEvent e) {
+						if (!e.getValueIsAdjusting()) {
+							ListSelectionModel lm = (ListSelectionModel) e
+									.getSource();
+							for (int i = e.getFirstIndex(); i <= e
+									.getLastIndex(); i++) {
+								if (lm.isSelectedIndex(i)) {
+									rellenarCampos(i);
+									break;
+								}
+							}
 						}
 					}
-				}
-			}
-		});
+				});
 		d.getNombreTextfieldModel().addDocumentListener(new DocumentListener() {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				notificarCambio();
 			}
+
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				notificarCambio();
 			}
+
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				notificarCambio();
@@ -74,40 +76,48 @@ public class DatosPropietarioPanel extends JPanel {
 			public void changedUpdate(DocumentEvent e) {
 				notificarCambio();
 			}
+
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				notificarCambio();
 			}
+
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				notificarCambio();
 			}
 		});
 
-		d.getApellido1TextfieldModel().addDocumentListener(new DocumentListener() {
+		d.getApellido1TextfieldModel().addDocumentListener(
+				new DocumentListener() {
 					@Override
 					public void changedUpdate(DocumentEvent e) {
 						notificarCambio();
 					}
+
 					@Override
 					public void insertUpdate(DocumentEvent e) {
 						notificarCambio();
 					}
+
 					@Override
 					public void removeUpdate(DocumentEvent e) {
 						notificarCambio();
 					}
 				});
 
-		d.getApellido2TextfieldModel().addDocumentListener(new DocumentListener() {
+		d.getApellido2TextfieldModel().addDocumentListener(
+				new DocumentListener() {
 					@Override
 					public void changedUpdate(DocumentEvent e) {
 						notificarCambio();
 					}
+
 					@Override
 					public void insertUpdate(DocumentEvent e) {
 						notificarCambio();
 					}
+
 					@Override
 					public void removeUpdate(DocumentEvent e) {
 						notificarCambio();
@@ -219,7 +229,8 @@ public class DatosPropietarioPanel extends JPanel {
 			jop.createDialog("Faltan datos").setVisible(true);
 			correcto = false;
 		}
-		if (d.getTelFijoTextfield() < 100000000 && d.getTelMovilTextfield() < 100000000) {
+		if (d.getTelFijoTextfield() < 100000000
+				&& d.getTelMovilTextfield() < 100000000) {
 			JOptionPane jop = new JOptionPane(
 					"Debe introducir un teléfono de contacto",
 					JOptionPane.ERROR_MESSAGE);
@@ -241,7 +252,7 @@ public class DatosPropietarioPanel extends JPanel {
 		d.setTelFijoTextfield(prop.getTel_fijo());
 		d.setTelMovilTextfield(prop.getTel_movil());
 		String[] horFijo = prop.getHorario_fijo().split(":");
-		String[] horMovil =prop.getHorario_movil().split(":");
+		String[] horMovil = prop.getHorario_movil().split(":");
 		d.setHoraFijoInicioComboBox(Integer.valueOf(horFijo[0]));
 		d.setHoraFijoFinCombobox(Integer.valueOf(horFijo[1]));
 		d.setHoraMovilInicioCombobox(Integer.valueOf(horMovil[0]));
@@ -278,40 +289,40 @@ public class DatosPropietarioPanel extends JPanel {
 		return segPropButton;
 	}
 
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
-		Vector<Propietario> vPropietarios = new Vector<Propietario>();
-		vPropietarios.add(new Propietario("72498991R", "joaquin", "perez",
-				"perez", "", 0, "", 1, 1, "", ""));
-		vPropietarios.add(new Propietario("72453454A", "txomin", "pitu",
-				"perez", "", 0, "", 1, 1, "", ""));
-		vPropietarios.add(new Propietario("72472349B", "anabel", "garcia",
-				"iñarritu", "", 0, "", 1, 1, "", ""));
-		vPropietarios.add(new Propietario("72422349X", "anabel", "garcia",
-				"iñarritu", "", 0, "", 1, 1, "", ""));
-		vPropietarios.add(new Propietario("72412982D", "anabel", "garcia",
-				"iñarritu", "", 0, "", 1, 1, "", ""));
-		vPropietarios.add(new Propietario("72482348E", "ramon", "lizarazu",
-				"ruterberg", "", 0, "", 1, 1, "", ""));
-		vPropietarios.add(new Propietario("72472823T", "nicole", "sheridan",
-				"smith", "", 0, "", 1, 1, "", ""));
-
-		JFrame x = new JFrame();
-		DatosPropietarioPanel y = new DatosPropietarioPanel();
-		y.setPropietarios(vPropietarios);
-		x.add(y);
-		x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		x.setVisible(true);
-	}
+	// public static void main(String[] args) {
+	// try {
+	// UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	// } catch (ClassNotFoundException e) {
+	// e.printStackTrace();
+	// } catch (InstantiationException e) {
+	// e.printStackTrace();
+	// } catch (IllegalAccessException e) {
+	// e.printStackTrace();
+	// } catch (UnsupportedLookAndFeelException e) {
+	// e.printStackTrace();
+	// }
+	// Vector<Propietario> vPropietarios = new Vector<Propietario>();
+	// vPropietarios.add(new Propietario("72498991R", "joaquin", "perez",
+	// "perez", "", 0, "", 1, 1, "", ""));
+	// vPropietarios.add(new Propietario("72453454A", "txomin", "pitu",
+	// "perez", "", 0, "", 1, 1, "", ""));
+	// vPropietarios.add(new Propietario("72472349B", "anabel", "garcia",
+	// "iñarritu", "", 0, "", 1, 1, "", ""));
+	// vPropietarios.add(new Propietario("72422349X", "anabel", "garcia",
+	// "iñarritu", "", 0, "", 1, 1, "", ""));
+	// vPropietarios.add(new Propietario("72412982D", "anabel", "garcia",
+	// "iñarritu", "", 0, "", 1, 1, "", ""));
+	// vPropietarios.add(new Propietario("72482348E", "ramon", "lizarazu",
+	// "ruterberg", "", 0, "", 1, 1, "", ""));
+	// vPropietarios.add(new Propietario("72472823T", "nicole", "sheridan",
+	// "smith", "", 0, "", 1, 1, "", ""));
+	//
+	// JFrame x = new JFrame();
+	// DatosPropietarioPanel y = new DatosPropietarioPanel();
+	// y.setPropietarios(vPropietarios);
+	// x.add(y);
+	// x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	// x.setVisible(true);
+	// }
 
 }
