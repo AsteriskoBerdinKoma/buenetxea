@@ -2,9 +2,12 @@ package buenetxea.gui;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
@@ -20,6 +23,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JProgressBar;
 import javax.swing.JToolBar;
 import javax.swing.LayoutStyle;
@@ -282,6 +286,31 @@ public class Nagusia extends JFrame {
 										GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)));
+
+		final JButton button = new JButton();
+		button.setToolTipText("Ver Fichas");
+		button.setIcon(SwingResourceManager.getIcon(Nagusia.class,
+				"/buenetxea/resources/fichas 48x48.png"));
+		toolBar.add(button);
+
+		final JPopupMenu popupMenu = new JPopupMenu();
+		addPopup(button, popupMenu);
+
+		final JMenuItem newItemMenuItem_9 = new JMenuItem();
+		newItemMenuItem_9.setText("Ver Ficha de Inmueble");
+		popupMenu.add(newItemMenuItem_9);
+
+		final JMenuItem newItemMenuItem_10 = new JMenuItem();
+		newItemMenuItem_10.setText("Ver Ficha de Cliente");
+		popupMenu.add(newItemMenuItem_10);
+
+		final JMenuItem newItemMenuItem_12 = new JMenuItem();
+		newItemMenuItem_12.setText("Ver Ficha de Peritaje");
+		popupMenu.add(newItemMenuItem_12);
+
+		final JMenuItem newItemMenuItem_11 = new JMenuItem();
+		newItemMenuItem_11.setText("Ver Ficha de Visita");
+		popupMenu.add(newItemMenuItem_11);
 		this.getContentPane().setLayout(groupLayout);
 
 		final JMenuBar menuBar = new JMenuBar();
@@ -472,5 +501,29 @@ public class Nagusia extends JFrame {
 		@Override
 		public void windowOpened(WindowEvent e) {
 		}
+	}
+
+	/**
+	 * WindowBuilder generated method.<br>
+	 * Please don't remove this method or its invocations.<br>
+	 * It used by WindowBuilder to associate the {@link javax.swing.JPopupMenu}
+	 * with parent.
+	 */
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger())
+					showMenu(e);
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger())
+					showMenu(e);
+			}
+
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
