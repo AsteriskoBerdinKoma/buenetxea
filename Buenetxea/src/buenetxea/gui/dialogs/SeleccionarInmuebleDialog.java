@@ -3,7 +3,6 @@ package buenetxea.gui.dialogs;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
@@ -81,11 +80,6 @@ public class SeleccionarInmuebleDialog extends JDialog {
 					errorLabel
 							.setText("La referencia introducida no es correcta");
 				} catch (ClassNotFoundException ex) {
-					// TODO Auto-generated catch block
-					ex.printStackTrace();
-					errorLabel
-							.setText("La referencia introducida no es correcta");
-				} catch (IOException ex) {
 					// TODO Auto-generated catch block
 					ex.printStackTrace();
 					errorLabel

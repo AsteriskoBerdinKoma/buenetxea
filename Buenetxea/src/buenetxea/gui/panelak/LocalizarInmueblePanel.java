@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Vector;
 
@@ -767,9 +766,6 @@ public class LocalizarInmueblePanel extends JPanel {
 			// TODO Auto-generated catch block
 			e3.printStackTrace();
 		} catch (ClassNotFoundException e3) {
-			// TODO Auto-generated catch block
-			e3.printStackTrace();
-		} catch (IOException e3) {
 			// TODO Auto-generated catch block
 			e3.printStackTrace();
 		}

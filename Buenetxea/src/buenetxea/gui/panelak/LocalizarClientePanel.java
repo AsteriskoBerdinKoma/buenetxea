@@ -15,6 +15,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -130,8 +131,18 @@ public class LocalizarClientePanel extends JPanel {
 			nacionalidadLabel = new JLabel();
 			nacionalidadLabel.setText("Nacionalidad:");
 
-			Vector<String> v = new Vector<String>(Arrays.asList(kud
-					.getNacionalidades()));
+			Vector<String> v;
+			try {
+				v = new Vector<String>(Arrays.asList(kud.getNacionalidades()));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				v = new Vector<String>();
+				JOptionPane joPane = new JOptionPane(
+						"No se ha podido cargar las nacionalidades. Compruebe que el archivo de ListaNacionalidades existe.",
+						JOptionPane.ERROR_MESSAGE);
+				joPane.createDialog("Archivo de nacionalidades no encontrado")
+						.setVisible(true);
+			}
 			v.insertElementAt("Todas", 0);
 			comboBox = new JComboBox(v.toArray());
 			comboBox.setSelectedIndex(0);
@@ -351,9 +362,6 @@ public class LocalizarClientePanel extends JPanel {
 			System.out.println("errorea p1");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
