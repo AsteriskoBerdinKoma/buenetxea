@@ -152,6 +152,11 @@ public class Kudeatzailea {
 		return naciones.toArray(new String[naciones.size()]);
 	}
 
+	public String[] getZonas() throws SQLException {
+		Vector<String> vZonas = this.inmKud.getZonas();
+		return vZonas.toArray(new String[vZonas.size()]);
+	}
+
 	public String[] getNacionalidades() {
 		return nacionalidades.toArray(new String[nacionalidades.size()]);
 	}
@@ -223,5 +228,4 @@ public class Kudeatzailea {
 	public boolean updateInmueble(Inmueble i) throws SQLException {
 		return this.inmKud.updateInmueble(i);
 	}
-
 }
