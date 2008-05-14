@@ -105,7 +105,7 @@ public class Nagusia extends JFrame {
 
 		CrearPropietarioPanel crearPropietarioPanel = null;
 		try {
-			//panel.add(panela,"prueba");
+			// panel.add(panela,"prueba");
 			final BuenetxeaPanel buenetxeaPanel = new BuenetxeaPanel();
 			buenetxeaPanel.setName("presentacion");
 			panel.add(buenetxeaPanel, buenetxeaPanel.getName());
@@ -312,19 +312,6 @@ public class Nagusia extends JFrame {
 		newItemMenuItem_1.setText("Vender Inmueble");
 		inmuebleMenu.add(newItemMenuItem_1);
 
-		final JMenu verMenu = new JMenu();
-		verMenu.setText("Ver");
-		menuBar.add(verMenu);
-
-		final JMenuItem newItemMenuItem = new JMenuItem();
-		newItemMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {
-				((CardLayout) panel.getLayout()).show(panel, "presentacion");
-			}
-		});
-		newItemMenuItem.setText("Presentación");
-		verMenu.add(newItemMenuItem);
-
 		final JMenu clientesMenu = new JMenu();
 		clientesMenu.setText("Clientes");
 		menuBar.add(clientesMenu);
@@ -347,9 +334,9 @@ public class Nagusia extends JFrame {
 		newItemMenuItem_6.setText("Ver Cliente");
 		clientesMenu.add(newItemMenuItem_6);
 
-		final JMenu adibideakMenu = new JMenu();
-		adibideakMenu.setText("Fichas");
-		menuBar.add(adibideakMenu);
+		final JMenu fichasMenu = new JMenu();
+		fichasMenu.setText("Fichas");
+		menuBar.add(fichasMenu);
 
 		final JMenuItem newItemMenuItem_3 = new JMenuItem();
 		newItemMenuItem_3.addActionListener(new ActionListener() {
@@ -358,7 +345,7 @@ public class Nagusia extends JFrame {
 			}
 		});
 		newItemMenuItem_3.setText("Ficha Inmueble");
-		adibideakMenu.add(newItemMenuItem_3);
+		fichasMenu.add(newItemMenuItem_3);
 
 		final JMenuItem newItemMenuItem_5 = new JMenuItem();
 		newItemMenuItem_5.addActionListener(new ActionListener() {
@@ -367,7 +354,7 @@ public class Nagusia extends JFrame {
 			}
 		});
 		newItemMenuItem_5.setText("Ficha Cliente");
-		adibideakMenu.add(newItemMenuItem_5);
+		fichasMenu.add(newItemMenuItem_5);
 
 		final JMenuItem newItemMenuItem_7 = new JMenuItem();
 		newItemMenuItem_7.addActionListener(new ActionListener() {
@@ -376,7 +363,7 @@ public class Nagusia extends JFrame {
 			}
 		});
 		newItemMenuItem_7.setText("Ficha Peritaje");
-		adibideakMenu.add(newItemMenuItem_7);
+		fichasMenu.add(newItemMenuItem_7);
 
 		final JMenuItem newItemMenuItem_8 = new JMenuItem();
 		newItemMenuItem_8.addActionListener(new ActionListener() {
@@ -385,7 +372,20 @@ public class Nagusia extends JFrame {
 			}
 		});
 		newItemMenuItem_8.setText("Ficha Visita");
-		adibideakMenu.add(newItemMenuItem_8);
+		fichasMenu.add(newItemMenuItem_8);
+
+		final JMenu verMenu = new JMenu();
+		verMenu.setText("Ver");
+		menuBar.add(verMenu);
+
+		final JMenuItem newItemMenuItem = new JMenuItem();
+		newItemMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				((CardLayout) panel.getLayout()).show(panel, "presentacion");
+			}
+		});
+		newItemMenuItem.setText("Presentación");
+		verMenu.add(newItemMenuItem);
 
 		pack();
 		//
