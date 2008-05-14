@@ -99,10 +99,6 @@ public class VerClientePanel extends JPanel {
 
 			viewer = new JRViewer(jp);
 
-			JButton button_1;
-			button_1 = new JButton();
-			button_1.setText("New JButton");
-
 			JLabel dniDelClienteLabel;
 			dniDelClienteLabel = new JLabel();
 			dniDelClienteLabel.setText("DNI del cliente:");
@@ -182,10 +178,7 @@ public class VerClientePanel extends JPanel {
 																			.addPreferredGap(
 																					LayoutStyle.ComponentPlacement.RELATED)
 																			.addComponent(
-																					verFichaVaciaButton))
-															.addComponent(
-																	button_1,
-																	GroupLayout.Alignment.TRAILING))
+																					verFichaVaciaButton)))
 											.addContainerGap()));
 			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
 					GroupLayout.Alignment.LEADING).addGroup(
@@ -203,9 +196,7 @@ public class VerClientePanel extends JPanel {
 							.addPreferredGap(
 									LayoutStyle.ComponentPlacement.RELATED)
 							.addComponent(viewer, GroupLayout.DEFAULT_SIZE,
-									293, Short.MAX_VALUE).addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(button_1).addContainerGap()));
+									322, Short.MAX_VALUE).addContainerGap()));
 			setLayout(groupLayout);
 			//
 

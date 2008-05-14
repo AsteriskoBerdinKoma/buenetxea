@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
 import buenetxea.db.Connector;
 import buenetxea.objektuak.Inmueble;
@@ -51,6 +52,15 @@ class InmuebleKud {
 		ps.close();
 		rs.close();
 		return inmueble;
+	}
+
+	public Vector<String> getZonas() throws SQLException {
+		Vector<String> vZonas = new Vector<String>();
+		String query = "SELECT DISTINCT zona FROM inmueble";
+		ResultSet rs = this.statement.executeQuery(query);
+		while (rs.next())
+			vZonas.addElement(rs.getString("zona"));
+		return vZonas;
 	}
 
 	public boolean insertInmueble(Inmueble i) throws SQLException {
@@ -102,5 +112,4 @@ class InmuebleKud {
 		ps.close();
 		return result > 0;
 	}
-
 }

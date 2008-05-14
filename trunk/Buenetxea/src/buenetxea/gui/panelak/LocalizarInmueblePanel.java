@@ -216,8 +216,9 @@ public class LocalizarInmueblePanel extends JPanel {
 			textField_8 = new JTextField();
 
 			comboBox_7 = new JComboBox();
-			comboBox_7.setModel(new DefaultComboBoxModel(new String[] {
-					"Parte vieja", "Centro", "Afueras", "Kontxa" }));
+			comboBox_7.setModel(new DefaultComboBoxModel(kud.getZonas()));
+			// new String[] {
+			// "Parte vieja", "Centro", "Afueras", "Kontxa" }));
 
 			comboBox_8 = new JComboBox();
 			comboBox_8.setModel(new DefaultComboBoxModel(new String[] {
@@ -304,7 +305,7 @@ public class LocalizarInmueblePanel extends JPanel {
 			final GroupLayout groupLayout = new GroupLayout(this);
 			groupLayout
 					.setHorizontalGroup(groupLayout
-							.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.createParallelGroup(GroupLayout.Alignment.TRAILING)
 							.addGroup(
 									groupLayout
 											.createSequentialGroup()
@@ -315,8 +316,9 @@ public class LocalizarInmueblePanel extends JPanel {
 																	GroupLayout.Alignment.TRAILING)
 															.addComponent(
 																	scrollPane,
+																	GroupLayout.Alignment.LEADING,
 																	GroupLayout.DEFAULT_SIZE,
-																	566,
+																	622,
 																	Short.MAX_VALUE)
 															.addGroup(
 																	groupLayout
@@ -328,255 +330,236 @@ public class LocalizarInmueblePanel extends JPanel {
 																							.addGroup(
 																									groupLayout
 																											.createSequentialGroup()
-																											.addGap(
-																													13,
-																													13,
-																													13)
-																											.addComponent(
-																													exteriorLabel_1,
-																													GroupLayout.PREFERRED_SIZE,
-																													48,
-																													GroupLayout.PREFERRED_SIZE)
-																											.addGap(
-																													12,
-																													12,
-																													12)
-																											.addComponent(
-																													comboBox_exterior,
-																													GroupLayout.PREFERRED_SIZE,
-																													63,
-																													GroupLayout.PREFERRED_SIZE))
-																							.addGroup(
-																									groupLayout
-																											.createSequentialGroup()
 																											.addGroup(
 																													groupLayout
 																															.createParallelGroup(
-																																	GroupLayout.Alignment.LEADING)
+																																	GroupLayout.Alignment.TRAILING)
 																															.addGroup(
 																																	groupLayout
 																																			.createSequentialGroup()
 																																			.addPreferredGap(
 																																					LayoutStyle.ComponentPlacement.RELATED)
-																																			.addComponent(
-																																					checkBox_1,
-																																					GroupLayout.PREFERRED_SIZE,
-																																					117,
-																																					GroupLayout.PREFERRED_SIZE)
+																																			.addGroup(
+																																					groupLayout
+																																							.createParallelGroup(
+																																									GroupLayout.Alignment.LEADING)
+																																							.addComponent(
+																																									exteriorLabel_1,
+																																									GroupLayout.Alignment.TRAILING)
+																																							.addComponent(
+																																									precioLabel_1,
+																																									GroupLayout.Alignment.TRAILING)
+																																							.addComponent(
+																																									zonaLabel_1,
+																																									GroupLayout.Alignment.TRAILING)
+																																							.addComponent(
+																																									label_2,
+																																									GroupLayout.Alignment.TRAILING)
+																																							.addComponent(
+																																									provinciaLabel_1,
+																																									GroupLayout.Alignment.TRAILING))
 																																			.addPreferredGap(
 																																					LayoutStyle.ComponentPlacement.RELATED)
-																																			.addComponent(
-																																					deLabel_1,
-																																					GroupLayout.DEFAULT_SIZE,
-																																					55,
-																																					Short.MAX_VALUE))
-																															.addGroup(
-																																	groupLayout
-																																			.createSequentialGroup()
-																																			.addGap(
-																																					68,
-																																					68,
-																																					68)
-																																			.addComponent(
-																																					estadoLabel_1,
-																																					GroupLayout.PREFERRED_SIZE,
-																																					49,
-																																					GroupLayout.PREFERRED_SIZE)
-																																			.addGap(
-																																					8,
-																																					8,
-																																					8)
-																																			.addComponent(
-																																					altaCheckBox_1,
-																																					GroupLayout.PREFERRED_SIZE,
-																																					47,
-																																					GroupLayout.PREFERRED_SIZE)))
-																											.addPreferredGap(
-																													LayoutStyle.ComponentPlacement.RELATED)
-																											.addComponent(
-																													spinner_desdeHab,
-																													GroupLayout.PREFERRED_SIZE,
-																													44,
-																													GroupLayout.PREFERRED_SIZE)))
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addGroup(
-																					groupLayout
-																							.createParallelGroup(
-																									GroupLayout.Alignment.TRAILING)
-																							.addComponent(
-																									asceensorLabel_1,
-																									GroupLayout.PREFERRED_SIZE,
-																									58,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addGroup(
-																									groupLayout
-																											.createParallelGroup(
-																													GroupLayout.Alignment.LEADING)
-																											.addComponent(
-																													bajaCheckBox_1,
-																													GroupLayout.PREFERRED_SIZE,
-																													50,
-																													GroupLayout.PREFERRED_SIZE)
-																											.addComponent(
-																													hastaLabel_2,
-																													GroupLayout.PREFERRED_SIZE,
-																													32,
-																													GroupLayout.PREFERRED_SIZE)))
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addGroup(
-																					groupLayout
-																							.createParallelGroup(
-																									GroupLayout.Alignment.LEADING)
-																							.addComponent(
-																									spinner_hastaHab,
-																									GroupLayout.PREFERRED_SIZE,
-																									43,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addComponent(
-																									comboBox_ascensor,
-																									GroupLayout.PREFERRED_SIZE,
-																									63,
-																									GroupLayout.PREFERRED_SIZE))
-																			.addGap(
-																					23,
-																					23,
-																					23)
-																			.addComponent(
-																					vendidoCheckBox_1,
-																					GroupLayout.PREFERRED_SIZE,
-																					71,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addGap(
-																					37,
-																					37,
-																					37)
-																			.addComponent(
-																					localizarButton_1_1,
-																					GroupLayout.PREFERRED_SIZE,
-																					86,
-																					GroupLayout.PREFERRED_SIZE))
-															.addGroup(
-																	groupLayout
-																			.createSequentialGroup()
-																			.addGroup(
-																					groupLayout
-																							.createParallelGroup(
-																									GroupLayout.Alignment.TRAILING)
-																							.addComponent(
-																									precioLabel_1,
-																									GroupLayout.PREFERRED_SIZE,
-																									40,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addComponent(
-																									zonaLabel_1,
-																									GroupLayout.PREFERRED_SIZE,
-																									31,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addComponent(
-																									label_2,
-																									GroupLayout.PREFERRED_SIZE,
-																									59,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addComponent(
-																									provinciaLabel_1,
-																									GroupLayout.PREFERRED_SIZE,
-																									56,
-																									GroupLayout.PREFERRED_SIZE))
-																			.addGap(
-																					20,
-																					20,
-																					20)
-																			.addGroup(
-																					groupLayout
-																							.createParallelGroup(
-																									GroupLayout.Alignment.LEADING)
+																																			.addGroup(
+																																					groupLayout
+																																							.createParallelGroup(
+																																									GroupLayout.Alignment.LEADING)
+																																							.addGroup(
+																																									groupLayout
+																																											.createSequentialGroup()
+																																											.addGap(
+																																													0,
+																																													0,
+																																													0)
+																																											.addGroup(
+																																													groupLayout
+																																															.createParallelGroup(
+																																																	GroupLayout.Alignment.TRAILING)
+																																															.addGroup(
+																																																	groupLayout
+																																																			.createSequentialGroup()
+																																																			.addGap(
+																																																					6,
+																																																					6,
+																																																					6)
+																																																			.addComponent(
+																																																					hastaLabel_1_1,
+																																																					GroupLayout.PREFERRED_SIZE,
+																																																					33,
+																																																					GroupLayout.PREFERRED_SIZE)
+																																																			.addPreferredGap(
+																																																					LayoutStyle.ComponentPlacement.RELATED)
+																																																			.addComponent(
+																																																					textField_prezioa,
+																																																					GroupLayout.DEFAULT_SIZE,
+																																																					266,
+																																																					Short.MAX_VALUE)
+																																																			.addPreferredGap(
+																																																					LayoutStyle.ComponentPlacement.RELATED)
+																																																			.addComponent(
+																																																					label_1_1))
+																																															.addGroup(
+																																																	groupLayout
+																																																			.createSequentialGroup()
+																																																			.addGap(
+																																																					4,
+																																																					4,
+																																																					4)
+																																																			.addGroup(
+																																																					groupLayout
+																																																							.createParallelGroup(
+																																																									GroupLayout.Alignment.LEADING)
+																																																							.addComponent(
+																																																									textField_7,
+																																																									GroupLayout.Alignment.TRAILING,
+																																																									GroupLayout.DEFAULT_SIZE,
+																																																									315,
+																																																									Short.MAX_VALUE)
+																																																							.addComponent(
+																																																									textField_8,
+																																																									GroupLayout.Alignment.TRAILING,
+																																																									GroupLayout.DEFAULT_SIZE,
+																																																									315,
+																																																									Short.MAX_VALUE)
+																																																							.addComponent(
+																																																									textField_6,
+																																																									GroupLayout.Alignment.TRAILING,
+																																																									GroupLayout.DEFAULT_SIZE,
+																																																									315,
+																																																									Short.MAX_VALUE))))
+																																											.addPreferredGap(
+																																													LayoutStyle.ComponentPlacement.RELATED)
+																																											.addGroup(
+																																													groupLayout
+																																															.createParallelGroup(
+																																																	GroupLayout.Alignment.LEADING)
+																																															.addComponent(
+																																																	comboBox_7,
+																																																	GroupLayout.PREFERRED_SIZE,
+																																																	107,
+																																																	GroupLayout.PREFERRED_SIZE)
+																																															.addComponent(
+																																																	comboBox_8,
+																																																	GroupLayout.Alignment.TRAILING,
+																																																	GroupLayout.PREFERRED_SIZE,
+																																																	107,
+																																																	GroupLayout.PREFERRED_SIZE)
+																																															.addComponent(
+																																																	comboBox_9,
+																																																	GroupLayout.Alignment.TRAILING,
+																																																	GroupLayout.PREFERRED_SIZE,
+																																																	107,
+																																																	GroupLayout.PREFERRED_SIZE))
+																																											.addGap(
+																																													4,
+																																													4,
+																																													4))
+																																							.addGroup(
+																																									groupLayout
+																																											.createSequentialGroup()
+																																											.addGap(
+																																													56,
+																																													56,
+																																													56)
+																																											.addComponent(
+																																													deLabel_1)
+																																											.addPreferredGap(
+																																													LayoutStyle.ComponentPlacement.RELATED)
+																																											.addComponent(
+																																													spinner_desdeHab,
+																																													GroupLayout.PREFERRED_SIZE,
+																																													44,
+																																													GroupLayout.PREFERRED_SIZE)
+																																											.addPreferredGap(
+																																													LayoutStyle.ComponentPlacement.RELATED)
+																																											.addComponent(
+																																													hastaLabel_2)
+																																											.addPreferredGap(
+																																													LayoutStyle.ComponentPlacement.RELATED)
+																																											.addComponent(
+																																													spinner_hastaHab,
+																																													GroupLayout.PREFERRED_SIZE,
+																																													43,
+																																													GroupLayout.PREFERRED_SIZE)
+																																											.addGap(
+																																													105,
+																																													105,
+																																													105))
+																																							.addGroup(
+																																									groupLayout
+																																											.createSequentialGroup()
+																																											.addGap(
+																																													4,
+																																													4,
+																																													4)
+																																											.addComponent(
+																																													comboBox_exterior,
+																																													GroupLayout.PREFERRED_SIZE,
+																																													GroupLayout.DEFAULT_SIZE,
+																																													GroupLayout.PREFERRED_SIZE)
+																																											.addPreferredGap(
+																																													LayoutStyle.ComponentPlacement.RELATED)
+																																											.addComponent(
+																																													asceensorLabel_1)
+																																											.addPreferredGap(
+																																													LayoutStyle.ComponentPlacement.RELATED)
+																																											.addComponent(
+																																													comboBox_ascensor,
+																																													GroupLayout.PREFERRED_SIZE,
+																																													GroupLayout.DEFAULT_SIZE,
+																																													GroupLayout.PREFERRED_SIZE))))
+																															.addComponent(
+																																	checkBox_1,
+																																	GroupLayout.Alignment.LEADING))
+																											.addGap(
+																													8,
+																													8,
+																													8))
 																							.addGroup(
 																									groupLayout
 																											.createSequentialGroup()
 																											.addComponent(
-																													hastaLabel_1_1,
-																													GroupLayout.PREFERRED_SIZE,
-																													33,
-																													GroupLayout.PREFERRED_SIZE)
+																													estadoLabel_1)
 																											.addPreferredGap(
 																													LayoutStyle.ComponentPlacement.RELATED)
 																											.addComponent(
-																													textField_prezioa,
-																													GroupLayout.PREFERRED_SIZE,
-																													66,
-																													GroupLayout.PREFERRED_SIZE)
+																													altaCheckBox_1)
 																											.addPreferredGap(
 																													LayoutStyle.ComponentPlacement.RELATED)
 																											.addComponent(
-																													label_1_1,
-																													GroupLayout.PREFERRED_SIZE,
-																													28,
-																													GroupLayout.PREFERRED_SIZE))
-																							.addComponent(
-																									textField_8,
-																									GroupLayout.Alignment.TRAILING,
-																									GroupLayout.DEFAULT_SIZE,
-																									170,
-																									Short.MAX_VALUE)
-																							.addComponent(
-																									textField_6,
-																									GroupLayout.Alignment.TRAILING,
-																									GroupLayout.DEFAULT_SIZE,
-																									170,
-																									Short.MAX_VALUE)
-																							.addComponent(
-																									textField_7,
-																									GroupLayout.Alignment.TRAILING,
-																									GroupLayout.DEFAULT_SIZE,
-																									170,
-																									Short.MAX_VALUE))
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
+																													bajaCheckBox_1)
+																											.addPreferredGap(
+																													LayoutStyle.ComponentPlacement.RELATED)
+																											.addComponent(
+																													vendidoCheckBox_1)
+																											.addPreferredGap(
+																													LayoutStyle.ComponentPlacement.RELATED)))
 																			.addGroup(
 																					groupLayout
 																							.createParallelGroup(
-																									GroupLayout.Alignment.LEADING)
+																									GroupLayout.Alignment.TRAILING)
 																							.addComponent(
-																									comboBox_7,
-																									0,
-																									170,
-																									Short.MAX_VALUE)
-																							.addComponent(
-																									comboBox_8,
-																									0,
-																									170,
-																									Short.MAX_VALUE)
-																							.addComponent(
-																									comboBox_9,
-																									0,
-																									170,
-																									Short.MAX_VALUE))
-																			.addGap(
-																					12,
-																					12,
-																					12)
-																			.addGroup(
-																					groupLayout
-																							.createParallelGroup(
-																									GroupLayout.Alignment.LEADING)
-																							.addComponent(
-																									button_1_1,
+																									localizarButton_1_1,
 																									GroupLayout.PREFERRED_SIZE,
-																									129,
+																									111,
 																									GroupLayout.PREFERRED_SIZE)
 																							.addComponent(
 																									button_2_1,
 																									GroupLayout.PREFERRED_SIZE,
-																									129,
+																									111,
 																									GroupLayout.PREFERRED_SIZE)
+																							.addComponent(
+																									button_1_1)
 																							.addComponent(
 																									button_3,
 																									GroupLayout.PREFERRED_SIZE,
-																									129,
-																									GroupLayout.PREFERRED_SIZE))))
-											.addContainerGap()));
+																									111,
+																									GroupLayout.PREFERRED_SIZE))
+																			.addGap(
+																					18,
+																					18,
+																					18)))
+											.addGap(0, 0, 0)));
 			groupLayout
 					.setVerticalGroup(groupLayout
 							.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -599,14 +582,14 @@ public class LocalizarInmueblePanel extends JPanel {
 																	GroupLayout.DEFAULT_SIZE,
 																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
+																	textField_7,
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
 																	button_2_1,
 																	GroupLayout.PREFERRED_SIZE,
 																	26,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
-																	textField_7,
-																	GroupLayout.PREFERRED_SIZE,
-																	16,
 																	GroupLayout.PREFERRED_SIZE))
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
@@ -620,14 +603,14 @@ public class LocalizarInmueblePanel extends JPanel {
 																	16,
 																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
-																	button_1_1,
-																	GroupLayout.PREFERRED_SIZE,
-																	26,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
 																	comboBox_8,
 																	GroupLayout.PREFERRED_SIZE,
 																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	button_1_1,
+																	GroupLayout.PREFERRED_SIZE,
+																	26,
 																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
 																	textField_6,
@@ -645,11 +628,6 @@ public class LocalizarInmueblePanel extends JPanel {
 																	16,
 																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
-																	textField_8,
-																	GroupLayout.PREFERRED_SIZE,
-																	21,
-																	GroupLayout.PREFERRED_SIZE)
-															.addComponent(
 																	comboBox_7,
 																	GroupLayout.PREFERRED_SIZE,
 																	GroupLayout.DEFAULT_SIZE,
@@ -658,6 +636,11 @@ public class LocalizarInmueblePanel extends JPanel {
 																	button_3,
 																	GroupLayout.PREFERRED_SIZE,
 																	26,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	textField_8,
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
 																	GroupLayout.PREFERRED_SIZE))
 											.addPreferredGap(
 													LayoutStyle.ComponentPlacement.RELATED)
@@ -671,7 +654,7 @@ public class LocalizarInmueblePanel extends JPanel {
 																	16,
 																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
-																	hastaLabel_1_1,
+																	label_1_1,
 																	GroupLayout.PREFERRED_SIZE,
 																	16,
 																	GroupLayout.PREFERRED_SIZE)
@@ -681,7 +664,7 @@ public class LocalizarInmueblePanel extends JPanel {
 																	20,
 																	GroupLayout.PREFERRED_SIZE)
 															.addComponent(
-																	label_1_1,
+																	hastaLabel_1_1,
 																	GroupLayout.PREFERRED_SIZE,
 																	16,
 																	GroupLayout.PREFERRED_SIZE))
@@ -689,133 +672,95 @@ public class LocalizarInmueblePanel extends JPanel {
 											.addGroup(
 													groupLayout
 															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
-															.addGroup(
-																	groupLayout
-																			.createSequentialGroup()
-																			.addPreferredGap(
-																					LayoutStyle.ComponentPlacement.RELATED)
-																			.addGroup(
-																					groupLayout
-																							.createParallelGroup(
-																									GroupLayout.Alignment.BASELINE)
-																							.addComponent(
-																									comboBox_exterior,
-																									GroupLayout.PREFERRED_SIZE,
-																									GroupLayout.DEFAULT_SIZE,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addComponent(
-																									comboBox_ascensor,
-																									GroupLayout.PREFERRED_SIZE,
-																									GroupLayout.DEFAULT_SIZE,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addComponent(
-																									asceensorLabel_1,
-																									GroupLayout.PREFERRED_SIZE,
-																									16,
-																									GroupLayout.PREFERRED_SIZE)))
-															.addGroup(
-																	groupLayout
-																			.createSequentialGroup()
-																			.addGap(
-																					4,
-																					4,
-																					4)
-																			.addComponent(
-																					exteriorLabel_1,
-																					GroupLayout.PREFERRED_SIZE,
-																					16,
-																					GroupLayout.PREFERRED_SIZE)))
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	exteriorLabel_1,
+																	GroupLayout.PREFERRED_SIZE,
+																	16,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	asceensorLabel_1,
+																	GroupLayout.PREFERRED_SIZE,
+																	16,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	comboBox_ascensor,
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	comboBox_exterior,
+																	GroupLayout.PREFERRED_SIZE,
+																	GroupLayout.DEFAULT_SIZE,
+																	GroupLayout.PREFERRED_SIZE))
 											.addGap(8, 8, 8)
 											.addGroup(
 													groupLayout
 															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
+																	GroupLayout.Alignment.BASELINE)
+															.addComponent(
+																	checkBox_1)
+															.addComponent(
+																	deLabel_1,
+																	GroupLayout.PREFERRED_SIZE,
+																	16,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	spinner_desdeHab,
+																	GroupLayout.PREFERRED_SIZE,
+																	20,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	hastaLabel_2,
+																	GroupLayout.PREFERRED_SIZE,
+																	16,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	spinner_hastaHab,
+																	GroupLayout.PREFERRED_SIZE,
+																	20,
+																	GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addGroup(
+													groupLayout
+															.createParallelGroup(
+																	GroupLayout.Alignment.BASELINE)
 															.addComponent(
 																	localizarButton_1_1,
 																	GroupLayout.PREFERRED_SIZE,
 																	26,
 																	GroupLayout.PREFERRED_SIZE)
-															.addGroup(
-																	groupLayout
-																			.createParallelGroup(
-																					GroupLayout.Alignment.BASELINE)
-																			.addComponent(
-																					deLabel_1,
-																					GroupLayout.PREFERRED_SIZE,
-																					16,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					spinner_desdeHab,
-																					GroupLayout.PREFERRED_SIZE,
-																					20,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					hastaLabel_2,
-																					GroupLayout.PREFERRED_SIZE,
-																					16,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					spinner_hastaHab,
-																					GroupLayout.PREFERRED_SIZE,
-																					20,
-																					GroupLayout.PREFERRED_SIZE)
-																			.addComponent(
-																					checkBox_1,
-																					GroupLayout.PREFERRED_SIZE,
-																					24,
-																					GroupLayout.PREFERRED_SIZE)))
-											.addGap(4, 4, 4)
-											.addGroup(
-													groupLayout
-															.createParallelGroup(
-																	GroupLayout.Alignment.LEADING)
-															.addGroup(
-																	groupLayout
-																			.createSequentialGroup()
-																			.addGap(
-																					5,
-																					5,
-																					5)
-																			.addComponent(
-																					estadoLabel_1,
-																					GroupLayout.PREFERRED_SIZE,
-																					16,
-																					GroupLayout.PREFERRED_SIZE))
-															.addGroup(
-																	groupLayout
-																			.createSequentialGroup()
-																			.addGap(
-																					1,
-																					1,
-																					1)
-																			.addGroup(
-																					groupLayout
-																							.createParallelGroup(
-																									GroupLayout.Alignment.BASELINE)
-																							.addComponent(
-																									altaCheckBox_1,
-																									GroupLayout.PREFERRED_SIZE,
-																									24,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addComponent(
-																									vendidoCheckBox_1,
-																									GroupLayout.PREFERRED_SIZE,
-																									24,
-																									GroupLayout.PREFERRED_SIZE)
-																							.addComponent(
-																									bajaCheckBox_1,
-																									GroupLayout.PREFERRED_SIZE,
-																									24,
-																									GroupLayout.PREFERRED_SIZE))))
-											.addGap(7, 7, 7).addComponent(
-													scrollPane,
+															.addComponent(
+																	estadoLabel_1,
+																	GroupLayout.PREFERRED_SIZE,
+																	16,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	altaCheckBox_1,
+																	GroupLayout.PREFERRED_SIZE,
+																	24,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	bajaCheckBox_1,
+																	GroupLayout.PREFERRED_SIZE,
+																	24,
+																	GroupLayout.PREFERRED_SIZE)
+															.addComponent(
+																	vendidoCheckBox_1,
+																	GroupLayout.PREFERRED_SIZE,
+																	24,
+																	GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(
+													LayoutStyle.ComponentPlacement.RELATED)
+											.addComponent(scrollPane,
 													GroupLayout.DEFAULT_SIZE,
-													115, Short.MAX_VALUE)
+													249, Short.MAX_VALUE)
 											.addContainerGap()));
-			groupLayout.linkSize(javax.swing.SwingConstants.VERTICAL,
-					new java.awt.Component[] { textField_6, textField_7,
-							textField_8 });
+			groupLayout
+					.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+							new java.awt.Component[] { button_1_1, button_2_1,
+									button_3 });
 			setLayout(groupLayout);
 			//
 		} catch (SQLException e3) {
