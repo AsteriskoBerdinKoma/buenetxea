@@ -55,7 +55,7 @@ public class CrearPropietarioPanel extends JPanel {
 	 * @throws ParseException
 	 */
 
-	public CrearPropietarioPanel() throws ParseException {
+	public CrearPropietarioPanel() {
 		super();
 
 		JPanel panel;
@@ -68,8 +68,13 @@ public class CrearPropietarioPanel extends JPanel {
 		dniLabel = new JLabel();
 		dniLabel.setText("DNI:");
 
-		formattedTextField = new JFormattedTextField(new MaskFormatter(
-				"########U"));
+		try {
+			formattedTextField = new JFormattedTextField(new MaskFormatter(
+					"########U"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		formattedTextField.setInputVerifier(new ValidateDNI());
 		formattedTextField.setColumns(9);
 

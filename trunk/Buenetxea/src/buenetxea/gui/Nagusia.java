@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Calendar;
 
 import javax.swing.GroupLayout;
@@ -108,65 +107,54 @@ public class Nagusia extends JFrame {
 		panel_1.add(progressBar);
 
 		CrearPropietarioPanel crearPropietarioPanel = null;
-		try {
-			// panel.add(panela,"prueba");
-			final BuenetxeaPanel buenetxeaPanel = new BuenetxeaPanel();
-			buenetxeaPanel.setName("presentacion");
-			panel.add(buenetxeaPanel, buenetxeaPanel.getName());
 
-			localizarClientePanel = new LocalizarClientePanel();
-			localizarClientePanel.setName("localizarCliente");
-			panel.add(localizarClientePanel, localizarClientePanel.getName());
+		final BuenetxeaPanel buenetxeaPanel = new BuenetxeaPanel();
+		buenetxeaPanel.setName("presentacion");
+		panel.add(buenetxeaPanel, buenetxeaPanel.getName());
 
-			final BuscasPanel buscas = new BuscasPanel();
-			buscas.setName("buscas");
-			panel.add(buscas, buscas.getName());
+		localizarClientePanel = new LocalizarClientePanel();
+		localizarClientePanel.setName("localizarCliente");
+		panel.add(localizarClientePanel, localizarClientePanel.getName());
 
-			localizarInmueblePanel = new LocalizarInmueblePanel();
-			localizarInmueblePanel.setName("localizador");
-			panel.add(localizarInmueblePanel, localizarInmueblePanel.getName());
+		final BuscasPanel buscas = new BuscasPanel();
+		buscas.setName("buscas");
+		panel.add(buscas, buscas.getName());
 
-			final SeguimientoPropietarioPanel seguimientoPropietarioPanel = new SeguimientoPropietarioPanel();
-			seguimientoPropietarioPanel.setName("seguimientoPropietario");
-			panel.add(seguimientoPropietarioPanel, seguimientoPropietarioPanel
-					.getName());
+		localizarInmueblePanel = new LocalizarInmueblePanel();
+		localizarInmueblePanel.setName("localizador");
+		panel.add(localizarInmueblePanel, localizarInmueblePanel.getName());
 
-			final IntroducirInmueblePanel introducirInmueblePanel = new IntroducirInmueblePanel();
-			introducirInmueblePanel.setName("peritaje");
-			panel.add(introducirInmueblePanel, introducirInmueblePanel
-					.getName());
+		final SeguimientoPropietarioPanel seguimientoPropietarioPanel = new SeguimientoPropietarioPanel();
+		seguimientoPropietarioPanel.setName("seguimientoPropietario");
+		panel.add(seguimientoPropietarioPanel, seguimientoPropietarioPanel
+				.getName());
 
-			modificarInmueblePanel = new ModificarInmueblePanel();
-			modificarInmueblePanel.setName("modificarInmueble");
-			panel.add(modificarInmueblePanel, modificarInmueblePanel.getName());
+		final IntroducirInmueblePanel introducirInmueblePanel = new IntroducirInmueblePanel();
+		introducirInmueblePanel.setName("peritaje");
+		panel.add(introducirInmueblePanel, introducirInmueblePanel.getName());
 
-			final IntroducirDatosVisitaPanel introducirDatosVisitaPanel = new IntroducirDatosVisitaPanel();
-			introducirDatosVisitaPanel.setName("visitas");
-			panel.add(introducirDatosVisitaPanel, introducirDatosVisitaPanel
-					.getName());
+		modificarInmueblePanel = new ModificarInmueblePanel();
+		modificarInmueblePanel.setName("modificarInmueble");
+		panel.add(modificarInmueblePanel, modificarInmueblePanel.getName());
 
-			final CrearClientePanel crearClientePanel = new CrearClientePanel();
-			crearClientePanel.setName("nuevoCliente");
-			panel.add(crearClientePanel, crearClientePanel.getName());
-			crearPropietarioPanel = new CrearPropietarioPanel();
+		final IntroducirDatosVisitaPanel introducirDatosVisitaPanel = new IntroducirDatosVisitaPanel();
+		introducirDatosVisitaPanel.setName("visitas");
+		panel.add(introducirDatosVisitaPanel, introducirDatosVisitaPanel
+				.getName());
 
-			mostrarClientesInteresadosPanel = new MostrarClientesInteresadosPanel();
-			mostrarClientesInteresadosPanel
-					.setName("mostrarClientesInteresados");
-			panel.add(mostrarClientesInteresadosPanel,
-					mostrarClientesInteresadosPanel.getName());
+		final CrearClientePanel crearClientePanel = new CrearClientePanel();
+		crearClientePanel.setName("nuevoCliente");
+		panel.add(crearClientePanel, crearClientePanel.getName());
+		crearPropietarioPanel = new CrearPropietarioPanel();
 
-			verVisitaPanel = new VerVisitaPanel();
-			verVisitaPanel.setName("verVisita");
+		mostrarClientesInteresadosPanel = new MostrarClientesInteresadosPanel();
+		mostrarClientesInteresadosPanel.setName("mostrarClientesInteresados");
+		panel.add(mostrarClientesInteresadosPanel,
+				mostrarClientesInteresadosPanel.getName());
 
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+		verVisitaPanel = new VerVisitaPanel();
+		verVisitaPanel.setName("verVisita");
+
 		crearPropietarioPanel.setName("crearPropietario");
 		panel.add(crearPropietarioPanel, crearPropietarioPanel.getName());
 
