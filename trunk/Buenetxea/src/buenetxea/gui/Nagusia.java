@@ -274,31 +274,6 @@ public class Nagusia extends JFrame {
 										GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)));
-
-		final JButton button = new JButton();
-		button.setToolTipText("Ver Fichas");
-		button.setIcon(SwingResourceManager.getIcon(Nagusia.class,
-				"/buenetxea/resources/fichas 48x48.png"));
-		toolBar.add(button);
-
-		final JPopupMenu popupMenu = new JPopupMenu();
-		addPopup(button, popupMenu);
-
-		final JMenuItem newItemMenuItem_9 = new JMenuItem();
-		newItemMenuItem_9.setText("Ver Ficha de Inmueble");
-		popupMenu.add(newItemMenuItem_9);
-
-		final JMenuItem newItemMenuItem_10 = new JMenuItem();
-		newItemMenuItem_10.setText("Ver Ficha de Cliente");
-		popupMenu.add(newItemMenuItem_10);
-
-		final JMenuItem newItemMenuItem_12 = new JMenuItem();
-		newItemMenuItem_12.setText("Ver Ficha de Peritaje");
-		popupMenu.add(newItemMenuItem_12);
-
-		final JMenuItem newItemMenuItem_11 = new JMenuItem();
-		newItemMenuItem_11.setText("Ver Ficha de Visita");
-		popupMenu.add(newItemMenuItem_11);
 		this.getContentPane().setLayout(groupLayout);
 
 		final JMenuBar menuBar = new JMenuBar();
