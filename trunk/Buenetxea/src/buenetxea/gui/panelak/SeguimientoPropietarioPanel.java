@@ -17,9 +17,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 
-import buenetxea.db.ResultSetTableModel;
+import buenetxea.db.CachedRowSetTableModel;
 import buenetxea.kudeatzaileak.Kudeatzailea;
 import buenetxea.objektuak.Inmueble;
 
@@ -30,14 +29,22 @@ public class SeguimientoPropietarioPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JTextField textField;
-	private JTable table_1;
-	private JTable table;
-	private ResultSetTableModel tableModel;
-	private ResultSetTableModel tableModel2;
+	private JTextField refInmuebletextField;
+	private JTable tablaVisitas;
+	private JTable tablaCambios;
+	private CachedRowSetTableModel tableModelVisitas;
+	private CachedRowSetTableModel tableModelCambios;
+
+	private final String queryVisitasVacio = "SELECT fk_cliente_dni AS 'DNI Cliente', fecha AS 'Fecha visita', " +
+											 "precio AS '¿Precio?', le_gusta AS '¿Le gusta?', vendido_en_esta_visita AS '¿Vendido?', " +
+											 "alquilado_en_esta_visita AS '¿Alquilado?', representante AS 'Representante' " +
+											 "FROM rel_visita WHERE false";
+	private final String queryCambiosVacio = "SELECT fk_propietario_dni AS 'DNI Propietario', " +
+											 "fecha AS 'Fecha de cambio', nuevo_precio AS 'Nuevo Precio', " +
+											 "observaciones AS 'Motivo de cambio' " +
+											 "FROM rel_inmueble_propietario WHERE false";
 
 	private Kudeatzailea kud;
-	private boolean datuaSartua = false;
 
 	/**
 	 * Create the panel
@@ -46,28 +53,11 @@ public class SeguimientoPropietarioPanel extends JPanel {
 		super();
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(final ComponentEvent arg0) {
-				try {
-					if (tableModel == null) {
-						tableModel = new ResultSetTableModel(getQuery());
-					} else {
-						tableModel.refresh();
-					}
-					if (tableModel2 == null) {
-						tableModel2 = new ResultSetTableModel(getQuery2());
-					} else {
-						tableModel2.refresh();
-					}
-					table_1.setModel(tableModel);
-					table.setModel(tableModel2);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+
 			}
 
 			public void componentHidden(final ComponentEvent arg0) {
-				table_1.setModel(new DefaultTableModel());
-				table.setModel(new DefaultTableModel());
+				//Put here the code to empty the fields
 			}
 		});
 
@@ -81,69 +71,60 @@ public class SeguimientoPropietarioPanel extends JPanel {
 			JPanel panel;
 			panel = new JPanel();
 			panel.setBorder(new TitledBorder(null,
-					"Cambios realizados por el propietarios",
+					"Cambios realizados por los propietarios",
 					TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
 
-			JPanel panel_1;
-			panel_1 = new JPanel();
-			panel_1.setBorder(new TitledBorder(null, "Visitas realizadas",
+			JPanel panelVisitas;
+			panelVisitas = new JPanel();
+			panelVisitas.setBorder(new TitledBorder(null, "Visitas realizadas",
 					TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
 
-			JPanel panel_2;
-			panel_2 = new JPanel();
-			panel_2.setBorder(new TitledBorder(null, "Búsqueda",
+			JPanel panelCambios;
+			panelCambios = new JPanel();
+			panelCambios.setBorder(new TitledBorder(null, "Búsqueda",
 					TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
 
-			// Visitas realizadas
-			JScrollPane scrollPane_1;
-			scrollPane_1 = new JScrollPane();
+			JScrollPane scrollVisitas;
+			scrollVisitas = new JScrollPane();
 
-			// Cambios propietario
-			JScrollPane scrollPane;
-			scrollPane = new JScrollPane();
+			JScrollPane scrollCambios;
+			scrollCambios = new JScrollPane();
+			
+			tableModelVisitas = new CachedRowSetTableModel(queryVisitasVacio);
+			tableModelCambios = new CachedRowSetTableModel(queryCambiosVacio);
 
-			table_1 = new JTable();
-			table_1.setModel(new DefaultTableModel());
-			scrollPane_1.setViewportView(table_1);
+			tablaVisitas = new JTable();
+			tablaVisitas.setModel(tableModelVisitas);
+			scrollVisitas.setViewportView(tablaVisitas);
 
-			table = new JTable();
-			table.setModel(new DefaultTableModel());
-			scrollPane.setViewportView(table);
+			tablaCambios = new JTable();
+			tablaCambios.setModel(tableModelCambios);
+			scrollCambios.setViewportView(tablaCambios);
 
 			JLabel label;
 			label = new JLabel();
-			label.setText("nº referencia:");
+			label.setText("Ref. Inmueble:");
 
-			table_1.setModel(new DefaultTableModel());
-			table.setModel(new DefaultTableModel());
+			JButton mostrarSegButton;
+			mostrarSegButton = new JButton();
+			mostrarSegButton.setText("Mostrar seguimiento");
 
-			JButton mostrarVisitasButton;
-			mostrarVisitasButton = new JButton();
-			mostrarVisitasButton.setText("Mostrar visitas");
+			refInmuebletextField = new JTextField();
 
-			textField = new JTextField();
-
-			mostrarVisitasButton.addActionListener(new ActionListener() {
+			mostrarSegButton.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					if (!textField.getText().isEmpty()) {
-						datuaSartua = true;
-
+					if (!refInmuebletextField.getText().isEmpty()) {
 						int numReferencia;
-						numReferencia = Integer.parseInt(textField.getText());
+						numReferencia = Integer.parseInt(refInmuebletextField.getText());
 						try {
 
 							Inmueble inmueble = kud.getInmueble(numReferencia);
 							if (inmueble != null) {
-								tableModel = new ResultSetTableModel(getQuery());
-								// tableModel2 = new
-								// ResultSetTableModel(getQuery2());
-								table_1.setModel(tableModel);
-								tableModel.refresh();
-								// table.setModel(tableModel2);
-								// tableModel2.refresh();
+								tableModelVisitas.setQuery(getQuery());
+								tableModelCambios.setQuery(getQuery2());
 							} else {
 								JOptionPane joptionpane = new JOptionPane(
 										"La referencia del inmueble introducida no se encuentra en la base de datos.",
@@ -153,7 +134,6 @@ public class SeguimientoPropietarioPanel extends JPanel {
 										true);
 							}
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 							JOptionPane joptionpane = new JOptionPane(
 									"La referencia del inmueble introducida no se encuentra en la base de datos.",
@@ -167,104 +147,61 @@ public class SeguimientoPropietarioPanel extends JPanel {
 			});
 
 			final GroupLayout groupLayout_2 = new GroupLayout(
-					(JComponent) panel_1);
+					(JComponent) panelVisitas);
 			groupLayout_2.setHorizontalGroup(groupLayout_2.createParallelGroup(
 					GroupLayout.Alignment.LEADING).addGroup(
 					groupLayout_2.createSequentialGroup().addContainerGap()
-							.addComponent(scrollPane_1,
+							.addComponent(scrollVisitas,
 									GroupLayout.DEFAULT_SIZE, 428,
 									Short.MAX_VALUE).addContainerGap()));
 			groupLayout_2.setVerticalGroup(groupLayout_2.createParallelGroup(
 					GroupLayout.Alignment.LEADING).addGroup(
 					groupLayout_2.createSequentialGroup().addComponent(
-							scrollPane_1, GroupLayout.DEFAULT_SIZE, 88,
+							scrollVisitas, GroupLayout.DEFAULT_SIZE, 88,
 							Short.MAX_VALUE).addContainerGap()));
-			panel_1.setLayout(groupLayout_2);
-
-			JButton mostrarCambiosButton;
-			mostrarCambiosButton = new JButton();
-			mostrarCambiosButton.addActionListener(new ActionListener() {
-				public void actionPerformed(final ActionEvent arg0) {
-					if (!textField.getText().isEmpty()) {
-						datuaSartua = true;
-
-						int numReferencia;
-						numReferencia = Integer.parseInt(textField.getText());
-						try {
-
-							Inmueble inmueble = kud.getInmueble(numReferencia);
-							if (inmueble != null) {
-								tableModel2 = new ResultSetTableModel(
-										getQuery2());
-								table.setModel(tableModel2);
-								tableModel2.refresh();
-							} else {
-								JOptionPane joptionpane = new JOptionPane(
-										"La referencia del inmueble introducida no se encuentra en la base de datos.",
-										JOptionPane.ERROR_MESSAGE);
-								joptionpane.createDialog(
-										"Inmueble no encontrado").setVisible(
-										true);
-							}
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-							JOptionPane joptionpane = new JOptionPane(
-									"La referencia del inmueble introducida no se encuentra en la base de datos.",
-									JOptionPane.ERROR_MESSAGE);
-							joptionpane.createDialog("Inmueble no encontrado")
-									.setVisible(true);
-						}
-					}
-				}
-
-			});
-			mostrarCambiosButton.setText("Mostrar cambios");
+			panelVisitas.setLayout(groupLayout_2);
+			final GroupLayout groupLayout_1 = new GroupLayout(
+					(JComponent) panel);
+			groupLayout_1.setHorizontalGroup(groupLayout_1.createParallelGroup(
+					GroupLayout.Alignment.LEADING).addGroup(
+					groupLayout_1.createSequentialGroup().addContainerGap()
+							.addComponent(scrollCambios,
+									GroupLayout.DEFAULT_SIZE, 428,
+									Short.MAX_VALUE).addContainerGap()));
+			groupLayout_1.setVerticalGroup(groupLayout_1.createParallelGroup(
+					GroupLayout.Alignment.LEADING).addGroup(
+					groupLayout_1.createSequentialGroup().addComponent(
+							scrollCambios, GroupLayout.DEFAULT_SIZE, 87,
+							Short.MAX_VALUE).addContainerGap()));
+			panel.setLayout(groupLayout_1);
 			final GroupLayout groupLayout_3 = new GroupLayout(
-					(JComponent) panel_2);
+					(JComponent) panelCambios);
 			groupLayout_3.setHorizontalGroup(groupLayout_3.createParallelGroup(
 					GroupLayout.Alignment.LEADING).addGroup(
 					groupLayout_3.createSequentialGroup().addContainerGap()
 							.addComponent(label).addPreferredGap(
 									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(textField,
+							.addComponent(refInmuebletextField,
 									GroupLayout.PREFERRED_SIZE, 93,
 									GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(
 									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(mostrarVisitasButton)
-							.addPreferredGap(
-									LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(mostrarCambiosButton)
-							.addContainerGap(66, Short.MAX_VALUE)));
+							.addComponent(mostrarSegButton).addContainerGap(
+									160, Short.MAX_VALUE)));
 			groupLayout_3.setVerticalGroup(groupLayout_3.createParallelGroup(
 					GroupLayout.Alignment.LEADING).addGroup(
 					groupLayout_3.createSequentialGroup().addGroup(
 							groupLayout_3.createParallelGroup(
 									GroupLayout.Alignment.BASELINE)
 									.addComponent(label).addComponent(
-											textField,
+											refInmuebletextField,
 											GroupLayout.PREFERRED_SIZE,
 											GroupLayout.DEFAULT_SIZE,
 											GroupLayout.PREFERRED_SIZE)
-									.addComponent(mostrarVisitasButton)
-									.addComponent(mostrarCambiosButton))
+									.addComponent(mostrarSegButton))
 							.addContainerGap(GroupLayout.DEFAULT_SIZE,
 									Short.MAX_VALUE)));
-			panel_2.setLayout(groupLayout_3);
-			final GroupLayout groupLayout_1 = new GroupLayout(
-					(JComponent) panel);
-			groupLayout_1.setHorizontalGroup(groupLayout_1.createParallelGroup(
-					GroupLayout.Alignment.LEADING).addGroup(
-					groupLayout_1.createSequentialGroup().addContainerGap()
-							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE,
-									428, Short.MAX_VALUE).addContainerGap()));
-			groupLayout_1.setVerticalGroup(groupLayout_1.createParallelGroup(
-					GroupLayout.Alignment.LEADING).addGroup(
-					groupLayout_1.createSequentialGroup().addComponent(
-							scrollPane, GroupLayout.DEFAULT_SIZE, 87,
-							Short.MAX_VALUE).addContainerGap()));
-			panel.setLayout(groupLayout_1);
+			panelCambios.setLayout(groupLayout_3);
 			final GroupLayout groupLayout = new GroupLayout((JComponent) this);
 			groupLayout
 					.setHorizontalGroup(groupLayout
@@ -283,12 +220,12 @@ public class SeguimientoPropietarioPanel extends JPanel {
 																	0,
 																	Short.MAX_VALUE)
 															.addComponent(
-																	panel_2,
+																	panelCambios,
 																	GroupLayout.DEFAULT_SIZE,
 																	464,
 																	Short.MAX_VALUE)
 															.addComponent(
-																	panel_1,
+																	panelVisitas,
 																	GroupLayout.Alignment.TRAILING,
 																	GroupLayout.PREFERRED_SIZE,
 																	0,
@@ -296,13 +233,14 @@ public class SeguimientoPropietarioPanel extends JPanel {
 											.addContainerGap()));
 			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
 					GroupLayout.Alignment.LEADING).addGroup(
-					groupLayout.createSequentialGroup().addComponent(panel_2,
-							GroupLayout.PREFERRED_SIZE,
+					groupLayout.createSequentialGroup().addComponent(
+							panelCambios, GroupLayout.PREFERRED_SIZE,
 							GroupLayout.DEFAULT_SIZE,
 							GroupLayout.PREFERRED_SIZE).addPreferredGap(
 							LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE,
-									129, Short.MAX_VALUE).addPreferredGap(
+							.addComponent(panelVisitas,
+									GroupLayout.DEFAULT_SIZE, 129,
+									Short.MAX_VALUE).addPreferredGap(
 									LayoutStyle.ComponentPlacement.RELATED)
 							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 128,
 									Short.MAX_VALUE).addGap(12, 12, 12)));
@@ -318,10 +256,7 @@ public class SeguimientoPropietarioPanel extends JPanel {
 	}
 
 	private String getQuery() {
-		// TODO Auto-generated method stub
-		int ref = 0;
-		if (datuaSartua)
-			ref = Integer.parseInt(textField.getText().trim());
+		int ref = Integer.parseInt(refInmuebletextField.getText().trim());
 		return "SELECT fk_cliente_dni AS 'DNI Cliente', fecha AS 'Fecha visita', "
 				+ "precio AS '¿Precio?', le_gusta AS '¿Le gusta?', "
 				+ "vendido_en_esta_visita AS '¿Vendido?', "
@@ -333,10 +268,7 @@ public class SeguimientoPropietarioPanel extends JPanel {
 	}
 
 	private String getQuery2() {
-		// TODO Auto-generated method stub
-		int ref = 0;
-		if (datuaSartua)
-			ref = Integer.parseInt(textField.getText().trim());
+		int ref = Integer.parseInt(refInmuebletextField.getText().trim());
 		return "SELECT fk_propietario_dni AS 'DNI Propietario', "
 				+ "fecha AS 'Fecha de cambio', nuevo_precio AS 'Nuevo Precio', "
 				+ "observaciones AS 'Motivo de cambio' "
