@@ -36,7 +36,7 @@ class InmuebleKud {
 		String direccion;
 		boolean vendido;
 
-		String query = "SELECT * FROM Inmueble WHERE referencia = ?";
+		String query = "SELECT * FROM inmueble WHERE referencia = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setInt(1, refInmueble);
 		ResultSet rs = ps.executeQuery();

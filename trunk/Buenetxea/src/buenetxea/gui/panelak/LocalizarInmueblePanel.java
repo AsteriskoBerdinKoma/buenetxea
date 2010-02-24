@@ -89,7 +89,7 @@ public class LocalizarInmueblePanel extends JPanel {
 					TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
 
-			// if checkBox.setSelectedIcon(Nº Habitaciones:){
+			// if checkBox.setSelectedIcon(Nï¿½ Habitaciones:){
 			// selekzionau zenbat abitaziokin nahi dan
 			// spinner_1 = new JSpinner();
 			// }
@@ -100,7 +100,7 @@ public class LocalizarInmueblePanel extends JPanel {
 
 			final JCheckBox checkBox_1;
 			checkBox_1 = new JCheckBox();
-			checkBox_1.setText("Nº Habitaciones:");
+			checkBox_1.setText("Nï¿½ Habitaciones:");
 
 			JLabel deLabel_1;
 			deLabel_1 = new JLabel();
@@ -202,7 +202,7 @@ public class LocalizarInmueblePanel extends JPanel {
 
 			JLabel label_2;
 			label_2 = new JLabel();
-			label_2.setText("Población:");
+			label_2.setText("Poblaciï¿½n:");
 
 			JLabel provinciaLabel_1;
 			provinciaLabel_1 = new JLabel();
@@ -242,7 +242,7 @@ public class LocalizarInmueblePanel extends JPanel {
 
 				}
 			});
-			button_1_1.setText("Añadir población");
+			button_1_1.setText("Aï¿½adir poblaciï¿½n");
 
 			JButton button_2_1;
 			button_2_1 = new JButton();
@@ -253,7 +253,7 @@ public class LocalizarInmueblePanel extends JPanel {
 				}
 			});
 
-			button_2_1.setText("Añadir provincia");
+			button_2_1.setText("Aï¿½adir provincia");
 			JButton button_3;
 			button_3 = new JButton();
 			button_3.addActionListener(new ActionListener() {
@@ -269,7 +269,7 @@ public class LocalizarInmueblePanel extends JPanel {
 
 				}
 			});
-			button_3.setText("Añadir zona");
+			button_3.setText("Aï¿½adir zona");
 
 			JLabel hastaLabel_1_1;
 			hastaLabel_1_1 = new JLabel();
@@ -279,7 +279,7 @@ public class LocalizarInmueblePanel extends JPanel {
 
 			JLabel label_1_1;
 			label_1_1 = new JLabel();
-			label_1_1.setText("€");
+			label_1_1.setText("ï¿½");
 
 			comboBox_exterior = new JComboBox();
 			comboBox_exterior.setModel(new DefaultComboBoxModel(new String[] {
@@ -773,7 +773,7 @@ public class LocalizarInmueblePanel extends JPanel {
 
 	private String getQuery() {
 
-		String query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, p.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta  FROM Inmueble  I "
+		String query = "SELECT distinct I.referencia AS 'Inmueble Ref.', I.zona AS 'Zona',P.m2_constr,P.ascensor, p.tipo_inmueble, P.tipo_venta,I.direccion,RPI.precio_venta  FROM inmueble  I "
 				+ "INNER JOIN (rel_peritaje_inmueble  RPI INNER JOIN (peritaje  P INNER JOIN descripcion  D ON "
 				+ "P.id = D.fk_peritaje_id) ON RPI.fk_peritaje_id = P.id) ON "
 				+ "I.referencia = RPI.fk_inmueble_referencia WHERE";

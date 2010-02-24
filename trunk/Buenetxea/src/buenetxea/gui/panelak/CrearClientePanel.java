@@ -52,7 +52,7 @@ public class CrearClientePanel extends JPanel {
 	private JTextField textField_4_zona;
 	private JTextField textField_presupuesto;
 	private JSpinner spinner_aseos;
-	private JSpinner spinner_baÒos;
+	private JSpinner spinner_ba√±os;
 	private JSpinner spinner_habitdesde;
 	private JSpinner spinner_hastametros;
 	private JSpinner spinner_desdemetros;
@@ -254,7 +254,7 @@ public class CrearClientePanel extends JPanel {
 							.getValue().toString());
 					int habitHasta = Integer.parseInt(spinner_habithasta
 							.getValue().toString());
-					int baÒos = Integer.parseInt(spinner_baÒos.getValue()
+					int ba√±os = Integer.parseInt(spinner_ba√±os.getValue()
 							.toString());
 					int aseos = Integer.parseInt(spinner_aseos.getValue()
 							.toString());
@@ -265,7 +265,7 @@ public class CrearClientePanel extends JPanel {
 					int altura = Integer.parseInt(spinner_altura.getValue()
 							.toString());
 					Preferencias preferencias = new Preferencias(dni, tipo,
-							exterior, metrosDesde, metrosHasta, zona, baÒos,
+							exterior, metrosDesde, metrosHasta, zona, ba√±os,
 							aseos, presupuesto, observaciones, habitDesde,
 							habitHasta, altura);
 
@@ -333,7 +333,7 @@ public class CrearClientePanel extends JPanel {
 
 			JLabel m2Label;
 			m2Label = new JLabel();
-			m2Label.setText("m≤");
+			m2Label.setText("m√≠");
 
 			JLabel hastaLabel;
 			hastaLabel = new JLabel();
@@ -343,7 +343,7 @@ public class CrearClientePanel extends JPanel {
 
 			JLabel m2Label_1;
 			m2Label_1 = new JLabel();
-			m2Label_1.setText("m≤");
+			m2Label_1.setText("m√≠");
 
 			exteriorCheckBox = new JCheckBox();
 			exteriorCheckBox
@@ -358,9 +358,9 @@ public class CrearClientePanel extends JPanel {
 
 			JLabel label;
 			label = new JLabel();
-			label.setText("BaÒos:");
+			label.setText("Ba√±os:");
 
-			spinner_baÒos = new JSpinner();
+			spinner_ba√±os = new JSpinner();
 
 			JLabel aseosLabel;
 			aseosLabel = new JLabel();
@@ -376,7 +376,7 @@ public class CrearClientePanel extends JPanel {
 
 			JLabel label_1;
 			label_1 = new JLabel();
-			label_1.setText("Ä");
+			label_1.setText("‚Ç¨");
 
 			textField_4_zona = new JTextField();
 
@@ -755,7 +755,7 @@ public class CrearClientePanel extends JPanel {
 																											.addPreferredGap(
 																													LayoutStyle.ComponentPlacement.RELATED)
 																											.addComponent(
-																													spinner_baÒos,
+																													spinner_ba√±os,
 																													GroupLayout.PREFERRED_SIZE,
 																													GroupLayout.DEFAULT_SIZE,
 																													GroupLayout.PREFERRED_SIZE)
@@ -999,7 +999,7 @@ public class CrearClientePanel extends JPanel {
 																							.addComponent(
 																									label)
 																							.addComponent(
-																									spinner_baÒos,
+																									spinner_ba√±os,
 																									GroupLayout.PREFERRED_SIZE,
 																									GroupLayout.DEFAULT_SIZE,
 																									GroupLayout.PREFERRED_SIZE)
@@ -1116,11 +1116,11 @@ public class CrearClientePanel extends JPanel {
 		 * Verifica un DNI.
 		 */
 		private boolean verifyDNI(String DNI) {
-			// Eliminamos caracteres de separaciÛn.
+			// Eliminamos caracteres de separaci√≥n.
 			DNI = DNI.replaceAll("[.-]", "");
 			if (DNI.length() != 9)
 				return false;
-			// El ˙ltimo car·cter debe ser una letra
+			// El √∫ltimo car√°cter debe ser una letra
 			if (!Character.isLetter(DNI.charAt(8)))
 				return false;
 			int digits;
@@ -1129,11 +1129,11 @@ public class CrearClientePanel extends JPanel {
 			} catch (NumberFormatException e) {
 				return false;
 			}
-			// El algoritmo m·gico
+			// El algoritmo m√°gico
 			int pos = (digits % 23);
 			if (pos == 0)
 				pos = pattern.length();
-			pos = pos - 1; // Las tiras en Java est·n basadas en cero!
+			pos = pos - 1; // Las tiras en Java est√°n basadas en cero!
 			return (pattern.charAt(pos) == DNI.charAt(8));
 		}
 
@@ -1148,7 +1148,7 @@ public class CrearClientePanel extends JPanel {
 			}
 			if (!b) {
 				JOptionPane jop = new JOptionPane(
-						"El DNI introducido no es correcto. Introd˙zcalo de nuevo.",
+						"El DNI introducido no es correcto. Introd√∫zcalo de nuevo.",
 						JOptionPane.ERROR_MESSAGE);
 				jop.createDialog("DNI incorrecto").setVisible(true);
 			}

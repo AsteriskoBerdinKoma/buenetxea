@@ -39,7 +39,7 @@ class DescripcionKud {
 		double m2;
 		String descripcion;
 
-		String query = "SELECT * FROM Descripcion WHERE fk_peritaje_id = ?";
+		String query = "SELECT * FROM descripcion WHERE fk_peritaje_id = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setInt(1, peritajeId);
 		ResultSet rs = ps.executeQuery();

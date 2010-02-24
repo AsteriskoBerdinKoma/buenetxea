@@ -45,7 +45,7 @@ class VisitaKud {
 		boolean oscuro;
 		boolean loquierenmasgrande;
 		boolean notieneascensor;
-		boolean quierenmasbaños;
+		boolean quierenmasbaÃ±os;
 		boolean concertada2visita;
 		boolean vendidoenestavisita;
 		boolean planton;
@@ -76,7 +76,7 @@ class VisitaKud {
 			oscuro = rs.getBoolean("oscuro");
 			loquierenmasgrande = rs.getBoolean("loquierenmasgrande");
 			notieneascensor = rs.getBoolean("notieneascensor");
-			quierenmasbaños = rs.getBoolean("quierenmasbaños");
+			quierenmasbaÃ±os = rs.getBoolean("quierenmasbaÃ±os");
 			concertada2visita = rs.getBoolean("concertada2visita");
 			vendidoenestavisita = rs.getBoolean("vendidoenestavisita");
 			planton = rs.getBoolean("planton");
@@ -104,7 +104,7 @@ class VisitaKud {
 			return new Visita(cal, representante, precio, nolegustalazona,
 					loquierenmasalto, muchasreformas, quierenmashabitaciones,
 					visitaanuladacomprador, visitaanuladapropietario, oscuro,
-					loquierenmasgrande, notieneascensor, quierenmasbaños,
+					loquierenmasgrande, notieneascensor, quierenmasbaÃ±os,
 					concertada2visita, vendidoenestavisita, planton, legusta,
 					todoexterior, quierenbalconterraza, nogustadistribucion,
 					alquiladoenestavisita, gestiondeventa, peritarpiso,
@@ -151,7 +151,7 @@ class VisitaKud {
 		ps.setBoolean(10, v.isOscuro());
 		ps.setBoolean(11, v.isLoquierenmasgrande());
 		ps.setBoolean(12, v.isNotieneascensor());
-		ps.setBoolean(13, v.isQuierenmasbaños());
+		ps.setBoolean(13, v.isQuierenmasbaÃ±os());
 		ps.setBoolean(14, v.isConcertada2visita());
 		ps.setBoolean(15, v.isVendidoenestavisita());
 		ps.setBoolean(16, v.isPlanton());
