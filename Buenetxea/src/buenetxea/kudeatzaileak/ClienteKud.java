@@ -57,7 +57,7 @@ class ClienteKud {
 		int telefono;
 		String medio;
 		String asesor;
-		String query = "SELECT * FROM Cliente WHERE dni = ?";
+		String query = "SELECT * FROM cliente WHERE dni = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setString(1, nan);
 		ResultSet rs = ps.executeQuery();
@@ -105,7 +105,7 @@ class ClienteKud {
 		String medio;
 		String asesor;
 		String direccion;
-		String query = " SELECT * FROM Cliente WHERE dni =? and nacionalidad = ? and nombre = ? and apellido1 = ? and apellido2 = ?";
+		String query = " SELECT * FROM cliente WHERE dni =? and nacionalidad = ? and nombre = ? and apellido1 = ? and apellido2 = ?";
 		PreparedStatement ps = this.connection.prepareStatement(query);
 		ps.setString(1, nan);
 		ps.setString(2, Nazionalitatea);

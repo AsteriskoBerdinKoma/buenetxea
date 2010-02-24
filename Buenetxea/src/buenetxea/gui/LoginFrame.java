@@ -44,7 +44,7 @@ public class LoginFrame extends JFrame {
 
 		JLabel label;
 		label = new JLabel();
-		label.setText("Contraseña:");
+		label.setText("ContraseÃ±a:");
 
 		this.textField = new JTextField();
 
@@ -143,22 +143,22 @@ public class LoginFrame extends JFrame {
 			ex.printStackTrace();
 			if (ex.getErrorCode() == 1045) {
 				JOptionPane jop = new JOptionPane(
-						"El nombre de usuario o la contraseña son incorrectos.",
+						"El nombre de usuario o la contraseÃ±a son incorrectos.",
 						JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION,
 						new javax.swing.ImageIcon(this.getClass().getResource(
 								"/buenetxea/resources/loginFailed_48x48.png")));
-				jop.createDialog(null, "Conexión fallida").setVisible(true);
+				jop.createDialog(null, "Conexiï¿½n fallida").setVisible(true);
 			} else if (ex.getErrorCode() == 1044) {
 				JOptionPane jop = new JOptionPane(
 						"Este usuario no tiene permisos para acceder al programa.",
 						JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION,
 						new javax.swing.ImageIcon(this.getClass().getResource(
 								"/buenetxea/resources/loginFailed_48x48.png")));
-				jop.createDialog(null, "Conexión fallida").setVisible(true);
+				jop.createDialog(null, "Conexiï¿½n fallida").setVisible(true);
 			} else if (ex.getErrorCode() == 0) {
-				JOptionPane jop = new JOptionPane("MySQL no está en marcha.",
+				JOptionPane jop = new JOptionPane("MySQL no estï¿½ en marcha.",
 						JOptionPane.ERROR_MESSAGE);
-				jop.createDialog(null, "Conexión fallida").setVisible(true);
+				jop.createDialog(null, "Conexiï¿½n fallida").setVisible(true);
 			}
 			this.textField.setText("");
 			this.passwordField.setText("");

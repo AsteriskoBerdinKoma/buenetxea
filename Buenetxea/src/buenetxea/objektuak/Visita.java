@@ -16,7 +16,7 @@ public class Visita {
 	private boolean oscuro;
 	private boolean loquierenmasgrande;
 	private boolean notieneascensor;
-	private boolean quierenmasbaños;
+	private boolean quierenmasbaÃ±os;
 	private boolean concertada2visita;
 	private boolean vendidoenestavisita;
 	private boolean planton;
@@ -35,7 +35,7 @@ public class Visita {
 			boolean muchasreformas, boolean quierenmashabitaciones,
 			boolean visitaanuladacomprador, boolean visitaanuladapropietario,
 			boolean oscuro, boolean loquierenmasgrande,
-			boolean notieneascensor, boolean quierenmasbaños,
+			boolean notieneascensor, boolean quierenmasbaÃ±os,
 			boolean concertada2visita, boolean vendidoenestavisita,
 			boolean planton, boolean legusta, boolean todoexterior,
 			boolean quierenbalconterraza, boolean nogustadistribucion,
@@ -55,7 +55,7 @@ public class Visita {
 		this.oscuro = oscuro;
 		this.loquierenmasgrande = loquierenmasgrande;
 		this.notieneascensor = notieneascensor;
-		this.quierenmasbaños = quierenmasbaños;
+		this.quierenmasbaÃ±os = quierenmasbaÃ±os;
 		this.concertada2visita = concertada2visita;
 		this.vendidoenestavisita = vendidoenestavisita;
 		this.planton = planton;
@@ -166,12 +166,12 @@ public class Visita {
 		this.notieneascensor = notieneascensor;
 	}
 
-	public boolean isQuierenmasbaños() {
-		return quierenmasbaños;
+	public boolean isQuierenmasbaÃ±os() {
+		return quierenmasbaÃ±os;
 	}
 
-	public void setQuierenmasbaños(boolean quierenmasbaños) {
-		this.quierenmasbaños = quierenmasbaños;
+	public void setQuierenmasbaÃ±os(boolean quierenmasbaÃ±os) {
+		this.quierenmasbaÃ±os = quierenmasbaÃ±os;
 	}
 
 	public boolean isConcertada2visita() {

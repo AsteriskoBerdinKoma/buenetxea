@@ -66,7 +66,7 @@ class PropietarioKud {
 	}
 
 	public boolean InsertPropietario(Propietario p) throws SQLException {
-		String query = "INSERT INTO Propietario SET dni = ?, apellido1 = ?,apellido2 = ?, nombre = ?,domicilio_postal = ?,codigo_postal = ?,ciudad = ?,tel_fijo = ?,tel_movil=?,horario_fijo=?,horario_movil=?";
+		String query = "INSERT INTO propietario SET dni = ?, apellido1 = ?,apellido2 = ?, nombre = ?,domicilio_postal = ?,codigo_postal = ?,ciudad = ?,tel_fijo = ?,tel_movil=?,horario_fijo=?,horario_movil=?";
 		PreparedStatement ps = connection.prepareStatement(query);
 
 		ps.setString(1, p.getDni());
@@ -124,7 +124,7 @@ class PropietarioKud {
 	}
 
 	public boolean updatePropietario(Propietario p) throws SQLException {
-		String query = "UPDATE Propietario SET apellido1 = ?, "
+		String query = "UPDATE propietario SET apellido1 = ?, "
 				+ "apellido2 = ?, nombre = ?, domicilio_postal = ?, "
 				+ "codigo_postal = ?, ciudad = ?, tel_fijo = ?, "
 				+ "tel_movil=?, horario_fijo=?, horario_movil=? "
